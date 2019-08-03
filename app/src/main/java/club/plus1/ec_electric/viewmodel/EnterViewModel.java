@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import club.plus1.ec_electric.view.SplashActivity;
+import club.plus1.ec_electric.view.StartActivity;
 
 public class EnterViewModel {
     public String login;
@@ -14,7 +14,7 @@ public class EnterViewModel {
     }
 
     public void onEnter(Context context){
-        Intent intent = new Intent(context, SplashActivity.class);
+        Intent intent = new Intent(context, StartActivity.class);
         context.startActivity(intent);
     }
 
