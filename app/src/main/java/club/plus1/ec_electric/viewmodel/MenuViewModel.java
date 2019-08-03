@@ -2,14 +2,17 @@ package club.plus1.ec_electric.viewmodel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.MenuItem;
 
+import club.plus1.ec_electric.R;
+import club.plus1.ec_electric.view.EnterActivity;
 import club.plus1.ec_electric.view.InvoiceTableActivity;
 import club.plus1.ec_electric.view.RequestByCodeActivity;
 import club.plus1.ec_electric.view.RequestTableActivity;
 
-public class StartViewModel {
+public class MenuViewModel {
 
-    public StartViewModel(Context context){}
+    public MenuViewModel(Context context){}
 
     public void onCheckExistence(Context context){
         Intent intent = new Intent(context, RequestByCodeActivity.class);
@@ -51,4 +54,42 @@ public class StartViewModel {
         context.startActivity(intent);
     }
 
+    public void onExit(Context context){
+        Intent intent = new Intent(context, EnterActivity.class);
+        context.startActivity(intent);
+    }
+
+    public boolean onOptionsItemSelected(Context context, MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.action_check_existence:
+                onCheckExistence(context);
+                return true;
+            case R.id.action_cart:
+                onCart(context);
+                return true;
+            case R.id.action_reserves:
+                onReserves(context);
+                return true;
+            case R.id.action_canceled:
+                onCanceled(context);
+                return true;
+            case R.id.action_make_order:
+                onMakeOrder(context);
+                return true;
+            case R.id.action_unconfirmed:
+                onUnconfirmed(context);
+                return true;
+            case R.id.action_orders:
+                onOrders(context);
+                return true;
+            case R.id.action_history:
+                onHistory(context);
+                return true;
+            case R.id.action_exit:
+                onExit(context);
+                return true;
+            default:
+                return false;
+        }
+    }
 }

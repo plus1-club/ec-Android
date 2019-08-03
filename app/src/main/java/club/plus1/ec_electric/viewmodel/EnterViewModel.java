@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import club.plus1.ec_electric.view.StartActivity;
+import club.plus1.ec_electric.view.MenuActivity;
 
 public class EnterViewModel {
     public String login;
@@ -14,7 +14,7 @@ public class EnterViewModel {
     }
 
     public void onEnter(Context context){
-        Intent intent = new Intent(context, StartActivity.class);
+        Intent intent = new Intent(context, MenuActivity.class);
         context.startActivity(intent);
     }
 

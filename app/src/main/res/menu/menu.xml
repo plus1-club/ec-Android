@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_check_existence"
+        android:orderInCategory="100"
+        android:title="@string/text_check_existence"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_cart"
+        android:orderInCategory="100"
+        android:title="@string/text_cart"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_reserves"
+        android:orderInCategory="100"
+        android:title="@string/text_reserves"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_canceled"
+        android:orderInCategory="100"
+        android:title="@string/text_canceled"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_make_order"
+        android:orderInCategory="100"
+        android:title="@string/text_make_order"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_unconfirmed"
+        android:orderInCategory="100"
+        android:title="@string/text_unconfirmed"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_orders"
+        android:orderInCategory="100"
+        android:title="@string/text_orders"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_history"
+        android:orderInCategory="100"
+        android:title="@string/text_history"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_exit"
+        android:orderInCategory="100"
+        android:title="@string/text_exit"
+        app:showAsAction="never"/>
+</menu>
