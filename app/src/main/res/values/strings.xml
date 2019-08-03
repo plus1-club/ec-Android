@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ec-electric</string>
+
+    <!-- Экран "1.Вход" -->
+    <string name="edit_login">Логин</string>
+    <string name="edit_password">Пароль</string>
+    <string name="button_enter">Войти</string>
+    <string name="text_ender">Логин и временный пароль вы можете получить,
+        позвонив по телефону:</string>
+    <string name="text_phone">+7(495)1234567</string>
+
+
 </resources>
