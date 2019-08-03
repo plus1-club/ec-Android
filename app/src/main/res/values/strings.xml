@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">ec-electric</string>
+    <string name="full_name">EC-Online</string>
+
+    <!-- Экран "1.Вход" -->
+    <string name="edit_login">Логин</string>
+    <string name="edit_password">Пароль</string>
+    <string name="button_enter">Войти</string>
+    <string name="text_ender">Логин и временный пароль вы можете получить,
+        позвонив по телефону:%1$s</string>
+    <string name="text_phone">+7(495)1234567</string>
+
+    <!-- Экран "2.Стартовый" -->
+    <string name="text_check_existence">Проверка наличия заказа</string>
+    <string name="text_cart">Корзина</string>
+    <string name="text_reserves">Резервы</string>
+    <string name="text_canceled">Аннулированные и просроченные счета</string>
+    <string name="text_make_order">Сделать заказ</string>
+    <string name="text_unconfirmed">Неподтвержденные резервы</string>
+    <string name="text_orders">Заказы</string>
+    <string name="text_history">История отгрузок</string>
+
+    <!-- Названия экранов - временно -->
+    <string name="screen_3">3.Заявки по коду</string>
+    <string name="screen_4">4.Заявки из Excel</string>
+    <string name="screen_5">5.Таблица заявок</string>
+    <string name="screen_6">6.Счета</string>
+    <string name="screen_7">7.Детали счета</string>
+
 </resources>
