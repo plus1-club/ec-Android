@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.EnterActivity" />
-        <activity android:name=".view.StartActivity" />
+        <activity android:name=".view.MenuActivity" />
         <activity android:name=".view.RequestByCodeActivity" />
         <activity android:name=".view.RequestFromExcelActivity" />
         <activity android:name=".view.RequestTableActivity" />
