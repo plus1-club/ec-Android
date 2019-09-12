@@ -41,5 +41,11 @@
     <string name="screen_5">5.Таблица заявок</string>
     <string name="screen_6">6.Счета</string>
     <string name="screen_7">7.Детали счета</string>
+    <string name="text_total">Итого: 6 608 547,36</string>
+    <string name="text_comment">Комментарий к заказу</string>
+    <string name="button_recount">Пересчитать</string>
+    <string name="button_clear">Очистить</string>
+    <string name="button_add">Добавить</string>
+    <string name="button_issue">Оформить</string>
 
 </resources>
