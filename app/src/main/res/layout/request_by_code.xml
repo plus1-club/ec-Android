@@ -7,18 +7,60 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <ImageView
-        android:id="@+id/splash_screen"
-        style="@style/AppTheme.ECElectric.Logo"
-        android:src="@drawable/splash"
-        tools:ignore="ContentDescription" />
+            <TextView
+                android:id="@+id/text_input"
+                style="@style/AppTheme.ECElectric.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_enter_number_or_product"
+                android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/text_version"
-        style="@style/AppTheme.ECElectric.Edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/screen_3"
-        android:textAlignment="center" />
+            <EditText
+                android:id="@+id/editProduct"
+                style="@style/AppTheme.ECElectric.Edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_product"
+                android:inputType="textPersonName"
+                tools:ignore="Autofill" />
+
+            <EditText
+                android:id="@+id/editCount"
+                style="@style/AppTheme.ECElectric.Edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_count"
+                android:inputType="textPersonName"
+                tools:ignore="Autofill" />
+
+            <CheckBox
+                android:id="@+id/checkFullSearch"
+                style="@style/AppTheme.ECElectric.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/check_fulltext_search" />
+
+            <Button
+                android:id="@+id/buttonNext"
+                style="@style/AppTheme.ECElectric.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/button_check" />
+
+            <TextView
+                android:id="@+id/linkSample"
+                style="@style/AppTheme.ECElectric.Link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/link_store_file" />
+
+            <TextView
+                android:id="@+id/linkSpecifications"
+                style="@style/AppTheme.ECElectric.Link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/link_specifications_file" />
 
 </LinearLayout>

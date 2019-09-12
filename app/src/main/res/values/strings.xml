@@ -21,9 +21,23 @@
     <string name="text_history">История отгрузок</string>
     <string name="text_exit">Выход</string>
 
+    <!-- Экран "3.Заявки по коду" -->
+    <string name="text_enter_number_or_product">Введите код или название товара:</string>
+    <string name="hint_product">Товар</string>
+    <string name="hint_count">Количество</string>
+    <string name="check_fulltext_search">Отключить расширенный поиск</string>
+    <string name="button_check"><![CDATA[Проверить >]]></string>
+    <string name="link_store_file">Скачать складские остатки</string>
+    <string name="link_specifications_file">Посмотреть ранее загруженные спецификации</string>
+
+    <!-- Экран "4.Заявки из Excel" -->
+    <string name="text_select_file">Выберите Excel-файл (формат XLS, XLSX, ODS) В файле должен быть столбец с товарами и столбец с количеством товаров.</string>
+    <string name="button_select">Обзор…</string>
+    <string name="hint_product_column_number">Номер колонки с товаром</string>
+    <string name="hint_count_column_number">Номер колонки с количеством</string>
+    <string name="link_file_example">Пример файла</string>
+
     <!-- Названия экранов - временно -->
-    <string name="screen_3">3.Заявки по коду</string>
-    <string name="screen_4">4.Заявки из Excel</string>
     <string name="screen_5">5.Таблица заявок</string>
     <string name="screen_6">6.Счета</string>
     <string name="screen_7">7.Детали счета</string>
