@@ -5,9 +5,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/icon"
         android:label="@string/full_name"
-        android:roundIcon="@drawable/logo"
+        android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ECElectric"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
@@ -18,13 +18,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.EnterActivity" />
-        <activity android:name=".view.MenuActivity" />
-        <activity android:name=".view.RequestByCodeActivity" />
-        <activity android:name=".view.RequestFromExcelActivity" />
-        <activity android:name=".view.RequestTableActivity" />
-        <activity android:name=".view.InvoiceTableActivity" />
-        <activity android:name=".view.InvoiceDetailsActivity" />
+        <activity
+            android:name=".view.EnterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.MenuActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.RequestByCodeActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.RequestFromExcelActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.RequestTableActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.InvoiceTableActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.InvoiceDetailsActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
