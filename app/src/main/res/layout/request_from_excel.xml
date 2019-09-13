@@ -8,7 +8,7 @@
     android:layout_height="fill_parent">
 
             <TextView
-                android:id="@+id/text_screen_name"
+                android:id="@+id/text_product"
                 style="@style/AppTheme.ECElectric.Text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,12 +71,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/check_fulltext_search" />
 
-            <Button
-                android:id="@+id/buttonNext"
-                style="@style/AppTheme.ECElectric.Button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button_check" />
+    <Button
+        android:id="@+id/buttonNext"
+        style="@style/AppTheme.ECElectric.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_check" />
 
             <TextView
                 android:id="@+id/linkSample"

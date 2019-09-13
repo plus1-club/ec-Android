@@ -47,5 +47,14 @@
     <string name="button_clear">Очистить</string>
     <string name="button_add">Добавить</string>
     <string name="button_issue">Оформить</string>
+    <string name="button_to_busket">В корзину</string>
+    <string name="button_specifications">Спецификации</string>
+    <string name="button_stock">Остатки</string>
+    <string name="button_V">V</string>
+    <string name="text_status">В наличии</string>
+    <string name="text_product">1.Schneider MGU5.418.25ZD 2 USB Зарядное устройство, 2.1A, беж</string>
+    <string name="button_X">X</string>
+    <string name="text_sum">Сумма: 2141,81</string>
+    <string name="text_price">Цена: 2141,81</string>
 
 </resources>

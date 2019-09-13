@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import club.plus1.ec_electric.R;
 import club.plus1.ec_electric.view.EnterActivity;
 import club.plus1.ec_electric.view.InvoiceTableActivity;
+import club.plus1.ec_electric.view.RequestBasketActivity;
 import club.plus1.ec_electric.view.RequestByCodeActivity;
 import club.plus1.ec_electric.view.RequestTableActivity;
 
@@ -25,7 +26,7 @@ public class MenuViewModel {
     }
 
     public void onCart(Context context){
-        Intent intent = new Intent(context, RequestTableActivity.class);
+        Intent intent = new Intent(context, RequestBasketActivity.class);
         context.startActivity(intent);
     }
 
@@ -54,7 +55,7 @@ public class MenuViewModel {
         context.startActivity(intent);
     }
 
-    public void onExit(Context context){
+    private void onExit(Context context){
         Intent intent = new Intent(context, EnterActivity.class);
         context.startActivity(intent);
     }

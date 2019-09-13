@@ -7,7 +7,7 @@
     tools:ignore="UseCompoundDrawables">
 
     <TextView
-        android:id="@+id/text_screen_name"
+        android:id="@+id/text_product"
         style="@style/AppTheme.ECElectric.Edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

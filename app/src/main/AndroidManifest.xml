@@ -34,6 +34,9 @@
             android:name=".view.RequestTableActivity"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".view.RequestBasketActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".view.InvoiceTableActivity"
             android:screenOrientation="portrait"/>
         <activity

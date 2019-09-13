@@ -17,12 +17,12 @@ import java.util.Locale;
 import club.plus1.ec_electric.R;
 import club.plus1.ec_electric.model.Request;
 
-public class RequestTableAdapter extends RecyclerView.Adapter<RequestTableAdapter.RequestViewHolder>{
+public class RequestBasketAdapter extends RecyclerView.Adapter<RequestBasketAdapter.RequestBasketHolder>{
 
     private List<Request> requests;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RequestTableAdapter() {
+    public RequestBasketAdapter() {
         requests = new ArrayList<>();
     }
 
@@ -39,15 +39,15 @@ public class RequestTableAdapter extends RecyclerView.Adapter<RequestTableAdapte
     // Create new views (invoked by the layout manager)
     @NonNull
     @Override
-    public RequestTableAdapter.RequestViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RequestBasketAdapter.RequestBasketHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.request_item, parent, false);
-        return new RequestViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.request_basket_item, parent, false);
+        return new RequestBasketHolder(view);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(RequestViewHolder holder, int position) {
+    public void onBindViewHolder(RequestBasketHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.bind(requests.get(position));
@@ -59,20 +59,26 @@ public class RequestTableAdapter extends RecyclerView.Adapter<RequestTableAdapte
         return requests.size();
     }
 
-    static class RequestViewHolder extends RecyclerView.ViewHolder {
+    static class RequestBasketHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         private  TextView textProduct;
         private  EditText editCount;
+        private  TextView textPrice;
+        private  TextView textSum;
 
-        RequestViewHolder(View v) {
+        RequestBasketHolder(View v) {
             super(v);
             textProduct = v.findViewById(R.id.text_product);
             editCount = v.findViewById(R.id.edit_count);
+            textPrice = v.findViewById(R.id.text_price);
+            textSum = v.findViewById(R.id.text_sum);
         }
 
         void bind(Request request){
             textProduct.setText(request.product);
             editCount.setText(String.format(Locale.getDefault(),"%d", request.count));
+            textPrice.setText(String.format(Locale.getDefault(),"Цена: %a", request.price));
+            textSum.setText(String.format(Locale.getDefault(),"Сумма: %a", request.sum));
         }
     }
 }

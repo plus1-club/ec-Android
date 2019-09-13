@@ -3,7 +3,10 @@ package club.plus1.ec_electric.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -11,8 +14,7 @@ import club.plus1.ec_electric.R;
 import club.plus1.ec_electric.viewmodel.RequestFragmentPagerAdapter;
 
 public class RequestByCodeActivity extends AppCompatActivity {
-
-   @Override
+  @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -25,5 +27,6 @@ public class RequestByCodeActivity extends AppCompatActivity {
         // Передаём ViewPager в TabLayout
         TabLayout tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-    }
+
+   }
 }

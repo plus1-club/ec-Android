@@ -1,19 +1,20 @@
 package club.plus1.ec_electric.view;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import club.plus1.ec_electric.R;
 import club.plus1.ec_electric.model.Request;
+import club.plus1.ec_electric.viewmodel.RequestBasketAdapter;
 import club.plus1.ec_electric.viewmodel.RequestTableAdapter;
 
-public class RequestTableActivity extends AppCompatActivity {
+public class RequestBasketActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -22,7 +23,7 @@ public class RequestTableActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.request_table);
+        setContentView(R.layout.request_basket);
 
         recyclerView = findViewById(R.id.list);
         recyclerView.setHasFixedSize(true);
@@ -39,9 +40,9 @@ public class RequestTableActivity extends AppCompatActivity {
         requests.add(new Request("4.Legrand 10954 Суппорт/Рамка 4 М Dpl Кр.65",
                 20, 162.74));
 
-        RequestTableAdapter requestTableAdapter = new RequestTableAdapter();
-        requestTableAdapter.setItems(requests);
-        adapter = requestTableAdapter;
+        RequestBasketAdapter requestBasketAdapter = new RequestBasketAdapter();
+        requestBasketAdapter.setItems(requests);
+        adapter = requestBasketAdapter;
         recyclerView.setAdapter(adapter);
     }
 }
