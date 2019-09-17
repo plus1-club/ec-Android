@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -15,11 +16,14 @@ import java.util.List;
 import java.util.Locale;
 
 import club.plus1.ec_electric.R;
+import club.plus1.ec_electric.databinding.RequestsTableItemBinding;
 import club.plus1.ec_electric.model.Request;
+import club.plus1.ec_electric.viewmodel.RequestViewModel;
 
 public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdapter.RequestViewHolder>{
 
     private List<Request> requests;
+    private RequestViewModel viewModel;
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public RequestsTableAdapter() {
@@ -39,10 +43,11 @@ public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdap
     // Create new views (invoked by the layout manager)
     @NonNull
     @Override
-    public RequestsTableAdapter.RequestViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.requests_item, parent, false);
-        return new RequestViewHolder(view);
+    public RequestsTableAdapter.RequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        viewModel = RequestViewModel.getInstance();
+        RequestsTableItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.requests_table_item, parent, false);
+        binding.setViewModel(viewModel);
+        return new RequestViewHolder(binding.getRoot());
     }
 
     // Replace the contents of a view (invoked by the layout manager)

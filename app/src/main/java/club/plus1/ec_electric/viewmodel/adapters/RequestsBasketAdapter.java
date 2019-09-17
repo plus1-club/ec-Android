@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -15,11 +16,15 @@ import java.util.List;
 import java.util.Locale;
 
 import club.plus1.ec_electric.R;
+import club.plus1.ec_electric.databinding.RequestsBasketItemBinding;
+import club.plus1.ec_electric.databinding.RequestsTableItemBinding;
 import club.plus1.ec_electric.model.Request;
+import club.plus1.ec_electric.viewmodel.RequestViewModel;
 
 public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAdapter.RequestBasketHolder>{
 
     private List<Request> requests;
+    private RequestViewModel viewModel;
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public RequestsBasketAdapter() {
@@ -39,10 +44,11 @@ public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAd
     // Create new views (invoked by the layout manager)
     @NonNull
     @Override
-    public RequestsBasketAdapter.RequestBasketHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.requests_basket_item, parent, false);
-        return new RequestBasketHolder(view);
+    public RequestsBasketAdapter.RequestBasketHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        viewModel = RequestViewModel.getInstance();
+        RequestsBasketItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.requests_basket_item, parent, false);
+        binding.setViewModel(viewModel);
+        return new RequestsBasketAdapter.RequestBasketHolder(binding.getRoot());
     }
 
     // Replace the contents of a view (invoked by the layout manager)
