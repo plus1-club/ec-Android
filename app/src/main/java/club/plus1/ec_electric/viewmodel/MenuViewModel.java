@@ -7,26 +7,25 @@ import android.view.MenuItem;
 import club.plus1.ec_electric.R;
 import club.plus1.ec_electric.view.EnterActivity;
 import club.plus1.ec_electric.view.InvoiceTableActivity;
-import club.plus1.ec_electric.view.RequestBasketActivity;
-import club.plus1.ec_electric.view.RequestByCodeActivity;
-import club.plus1.ec_electric.view.RequestTableActivity;
+import club.plus1.ec_electric.view.RequestsBasketActivity;
+import club.plus1.ec_electric.view.RequestActivity;
 
 public class MenuViewModel {
 
     public MenuViewModel(Context context){}
 
     public void onCheckExistence(Context context){
-        Intent intent = new Intent(context, RequestByCodeActivity.class);
+        Intent intent = new Intent(context, RequestActivity.class);
         context.startActivity(intent);
     }
 
     public void onMakeOrder(Context context){
-        Intent intent = new Intent(context, RequestByCodeActivity.class);
+        Intent intent = new Intent(context, RequestActivity.class);
         context.startActivity(intent);
     }
 
     public void onCart(Context context){
-        Intent intent = new Intent(context, RequestBasketActivity.class);
+        Intent intent = new Intent(context, RequestsBasketActivity.class);
         context.startActivity(intent);
     }
 

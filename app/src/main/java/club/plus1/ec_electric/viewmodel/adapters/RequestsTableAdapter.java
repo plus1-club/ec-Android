@@ -1,4 +1,4 @@
-package club.plus1.ec_electric.viewmodel;
+package club.plus1.ec_electric.viewmodel.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +17,12 @@ import java.util.Locale;
 import club.plus1.ec_electric.R;
 import club.plus1.ec_electric.model.Request;
 
-public class RequestTableAdapter extends RecyclerView.Adapter<RequestTableAdapter.RequestViewHolder>{
+public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdapter.RequestViewHolder>{
 
     private List<Request> requests;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RequestTableAdapter() {
+    public RequestsTableAdapter() {
         requests = new ArrayList<>();
     }
 
@@ -39,9 +39,9 @@ public class RequestTableAdapter extends RecyclerView.Adapter<RequestTableAdapte
     // Create new views (invoked by the layout manager)
     @NonNull
     @Override
-    public RequestTableAdapter.RequestViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RequestsTableAdapter.RequestViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.request_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.requests_item, parent, false);
         return new RequestViewHolder(view);
     }
 
@@ -66,8 +66,8 @@ public class RequestTableAdapter extends RecyclerView.Adapter<RequestTableAdapte
 
         RequestViewHolder(View v) {
             super(v);
-            textProduct = v.findViewById(R.id.text_product);
-            editCount = v.findViewById(R.id.edit_count);
+            textProduct = v.findViewById(R.id.textProduct);
+            editCount = v.findViewById(R.id.editCount);
         }
 
         void bind(Request request){

@@ -1,66 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="UseCompoundDrawables"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="club.plus1.ec_electric.viewmodel.RequestViewModel" />
+    </data>
+    <LinearLayout
+        tools:ignore="UseCompoundDrawables"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-            <TextView
-                android:id="@+id/text_product"
-                style="@style/AppTheme.ECElectric.Text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/text_enter_number_or_product"
-                android:textAlignment="center" />
+                <TextView
+                    android:id="@+id/textProduct"
+                    style="@style/AppTheme.ECElectric.Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_enter_number_or_product"
+                    android:textAlignment="center" />
 
-            <EditText
-                android:id="@+id/editProduct"
-                style="@style/AppTheme.ECElectric.Edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/hint_product"
-                android:inputType="textPersonName"
-                tools:ignore="Autofill" />
+                <EditText
+                    android:id="@+id/editProduct"
+                    style="@style/AppTheme.ECElectric.Edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/hint_product"
+                    android:inputType="textPersonName"
+                    android:text="@={viewModel.product}"
+                    tools:ignore="Autofill" />
 
-            <EditText
-                android:id="@+id/editCount"
-                style="@style/AppTheme.ECElectric.Edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/hint_count"
-                android:inputType="textPersonName"
-                tools:ignore="Autofill" />
+        <EditText
+            android:id="@+id/editCount"
+            style="@style/AppTheme.ECElectric.Edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_count"
+            android:inputType="number"
+            android:text="@={viewModel.count}"
+            tools:ignore="Autofill" />
 
-            <CheckBox
-                android:id="@+id/checkFullSearch"
-                style="@style/AppTheme.ECElectric.Text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/check_fulltext_search" />
+                <CheckBox
+                    android:id="@+id/checkFullSearch"
+                    style="@style/AppTheme.ECElectric.Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.isFullSearch}"
+                    android:text="@string/check_fulltext_search" />
 
-            <Button
-                android:id="@+id/buttonNext"
-                style="@style/AppTheme.ECElectric.Button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button_check" />
+                <Button
+                    android:id="@+id/buttonNext"
+                    style="@style/AppTheme.ECElectric.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_check"
+                    android:onClick="@{() -> viewModel.onNext(context)}"/>
 
-            <TextView
-                android:id="@+id/linkSample"
-                style="@style/AppTheme.ECElectric.Link"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/link_store_file" />
+                <TextView
+                    android:id="@+id/linkStock"
+                    style="@style/AppTheme.ECElectric.Link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/link_store_file"
+                    android:onClick="@{() -> viewModel.linkStock(context)}"/>
 
-            <TextView
-                android:id="@+id/linkSpecifications"
-                style="@style/AppTheme.ECElectric.Link"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/link_specifications_file" />
+                <TextView
+                    android:id="@+id/linkSpecifications"
+                    style="@style/AppTheme.ECElectric.Link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/link_specifications_file"
+                    android:onClick="@{() -> viewModel.linkSpecifications(context)}" />
 
-</LinearLayout>
+    </LinearLayout>
+</layout>

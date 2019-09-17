@@ -1,4 +1,4 @@
-package club.plus1.ec_electric.viewmodel;
+package club.plus1.ec_electric.viewmodel.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +17,12 @@ import java.util.Locale;
 import club.plus1.ec_electric.R;
 import club.plus1.ec_electric.model.Request;
 
-public class RequestBasketAdapter extends RecyclerView.Adapter<RequestBasketAdapter.RequestBasketHolder>{
+public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAdapter.RequestBasketHolder>{
 
     private List<Request> requests;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RequestBasketAdapter() {
+    public RequestsBasketAdapter() {
         requests = new ArrayList<>();
     }
 
@@ -39,9 +39,9 @@ public class RequestBasketAdapter extends RecyclerView.Adapter<RequestBasketAdap
     // Create new views (invoked by the layout manager)
     @NonNull
     @Override
-    public RequestBasketAdapter.RequestBasketHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RequestsBasketAdapter.RequestBasketHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.request_basket_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.requests_basket_item, parent, false);
         return new RequestBasketHolder(view);
     }
 
@@ -68,17 +68,17 @@ public class RequestBasketAdapter extends RecyclerView.Adapter<RequestBasketAdap
 
         RequestBasketHolder(View v) {
             super(v);
-            textProduct = v.findViewById(R.id.text_product);
-            editCount = v.findViewById(R.id.edit_count);
-            textPrice = v.findViewById(R.id.text_price);
-            textSum = v.findViewById(R.id.text_sum);
+            textProduct = v.findViewById(R.id.textProduct);
+            editCount = v.findViewById(R.id.editCount);
+            textPrice = v.findViewById(R.id.editPrice);
+            textSum = v.findViewById(R.id.editSum);
         }
 
         void bind(Request request){
             textProduct.setText(request.product);
             editCount.setText(String.format(Locale.getDefault(),"%d", request.count));
-            textPrice.setText(String.format(Locale.getDefault(),"Цена: %a", request.price));
-            textSum.setText(String.format(Locale.getDefault(),"Сумма: %a", request.sum));
+            textPrice.setText(String.format(Locale.getDefault(),"%.2f\u20BD", request.price));
+            textSum.setText(String.format(Locale.getDefault(),"%.2f\u20BD", request.sum));
         }
     }
 }

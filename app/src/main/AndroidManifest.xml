@@ -25,16 +25,13 @@
             android:name=".view.MenuActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".view.RequestByCodeActivity"
+            android:name=".view.RequestActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".view.RequestFromExcelActivity"
+            android:name=".view.RequestsTableActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".view.RequestTableActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".view.RequestBasketActivity"
+            android:name=".view.RequestsBasketActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".view.InvoiceTableActivity"

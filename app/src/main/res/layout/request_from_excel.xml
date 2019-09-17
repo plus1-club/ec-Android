@@ -1,89 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="UseCompoundDrawables"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewModel"
+            type="club.plus1.ec_electric.viewmodel.RequestViewModel" />
+    </data>
+    <LinearLayout
+        tools:ignore="UseCompoundDrawables"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-            <TextView
-                android:id="@+id/text_product"
-                style="@style/AppTheme.ECElectric.Text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="0dp"
-                android:text="@string/text_select_file"
-                android:textAlignment="center" />
+        <TextView
+            android:id="@+id/textProduct"
+            style="@style/AppTheme.ECElectric.Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:text="@string/text_select_file"
+            android:textAlignment="center" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="0dp">
-
-                <EditText
-                    android:id="@+id/editFile"
-                    style="@style/AppTheme.ECElectric.Edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:inputType="textPersonName"
-                    android:labelFor="@id/buttonSelect"
-                    tools:ignore="Autofill,LabelFor" />
-
-                <Button
-                    android:id="@+id/buttonSelect"
-                    style="@style/AppTheme.ECElectric.Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="@string/button_select" />
-
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="0dp">
 
             <EditText
-                android:id="@+id/editProduct"
+                android:id="@+id/editFile"
                 style="@style/AppTheme.ECElectric.Edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/hint_product_column_number"
+                android:enabled="false"
                 android:inputType="textPersonName"
-                tools:ignore="Autofill" />
+                android:labelFor="@id/buttonSelect"
+                tools:ignore="Autofill,LabelFor" />
 
-            <EditText
-                android:id="@+id/editCount"
-                style="@style/AppTheme.ECElectric.Edit"
+            <Button
+                android:id="@+id/buttonSelect"
+                style="@style/AppTheme.ECElectric.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/hint_count_column_number"
-                android:inputType="textPersonName"
-                tools:ignore="Autofill" />
+                android:layout_weight="2"
+                android:text="@string/button_select" />
 
-            <CheckBox
-                android:id="@+id/checkFullSearch"
-                style="@style/AppTheme.ECElectric.Text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/check_fulltext_search" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonNext"
-        style="@style/AppTheme.ECElectric.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_check" />
+        <EditText
+            android:id="@+id/editProduct"
+            style="@style/AppTheme.ECElectric.Edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_product_column_number"
+            android:inputType="textPersonName"
+            android:text="@={viewModel.productColumn}"
+            tools:ignore="Autofill" />
 
-            <TextView
-                android:id="@+id/linkSample"
-                style="@style/AppTheme.ECElectric.Link"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/link_file_example" />
+        <EditText
+            android:id="@+id/editCount"
+            style="@style/AppTheme.ECElectric.Edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_count_column_number"
+            android:inputType="textPersonName"
+            android:text="@={viewModel.countColumn}"
+            tools:ignore="Autofill" />
 
+        <CheckBox
+            android:id="@+id/checkFullSearch"
+            style="@style/AppTheme.ECElectric.Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="@={viewModel.isFullSearch}"
+            android:text="@string/check_fulltext_search" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/buttonNext"
+            style="@style/AppTheme.ECElectric.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onNext(context)}"
+            android:text="@string/button_check" />
+
+        <TextView
+            android:id="@+id/linkSample"
+            style="@style/AppTheme.ECElectric.Link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.linkSample(context)}"
+            android:text="@string/link_file_example" />
+
+    </LinearLayout>
+</layout>
