@@ -54,7 +54,7 @@ public class MenuViewModel {
         context.startActivity(intent);
     }
 
-    private void onExit(Context context){
+    public void onExit(Context context){
         Intent intent = new Intent(context, EnterActivity.class);
         context.startActivity(intent);
     }
