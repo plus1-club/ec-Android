@@ -15,15 +15,15 @@
         <LinearLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_height="60dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/labelScreenName"
-                style="@style/AppTheme.ECOnline.Text"
+                style="@style/AppTheme.ECOnline.Header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="0dp"
                 android:text="@string/label_request" />
 
         </LinearLayout>
@@ -31,7 +31,7 @@
         <LinearLayout
             android:id="@+id/body"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@color/black"
             android:orientation="vertical">
@@ -48,8 +48,7 @@
         <LinearLayout
             android:id="@+id/footer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_height="80dp"
             android:orientation="vertical">
 
             <Button

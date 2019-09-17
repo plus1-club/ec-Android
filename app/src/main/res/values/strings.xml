@@ -38,7 +38,7 @@
     <string name="link_file_example">Пример файла</string>
 
     <!-- Экран "5.Таблица заявок" -->
-    <string name="label_count">Кол-во:</string>
+    <string name="label_count">Количество:</string>
     <string name="label_price">Цена:</string>
     <string name="label_sum">Сумма:</string>
     <string name="button_V">V</string>
@@ -53,8 +53,8 @@
     <!-- Тестовые значения - временно -->
     <string name="text_product">1.Schneider MGU5.418.25ZD 2 USB Зарядное устройство, 2.1A, беж</string>
     <string name="text_total">Итого: 6 608 547,36</string>
-    <string name="text_price">2141,81</string>
-    <string name="text_sum">2141,81</string>
+    <string name="text_price">Цена: 2141,81</string>
+    <string name="text_sum">Сумма: 2141,81</string>
     <string name="text_status">В наличии</string>
 
     <!-- Названия экранов -->
