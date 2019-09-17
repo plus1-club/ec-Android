@@ -21,6 +21,14 @@
             android:background="@color/white"
             android:orientation="horizontal">
 
+            <CheckBox
+                android:id="@+id/buttonDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/green"
+                android:onClick="@{() -> viewModel.onDeleteRow(context)}"
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/textProduct"
                 style="@style/AppTheme.ECOnline.Text"
@@ -30,15 +38,6 @@
                 android:layout_weight="1"
                 android:text="@string/text_product"
                 android:textAlignment="viewStart" />
-
-            <Button
-                android:id="@+id/buttonDelete"
-                style="@style/AppTheme.ECOnline.Button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:onClick="@{() -> viewModel.onDeleteRow(context)}"
-                android:text="@string/button_X"
-                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -73,6 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/green"
                     android:ems="10"
                     android:inputType="number"
                     android:labelFor="@id/buttonDelete"

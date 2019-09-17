@@ -2,6 +2,7 @@ package club.plus1.ec_online.viewmodel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.databinding.ObservableBoolean;
@@ -77,8 +78,7 @@ public class RequestViewModel {
     }
 
     // TODO: Реализовать выставление флага
-    public void onCheckRow(Context context){
-        Toast.makeText(context, "Выставление флага", Toast.LENGTH_LONG).show();
+    public void onCheckRow(Context context, View view){
     }
 
     // TODO: Реализовать удаление строки
