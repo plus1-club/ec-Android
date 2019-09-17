@@ -1,5 +1,6 @@
-package club.plus1.ec_electric.view;
+package club.plus1.ec_online.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -7,9 +8,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import club.plus1.ec_electric.R;
-import club.plus1.ec_electric.databinding.MenuBinding;
-import club.plus1.ec_electric.viewmodel.MenuViewModel;
+import club.plus1.ec_online.R;
+import club.plus1.ec_online.databinding.MenuBinding;
+import club.plus1.ec_online.viewmodel.MenuViewModel;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -32,10 +33,8 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item == null) {
-            return false;
-        } else if(menuModel.onOptionsItemSelected(this, item)) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(menuModel.onOptionsItemSelected(this, item)) {
             return true;
         } else {
             return super.onOptionsItemSelected(item);

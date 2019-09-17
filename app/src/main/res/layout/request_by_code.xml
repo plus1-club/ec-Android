@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="club.plus1.ec_electric.viewmodel.RequestViewModel" />
+            type="club.plus1.ec_online.viewmodel.RequestViewModel" />
     </data>
     <LinearLayout
         tools:ignore="UseCompoundDrawables"
@@ -14,7 +14,7 @@
 
                 <TextView
                     android:id="@+id/textProduct"
-                    style="@style/AppTheme.ECElectric.Text"
+                    style="@style/AppTheme.ECOnline.Text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/text_enter_number_or_product"
@@ -22,7 +22,7 @@
 
                 <EditText
                     android:id="@+id/editProduct"
-                    style="@style/AppTheme.ECElectric.Edit"
+                    style="@style/AppTheme.ECOnline.Edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -33,7 +33,7 @@
 
         <EditText
             android:id="@+id/editCount"
-            style="@style/AppTheme.ECElectric.Edit"
+            style="@style/AppTheme.ECOnline.Edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -44,7 +44,7 @@
 
                 <CheckBox
                     android:id="@+id/checkFullSearch"
-                    style="@style/AppTheme.ECElectric.Text"
+                    style="@style/AppTheme.ECOnline.Text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="@={viewModel.isFullSearch}"
@@ -52,7 +52,7 @@
 
                 <Button
                     android:id="@+id/buttonNext"
-                    style="@style/AppTheme.ECElectric.Button"
+                    style="@style/AppTheme.ECOnline.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/button_check"
@@ -60,7 +60,7 @@
 
                 <TextView
                     android:id="@+id/linkStock"
-                    style="@style/AppTheme.ECElectric.Link"
+                    style="@style/AppTheme.ECOnline.Link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/link_store_file"
@@ -68,7 +68,7 @@
 
                 <TextView
                     android:id="@+id/linkSpecifications"
-                    style="@style/AppTheme.ECElectric.Link"
+                    style="@style/AppTheme.ECOnline.Link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/link_specifications_file"

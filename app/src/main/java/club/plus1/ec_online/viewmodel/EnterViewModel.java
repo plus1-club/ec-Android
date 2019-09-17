@@ -1,10 +1,10 @@
-package club.plus1.ec_electric.viewmodel;
+package club.plus1.ec_online.viewmodel;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import club.plus1.ec_electric.view.MenuActivity;
+import club.plus1.ec_online.view.MenuActivity;
 
 public class EnterViewModel {
     public String login;

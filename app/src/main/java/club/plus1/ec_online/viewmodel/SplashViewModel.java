@@ -1,4 +1,4 @@
-package club.plus1.ec_electric.viewmodel;
+package club.plus1.ec_online.viewmodel;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 
-import club.plus1.ec_electric.view.EnterActivity;
+import club.plus1.ec_online.view.EnterActivity;
 
 public class SplashViewModel {
 

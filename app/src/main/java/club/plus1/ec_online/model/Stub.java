@@ -1,4 +1,4 @@
-package club.plus1.ec_electric.model;
+package club.plus1.ec_online.model;
 
 import java.util.ArrayList;
 import java.util.List;

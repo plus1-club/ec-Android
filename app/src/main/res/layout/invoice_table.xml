@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/textProduct"
-        style="@style/AppTheme.ECElectric.Edit"
+        style="@style/AppTheme.ECOnline.Edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/screen_6"

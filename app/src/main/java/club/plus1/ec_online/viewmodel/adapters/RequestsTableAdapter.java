@@ -1,4 +1,4 @@
-package club.plus1.ec_electric.viewmodel.adapters;
+package club.plus1.ec_online.viewmodel.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +15,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-import club.plus1.ec_electric.R;
-import club.plus1.ec_electric.databinding.RequestsTableItemBinding;
-import club.plus1.ec_electric.model.Request;
-import club.plus1.ec_electric.viewmodel.RequestViewModel;
+import club.plus1.ec_online.R;
+import club.plus1.ec_online.databinding.RequestsTableItemBinding;
+import club.plus1.ec_online.model.Request;
+import club.plus1.ec_online.viewmodel.RequestViewModel;
 
 public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdapter.RequestViewHolder>{
 

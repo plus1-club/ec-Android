@@ -1,4 +1,4 @@
-package club.plus1.ec_electric.view.fragmets;
+package club.plus1.ec_online.view.fragmets;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,10 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import club.plus1.ec_electric.R;
-import club.plus1.ec_electric.databinding.RequestByCodeBinding;
-import club.plus1.ec_electric.databinding.RequestFromExcelBinding;
-import club.plus1.ec_electric.viewmodel.RequestViewModel;
+import club.plus1.ec_online.R;
+import club.plus1.ec_online.databinding.RequestByCodeBinding;
+import club.plus1.ec_online.databinding.RequestFromExcelBinding;
+import club.plus1.ec_online.viewmodel.RequestViewModel;
 
 public class RequestFragment extends Fragment {
 

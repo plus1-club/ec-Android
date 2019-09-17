@@ -1,13 +1,13 @@
-package club.plus1.ec_electric.view;
+package club.plus1.ec_online.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 
-import club.plus1.ec_electric.R;
-import club.plus1.ec_electric.databinding.EnterBinding;
-import club.plus1.ec_electric.viewmodel.EnterViewModel;
+import club.plus1.ec_online.R;
+import club.plus1.ec_online.databinding.EnterBinding;
+import club.plus1.ec_online.viewmodel.EnterViewModel;
 
 public class EnterActivity extends AppCompatActivity {
 

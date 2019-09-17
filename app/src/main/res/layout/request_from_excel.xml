@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="club.plus1.ec_electric.viewmodel.RequestViewModel" />
+            type="club.plus1.ec_online.viewmodel.RequestViewModel" />
     </data>
     <LinearLayout
         tools:ignore="UseCompoundDrawables"
@@ -14,7 +14,7 @@
 
         <TextView
             android:id="@+id/textProduct"
-            style="@style/AppTheme.ECElectric.Text"
+            style="@style/AppTheme.ECOnline.Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="0dp"
@@ -29,7 +29,7 @@
 
             <EditText
                 android:id="@+id/editFile"
-                style="@style/AppTheme.ECElectric.Edit"
+                style="@style/AppTheme.ECOnline.Edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -41,7 +41,7 @@
 
             <Button
                 android:id="@+id/buttonSelect"
-                style="@style/AppTheme.ECElectric.Button"
+                style="@style/AppTheme.ECOnline.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -51,7 +51,7 @@
 
         <EditText
             android:id="@+id/editProduct"
-            style="@style/AppTheme.ECElectric.Edit"
+            style="@style/AppTheme.ECOnline.Edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -62,7 +62,7 @@
 
         <EditText
             android:id="@+id/editCount"
-            style="@style/AppTheme.ECElectric.Edit"
+            style="@style/AppTheme.ECOnline.Edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -73,7 +73,7 @@
 
         <CheckBox
             android:id="@+id/checkFullSearch"
-            style="@style/AppTheme.ECElectric.Text"
+            style="@style/AppTheme.ECOnline.Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="@={viewModel.isFullSearch}"
@@ -81,7 +81,7 @@
 
         <Button
             android:id="@+id/buttonNext"
-            style="@style/AppTheme.ECElectric.Button"
+            style="@style/AppTheme.ECOnline.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.onNext(context)}"
@@ -89,7 +89,7 @@
 
         <TextView
             android:id="@+id/linkSample"
-            style="@style/AppTheme.ECElectric.Link"
+            style="@style/AppTheme.ECOnline.Link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.linkSample(context)}"

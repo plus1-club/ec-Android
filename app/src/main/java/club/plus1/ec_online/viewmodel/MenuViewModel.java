@@ -1,14 +1,14 @@
-package club.plus1.ec_electric.viewmodel;
+package club.plus1.ec_online.viewmodel;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.MenuItem;
 
-import club.plus1.ec_electric.R;
-import club.plus1.ec_electric.view.EnterActivity;
-import club.plus1.ec_electric.view.InvoiceTableActivity;
-import club.plus1.ec_electric.view.RequestsBasketActivity;
-import club.plus1.ec_electric.view.RequestActivity;
+import club.plus1.ec_online.R;
+import club.plus1.ec_online.view.EnterActivity;
+import club.plus1.ec_online.view.InvoiceTableActivity;
+import club.plus1.ec_online.view.RequestsBasketActivity;
+import club.plus1.ec_online.view.RequestActivity;
 
 public class MenuViewModel {
 

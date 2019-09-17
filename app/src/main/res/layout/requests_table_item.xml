@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="club.plus1.ec_electric.viewmodel.RequestViewModel" />
+            type="club.plus1.ec_online.viewmodel.RequestViewModel" />
     </data>
     <LinearLayout
         android:layout_width="fill_parent"
@@ -24,7 +24,7 @@
 
             <TextView
                 android:id="@+id/textProduct"
-                style="@style/AppTheme.ECElectric.Text"
+                style="@style/AppTheme.ECOnline.Text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/text_product"
@@ -49,7 +49,7 @@
 
                 <TextView
                     android:id="@+id/labelCount"
-                    style="@style/AppTheme.ECElectric.Text"
+                    style="@style/AppTheme.ECOnline.Text"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -80,7 +80,7 @@
 
                 <TextView
                     android:id="@+id/editSum"
-                    style="@style/AppTheme.ECElectric.Text"
+                    style="@style/AppTheme.ECOnline.Text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal|center_vertical"

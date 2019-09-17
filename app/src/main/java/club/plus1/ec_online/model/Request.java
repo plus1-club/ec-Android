@@ -1,4 +1,4 @@
-package club.plus1.ec_electric.model;
+package club.plus1.ec_online.model;
 
 public class Request {
     public String product;
@@ -6,7 +6,7 @@ public class Request {
     public double price;
     public double sum;
 
-    public Request(String product, int count, double price){
+    Request(String product, int count, double price){
         this.product = product;
         this.count = count;
         this.price = price;

@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="club.plus1.ec_electric.viewmodel.SplashViewModel" />
+            type="club.plus1.ec_online.viewmodel.SplashViewModel" />
     </data>
     <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         tools:ignore="UseCompoundDrawables"
@@ -13,7 +13,7 @@
 
         <ImageView
             android:id="@+id/splash_screen"
-            style="@style/AppTheme.ECElectric.Logo"
+            style="@style/AppTheme.ECOnline.Logo"
             android:src="@drawable/splash"
             tools:ignore="ContentDescription" />
 

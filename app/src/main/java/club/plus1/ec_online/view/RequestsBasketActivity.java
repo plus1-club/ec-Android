@@ -1,4 +1,4 @@
-package club.plus1.ec_electric.view;
+package club.plus1.ec_online.view;
 
 import android.os.Bundle;
 
@@ -6,11 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import club.plus1.ec_electric.R;
-import club.plus1.ec_electric.databinding.RequestsBasketBinding;
-import club.plus1.ec_electric.model.Stub;
-import club.plus1.ec_electric.viewmodel.RequestViewModel;
-import club.plus1.ec_electric.viewmodel.adapters.RequestsBasketAdapter;
+import club.plus1.ec_online.R;
+import club.plus1.ec_online.databinding.RequestsBasketBinding;
+import club.plus1.ec_online.model.Stub;
+import club.plus1.ec_online.viewmodel.RequestViewModel;
+import club.plus1.ec_online.viewmodel.adapters.RequestsBasketAdapter;
 
 public class RequestsBasketActivity extends AppCompatActivity {
 

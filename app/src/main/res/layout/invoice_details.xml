@@ -9,13 +9,13 @@
 
     <ImageView
         android:id="@+id/splash_screen"
-        style="@style/AppTheme.ECElectric.Logo"
+        style="@style/AppTheme.ECOnline.Logo"
         android:src="@drawable/splash"
         tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textProduct"
-        style="@style/AppTheme.ECElectric.Edit"
+        style="@style/AppTheme.ECOnline.Edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/screen_7"

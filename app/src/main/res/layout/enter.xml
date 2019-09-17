@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="club.plus1.ec_electric.viewmodel.EnterViewModel" />
+            type="club.plus1.ec_online.viewmodel.EnterViewModel" />
     </data>
     <LinearLayout
         tools:ignore="UseCompoundDrawables"
@@ -14,14 +14,14 @@
 
         <ImageView
             android:id="@+id/splash_screen"
-            style="@style/AppTheme.ECElectric.Logo"
+            style="@style/AppTheme.ECOnline.Logo"
             android:layout_weight="1"
             android:src="@drawable/splash"
             tools:ignore="ContentDescription" android:layout_height="0dp"/>
 
         <EditText
             android:id="@+id/editLogin"
-            style="@style/AppTheme.ECElectric.Edit"
+            style="@style/AppTheme.ECOnline.Edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -32,7 +32,7 @@
 
         <EditText
             android:id="@+id/editPassword"
-            style="@style/AppTheme.ECElectric.Edit"
+            style="@style/AppTheme.ECOnline.Edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -43,7 +43,7 @@
 
         <Button
             android:id="@+id/buttonEnter"
-            style="@style/AppTheme.ECElectric.Button"
+            style="@style/AppTheme.ECOnline.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{()->viewModel.onEnter(context)}"
@@ -51,7 +51,7 @@
 
         <TextView
             android:id="@+id/textEnter"
-            style="@style/AppTheme.ECElectric.Text"
+            style="@style/AppTheme.ECOnline.Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{@string/text_ender(@string/text_phone)}"

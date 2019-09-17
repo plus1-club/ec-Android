@@ -1,4 +1,4 @@
-package club.plus1.ec_electric.viewmodel;
+package club.plus1.ec_online.viewmodel;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.widget.Toast;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 
-import club.plus1.ec_electric.view.RequestsBasketActivity;
-import club.plus1.ec_electric.view.RequestsTableActivity;
+import club.plus1.ec_online.view.RequestsBasketActivity;
+import club.plus1.ec_online.view.RequestsTableActivity;
 
 public class RequestViewModel {
 

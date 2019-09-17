@@ -1,4 +1,4 @@
-package club.plus1.ec_electric;
+package club.plus1.ec_online;
 
 import org.junit.Test;
 

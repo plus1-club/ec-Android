@@ -1,14 +1,14 @@
-package club.plus1.ec_electric.view;
+package club.plus1.ec_online.view;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import club.plus1.ec_electric.R;
-import club.plus1.ec_electric.databinding.RequestBinding;
-import club.plus1.ec_electric.viewmodel.RequestViewModel;
-import club.plus1.ec_electric.viewmodel.adapters.RequestFragmentAdapter;
+import club.plus1.ec_online.R;
+import club.plus1.ec_online.databinding.RequestBinding;
+import club.plus1.ec_online.viewmodel.RequestViewModel;
+import club.plus1.ec_online.viewmodel.adapters.RequestFragmentAdapter;
 
 public class RequestActivity extends AppCompatActivity {
 

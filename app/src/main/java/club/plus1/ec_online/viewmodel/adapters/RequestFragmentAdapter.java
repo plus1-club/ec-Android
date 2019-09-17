@@ -1,13 +1,11 @@
-package club.plus1.ec_electric.viewmodel.adapters;
-
-import android.content.Context;
+package club.plus1.ec_online.viewmodel.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import club.plus1.ec_electric.view.fragmets.RequestFragment;
+import club.plus1.ec_online.view.fragmets.RequestFragment;
 
 public class RequestFragmentAdapter extends FragmentPagerAdapter {
 
