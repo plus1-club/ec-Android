@@ -25,7 +25,7 @@ public class MenuViewModel {
     }
 
     public void onMakeOrder(Context context){
-        Intent intent = new Intent(context, InvoiceTableActivity.class);
+        Intent intent = new Intent(context, RequestActivity.class);
         context.startActivity(intent);
     }
 
