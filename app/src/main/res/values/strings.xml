@@ -11,7 +11,7 @@
     <string name="text_phone">+7(495)1234567</string>
 
     <!-- Экран "2.Стартовый" и меню "8.Меню" -->
-    <string name="text_check_existence">Проверка наличия заказа</string>
+    <string name="text_product_existence">Проверка наличия товара</string>
     <string name="text_cart">Корзина</string>
     <string name="text_reserves">Резервы</string>
     <string name="text_canceled">Аннулированные и просроченные счета</string>

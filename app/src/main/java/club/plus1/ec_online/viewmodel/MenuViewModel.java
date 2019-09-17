@@ -61,7 +61,7 @@ public class MenuViewModel {
 
     public boolean onOptionsItemSelected(Context context, MenuItem item){
         switch (item.getItemId()) {
-            case R.id.action_check_existence:
+            case R.id.action_product_existence:
                 onCheckExistence(context);
                 return true;
             case R.id.action_cart:
