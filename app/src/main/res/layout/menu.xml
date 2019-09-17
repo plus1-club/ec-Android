@@ -18,7 +18,7 @@
             style="@style/AppTheme.ECOnline.Logo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="12"
+            android:layout_weight="16"
             android:src="@drawable/splash"
             tools:ignore="ContentDescription" />
 

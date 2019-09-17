@@ -19,11 +19,12 @@
             android:layout_weight="8"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/splash_screen"
-                style="@style/AppTheme.ECOnline.Logo"
-                android:src="@drawable/splash"
-                tools:ignore="ContentDescription" />
+            <TextView
+                android:id="@+id/labelScreenName"
+                style="@style/AppTheme.ECOnline.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_request" />
 
         </LinearLayout>
 
