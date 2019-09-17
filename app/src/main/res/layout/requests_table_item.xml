@@ -23,10 +23,12 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonDelete"
+                android:id="@+id/buttonAdd"
                 style="@style/AppTheme.ECOnline.Button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:backgroundTint="@color/green"
+                android:backgroundTintMode="multiply"
                 android:onClick="@{() -> viewModel.onCheckRow(context)}"
                 android:text="@string/button_V"
                 android:textSize="14sp" />
@@ -97,6 +99,7 @@
                     android:layout_margin="0dp"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="@string/text_status"
+                    android:textColor="@color/green"
                     android:textSize="14sp" />
             </LinearLayout>
 

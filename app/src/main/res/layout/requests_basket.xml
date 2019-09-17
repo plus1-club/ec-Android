@@ -108,7 +108,7 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/buttonAdd"
+                        android:id="@+id/buttonDelete"
                         style="@style/AppTheme.ECOnline.Button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
