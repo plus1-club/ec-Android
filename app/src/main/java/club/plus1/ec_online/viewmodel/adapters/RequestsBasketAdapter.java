@@ -68,22 +68,20 @@ public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAd
         // each data item is just a string in this case
         private  TextView textProduct;
         private  EditText editCount;
-        private  TextView textPrice;
         private  TextView textSum;
 
         RequestBasketHolder(View v) {
             super(v);
             textProduct = v.findViewById(R.id.textProduct);
             editCount = v.findViewById(R.id.editCount);
-            textPrice = v.findViewById(R.id.editPrice);
             textSum = v.findViewById(R.id.editSum);
         }
 
         void bind(Request request){
             textProduct.setText(request.product);
             editCount.setText(String.format(Locale.getDefault(), "%d", request.count));
-            textPrice.setText(String.format(Locale.getDefault(),"Цена: %.2f \u20BD", request.price));
-            textSum.setText(String.format(Locale.getDefault(),"Сумма: %.2f \u20BD", request.sum));
+            textSum.setText(String.format(Locale.getDefault(),
+                    "Цена: %1$.2f \u20BD\nСумма: %2$.2f \u20BD", request.price, request.sum));
         }
     }
 }

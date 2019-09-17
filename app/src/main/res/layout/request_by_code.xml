@@ -50,13 +50,14 @@
                     android:checked="@={viewModel.isFullSearch}"
                     android:text="@string/check_fulltext_search" />
 
-                <Button
-                    android:id="@+id/buttonNext"
-                    style="@style/AppTheme.ECOnline.Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_check"
-                    android:onClick="@{() -> viewModel.onNext(context)}"/>
+        <Button
+            android:id="@+id/buttonNext"
+            style="@style/AppTheme.ECOnline.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onNext(context)}"
+            android:text="@string/button_check"
+            android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/linkStock"
