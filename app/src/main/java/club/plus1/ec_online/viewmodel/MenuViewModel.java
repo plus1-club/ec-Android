@@ -19,13 +19,13 @@ public class MenuViewModel {
         context.startActivity(intent);
     }
 
-    public void onMakeOrder(Context context){
-        Intent intent = new Intent(context, RequestActivity.class);
+    public void onCart(Context context){
+        Intent intent = new Intent(context, RequestsBasketActivity.class);
         context.startActivity(intent);
     }
 
-    public void onCart(Context context){
-        Intent intent = new Intent(context, RequestsBasketActivity.class);
+    public void onMakeOrder(Context context){
+        Intent intent = new Intent(context, InvoiceTableActivity.class);
         context.startActivity(intent);
     }
 
