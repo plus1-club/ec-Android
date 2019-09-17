@@ -77,7 +77,7 @@ public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdap
 
         void bind(Request request){
             textProduct.setText(request.product);
-            editCount.setText(String.format(Locale.getDefault(),"%d", request.count));
+            editCount.setText(String.format(Locale.getDefault(), "%d", request.count));
         }
     }
 }

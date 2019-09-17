@@ -63,8 +63,7 @@
     <string name="label_basket">Корзина</string>
 
     <!-- Названия экранов - временно -->
-    <string name="screen_5">5.Таблица заявок</string>
-    <string name="screen_6">6.Счета</string>
+    <string name="screen_6">Находится в разработке</string>
     <string name="screen_7">7.Детали счета</string>
 
 </resources>

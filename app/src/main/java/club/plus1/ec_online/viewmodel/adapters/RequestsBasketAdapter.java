@@ -17,7 +17,6 @@ import java.util.Locale;
 
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.RequestsBasketItemBinding;
-import club.plus1.ec_online.databinding.RequestsTableItemBinding;
 import club.plus1.ec_online.model.Request;
 import club.plus1.ec_online.viewmodel.RequestViewModel;
 
@@ -82,9 +81,9 @@ public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAd
 
         void bind(Request request){
             textProduct.setText(request.product);
-            editCount.setText(String.format(Locale.getDefault(),"%d", request.count));
-            textPrice.setText(String.format(Locale.getDefault(),"Цена: %.2f\u20BD", request.price));
-            textSum.setText(String.format(Locale.getDefault(),"Сумма: %.2f\u20BD", request.sum));
+            editCount.setText(String.format(Locale.getDefault(), "%d", request.count));
+            textPrice.setText(String.format(Locale.getDefault(),"Цена: %.2f \u20BD", request.price));
+            textSum.setText(String.format(Locale.getDefault(),"Сумма: %.2f \u20BD", request.sum));
         }
     }
 }
