@@ -32,13 +32,14 @@
 
             <LinearLayout
                 android:id="@+id/layoutRequest"
-                style="@style/AppTheme.ECOnline.Card"
+                style="@style/AppTheme.ECOnline.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="@{()->viewModel.onCheckExistence(context)}"
                 android:orientation="vertical"
+                android:padding="2dp"
                 tools:ignore="NestedWeights">
 
                 <ImageView
@@ -63,13 +64,14 @@
 
             <LinearLayout
                 android:id="@+id/layoutOrder"
-                style="@style/AppTheme.ECOnline.Card"
+                style="@style/AppTheme.ECOnline.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="@{()->viewModel.onMakeOrder(context)}"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="2dp">
 
                 <ImageView
                     android:id="@+id/imageOrder"
@@ -103,13 +105,14 @@
 
             <LinearLayout
                 android:id="@+id/layoutBasket"
-                style="@style/AppTheme.ECOnline.Card"
+                style="@style/AppTheme.ECOnline.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="@{()->viewModel.onCart(context)}"
                 android:orientation="vertical"
+                android:padding="2dp"
                 tools:ignore="NestedWeights">
 
                 <ImageView
@@ -134,13 +137,14 @@
 
             <LinearLayout
                 android:id="@+id/layoutUnconfirmed"
-                style="@style/AppTheme.ECOnline.Card"
+                style="@style/AppTheme.ECOnline.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="@{()->viewModel.onUnconfirmed(context)}"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="2dp">
 
                 <ImageView
                     android:id="@+id/imageUnconfirmed"
@@ -174,13 +178,14 @@
 
             <LinearLayout
                 android:id="@+id/layoutReserved"
-                style="@style/AppTheme.ECOnline.Card"
+                style="@style/AppTheme.ECOnline.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="@{()->viewModel.onReserves(context)}"
                 android:orientation="vertical"
+                android:padding="2dp"
                 tools:ignore="NestedWeights">
 
                 <ImageView
@@ -205,13 +210,14 @@
 
             <LinearLayout
                 android:id="@+id/layoutOrdered"
-                style="@style/AppTheme.ECOnline.Card"
+                style="@style/AppTheme.ECOnline.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="@{()->viewModel.onOrders(context)}"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="2dp">
 
                 <ImageView
                     android:id="@+id/imageOrdered"
@@ -245,13 +251,14 @@
 
             <LinearLayout
                 android:id="@+id/layoutCanceled"
-                style="@style/AppTheme.ECOnline.Card"
+                style="@style/AppTheme.ECOnline.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="@{()->viewModel.onCanceled(context)}"
                 android:orientation="vertical"
+                android:padding="2dp"
                 tools:ignore="NestedWeights">
 
                 <ImageView
@@ -276,13 +283,14 @@
 
             <LinearLayout
                 android:id="@+id/layoutShipped"
-                style="@style/AppTheme.ECOnline.Card"
+                style="@style/AppTheme.ECOnline.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="@{()->viewModel.onHistory(context)}"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="2dp">
 
                 <ImageView
                     android:id="@+id/imageShipped"

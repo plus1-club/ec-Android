@@ -137,10 +137,11 @@
 
                 <Button
                     android:id="@+id/buttonDelete"
+                    style="@style/AppTheme.ECOnline.Button"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/button_X"
                     android:onClick="@{() -> viewModel.onDeleteRow(context)}"
+                    android:text="@string/button_X"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
