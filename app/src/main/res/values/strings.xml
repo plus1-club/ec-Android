@@ -48,10 +48,9 @@
     <string name="button_add">Добавить</string>
     <string name="button_issue">Оформить</string>
     <string name="text_count">%1$d</string>
-    <string name="text_price">Цена:\n%1$.2f ₽</string>
-    <string name="text_sum">Сумма:\n%1$.2f ₽</string>
+    <string name="text_money">%1$.2f ₽</string>
     <string name="text_status_green">В наличии</string>
-    <string name="text_status_yellow">%1$d из %2$d</string>
+    <string name="text_status_yellow">Есть %1$d из %2$d</string>
     <string name="text_status_red">Нет</string>
 
     <!-- Тестовые значения - временно -->

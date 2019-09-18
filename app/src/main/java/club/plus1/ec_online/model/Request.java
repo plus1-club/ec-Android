@@ -7,7 +7,7 @@ public class Request {
     public double price;
     public double sum;
 
-    Request(String product, int requestCount, int stockCount, double price) {
+    public Request(String product, int requestCount, int stockCount, double price) {
         this.product = product;
         this.requestCount = requestCount;
         this.stockCount = stockCount;

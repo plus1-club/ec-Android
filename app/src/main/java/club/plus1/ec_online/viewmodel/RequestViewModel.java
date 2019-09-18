@@ -4,9 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableList;
 
+import club.plus1.ec_online.model.Request;
 import club.plus1.ec_online.view.RequestsBasketActivity;
 import club.plus1.ec_online.view.RequestsTableActivity;
 
@@ -17,10 +21,15 @@ public class RequestViewModel {
     public ObservableField<String> productColumn;
     public ObservableField<String> countColumn;
     public ObservableBoolean isFullSearch;
+    public ObservableList<Request> requests;
+    public ObservableDouble total;
 
     private static RequestViewModel mInstance;    // Ссылка для биндинга с View
 
-    private RequestViewModel(){}
+    private RequestViewModel() {
+        requests = new ObservableArrayList<>();
+        total = new ObservableDouble();
+    }
 
     // Получение единственного экземпляра класса
     public static RequestViewModel getInstance() {

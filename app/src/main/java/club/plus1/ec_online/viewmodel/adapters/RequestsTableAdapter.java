@@ -1,6 +1,5 @@
 package club.plus1.ec_online.viewmodel.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 import club.plus1.ec_online.R;
@@ -34,15 +32,12 @@ public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdap
         notifyDataSetChanged();
     }
 
-    public void clearItems() {
-        requests.clear();
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public RequestsTableAdapter.RequestsTableViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         viewModel = new RequestItemViewModel();
+        viewModel.parent.requests.clear();
+        viewModel.parent.requests.addAll(requests);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         RequestsTableItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.requests_table_item, parent, false);
         binding.setViewModel(viewModel);
@@ -51,7 +46,7 @@ public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdap
 
     @Override
     public void onBindViewHolder(RequestsTableViewHolder holder, int position) {
-        holder.bind(requests.get(position));
+        holder.bind(requests.get(position), position);
     }
 
     @Override
@@ -70,26 +65,12 @@ public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdap
             viewModel = Objects.requireNonNull(binding).getViewModel();
         }
 
-        void bind(Request request){
-            Context context = binding.getRoot().getContext();
-            String status;
-            int color;
-            if (request.stockCount == 0) {
-                status = context.getString(R.string.text_status_red);
-                color = R.color.red;
-            } else if (request.stockCount > request.requestCount) {
-                status = context.getString(R.string.text_status_green);
-                color = R.color.green;
-            } else {
-                status = context.getString(R.string.text_status_yellow, request.stockCount, request.requestCount);
-                color = R.color.yellow;
-            }
-
+        void bind(Request request, int position) {
+            viewModel.position.set(position);
             viewModel.product.set(request.product);
-            viewModel.count.set(String.format(Locale.getDefault(),
-                    context.getString(R.string.text_count), request.requestCount));
-            viewModel.status.set(status);
-            viewModel.color.set(color);
+            viewModel.count.set(request.requestCount);
+            viewModel.stockCount.set(request.stockCount);
+            viewModel.updateStatus();
         }
     }
 }

@@ -4,6 +4,7 @@
     package="club.plus1.ec_online">
 
     <application
+        android:name=".model.App"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/full_name"
