@@ -1,10 +1,9 @@
 package club.plus1.ec_online.viewmodel.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -14,18 +13,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.RequestsTableItemBinding;
 import club.plus1.ec_online.model.Request;
-import club.plus1.ec_online.viewmodel.RequestViewModel;
+import club.plus1.ec_online.viewmodel.RequestItemViewModel;
 
-public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdapter.RequestViewHolder>{
+public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdapter.RequestsTableViewHolder> {
 
     private List<Request> requests;
-    private RequestViewModel viewModel;
+    private RequestItemViewModel viewModel;
 
-    // Provide a suitable constructor (depends on the kind of dataset)
     public RequestsTableAdapter() {
         requests = new ArrayList<>();
     }
@@ -40,44 +39,57 @@ public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdap
         notifyDataSetChanged();
     }
 
-    // Create new views (invoked by the layout manager)
     @NonNull
     @Override
-    public RequestsTableAdapter.RequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        viewModel = RequestViewModel.getInstance();
-        RequestsTableItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.requests_table_item, parent, false);
+    public RequestsTableAdapter.RequestsTableViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        viewModel = new RequestItemViewModel();
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        RequestsTableItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.requests_table_item, parent, false);
         binding.setViewModel(viewModel);
-        return new RequestViewHolder(binding.getRoot());
+        return new RequestsTableViewHolder(binding.getRoot());
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(RequestViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
+    public void onBindViewHolder(RequestsTableViewHolder holder, int position) {
         holder.bind(requests.get(position));
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return requests.size();
     }
 
-    static class RequestViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        private  TextView textProduct;
-        private  EditText editCount;
+    static class RequestsTableViewHolder extends RecyclerView.ViewHolder {
 
-        RequestViewHolder(View v) {
-            super(v);
-            textProduct = v.findViewById(R.id.textProduct);
-            editCount = v.findViewById(R.id.editCount);
+        private RequestsTableItemBinding binding;
+        private RequestItemViewModel viewModel;
+
+        RequestsTableViewHolder(View view) {
+            super(view);
+            binding = DataBindingUtil.bind(view);
+            viewModel = Objects.requireNonNull(binding).getViewModel();
         }
 
         void bind(Request request){
-            textProduct.setText(request.product);
-            editCount.setText(String.format(Locale.getDefault(), "%d", request.count));
+            Context context = binding.getRoot().getContext();
+            String status;
+            int color;
+            if (request.stockCount == 0) {
+                status = context.getString(R.string.text_status_red);
+                color = R.color.red;
+            } else if (request.stockCount > request.requestCount) {
+                status = context.getString(R.string.text_status_green);
+                color = R.color.green;
+            } else {
+                status = context.getString(R.string.text_status_yellow, request.stockCount, request.requestCount);
+                color = R.color.yellow;
+            }
+
+            viewModel.product.set(request.product);
+            viewModel.count.set(String.format(Locale.getDefault(),
+                    context.getString(R.string.text_count), request.requestCount));
+            viewModel.status.set(status);
+            viewModel.color.set(color);
         }
     }
 }

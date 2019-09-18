@@ -2,7 +2,6 @@ package club.plus1.ec_online.viewmodel;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.databinding.ObservableBoolean;
@@ -76,14 +75,4 @@ public class RequestViewModel {
     public void onIssue(Context context){
         Toast.makeText(context, "Оформить заказ", Toast.LENGTH_LONG).show();
     }
-
-    // TODO: Реализовать выставление флага
-    public void onCheckRow(Context context, View view){
-    }
-
-    // TODO: Реализовать удаление строки
-    public void onDeleteRow(Context context){
-        Toast.makeText(context, "Удаление строки", Toast.LENGTH_LONG).show();
-    }
-
 }

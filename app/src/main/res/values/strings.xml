@@ -41,20 +41,21 @@
     <string name="label_count">Количество:</string>
     <string name="label_price">Цена:</string>
     <string name="label_sum">Сумма:</string>
-    <string name="button_V">V</string>
-    <string name="button_X">X</string>
     <string name="text_comment">Комментарий к заказу</string>
     <string name="button_to_busket">В корзину</string>
     <string name="button_recount">Пересчитать</string>
     <string name="button_clear">Очистить</string>
     <string name="button_add">Добавить</string>
     <string name="button_issue">Оформить</string>
+    <string name="text_count">%1$d</string>
+    <string name="text_price">Цена:\n%1$.2f ₽</string>
+    <string name="text_sum">Сумма:\n%1$.2f ₽</string>
+    <string name="text_status_green">В наличии</string>
+    <string name="text_status_yellow">%1$d из %2$d</string>
+    <string name="text_status_red">Нет</string>
 
     <!-- Тестовые значения - временно -->
-    <string name="text_product">1.Schneider MGU5.418.25ZD 2 USB Зарядное устройство, 2.1A, беж</string>
     <string name="text_total">Итого: 6 608 547,36</string>
-    <string name="text_sum">Цена: 2141,81  Сумма: 2141,81</string>
-    <string name="text_status">В наличии</string>
 
     <!-- Названия экранов -->
     <string name="label_request">Проверка наличия товара</string>

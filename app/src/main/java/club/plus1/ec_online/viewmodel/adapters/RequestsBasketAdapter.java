@@ -1,10 +1,9 @@
 package club.plus1.ec_online.viewmodel.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -14,18 +13,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.RequestsBasketItemBinding;
 import club.plus1.ec_online.model.Request;
-import club.plus1.ec_online.viewmodel.RequestViewModel;
+import club.plus1.ec_online.viewmodel.RequestItemViewModel;
 
-public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAdapter.RequestBasketHolder>{
+public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAdapter.RequestsBasketViewHolder> {
 
     private List<Request> requests;
-    private RequestViewModel viewModel;
+    private RequestItemViewModel viewModel;
 
-    // Provide a suitable constructor (depends on the kind of dataset)
     public RequestsBasketAdapter() {
         requests = new ArrayList<>();
     }
@@ -40,48 +39,61 @@ public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAd
         notifyDataSetChanged();
     }
 
-    // Create new views (invoked by the layout manager)
     @NonNull
     @Override
-    public RequestsBasketAdapter.RequestBasketHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        viewModel = RequestViewModel.getInstance();
-        RequestsBasketItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.requests_basket_item, parent, false);
+    public RequestsBasketAdapter.RequestsBasketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        viewModel = new RequestItemViewModel();
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        RequestsBasketItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.requests_basket_item, parent, false);
         binding.setViewModel(viewModel);
-        return new RequestsBasketAdapter.RequestBasketHolder(binding.getRoot());
+        return new RequestsBasketAdapter.RequestsBasketViewHolder(binding.getRoot());
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(RequestBasketHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
+    public void onBindViewHolder(RequestsBasketViewHolder holder, int position) {
         holder.bind(requests.get(position));
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return requests.size();
     }
 
-    static class RequestBasketHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        private  TextView textProduct;
-        private  EditText editCount;
-        private  TextView textSum;
+    static class RequestsBasketViewHolder extends RecyclerView.ViewHolder {
 
-        RequestBasketHolder(View v) {
-            super(v);
-            textProduct = v.findViewById(R.id.textProduct);
-            editCount = v.findViewById(R.id.editCount);
-            textSum = v.findViewById(R.id.editSum);
+        private RequestsBasketItemBinding binding;
+        private RequestItemViewModel viewModel;
+
+        RequestsBasketViewHolder(View view) {
+            super(view);
+            binding = DataBindingUtil.bind(view);
+            viewModel = Objects.requireNonNull(binding).getViewModel();
         }
 
         void bind(Request request){
-            textProduct.setText(request.product);
-            editCount.setText(String.format(Locale.getDefault(), "%d", request.count));
-            textSum.setText(String.format(Locale.getDefault(),
-                    "Цена: %1$.2f \u20BD\nСумма: %2$.2f \u20BD", request.price, request.sum));
+            Context context = binding.getRoot().getContext();
+            String status;
+            int color;
+            if (request.stockCount == 0) {
+                status = context.getString(R.string.text_status_red);
+                color = R.color.red;
+            } else if (request.stockCount > request.requestCount) {
+                status = context.getString(R.string.text_status_green);
+                color = R.color.green;
+            } else {
+                status = context.getString(R.string.text_status_yellow, request.stockCount, request.requestCount);
+                color = R.color.yellow;
+            }
+
+            viewModel.product.set(request.product);
+            viewModel.count.set(String.format(Locale.getDefault(),
+                    context.getString(R.string.text_count), request.requestCount));
+            viewModel.price.set(String.format(Locale.getDefault(),
+                    context.getString(R.string.text_price), request.price));
+            viewModel.sum.set(String.format(Locale.getDefault(),
+                    context.getString(R.string.text_sum), request.sum));
+            viewModel.status.set(status);
+            viewModel.color.set(color);
         }
     }
 }
