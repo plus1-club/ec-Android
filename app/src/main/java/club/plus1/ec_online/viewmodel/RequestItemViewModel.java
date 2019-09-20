@@ -44,7 +44,7 @@ public class RequestItemViewModel {
         if (stockCount.get() == 0) {
             status.set(App.getContext().getString(R.string.text_status_red));
             color.set(R.color.red);
-        } else if (stockCount.get() > count.get()) {
+        } else if (stockCount.get() >= count.get()) {
             status.set(App.getContext().getString(R.string.text_status_green));
             color.set(R.color.green);
         } else {

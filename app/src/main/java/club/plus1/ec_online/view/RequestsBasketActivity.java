@@ -29,7 +29,7 @@ public class RequestsBasketActivity extends AppCompatActivity {
         viewModel = RequestViewModel.getInstance();
         Stub stub = new Stub();
         RequestsBasketAdapter requestsBasketAdapter = new RequestsBasketAdapter();
-        requestsBasketAdapter.setItems(stub.requests);
+        requestsBasketAdapter.setItems(stub.basket);
 
         RequestsBasketBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_basket);
         binding.setViewModel(viewModel);
