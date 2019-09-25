@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import java.util.Objects;
+
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.RequestsTableBinding;
 import club.plus1.ec_online.model.Stub;
@@ -27,9 +29,9 @@ public class RequestsTableActivity extends AppCompatActivity {
 
         menuModel = new MenuViewModel(this);
         viewModel = RequestViewModel.getInstance();
-        Stub stub = new Stub();
+        Stub stub = Stub.getInstance();
         RequestsTableAdapter requestsTableAdapter = new RequestsTableAdapter();
-        requestsTableAdapter.setItems(stub.getRequests(viewModel.product.get(), viewModel.count.get()));
+        requestsTableAdapter.setItems(stub.getRequests(Objects.requireNonNull(viewModel.product.get()), viewModel.count.get()));
 
         RequestsTableBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_table);
         binding.setViewModel(viewModel);

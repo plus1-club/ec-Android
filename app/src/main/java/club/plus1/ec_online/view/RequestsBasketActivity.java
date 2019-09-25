@@ -27,7 +27,7 @@ public class RequestsBasketActivity extends AppCompatActivity {
 
         menuModel = new MenuViewModel(this);
         viewModel = RequestViewModel.getInstance();
-        Stub stub = new Stub();
+        Stub stub = Stub.getInstance();
         RequestsBasketAdapter requestsBasketAdapter = new RequestsBasketAdapter();
         requestsBasketAdapter.setItems(stub.basket);
 
