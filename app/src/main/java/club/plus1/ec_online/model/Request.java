@@ -12,6 +12,25 @@ public class Request {
         this.requestCount = requestCount;
         this.stockCount = stockCount;
         this.price = price;
-        this.sum = requestCount * price;
+        sum = requestCount * price;
+    }
+
+    public Request(String product, int requestCount, int stockCount) {
+        this.product = product;
+        this.requestCount = requestCount;
+        this.stockCount = stockCount;
+        price = 0;
+        sum = 0;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+        sum = requestCount * price;
+    }
+
+
+    public void setCount(int requestCount) {
+        this.stockCount = stockCount;
+        sum = requestCount * price;
     }
 }

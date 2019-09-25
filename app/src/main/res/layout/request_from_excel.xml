@@ -59,8 +59,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/hint_product_column_number"
-            android:inputType="textPersonName"
-            android:text="@={viewModel.productColumn}"
+            android:inputType="text"
+            android:text="@={`` + viewModel.productColumn}"
             tools:ignore="Autofill" />
 
         <EditText
@@ -70,8 +70,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/hint_count_column_number"
-            android:inputType="textPersonName"
-            android:text="@={viewModel.countColumn}"
+            android:inputType="number"
+            android:text="@={`` + viewModel.countColumn}"
             tools:ignore="Autofill" />
 
         <CheckBox

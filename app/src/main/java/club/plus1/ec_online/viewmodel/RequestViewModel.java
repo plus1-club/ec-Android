@@ -8,6 +8,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
 import club.plus1.ec_online.model.Request;
@@ -17,18 +18,25 @@ import club.plus1.ec_online.view.RequestsTableActivity;
 public class RequestViewModel {
 
     public ObservableField<String> product;
-    public ObservableField<String> count;
-    public ObservableField<String> productColumn;
-    public ObservableField<String> countColumn;
+    public ObservableInt count;
+    public ObservableInt productColumn;
+    public ObservableInt countColumn;
     public ObservableBoolean isFullSearch;
-    public ObservableList<Request> requests;
     public ObservableDouble total;
+
+    public ObservableList<Request> requests;
 
     private static RequestViewModel mInstance;    // Ссылка для биндинга с View
 
     private RequestViewModel() {
-        requests = new ObservableArrayList<>();
+        product = new ObservableField<>();
+        count = new ObservableInt();
+        productColumn = new ObservableInt();
+        countColumn = new ObservableInt();
+        isFullSearch = new ObservableBoolean();
         total = new ObservableDouble();
+
+        requests = new ObservableArrayList<>();
     }
 
     // Получение единственного экземпляра класса

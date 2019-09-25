@@ -73,7 +73,7 @@
                     android:backgroundTint="@{viewModel.color}"
                     android:ems="10"
                     android:inputType="number|text"
-                    android:onTextChanged="@{viewModel.onTextChanged}"
+                    android:onTextChanged="@{viewModel::onTextChanged}"
                     android:padding="10dp"
                     android:text="@={`` + viewModel.count}"
                     android:textAlignment="center"

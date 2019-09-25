@@ -29,7 +29,7 @@ public class RequestsTableActivity extends AppCompatActivity {
         viewModel = RequestViewModel.getInstance();
         Stub stub = new Stub();
         RequestsTableAdapter requestsTableAdapter = new RequestsTableAdapter();
-        requestsTableAdapter.setItems(stub.requests);
+        requestsTableAdapter.setItems(stub.getRequests(viewModel.product.get(), viewModel.count.get()));
 
         RequestsTableBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_table);
         binding.setViewModel(viewModel);
