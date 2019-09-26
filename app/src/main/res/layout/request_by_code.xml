@@ -12,19 +12,31 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-                <TextView
-                    android:id="@+id/textProduct"
-                    style="@style/AppTheme.ECOnline.Text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_enter_number_or_product"
-                    android:textAlignment="center" />
+        <Button
+            android:id="@+id/buttonNext"
+            style="@style/AppTheme.ECOnline.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:onClick="@{() -> viewModel.onNext(context)}"
+            android:text="@string/button_check"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/checkFullSearch"
+            style="@style/AppTheme.ECOnline.Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:checked="@={viewModel.isFullSearch}"
+            android:text="@string/check_fulltext_search" />
 
         <EditText
             android:id="@+id/editProduct"
             style="@style/AppTheme.ECOnline.Edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:ems="10"
             android:hint="@string/hint_product"
             android:inputType="text"
@@ -36,44 +48,30 @@
             style="@style/AppTheme.ECOnline.Edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:ems="10"
             android:hint="@string/hint_count"
             android:inputType="number"
             android:text="@={`` + viewModel.count}"
             tools:ignore="Autofill" />
 
-                <CheckBox
-                    android:id="@+id/checkFullSearch"
-                    style="@style/AppTheme.ECOnline.Text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="@={viewModel.isFullSearch}"
-                    android:text="@string/check_fulltext_search" />
-
-        <Button
-            android:id="@+id/buttonNext"
-            style="@style/AppTheme.ECOnline.Button"
+        <TextView
+            android:id="@+id/textProduct"
+            style="@style/AppTheme.ECOnline.Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> viewModel.onNext(context)}"
-            android:text="@string/button_check"
-            android:textSize="18sp" />
+            android:layout_margin="5dp"
+            android:text="@string/text_enter_number_or_product"
+            android:textAlignment="center" />
 
-                <TextView
-                    android:id="@+id/linkStock"
-                    style="@style/AppTheme.ECOnline.Link"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/link_store_file"
-                    android:onClick="@{() -> viewModel.linkStock(context)}"/>
-
-                <TextView
-                    android:id="@+id/linkSpecifications"
-                    style="@style/AppTheme.ECOnline.Link"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/link_specifications_file"
-                    android:onClick="@{() -> viewModel.linkSpecifications(context)}" />
+        <TextView
+            android:id="@+id/linkStock"
+            style="@style/AppTheme.ECOnline.Link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:onClick="@{() -> viewModel.linkStock(context)}"
+            android:text="@string/link_store_file" />
 
     </LinearLayout>
 </layout>

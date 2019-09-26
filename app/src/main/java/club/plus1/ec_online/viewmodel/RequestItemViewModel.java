@@ -1,5 +1,6 @@
 package club.plus1.ec_online.viewmodel;
 
+import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
@@ -20,6 +21,7 @@ public class RequestItemViewModel {
     public ObservableDouble sum;
     public ObservableField<String> status;
     public ObservableInt color;
+    public ObservableBoolean mark;
 
     public RequestItemViewModel() {
         position = new ObservableInt();
@@ -30,6 +32,7 @@ public class RequestItemViewModel {
         sum = new ObservableDouble();
         status = new ObservableField<>();
         color = new ObservableInt();
+        mark = new ObservableBoolean();
         parent = RequestViewModel.getInstance();
     }
 

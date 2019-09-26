@@ -18,11 +18,12 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/checkRow"
+                android:id="@+id/checkMark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTintMode="add"
                 android:buttonTint="@{viewModel.color}"
+                android:checked="@={viewModel.mark}"
                 android:textSize="14sp" />
 
             <TextView
@@ -31,8 +32,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
+                android:padding="0dp"
                 android:text="@={viewModel.product}"
-                android:textAlignment="viewStart" />
+                android:textAlignment="viewStart"
+                android:textSize="14sp" />
 
         </LinearLayout>
 

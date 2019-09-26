@@ -2,6 +2,7 @@ package club.plus1.ec_online.viewmodel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.databinding.ObservableArrayList;
@@ -52,19 +53,14 @@ public class RequestViewModel {
         context.startActivity(intent);
     }
 
-    // TODO: Реализовать скачивание складских остатков
     public void linkStock(Context context){
-        Toast.makeText(context, "Складские остатки", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ec-electric.ru/stock_free/"));
+        context.startActivity(intent);
     }
 
-    // TODO: Реализовать скачивание спецификаций
-    public void linkSpecifications(Context context){
-        Toast.makeText(context, "Спецификации", Toast.LENGTH_LONG).show();
-    }
-
-    // TODO: Реализовать скачивание примера файла
     public void linkSample(Context context){
-        Toast.makeText(context, "Пример файла", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ec-electric.ru/order/example.xls"));
+        context.startActivity(intent);
     }
 
     // TODO: Добавлять всё что в списке в корзину

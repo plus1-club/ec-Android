@@ -15,7 +15,7 @@
         <LinearLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="30dp"
             android:orientation="vertical">
 
             <TextView
@@ -24,14 +24,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
-                android:text="@string/label_basket" />
+                android:padding="0dp"
+                android:text="@string/label_basket"
+                android:textSize="18sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/body"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="3"
             android:background="@color/black"
             android:orientation="vertical">
@@ -48,8 +50,7 @@
         <LinearLayout
             android:id="@+id/footer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_height="120dp"
             android:orientation="vertical">
 
             <TextView
@@ -58,6 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
+                android:padding="0dp"
                 android:text="@{viewModel.total}"
                 android:textAlignment="textEnd" />
 
@@ -68,6 +70,7 @@
                 android:ems="10"
                 android:hint="@string/text_comment"
                 android:inputType="textMultiLine"
+                android:padding="5dp"
                 tools:ignore="Autofill" />
 
             <LinearLayout
@@ -76,55 +79,36 @@
                 android:baselineAligned="false"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <Button
+                    android:id="@+id/buttonClear"
+                    style="@style/AppTheme.ECOnline.Button"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:onClick="@{() -> viewModel.onClear(context)}"
+                    android:text="@string/button_clear"
+                    android:textSize="14sp" />
 
-                    <Button
-                        android:id="@+id/buttonRecount"
-                        style="@style/AppTheme.ECOnline.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="@{() -> viewModel.onRecount(context)}"
-                        android:text="@string/button_recount"
-                        android:textSize="18sp" />
-
-                    <Button
-                        android:id="@+id/buttonClear"
-                        style="@style/AppTheme.ECOnline.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="@{() -> viewModel.onClear(context)}"
-                        android:text="@string/button_clear"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
+                <Button
+                    android:id="@+id/checkMark"
+                    style="@style/AppTheme.ECOnline.Button"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:onClick="@{() -> viewModel.addToBasket(context)}"
+                    android:text="@string/button_add"
+                    android:textSize="14sp" />
 
-                    <Button
-                        android:id="@+id/buttonDelete"
-                        style="@style/AppTheme.ECOnline.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="@{() -> viewModel.addToBasket(context)}"
-                        android:text="@string/button_add"
-                        android:textSize="18sp" />
+                <Button
+                    android:id="@+id/buttonIssue"
+                    style="@style/AppTheme.ECOnline.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> viewModel.onIssue(context)}"
+                    android:text="@string/button_issue"
+                    android:textSize="14sp" />
 
-                    <Button
-                        android:id="@+id/buttonIssue"
-                        style="@style/AppTheme.ECOnline.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="@{() -> viewModel.onIssue(context)}"
-                        android:text="@string/button_issue"
-                        android:textSize="18sp" />
-                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

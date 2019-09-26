@@ -23,40 +23,31 @@
             android:textAlignment="center"
             android:textSize="16sp" />
 
-        <LinearLayout
+        <Button
+            android:id="@+id/buttonNext"
+            style="@style/AppTheme.ECOnline.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="0dp">
+            android:layout_margin="5dp"
+            android:onClick="@{() -> viewModel.onNext(context)}"
+            android:text="@string/button_check"
+            android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/editFile"
-                style="@style/AppTheme.ECOnline.Edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:enabled="false"
-                android:inputType="textPersonName"
-                android:labelFor="@id/buttonSelect"
-                tools:ignore="Autofill,LabelFor" />
-
-            <Button
-                android:id="@+id/buttonSelect"
-                style="@style/AppTheme.ECOnline.Button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="@string/button_select"
-                android:textSize="18sp" />
-
-        </LinearLayout>
+        <CheckBox
+            android:id="@+id/checkFullSearch"
+            style="@style/AppTheme.ECOnline.Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:checked="@={viewModel.isFullSearch}"
+            android:text="@string/check_fulltext_search" />
 
         <EditText
             android:id="@+id/editProduct"
             style="@style/AppTheme.ECOnline.Edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:ems="10"
             android:hint="@string/hint_product_column_number"
             android:inputType="text"
@@ -68,28 +59,44 @@
             style="@style/AppTheme.ECOnline.Edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:ems="10"
             android:hint="@string/hint_count_column_number"
             android:inputType="number"
             android:text="@={`` + viewModel.countColumn}"
             tools:ignore="Autofill" />
 
-        <CheckBox
-            android:id="@+id/checkFullSearch"
-            style="@style/AppTheme.ECOnline.Text"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="@={viewModel.isFullSearch}"
-            android:text="@string/check_fulltext_search" />
+            android:orientation="horizontal"
+            android:padding="0dp">
 
-        <Button
-            android:id="@+id/buttonNext"
-            style="@style/AppTheme.ECOnline.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> viewModel.onNext(context)}"
-            android:text="@string/button_check"
-            android:textSize="18sp" />
+            <Button
+                android:id="@+id/buttonSelect"
+                style="@style/AppTheme.ECOnline.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="2"
+                android:text="@string/button_select"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editFile"
+                style="@style/AppTheme.ECOnline.Edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="textPersonName"
+                android:labelFor="@id/buttonSelect"
+                android:textSize="18sp"
+                tools:ignore="Autofill,LabelFor" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/linkSample"
@@ -97,6 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.linkSample(context)}"
+            android:layout_margin="5dp"
             android:text="@string/link_file_example" />
 
     </LinearLayout>
