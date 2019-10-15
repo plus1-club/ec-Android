@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="club.plus1.ec_online.viewmodel.InvoiceViewModel" />
+            type="club.plus1.ec_online.viewmodel.InvoiceTableViewModel" />
     </data>
 
     <LinearLayout
@@ -29,7 +29,8 @@
                 android:layout_margin="0dp"
                 android:padding="0dp"
                 android:text="@string/text_history"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

@@ -10,9 +10,9 @@ import androidx.databinding.ObservableInt;
 
 import club.plus1.ec_online.view.InvoiceDetailsActivity;
 
-public class InvoiceItemViewModel {
+public class InvoiceTableItemViewModel {
 
-    public InvoiceViewModel parent;
+    public InvoiceTableViewModel parent;
 
     public ObservableInt position;
     public ObservableInt number;
@@ -21,14 +21,14 @@ public class InvoiceItemViewModel {
     public ObservableField<String> status;
     public ObservableInt waybill;
 
-    public InvoiceItemViewModel() {
+    public InvoiceTableItemViewModel() {
         position = new ObservableInt();
         number = new ObservableInt();
         date = new ObservableField<>();
         sum = new ObservableDouble();
         status = new ObservableField<>();
         waybill = new ObservableInt();
-        parent = InvoiceViewModel.getInstance();
+        parent = InvoiceTableViewModel.getInstance();
     }
 
     public void onDetails(Context context) {

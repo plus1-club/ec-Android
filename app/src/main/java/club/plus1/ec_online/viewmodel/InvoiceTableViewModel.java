@@ -5,20 +5,20 @@ import androidx.databinding.ObservableList;
 
 import club.plus1.ec_online.model.Invoice;
 
-public class InvoiceViewModel {
+public class InvoiceTableViewModel {
 
     public ObservableList<Invoice> invoices;
 
-    private static InvoiceViewModel mInstance;    // Ссылка для биндинга с View
+    private static InvoiceTableViewModel mInstance;    // Ссылка для биндинга с View
 
-    private InvoiceViewModel() {
+    private InvoiceTableViewModel() {
         invoices = new ObservableArrayList<>();
     }
 
     // Получение единственного экземпляра класса
-    public static InvoiceViewModel getInstance() {
+    public static InvoiceTableViewModel getInstance() {
         if (mInstance == null) {
-            mInstance = new InvoiceViewModel();
+            mInstance = new InvoiceTableViewModel();
         }
         return mInstance;
     }

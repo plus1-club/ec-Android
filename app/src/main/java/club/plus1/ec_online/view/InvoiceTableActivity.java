@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.InvoiceTableBinding;
 import club.plus1.ec_online.model.Stub;
-import club.plus1.ec_online.viewmodel.InvoiceViewModel;
+import club.plus1.ec_online.viewmodel.InvoiceTableViewModel;
 import club.plus1.ec_online.viewmodel.MenuViewModel;
 import club.plus1.ec_online.viewmodel.adapters.InvoiceTableAdapter;
 
 public class InvoiceTableActivity extends AppCompatActivity {
 
-    InvoiceViewModel viewModel;
+    InvoiceTableViewModel viewModel;
     MenuViewModel menuModel;
 
     @Override
@@ -26,7 +26,7 @@ public class InvoiceTableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         menuModel = new MenuViewModel(this);
-        viewModel = InvoiceViewModel.getInstance();
+        viewModel = InvoiceTableViewModel.getInstance();
         Stub stub = Stub.getInstance();
         InvoiceTableAdapter invoiceTableAdapter = new InvoiceTableAdapter();
         invoiceTableAdapter.setItems(stub.invoices);

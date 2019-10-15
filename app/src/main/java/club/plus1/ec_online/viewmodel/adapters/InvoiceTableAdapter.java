@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.Objects;
 
 import club.plus1.ec_online.R;
-import club.plus1.ec_online.databinding.InvoiceItemBinding;
+import club.plus1.ec_online.databinding.InvoiceTableItemBinding;
 import club.plus1.ec_online.model.Invoice;
-import club.plus1.ec_online.viewmodel.InvoiceItemViewModel;
+import club.plus1.ec_online.viewmodel.InvoiceTableItemViewModel;
 
 public class InvoiceTableAdapter extends RecyclerView.Adapter<InvoiceTableAdapter.InvoiceTableViewHolder> {
 
     private List<Invoice> invoices;
-    private InvoiceItemViewModel viewModel;
+    private InvoiceTableItemViewModel viewModel;
 
     public InvoiceTableAdapter() {
         invoices = new ArrayList<>();
@@ -35,11 +35,11 @@ public class InvoiceTableAdapter extends RecyclerView.Adapter<InvoiceTableAdapte
     @NonNull
     @Override
     public InvoiceTableAdapter.InvoiceTableViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        viewModel = new InvoiceItemViewModel();
+        viewModel = new InvoiceTableItemViewModel();
         viewModel.parent.invoices.clear();
         viewModel.parent.invoices.addAll(invoices);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        InvoiceItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.invoice_item, parent, false);
+        InvoiceTableItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.invoice_table_item, parent, false);
         binding.setViewModel(viewModel);
         return new InvoiceTableAdapter.InvoiceTableViewHolder(binding.getRoot());
     }
@@ -56,8 +56,8 @@ public class InvoiceTableAdapter extends RecyclerView.Adapter<InvoiceTableAdapte
 
     static class InvoiceTableViewHolder extends RecyclerView.ViewHolder {
 
-        private InvoiceItemBinding binding;
-        private InvoiceItemViewModel viewModel;
+        private InvoiceTableItemBinding binding;
+        private InvoiceTableItemViewModel viewModel;
 
         InvoiceTableViewHolder(View view) {
             super(view);
