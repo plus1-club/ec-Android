@@ -30,12 +30,12 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/body"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/black"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -43,7 +43,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="1dp"
-                android:background="@color/white"
                 android:scrollbars="vertical" />
         </LinearLayout>
 
@@ -58,6 +57,7 @@
                 style="@style/AppTheme.ECOnline.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:onClick="@{() -> viewModel.toBasket(context)}"
                 android:text="@string/button_to_busket"
                 android:textSize="14sp" />

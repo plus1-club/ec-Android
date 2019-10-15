@@ -43,7 +43,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="1dp"
-                android:background="@color/white"
                 android:scrollbars="vertical" />
         </LinearLayout>
 
@@ -58,10 +57,12 @@
                 style="@style/AppTheme.ECOnline.Text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:padding="0dp"
                 android:text="@{viewModel.total}"
-                android:textAlignment="textEnd" />
+                android:textAlignment="textEnd"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editComment"
@@ -72,7 +73,7 @@
                 android:ems="10"
                 android:hint="@string/text_comment"
                 android:inputType="textMultiLine"
-                android:padding="5dp"
+                android:padding="10dp"
                 tools:ignore="Autofill" />
 
             <LinearLayout
