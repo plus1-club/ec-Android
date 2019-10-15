@@ -12,24 +12,14 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <Button
-            android:id="@+id/buttonNext"
-            style="@style/AppTheme.ECOnline.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:onClick="@{() -> viewModel.onNext(context)}"
-            android:text="@string/button_check"
-            android:textSize="18sp" />
-
-        <CheckBox
-            android:id="@+id/checkFullSearch"
+        <TextView
+            android:id="@+id/textInfo"
             style="@style/AppTheme.ECOnline.Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:checked="@={viewModel.isFullSearch}"
-            android:text="@string/check_fulltext_search" />
+            android:text="@string/text_enter_number_or_product"
+            android:textAlignment="center" />
 
         <EditText
             android:id="@+id/editProduct"
@@ -55,14 +45,24 @@
             android:text="@={`` + viewModel.count}"
             tools:ignore="Autofill" />
 
-        <TextView
-            android:id="@+id/textProduct"
+        <CheckBox
+            android:id="@+id/checkFullSearch"
             style="@style/AppTheme.ECOnline.Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="@string/text_enter_number_or_product"
-            android:textAlignment="center" />
+            android:checked="@={viewModel.isFullSearch}"
+            android:text="@string/check_fulltext_search" />
+
+        <Button
+            android:id="@+id/buttonNext"
+            style="@style/AppTheme.ECOnline.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:onClick="@{() -> viewModel.onNext(context)}"
+            android:text="@string/button_check"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/linkStock"

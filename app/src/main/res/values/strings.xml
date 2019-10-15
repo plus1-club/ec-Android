@@ -53,6 +53,12 @@
     <string name="text_status_yellow">Есть %1$d из %2$d</string>
     <string name="text_status_red">Нет</string>
 
+    <!-- Экран "6.Счета" -->
+    <string name="text_invoice">Счет № %1$d от %2$s</string>
+    <string name="text_waybill">Накладная № %1$d</string>
+    <string name="button_detail">Подробнее</string>
+    <string name="button_invoice">Счет</string>
+
     <!-- Тестовые значения - временно -->
     <string name="text_total">Итого: 6 608 547,36</string>
 

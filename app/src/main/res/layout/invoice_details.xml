@@ -14,7 +14,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/textProduct"
+        android:id="@+id/textInvoice"
         style="@style/AppTheme.ECOnline.Edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

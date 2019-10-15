@@ -9,6 +9,7 @@ public class Stub {
     private static Stub mInstance;
     public List<Request> basket;
     private List<Product> goods;
+    public List<Invoice> invoices;
 
     private Stub() {
         goods = Stock.getInstance().goods;
@@ -27,6 +28,28 @@ public class Stub {
                 10, 20, 112.23));
         basket.add(new Request("Schneider MGU5.418.25ZD 2 USB Зарядное устройство, 2.1A, беж",
                 1, 0, 2141.81));
+
+        invoices = new ArrayList<>();
+        invoices.add(new Invoice(1756503, "27.03.2019", 7970.98, "Неподтвержденный резерв"));
+        invoices.add(new Invoice(1753858, "27.03.2019", 5274.93, "Неподтвержденный резерв"));
+        invoices.add(new Invoice(1737303, "27.03.2019", 85.03, "Неподтвержденный резерв"));
+        invoices.add(new Invoice(1736947, "27.03.2019", 1924.70, "Неподтвержденный резерв"));
+        invoices.add(new Invoice(2756503, "27.03.2019", 7970.98, "Резерв"));
+        invoices.add(new Invoice(2753858, "27.03.2019", 5274.93, "Резерв"));
+        invoices.add(new Invoice(2737303, "27.03.2019", 85.03, "Резерв"));
+        invoices.add(new Invoice(2736947, "27.03.2019", 1924.70, "Резерв"));
+        invoices.add(new Invoice(3756503, "27.03.2019", 7970.98, "Заказ"));
+        invoices.add(new Invoice(3753858, "27.03.2019", 5274.93, "Заказ"));
+        invoices.add(new Invoice(3737303, "27.03.2019", 85.03, "Заказ"));
+        invoices.add(new Invoice(3736947, "27.03.2019", 1924.70, "Заказ"));
+        invoices.add(new Invoice(4756503, "27.03.2019", 7970.98, "Аннулирован"));
+        invoices.add(new Invoice(4753858, "27.03.2019", 5274.93, "Аннулирован"));
+        invoices.add(new Invoice(4737303, "27.03.2019", 85.03, "Просрочен"));
+        invoices.add(new Invoice(4736947, "27.03.2019", 1924.70, "Просрочен"));
+        invoices.add(new Invoice(5756503, "27.03.2019", 7970.98, "Отгружен", 39737));
+        invoices.add(new Invoice(5753858, "27.03.2019", 5274.93, "Отгружен", 39738));
+        invoices.add(new Invoice(5737303, "27.03.2019", 85.03, "Отгружен", 39739));
+        invoices.add(new Invoice(5736947, "27.03.2019", 1924.70, "Отгружен", 39740));
     }
 
     public static Stub getInstance() {
