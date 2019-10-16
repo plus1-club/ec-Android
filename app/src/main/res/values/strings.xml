@@ -12,12 +12,12 @@
 
     <!-- Экран "2.Стартовый" и меню "8.Меню" -->
     <string name="text_product_existence">Проверка наличия товара</string>
-    <string name="text_cart">Корзина</string>
-    <string name="text_reserves">Резервы</string>
-    <string name="text_canceled">Аннулированные и просроченные счета</string>
     <string name="text_make_order">Сделать заказ</string>
+    <string name="text_cart">Корзина</string>
     <string name="text_unconfirmed">Неподтвержденные резервы</string>
     <string name="text_orders">Заказы</string>
+    <string name="text_reserves">Резервы</string>
+    <string name="text_canceled">Аннулированные и просроченные счета</string>
     <string name="text_history">История отгрузок</string>
     <string name="text_exit">Выход</string>
 
@@ -59,16 +59,15 @@
     <string name="button_detail">Подробнее</string>
     <string name="button_invoice">Счет</string>
 
-    <!-- Тестовые значения - временно -->
-    <string name="text_total">Итого: 6 608 547,36</string>
-
     <!-- Названия экранов -->
     <string name="label_request">Проверка наличия товара</string>
     <string name="label_order">Сделать заказ</string>
     <string name="label_basket">Корзина</string>
-
-    <!-- Названия экранов - временно -->
-    <string name="screen_6">Находится в разработке</string>
-    <string name="screen_7">7.Детали счета</string>
+    <string name="label_unconfirmed">Неподтвержденный резерв</string>
+    <string name="label_ordered">Заказ</string>
+    <string name="label_reserved">Резерв</string>
+    <string name="label_canceled">Аннулированный счет</string>
+    <string name="label_overdie">Просроченный счет</string>
+    <string name="label_shipped">Отгрузка</string>
 
 </resources>

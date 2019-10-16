@@ -13,8 +13,8 @@ import club.plus1.ec_online.view.InvoiceDetailsActivity;
 public class InvoiceTableItemViewModel {
 
     public InvoiceTableViewModel parent;
-
     public ObservableInt position;
+
     public ObservableInt number;
     public ObservableField<String> date;
     public ObservableDouble sum;
@@ -33,6 +33,11 @@ public class InvoiceTableItemViewModel {
 
     public void onDetails(Context context) {
         Intent intent = new Intent(context, InvoiceDetailsActivity.class);
+        intent.putExtra("number", number.get());
+        intent.putExtra("date", date.get());
+        intent.putExtra("sum", sum.get());
+        intent.putExtra("status", status.get());
+        intent.putExtra("waybill", waybill.get());
         context.startActivity(intent);
     }
 

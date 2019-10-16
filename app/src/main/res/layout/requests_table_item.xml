@@ -43,7 +43,7 @@
                 android:gravity="bottom"
                 android:inputType="number|text"
                 android:text="@={`` + viewModel.count}"
-                android:onTextChanged="@{viewModel.onTextChanged}"
+                android:onTextChanged="@{viewModel::onTextChanged}"
                 android:textAlignment="center"
                 tools:ignore="Autofill,LabelFor" />
 
