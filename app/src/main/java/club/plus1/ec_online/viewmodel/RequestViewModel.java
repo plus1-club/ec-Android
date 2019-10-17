@@ -50,6 +50,11 @@ public class RequestViewModel {
         return mInstance;
     }
 
+    // TODO: Реализовать выбор файла из папки
+    public void onBrowse(Context context) {
+        Toast.makeText(context, "Выбор файла - в разработке", Toast.LENGTH_LONG).show();
+    }
+
     public void onNext(Context context){
         Intent intent = new Intent(context, RequestsTableActivity.class);
         intent.putExtra("title", title.get());
