@@ -16,6 +16,7 @@ public class InvoiceDetailsViewModel {
     public ObservableField<String> status;
     public ObservableInt waybill;
 
+    public ObservableField<String> title;
     public ObservableList<Detail> details;
 
     private static InvoiceDetailsViewModel mInstance;    // Ссылка для биндинга с View
@@ -26,6 +27,7 @@ public class InvoiceDetailsViewModel {
         sum = new ObservableDouble();
         status = new ObservableField<>();
         waybill = new ObservableInt();
+        title = new ObservableField<>();
         details = new ObservableArrayList<>();
     }
 

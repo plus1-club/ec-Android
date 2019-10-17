@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import java.util.Objects;
+
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.InvoiceTableBinding;
 import club.plus1.ec_online.model.Stub;
@@ -29,7 +31,22 @@ public class InvoiceTableActivity extends AppCompatActivity {
         viewModel = InvoiceTableViewModel.getInstance();
         Stub stub = Stub.getInstance();
         InvoiceTableAdapter invoiceTableAdapter = new InvoiceTableAdapter();
-        invoiceTableAdapter.setItems(stub.invoices);
+
+        Bundle bundle = getIntent().getExtras();
+        viewModel.title.set(Objects.requireNonNull(bundle).getString("title"));
+        if (Objects.equals(viewModel.title.get(), getString(R.string.title_list_unconfirmed))) {
+            invoiceTableAdapter.setItems(stub.invoicesUnconf);
+        } else if (Objects.equals(viewModel.title.get(), getString(R.string.title_list_reserves))) {
+            invoiceTableAdapter.setItems(stub.invoicesReserv);
+        } else if (Objects.equals(viewModel.title.get(), getString(R.string.title_list_orders))) {
+            invoiceTableAdapter.setItems(stub.invoicesOrder);
+        } else if (Objects.equals(viewModel.title.get(), getString(R.string.title_list_canceled))) {
+            invoiceTableAdapter.setItems(stub.invoicesCancel);
+        } else if (Objects.equals(viewModel.title.get(), getString(R.string.title_list_history))) {
+            invoiceTableAdapter.setItems(stub.invoicesShip);
+        } else {
+            invoiceTableAdapter.setItems(stub.invoicesEmpty);
+        }
 
         InvoiceTableBinding binding = DataBindingUtil.setContentView(this, R.layout.invoice_table);
         binding.setViewModel(viewModel);

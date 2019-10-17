@@ -59,15 +59,29 @@
     <string name="button_detail">Подробнее</string>
     <string name="button_invoice">Счет</string>
 
-    <!-- Названия экранов -->
-    <string name="label_request">Проверка наличия товара</string>
-    <string name="label_order">Сделать заказ</string>
-    <string name="label_basket">Корзина</string>
-    <string name="label_unconfirmed">Неподтвержденный резерв</string>
-    <string name="label_ordered">Заказ</string>
-    <string name="label_reserved">Резерв</string>
-    <string name="label_canceled">Аннулированный счет</string>
-    <string name="label_overdie">Просроченный счет</string>
-    <string name="label_shipped">Отгрузка</string>
+    <!-- Статусы счетов -->
+    <string name="status_unconfirmed">Неподтвержденный резерв</string>
+    <string name="status_reserved">Резерв</string>
+    <string name="status_ordered">Заказ</string>
+    <string name="status_canceled">Аннулирован</string>
+    <string name="status_overdie">Просрочен</string>
+    <string name="status_shipped">Отгружен</string>
+
+    <!-- Заголовки экранов -->
+    <string name="title_request">Проверка наличия товара</string>
+    <string name="title_order">Сделать заказ</string>
+    <string name="title_basket">Корзина</string>
+    <string name="title_list_unconfirmed">Неподтвержденные резервы</string>
+    <string name="title_list_orders">Заказы</string>
+    <string name="title_list_reserves">Резервы</string>
+    <string name="title_list_canceled">Аннулированные и просроченные счета</string>
+    <string name="title_list_history">История отгрузок</string>
+    <string name="title_unconfirmed">Неподтвержденный резерв</string>
+    <string name="title_ordered">Заказ</string>
+    <string name="title_reserved">Резерв</string>
+    <string name="title_canceled">Аннулированный счет</string>
+    <string name="title_overdie">Просроченный счет</string>
+    <string name="title_shipped">Отгрузка</string>
+    <string name="title_invoice">Детали счета</string>
 
 </resources>

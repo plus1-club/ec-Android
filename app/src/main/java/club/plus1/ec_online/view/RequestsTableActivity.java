@@ -33,6 +33,9 @@ public class RequestsTableActivity extends AppCompatActivity {
         RequestsTableAdapter requestsTableAdapter = new RequestsTableAdapter();
         requestsTableAdapter.setItems(stub.getRequests(Objects.requireNonNull(viewModel.product.get()), viewModel.count.get()));
 
+        Bundle bundle = getIntent().getExtras();
+        viewModel.title.set(Objects.requireNonNull(bundle).getString("title"));
+
         RequestsTableBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_table);
         binding.setViewModel(viewModel);
         binding.list.setHasFixedSize(true);

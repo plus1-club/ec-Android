@@ -25,6 +25,7 @@ public class RequestViewModel {
     public ObservableBoolean isFullSearch;
     public ObservableDouble total;
 
+    public ObservableField<String> title;
     public ObservableList<Request> requests;
 
     private static RequestViewModel mInstance;    // Ссылка для биндинга с View
@@ -37,6 +38,7 @@ public class RequestViewModel {
         isFullSearch = new ObservableBoolean();
         total = new ObservableDouble();
 
+        title = new ObservableField<>();
         requests = new ObservableArrayList<>();
     }
 
@@ -50,12 +52,13 @@ public class RequestViewModel {
 
     public void onNext(Context context){
         Intent intent = new Intent(context, RequestsTableActivity.class);
+        intent.putExtra("title", title.get());
         context.startActivity(intent);
     }
 
+    // TODO: Подключаться к серверу и скачивать остатки
     public void linkStock(Context context){
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ec-electric.ru/stock_free/"));
-        context.startActivity(intent);
+        Toast.makeText(context, "Скачивание остатков - в разработке", Toast.LENGTH_LONG).show();
     }
 
     public void linkSample(Context context){
@@ -65,27 +68,23 @@ public class RequestViewModel {
 
     // TODO: Добавлять всё что в списке в корзину
     public void toBasket(Context context){
+        Toast.makeText(context, "Добавление в корзину - в разработке", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(context, RequestsBasketActivity.class);
         context.startActivity(intent);
     }
 
-    // TODO: Реализовать пересчет
-    public void onRecount(Context context){
-        Toast.makeText(context, "Пересчитать", Toast.LENGTH_LONG).show();
-    }
-
     // TODO: Реализовать очистку
     public void onClear(Context context){
-        Toast.makeText(context, "Очистить", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Очистить - в разработке", Toast.LENGTH_LONG).show();
     }
 
     // TODO: Реализовать добавление в корзину
     public void addToBasket(Context context){
-        Toast.makeText(context, "Добавить в корзину", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Добавить в корзину - в разработке", Toast.LENGTH_LONG).show();
     }
 
     // TODO: Реализовать оформление заказа
     public void onIssue(Context context){
-        Toast.makeText(context, "Оформить заказ", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Оформить заказ - в разработке", Toast.LENGTH_LONG).show();
     }
 }

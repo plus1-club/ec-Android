@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import java.util.Objects;
+
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.RequestBinding;
 import club.plus1.ec_online.viewmodel.MenuViewModel;
@@ -24,6 +26,9 @@ public class RequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         menuModel = new MenuViewModel(this);
         viewModel = RequestViewModel.getInstance();
+
+        Bundle bundle = getIntent().getExtras();
+        viewModel.title.set(Objects.requireNonNull(bundle).getString("title"));
 
         RequestBinding binding = DataBindingUtil.setContentView(this, R.layout.request);
         binding.setViewModel(viewModel);

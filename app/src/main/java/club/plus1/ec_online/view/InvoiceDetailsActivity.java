@@ -13,14 +13,15 @@ import java.util.Objects;
 
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.InvoiceDetailsBinding;
-import club.plus1.ec_online.model.Stub;
 import club.plus1.ec_online.viewmodel.InvoiceDetailsViewModel;
+import club.plus1.ec_online.viewmodel.InvoiceTableViewModel;
 import club.plus1.ec_online.viewmodel.MenuViewModel;
 import club.plus1.ec_online.viewmodel.adapters.InvoiceDetailsAdapter;
 
 public class InvoiceDetailsActivity extends AppCompatActivity {
 
     InvoiceDetailsViewModel viewModel;
+    InvoiceTableViewModel parent;
     MenuViewModel menuModel;
 
     @Override
@@ -29,9 +30,8 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
 
         menuModel = new MenuViewModel(this);
         viewModel = InvoiceDetailsViewModel.getInstance();
-        Stub stub = Stub.getInstance();
+        parent = InvoiceTableViewModel.getInstance();
         InvoiceDetailsAdapter invoiceDetailsAdapter = new InvoiceDetailsAdapter();
-        invoiceDetailsAdapter.setItems(stub.details);
 
         InvoiceDetailsBinding binding = DataBindingUtil.setContentView(this, R.layout.invoice_details);
         binding.setViewModel(viewModel);
@@ -45,6 +45,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         viewModel.sum.set(bundle.getDouble("sum"));
         viewModel.status.set(bundle.getString("status"));
         viewModel.waybill.set(bundle.getInt("waybill"));
+        invoiceDetailsAdapter.setItems(parent.invoices.get(bundle.getInt("position")).details);
     }
 
     @Override

@@ -72,6 +72,8 @@ public class InvoiceTableAdapter extends RecyclerView.Adapter<InvoiceTableAdapte
             viewModel.sum.set(invoice.sum);
             viewModel.status.set(invoice.status);
             viewModel.waybill.set(invoice.waybill);
+            viewModel.details.clear();
+            viewModel.details.addAll(invoice.details);
         }
     }
 }

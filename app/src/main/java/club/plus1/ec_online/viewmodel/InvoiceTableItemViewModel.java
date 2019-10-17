@@ -4,16 +4,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
+import androidx.databinding.ObservableList;
 
+import java.util.Objects;
+
+import club.plus1.ec_online.R;
+import club.plus1.ec_online.model.Detail;
 import club.plus1.ec_online.view.InvoiceDetailsActivity;
 
 public class InvoiceTableItemViewModel {
 
     public InvoiceTableViewModel parent;
     public ObservableInt position;
+    public ObservableList<Detail> details;
 
     public ObservableInt number;
     public ObservableField<String> date;
@@ -29,6 +36,7 @@ public class InvoiceTableItemViewModel {
         status = new ObservableField<>();
         waybill = new ObservableInt();
         parent = InvoiceTableViewModel.getInstance();
+        details = new ObservableArrayList<>();
     }
 
     public void onDetails(Context context) {
@@ -38,6 +46,24 @@ public class InvoiceTableItemViewModel {
         intent.putExtra("sum", sum.get());
         intent.putExtra("status", status.get());
         intent.putExtra("waybill", waybill.get());
+        intent.putExtra("position", position.get());
+
+        if (Objects.equals(status.get(), context.getString(R.string.status_unconfirmed))) {
+            intent.putExtra("title", context.getString(R.string.title_list_unconfirmed));
+        } else if (Objects.equals(status.get(), context.getString(R.string.status_reserved))) {
+            intent.putExtra("title", context.getString(R.string.title_list_reserves));
+        } else if (Objects.equals(status.get(), context.getString(R.string.status_ordered))) {
+            intent.putExtra("title", context.getString(R.string.title_list_orders));
+        } else if (Objects.equals(status.get(), context.getString(R.string.status_canceled))) {
+            intent.putExtra("title", context.getString(R.string.title_list_canceled));
+        } else if (Objects.equals(status.get(), context.getString(R.string.status_overdie))) {
+            intent.putExtra("title", context.getString(R.string.title_list_canceled));
+        } else if (Objects.equals(status.get(), context.getString(R.string.status_shipped))) {
+            intent.putExtra("title", context.getString(R.string.title_list_history));
+        } else {
+            intent.putExtra("title", context.getString(R.string.title_invoice));
+        }
+
         context.startActivity(intent);
     }
 

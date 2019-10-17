@@ -7,8 +7,8 @@ import android.view.MenuItem;
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.view.EnterActivity;
 import club.plus1.ec_online.view.InvoiceTableActivity;
-import club.plus1.ec_online.view.RequestsBasketActivity;
 import club.plus1.ec_online.view.RequestActivity;
+import club.plus1.ec_online.view.RequestsBasketActivity;
 
 public class MenuViewModel {
 
@@ -16,41 +16,49 @@ public class MenuViewModel {
 
     public void onCheckExistence(Context context){
         Intent intent = new Intent(context, RequestActivity.class);
+        intent.putExtra("title", context.getString(R.string.title_request));
+        context.startActivity(intent);
+    }
+
+    public void onMakeOrder(Context context) {
+        Intent intent = new Intent(context, RequestActivity.class);
+        intent.putExtra("title", context.getString(R.string.title_order));
         context.startActivity(intent);
     }
 
     public void onCart(Context context){
         Intent intent = new Intent(context, RequestsBasketActivity.class);
-        context.startActivity(intent);
-    }
-
-    public void onMakeOrder(Context context){
-        Intent intent = new Intent(context, RequestActivity.class);
+        intent.putExtra("title", context.getString(R.string.title_basket));
         context.startActivity(intent);
     }
 
     public void onUnconfirmed(Context context){
         Intent intent = new Intent(context, InvoiceTableActivity.class);
+        intent.putExtra("title", context.getString(R.string.title_list_unconfirmed));
         context.startActivity(intent);
     }
 
     public void onReserves(Context context){
         Intent intent = new Intent(context, InvoiceTableActivity.class);
+        intent.putExtra("title", context.getString(R.string.title_list_reserves));
         context.startActivity(intent);
     }
 
     public void onOrders(Context context){
         Intent intent = new Intent(context, InvoiceTableActivity.class);
+        intent.putExtra("title", context.getString(R.string.title_list_orders));
         context.startActivity(intent);
     }
 
     public void onCanceled(Context context){
         Intent intent = new Intent(context, InvoiceTableActivity.class);
+        intent.putExtra("title", context.getString(R.string.title_list_canceled));
         context.startActivity(intent);
     }
 
     public void onHistory(Context context){
         Intent intent = new Intent(context, InvoiceTableActivity.class);
+        intent.putExtra("title", context.getString(R.string.title_list_history));
         context.startActivity(intent);
     }
 
@@ -64,23 +72,23 @@ public class MenuViewModel {
             case R.id.action_product_existence:
                 onCheckExistence(context);
                 return true;
-            case R.id.action_cart:
-                onCart(context);
-                return true;
-            case R.id.action_reserves:
-                onReserves(context);
-                return true;
-            case R.id.action_canceled:
-                onCanceled(context);
-                return true;
             case R.id.action_make_order:
                 onMakeOrder(context);
+                return true;
+            case R.id.action_cart:
+                onCart(context);
                 return true;
             case R.id.action_unconfirmed:
                 onUnconfirmed(context);
                 return true;
+            case R.id.action_reserves:
+                onReserves(context);
+                return true;
             case R.id.action_orders:
                 onOrders(context);
+                return true;
+            case R.id.action_canceled:
+                onCanceled(context);
                 return true;
             case R.id.action_history:
                 onHistory(context);

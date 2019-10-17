@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import java.util.Objects;
+
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.RequestsBasketBinding;
 import club.plus1.ec_online.model.Stub;
@@ -30,6 +32,9 @@ public class RequestsBasketActivity extends AppCompatActivity {
         Stub stub = Stub.getInstance();
         RequestsBasketAdapter requestsBasketAdapter = new RequestsBasketAdapter();
         requestsBasketAdapter.setItems(stub.basket);
+
+        Bundle bundle = getIntent().getExtras();
+        viewModel.title.set(Objects.requireNonNull(bundle).getString("title"));
 
         RequestsBasketBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_basket);
         binding.setViewModel(viewModel);
