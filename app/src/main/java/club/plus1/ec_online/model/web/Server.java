@@ -1,11 +1,11 @@
-package club.plus1.ec_online.model;
+package club.plus1.ec_online.model.web;
 
 import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ServerModel {
+public class Server {
 
     @SerializedName("success")
     @Expose

@@ -1,8 +1,13 @@
-package club.plus1.ec_online.model;
+package club.plus1.ec_online.model.storage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import club.plus1.ec_online.domain.Detail;
+import club.plus1.ec_online.domain.Invoice;
+import club.plus1.ec_online.domain.Product;
+import club.plus1.ec_online.domain.Request;
 
 public class Stub {
 

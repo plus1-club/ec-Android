@@ -1,4 +1,4 @@
-package club.plus1.ec_online.model;
+package club.plus1.ec_online.model.web;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -6,8 +6,8 @@ import retrofit2.http.GET;
 public interface ServerApi {
 
     @GET("user/enter")
-    Call<ServerModel> enter();
+    Call<Server> enter();
 
     @GET("user/exit")
-    Call<ServerModel> exit();
+    Call<Server> exit();
 }

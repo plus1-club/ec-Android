@@ -5,7 +5,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="club.plus1.ec_online.viewmodel.InvoiceDetailsViewModel" />
+            type="club.plus1.ec_online.viewmodel.viewmodels.InvoiceDetailsViewModel" />
     </data>
     <LinearLayout
         tools:ignore="UseCompoundDrawables"

@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="club.plus1.ec_online.viewmodel.RequestItemViewModel" />
+            type="club.plus1.ec_online.viewmodel.viewmodels.RequestItemViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.RequestByCodeBinding;
 import club.plus1.ec_online.databinding.RequestFromExcelBinding;
-import club.plus1.ec_online.viewmodel.RequestViewModel;
+import club.plus1.ec_online.viewmodel.viewmodels.RequestViewModel;
 
 public class RequestFragment extends Fragment {
 

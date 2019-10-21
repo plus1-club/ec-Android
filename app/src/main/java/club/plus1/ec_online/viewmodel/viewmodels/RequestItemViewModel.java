@@ -1,4 +1,4 @@
-package club.plus1.ec_online.viewmodel;
+package club.plus1.ec_online.viewmodel.viewmodels;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
@@ -6,8 +6,8 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
 import club.plus1.ec_online.R;
-import club.plus1.ec_online.model.App;
-import club.plus1.ec_online.model.Request;
+import club.plus1.ec_online.domain.Request;
+import club.plus1.ec_online.view.App;
 
 public class RequestItemViewModel {
 

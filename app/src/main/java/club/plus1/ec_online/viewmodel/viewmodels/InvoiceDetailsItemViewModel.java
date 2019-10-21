@@ -1,4 +1,4 @@
-package club.plus1.ec_online.viewmodel;
+package club.plus1.ec_online.viewmodel.viewmodels;
 
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;

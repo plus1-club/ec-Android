@@ -1,4 +1,4 @@
-package club.plus1.ec_online.model;
+package club.plus1.ec_online.domain;
 
 public class Detail {
 
@@ -9,8 +9,8 @@ public class Detail {
     public String available;
     public String delivery;
 
-    Detail(String product, int count, double price, double sum,
-           String available, String delivery) {
+    public Detail(String product, int count, double price, double sum,
+                  String available, String delivery) {
         this.product = product;
         this.count = count;
         this.price = price;

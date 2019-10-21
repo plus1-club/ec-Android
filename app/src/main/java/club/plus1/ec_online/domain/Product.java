@@ -1,4 +1,4 @@
-package club.plus1.ec_online.model;
+package club.plus1.ec_online.domain;
 
 import androidx.annotation.NonNull;
 
@@ -12,7 +12,7 @@ public class Product {
     private String name;
     private double price;
 
-    Product(String producer, String code, String name, int count) {
+    public Product(String producer, String code, String name, int count) {
         this.producer = producer;
         this.code = code;
         this.name = name;
@@ -21,7 +21,7 @@ public class Product {
         this.product = producer + " " + code + " " + name;
     }
 
-    Product(String producer, String code, String name) {
+    public Product(String producer, String code, String name) {
         this.producer = producer;
         this.code = code;
         this.name = name;
@@ -52,7 +52,7 @@ public class Product {
         return price;
     }
 
-    void setPrice(double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }

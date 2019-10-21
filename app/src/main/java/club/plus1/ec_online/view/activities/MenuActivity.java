@@ -1,16 +1,16 @@
-package club.plus1.ec_online.view;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+package club.plus1.ec_online.view.activities;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.MenuBinding;
-import club.plus1.ec_online.viewmodel.MenuViewModel;
+import club.plus1.ec_online.viewmodel.viewmodels.MenuViewModel;
 
 public class MenuActivity extends AppCompatActivity {
 

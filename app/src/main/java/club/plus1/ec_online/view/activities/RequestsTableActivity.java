@@ -1,4 +1,4 @@
-package club.plus1.ec_online.view;
+package club.plus1.ec_online.view.activities;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,10 +13,10 @@ import java.util.Objects;
 
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.RequestsTableBinding;
-import club.plus1.ec_online.model.Stub;
-import club.plus1.ec_online.viewmodel.MenuViewModel;
-import club.plus1.ec_online.viewmodel.RequestViewModel;
+import club.plus1.ec_online.model.storage.Stub;
 import club.plus1.ec_online.viewmodel.adapters.RequestsTableAdapter;
+import club.plus1.ec_online.viewmodel.viewmodels.MenuViewModel;
+import club.plus1.ec_online.viewmodel.viewmodels.RequestViewModel;
 
 public class RequestsTableActivity extends AppCompatActivity {
 

@@ -15,8 +15,8 @@ import java.util.Objects;
 
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.RequestsTableItemBinding;
-import club.plus1.ec_online.model.Request;
-import club.plus1.ec_online.viewmodel.RequestItemViewModel;
+import club.plus1.ec_online.domain.Request;
+import club.plus1.ec_online.viewmodel.viewmodels.RequestItemViewModel;
 
 public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdapter.RequestsTableViewHolder> {
 

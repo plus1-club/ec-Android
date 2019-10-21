@@ -1,4 +1,4 @@
-package club.plus1.ec_online.model;
+package club.plus1.ec_online.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Invoice {
 
     public List<Detail> details;
 
-    Invoice(int number, String date, String status, int waybill, List<Detail> details) {
+    public Invoice(int number, String date, String status, int waybill, List<Detail> details) {
         this.number = number;
         this.date = date;
         this.status = status;
@@ -26,7 +26,7 @@ public class Invoice {
         }
     }
 
-    Invoice(int number, String date, String status, List<Detail> details) {
+    public Invoice(int number, String date, String status, List<Detail> details) {
         this.number = number;
         this.date = date;
         this.status = status;

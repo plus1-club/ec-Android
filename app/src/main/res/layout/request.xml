@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="club.plus1.ec_online.viewmodel.RequestViewModel" />
+            type="club.plus1.ec_online.viewmodel.viewmodels.RequestViewModel" />
     </data>
     <LinearLayout
         tools:ignore="UseCompoundDrawables"

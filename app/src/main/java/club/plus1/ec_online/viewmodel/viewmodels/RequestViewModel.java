@@ -1,4 +1,4 @@
-package club.plus1.ec_online.viewmodel;
+package club.plus1.ec_online.viewmodel.viewmodels;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +12,9 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
-import club.plus1.ec_online.model.Request;
-import club.plus1.ec_online.view.RequestsBasketActivity;
-import club.plus1.ec_online.view.RequestsTableActivity;
+import club.plus1.ec_online.domain.Request;
+import club.plus1.ec_online.view.activities.RequestsBasketActivity;
+import club.plus1.ec_online.view.activities.RequestsTableActivity;
 
 public class RequestViewModel {
 

@@ -1,4 +1,4 @@
-package club.plus1.ec_online.viewmodel;
+package club.plus1.ec_online.viewmodel.viewmodels;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,9 +6,10 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
-import club.plus1.ec_online.model.App;
-import club.plus1.ec_online.model.ServerModel;
-import club.plus1.ec_online.view.MenuActivity;
+import club.plus1.ec_online.model.web.Network;
+import club.plus1.ec_online.model.web.Server;
+import club.plus1.ec_online.view.App;
+import club.plus1.ec_online.view.activities.MenuActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,9 +23,10 @@ public class EnterViewModel {
 
     public void onEnter(final Context context) {
 
-        App.getApi().enter().enqueue(new Callback<ServerModel>() {
+        Network.getInstance();
+        Network.getApi().enter().enqueue(new Callback<Server>() {
             @Override
-            public void onResponse(@NonNull Call<ServerModel> call, @NonNull Response<ServerModel> response) {
+            public void onResponse(@NonNull Call<Server> call, @NonNull Response<Server> response) {
                 if (response.isSuccessful()) {
                     App.log(context, false, "response: " + response.body());
                 } else {
@@ -33,7 +35,7 @@ public class EnterViewModel {
             }
 
             @Override
-            public void onFailure(@NonNull Call<ServerModel> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<Server> call, @NonNull Throwable t) {
                 App.log(context, true, "failure " + t);
             }
         });

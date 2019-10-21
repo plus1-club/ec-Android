@@ -1,13 +1,13 @@
-package club.plus1.ec_online.view;
+package club.plus1.ec_online.view.activities;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.os.Bundle;
-
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.SplashBinding;
-import club.plus1.ec_online.viewmodel.SplashViewModel;
+import club.plus1.ec_online.viewmodel.viewmodels.SplashViewModel;
 
 public class SplashActivity extends AppCompatActivity {
 

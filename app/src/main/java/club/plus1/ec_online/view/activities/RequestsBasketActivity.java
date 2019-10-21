@@ -1,4 +1,4 @@
-package club.plus1.ec_online.view;
+package club.plus1.ec_online.view.activities;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,16 +7,18 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.Objects;
 
 import club.plus1.ec_online.R;
-import club.plus1.ec_online.databinding.RequestBinding;
-import club.plus1.ec_online.viewmodel.MenuViewModel;
-import club.plus1.ec_online.viewmodel.RequestViewModel;
-import club.plus1.ec_online.viewmodel.adapters.RequestFragmentAdapter;
+import club.plus1.ec_online.databinding.RequestsBasketBinding;
+import club.plus1.ec_online.model.storage.Stub;
+import club.plus1.ec_online.viewmodel.adapters.RequestsBasketAdapter;
+import club.plus1.ec_online.viewmodel.viewmodels.MenuViewModel;
+import club.plus1.ec_online.viewmodel.viewmodels.RequestViewModel;
 
-public class RequestActivity extends AppCompatActivity {
+public class RequestsBasketActivity extends AppCompatActivity {
 
     RequestViewModel viewModel;
     MenuViewModel menuModel;
@@ -24,16 +26,21 @@ public class RequestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         menuModel = new MenuViewModel(this);
         viewModel = RequestViewModel.getInstance();
+        Stub stub = Stub.getInstance();
+        RequestsBasketAdapter requestsBasketAdapter = new RequestsBasketAdapter();
+        requestsBasketAdapter.setItems(stub.basket);
 
         Bundle bundle = getIntent().getExtras();
         viewModel.title.set(Objects.requireNonNull(bundle).getString("title"));
 
-        RequestBinding binding = DataBindingUtil.setContentView(this, R.layout.request);
+        RequestsBasketBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_basket);
         binding.setViewModel(viewModel);
-        binding.viewpager.setAdapter(new RequestFragmentAdapter(getSupportFragmentManager()));
-        binding.tabs.setupWithViewPager(binding.viewpager);
+        binding.list.setHasFixedSize(true);
+        binding.list.setLayoutManager(new LinearLayoutManager(this));
+        binding.list.setAdapter(requestsBasketAdapter);
     }
 
     @Override

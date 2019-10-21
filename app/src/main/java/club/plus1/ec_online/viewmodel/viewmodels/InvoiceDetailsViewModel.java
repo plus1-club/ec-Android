@@ -1,4 +1,4 @@
-package club.plus1.ec_online.viewmodel;
+package club.plus1.ec_online.viewmodel.viewmodels;
 
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableDouble;
@@ -6,7 +6,7 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
-import club.plus1.ec_online.model.Detail;
+import club.plus1.ec_online.domain.Detail;
 
 public class InvoiceDetailsViewModel {
 

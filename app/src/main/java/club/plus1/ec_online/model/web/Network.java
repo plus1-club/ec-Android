@@ -1,10 +1,6 @@
-package club.plus1.ec_online.model;
+package club.plus1.ec_online.model.web;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
-import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -17,22 +13,21 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class App extends Application {
+public class Network {
 
-    @SuppressLint("StaticFieldLeak")
-    private static Context mContext;
     private static ServerApi serverApi;
+    private static Network mInstance;
     private Retrofit retrofit;
 
-    public static Context getContext() {
-        return mContext;
+    // Получение единственного экземпляра класса
+    public static Network getInstance() {
+        if (mInstance == null) {
+            mInstance = new Network();
+        }
+        return mInstance;
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        mContext = this;
-
+    private Network() {
         retrofit = new Retrofit.Builder()
                 //Базовая часть адреса
                 .baseUrl("http://www.ec-electric.ru/api/v1/")
@@ -43,6 +38,10 @@ public class App extends Application {
 
         //Создаем объект, при помощи которого будем выполнять запросы
         serverApi = retrofit.create(ServerApi.class);
+    }
+
+    public static ServerApi getApi() {
+        return serverApi;
     }
 
     private static OkHttpClient getUnsafeOkHttpClient() {
@@ -90,24 +89,5 @@ public class App extends Application {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static ServerApi getApi() {
-        return serverApi;
-    }
-
-    public static void log(Context context, boolean isError, String message) {
-        if (isError) {
-            Log.e("ec", message);
-        } else {
-            Log.d("ec", message);
-        }
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        mContext = null;
     }
 }

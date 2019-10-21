@@ -1,4 +1,4 @@
-package club.plus1.ec_online.viewmodel;
+package club.plus1.ec_online.viewmodel.viewmodels;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,8 +13,8 @@ import androidx.databinding.ObservableList;
 import java.util.Objects;
 
 import club.plus1.ec_online.R;
-import club.plus1.ec_online.model.Detail;
-import club.plus1.ec_online.view.InvoiceDetailsActivity;
+import club.plus1.ec_online.domain.Detail;
+import club.plus1.ec_online.view.activities.InvoiceDetailsActivity;
 
 public class InvoiceTableItemViewModel {
 

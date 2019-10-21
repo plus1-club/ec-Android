@@ -15,8 +15,8 @@ import java.util.Objects;
 
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.InvoiceTableItemBinding;
-import club.plus1.ec_online.model.Invoice;
-import club.plus1.ec_online.viewmodel.InvoiceTableItemViewModel;
+import club.plus1.ec_online.domain.Invoice;
+import club.plus1.ec_online.viewmodel.viewmodels.InvoiceTableItemViewModel;
 
 public class InvoiceTableAdapter extends RecyclerView.Adapter<InvoiceTableAdapter.InvoiceTableViewHolder> {
 

@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="club.plus1.ec_online.viewmodel.InvoiceDetailsItemViewModel" />
+            type="club.plus1.ec_online.viewmodel.viewmodels.InvoiceDetailsItemViewModel" />
     </data>
 
     <LinearLayout

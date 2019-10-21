@@ -1,4 +1,4 @@
-package club.plus1.ec_online.view;
+package club.plus1.ec_online.view.activities;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,10 +13,10 @@ import java.util.Objects;
 
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.InvoiceDetailsBinding;
-import club.plus1.ec_online.viewmodel.InvoiceDetailsViewModel;
-import club.plus1.ec_online.viewmodel.InvoiceTableViewModel;
-import club.plus1.ec_online.viewmodel.MenuViewModel;
 import club.plus1.ec_online.viewmodel.adapters.InvoiceDetailsAdapter;
+import club.plus1.ec_online.viewmodel.viewmodels.InvoiceDetailsViewModel;
+import club.plus1.ec_online.viewmodel.viewmodels.InvoiceTableViewModel;
+import club.plus1.ec_online.viewmodel.viewmodels.MenuViewModel;
 
 public class InvoiceDetailsActivity extends AppCompatActivity {
 

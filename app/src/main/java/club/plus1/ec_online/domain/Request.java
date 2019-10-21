@@ -1,4 +1,4 @@
-package club.plus1.ec_online.model;
+package club.plus1.ec_online.domain;
 
 public class Request {
     public String product;
@@ -28,9 +28,8 @@ public class Request {
         sum = requestCount * price;
     }
 
-
     public void setCount(int requestCount) {
-        this.stockCount = stockCount;
-        sum = requestCount * price;
+        this.requestCount = requestCount;
+        sum = this.requestCount * price;
     }
 }

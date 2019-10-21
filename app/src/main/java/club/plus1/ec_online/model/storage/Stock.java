@@ -1,4 +1,4 @@
-package club.plus1.ec_online.model;
+package club.plus1.ec_online.model.storage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import club.plus1.ec_online.R;
+import club.plus1.ec_online.domain.Product;
+import club.plus1.ec_online.view.App;
 
 class Stock {
 

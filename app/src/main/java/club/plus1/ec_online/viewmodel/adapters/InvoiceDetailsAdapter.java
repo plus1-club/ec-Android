@@ -15,8 +15,8 @@ import java.util.Objects;
 
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.InvoiceDetailsItemBinding;
-import club.plus1.ec_online.model.Detail;
-import club.plus1.ec_online.viewmodel.InvoiceDetailsItemViewModel;
+import club.plus1.ec_online.domain.Detail;
+import club.plus1.ec_online.viewmodel.viewmodels.InvoiceDetailsItemViewModel;
 
 public class InvoiceDetailsAdapter extends RecyclerView.Adapter<InvoiceDetailsAdapter.InvoiceDetailsViewHolder> {
 
