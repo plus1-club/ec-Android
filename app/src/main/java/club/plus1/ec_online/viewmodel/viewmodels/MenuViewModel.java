@@ -73,12 +73,10 @@ public class MenuViewModel {
     public void onExit(final Context context) {
 
         Network.getInstance();
-        Network.getApi().exit().enqueue(new Callback<Server>() {
+        Network.getApi().exit(App.token).enqueue(new Callback<Server>() {
             @Override
             public void onResponse(@NonNull Call<Server> call, @NonNull Response<Server> response) {
-                if (response.isSuccessful()) {
-                    App.log(context, false, "response: " + response.body());
-                } else {
+                if (!response.isSuccessful()) {
                     App.log(context, false, "response code " + response.code());
                 }
             }

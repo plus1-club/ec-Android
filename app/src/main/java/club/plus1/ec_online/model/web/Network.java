@@ -2,6 +2,8 @@ package club.plus1.ec_online.model.web;
 
 import android.annotation.SuppressLint;
 
+import java.security.cert.X509Certificate;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
@@ -9,7 +11,9 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import club.plus1.ec_online.BuildConfig;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -28,9 +32,10 @@ public class Network {
     }
 
     private Network() {
+
         retrofit = new Retrofit.Builder()
                 //Базовая часть адреса
-                .baseUrl("http://www.ec-electric.ru/api/v1/")
+                .baseUrl("https://www.ec-electric.ru/api/v1/")
                 //Конвертер, необходимый для преобразования JSON'а в объекты
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(getUnsafeOkHttpClient())
@@ -52,18 +57,18 @@ public class Network {
                         @SuppressLint("TrustAllX509TrustManager")
                         @Override
                         public void checkClientTrusted(
-                                java.security.cert.X509Certificate[] chain, String authType) {
+                                X509Certificate[] chain, String authType) {
                         }
 
                         @SuppressLint("TrustAllX509TrustManager")
                         @Override
                         public void checkServerTrusted(
-                                java.security.cert.X509Certificate[] chain, String authType) {
+                                X509Certificate[] chain, String authType) {
                         }
 
                         @Override
-                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                            return new java.security.cert.X509Certificate[]{};
+                        public X509Certificate[] getAcceptedIssuers() {
+                            return new X509Certificate[]{};
                         }
                     }
             };
@@ -85,7 +90,10 @@ public class Network {
                 }
             });
 
-            return builder.build();
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+
+            return builder.addInterceptor(interceptor).build();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -13,7 +13,7 @@ public class Server {
 
     @SerializedName("data")
     @Expose
-    private String data;
+    private Object data;
 
     @SerializedName("error")
     @Expose
@@ -23,7 +23,7 @@ public class Server {
     @Expose
     private String message;
 
-    private boolean isSuccess() {
+    public boolean isSuccess() {
         return success;
     }
 
@@ -31,15 +31,15 @@ public class Server {
         this.success = success;
     }
 
-    public String getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Object data) {
         this.data = data;
     }
 
-    private String getError() {
+    public String getError() {
         return error;
     }
 
@@ -47,7 +47,7 @@ public class Server {
         this.error = error;
     }
 
-    private String getMessage() {
+    public String getMessage() {
         return message;
     }
 
@@ -60,11 +60,11 @@ public class Server {
     public String toString() {
         if (this.isSuccess()) {
             return "Успешно.\n"
-                    + "Данные: " + this.getData() + "\n";
+                    + "Данные: " + this.getData();
         } else {
             return "Ошибка!\n"
                     + "Ошибка: " + this.getError() + "\n"
-                    + "Сообщение: " + this.getMessage() + "\n";
+                    + "Сообщение: " + this.getMessage();
         }
     }
 }

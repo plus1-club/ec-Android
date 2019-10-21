@@ -27,7 +27,7 @@
             android:ems="10"
             android:hint="@string/edit_login"
             android:inputType="textPersonName"
-            android:text="@{viewModel.login}"
+            android:text="@={viewModel.login}"
             tools:ignore="Autofill" />
 
         <EditText
@@ -38,7 +38,7 @@
             android:ems="10"
             android:hint="@string/edit_password"
             android:inputType="textPassword"
-            android:text="@{viewModel.password}"
+            android:text="@={viewModel.password}"
             tools:ignore="Autofill" />
 
         <Button

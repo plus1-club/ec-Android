@@ -10,6 +10,7 @@ public class App extends Application {
 
     @SuppressLint("StaticFieldLeak")
     private static Context mContext;
+    public static String token;
 
     public static Context getContext() {
         return mContext;
@@ -19,6 +20,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        token = "";
     }
 
     public static void log(Context context, boolean isError, String message) {
