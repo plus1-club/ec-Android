@@ -4,11 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+
 import club.plus1.ec_online.R;
+import club.plus1.ec_online.model.App;
+import club.plus1.ec_online.model.ServerModel;
 import club.plus1.ec_online.view.EnterActivity;
 import club.plus1.ec_online.view.InvoiceTableActivity;
 import club.plus1.ec_online.view.RequestActivity;
 import club.plus1.ec_online.view.RequestsBasketActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MenuViewModel {
 
@@ -62,7 +69,24 @@ public class MenuViewModel {
         context.startActivity(intent);
     }
 
-    public void onExit(Context context){
+    public void onExit(final Context context) {
+
+        App.getApi().exit().enqueue(new Callback<ServerModel>() {
+            @Override
+            public void onResponse(@NonNull Call<ServerModel> call, @NonNull Response<ServerModel> response) {
+                if (response.isSuccessful()) {
+                    App.log(context, false, "response: " + response.body());
+                } else {
+                    App.log(context, false, "response code " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ServerModel> call, @NonNull Throwable t) {
+                App.log(context, true, "failure " + t);
+            }
+        });
+
         Intent intent = new Intent(context, EnterActivity.class);
         context.startActivity(intent);
     }
