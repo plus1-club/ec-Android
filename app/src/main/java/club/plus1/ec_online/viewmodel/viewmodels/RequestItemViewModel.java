@@ -5,9 +5,9 @@ import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
+import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.domain.Request;
-import club.plus1.ec_online.view.App;
 
 public class RequestItemViewModel {
 

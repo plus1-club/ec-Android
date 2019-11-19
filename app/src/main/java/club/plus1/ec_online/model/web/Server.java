@@ -23,6 +23,19 @@ public class Server {
     @Expose
     private String message;
 
+    @NonNull
+    @Override
+    public String toString() {
+        if (this.isSuccess()) {
+            return "Успешно.\n"
+                    + "Данные: " + this.getData();
+        } else {
+            return "Ошибка!\n"
+                    + "Ошибка: " + this.getError() + "\n"
+                    + "Сообщение: " + this.getMessage();
+        }
+    }
+
     public boolean isSuccess() {
         return success;
     }
@@ -53,18 +66,5 @@ public class Server {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        if (this.isSuccess()) {
-            return "Успешно.\n"
-                    + "Данные: " + this.getData();
-        } else {
-            return "Ошибка!\n"
-                    + "Ошибка: " + this.getError() + "\n"
-                    + "Сообщение: " + this.getMessage();
-        }
     }
 }

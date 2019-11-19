@@ -6,10 +6,13 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 
+import java.util.List;
+
+import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
+import club.plus1.ec_online.domain.Request;
 import club.plus1.ec_online.model.web.Network;
 import club.plus1.ec_online.model.web.Server;
-import club.plus1.ec_online.view.App;
 import club.plus1.ec_online.view.activities.EnterActivity;
 import club.plus1.ec_online.view.activities.InvoiceTableActivity;
 import club.plus1.ec_online.view.activities.RequestActivity;
@@ -34,10 +37,28 @@ public class MenuViewModel {
         context.startActivity(intent);
     }
 
-    public void onCart(Context context){
-        Intent intent = new Intent(context, RequestsBasketActivity.class);
-        intent.putExtra("title", context.getString(R.string.title_basket));
-        context.startActivity(intent);
+    public void onCart(final Context context) {
+
+        Network.getInstance();
+        Network.getApi().getBasket(App.model.token).enqueue(new Callback<List<Server>>() {
+                                                                @Override
+                                                                public void onResponse(@NonNull Call<List<Server>> call, @NonNull Response<List<Server>> response) {
+                                                                    if (!response.isSuccessful()) {
+                                                                        App.model.basket.clear();
+                                                                        App.model.basket.add((Request) response.body());
+
+                                                                        Intent intent = new Intent(context, RequestsBasketActivity.class);
+                                                                        intent.putExtra("title", context.getString(R.string.title_basket));
+                                                                        context.startActivity(intent);
+                                                                    }
+                                                                }
+
+                                                                @Override
+                                                                public void onFailure(@NonNull Call<List<Server>> call, @NonNull Throwable t) {
+                                                                    App.log(context, true, "failure " + t);
+                                                                }
+                                                            }
+        );
     }
 
     public void onUnconfirmed(Context context){
@@ -73,7 +94,7 @@ public class MenuViewModel {
     public void onExit(final Context context) {
 
         Network.getInstance();
-        Network.getApi().exit(App.token).enqueue(new Callback<Server>() {
+        Network.getApi().exit(App.model.token).enqueue(new Callback<Server>() {
             @Override
             public void onResponse(@NonNull Call<Server> call, @NonNull Response<Server> response) {
                 if (!response.isSuccessful()) {

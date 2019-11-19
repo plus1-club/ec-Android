@@ -11,9 +11,9 @@ import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.Objects;
 
+import club.plus1.ec_online.App;
 import club.plus1.ec_online.model.web.Network;
 import club.plus1.ec_online.model.web.Server;
-import club.plus1.ec_online.view.App;
 import club.plus1.ec_online.view.activities.MenuActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,7 +47,7 @@ public class EnterViewModel {
                 if (response.isSuccessful()) {
                     if (Objects.requireNonNull(response.body()).isSuccess()) {
                         Object data = response.body().getData();
-                        App.token = (String) ((LinkedTreeMap) data).get("user_token");
+                        App.model.token = (String) ((LinkedTreeMap) data).get("user_token");
                         Intent intent = new Intent(context, MenuActivity.class);
                         context.startActivity(intent);
                     } else {

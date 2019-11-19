@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.Objects;
 
+import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.RequestsBasketBinding;
-import club.plus1.ec_online.model.storage.Stub;
 import club.plus1.ec_online.viewmodel.adapters.RequestsBasketAdapter;
 import club.plus1.ec_online.viewmodel.viewmodels.MenuViewModel;
 import club.plus1.ec_online.viewmodel.viewmodels.RequestViewModel;
@@ -29,9 +29,8 @@ public class RequestsBasketActivity extends AppCompatActivity {
 
         menuModel = new MenuViewModel(this);
         viewModel = RequestViewModel.getInstance();
-        Stub stub = Stub.getInstance();
         RequestsBasketAdapter requestsBasketAdapter = new RequestsBasketAdapter();
-        requestsBasketAdapter.setItems(stub.basket);
+        requestsBasketAdapter.setItems(App.model.basket);
 
         Bundle bundle = getIntent().getExtras();
         viewModel.title.set(Objects.requireNonNull(bundle).getString("title"));

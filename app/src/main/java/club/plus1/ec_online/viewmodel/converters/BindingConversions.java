@@ -5,8 +5,8 @@ import androidx.databinding.ObservableDouble;
 
 import java.util.Locale;
 
+import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
-import club.plus1.ec_online.view.App;
 
 public class BindingConversions {
 

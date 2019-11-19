@@ -8,7 +8,7 @@
     <string name="button_enter">Войти</string>
     <string name="text_ender">Логин и временный пароль вы можете получить,
         позвонив по телефону:%1$s</string>
-    <string name="text_phone">+7(495)1234567</string>
+    <string name="text_phone">+7(495)7300230</string>
 
     <!-- Экран "2.Стартовый" и меню "8.Меню" -->
     <string name="text_product_existence">Проверка наличия товара</string>
