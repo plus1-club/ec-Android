@@ -12,8 +12,10 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import club.plus1.ec_online.domain.Request;
-import club.plus1.ec_online.view.activities.RequestsBasketActivity;
 import club.plus1.ec_online.view.activities.RequestsTableActivity;
 
 public class RequestViewModel {
@@ -33,8 +35,11 @@ public class RequestViewModel {
     private RequestViewModel() {
         product = new ObservableField<>();
         count = new ObservableInt();
+        count.set(1);
         productColumn = new ObservableInt();
+        productColumn.set(1);
         countColumn = new ObservableInt();
+        countColumn.set(2);
         isFullSearch = new ObservableBoolean();
         total = new ObservableDouble();
 
@@ -73,9 +78,14 @@ public class RequestViewModel {
 
     // TODO: Добавлять всё что в списке в корзину
     public void toBasket(Context context){
-        Toast.makeText(context, "Добавление в корзину - в разработке", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(context, RequestsBasketActivity.class);
-        context.startActivity(intent);
+        List<Request> added = new ArrayList<>();
+        for (Request request: requests) {
+            if (request.requestCount > 0){
+                added.add(request);
+            }
+        }
+        ServerViewModel.postBasket(context, added);
+        ServerViewModel.getBasket(context);
     }
 
     // TODO: Реализовать очистку

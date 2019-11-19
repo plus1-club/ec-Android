@@ -5,6 +5,7 @@ import java.util.List;
 
 import club.plus1.ec_online.domain.Request;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -45,7 +46,7 @@ public interface ServerApi {
 
     @POST("request/basket")
     Call<Server> postBasket(@Header("user_token") String userToken,
-                            @Query("requests") List<Request> requests);
+                            @Body List<Request> requests);
 
     @PUT("request/basket")
     Call<Server> putBasket(@Header("user_token") String userToken,
@@ -57,7 +58,6 @@ public interface ServerApi {
 
     @POST("request/order")
     Call<Server> order(@Header("user_token") String userToken,
-                       @Query("requests") List<Request> requests,
                        @Query("comment") String comment);
 
 

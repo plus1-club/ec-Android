@@ -2,6 +2,9 @@ package club.plus1.ec_online.model.web;
 
 import android.annotation.SuppressLint;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.security.cert.X509Certificate;
 
 import javax.net.ssl.HostnameVerifier;
@@ -33,11 +36,12 @@ public class Network {
 
     private Network() {
 
+        Gson gson = new GsonBuilder().setLenient().create();
         retrofit = new Retrofit.Builder()
                 //Базовая часть адреса
                 .baseUrl("https://www.ec-electric.ru/api/v1/")
                 //Конвертер, необходимый для преобразования JSON'а в объекты
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(getUnsafeOkHttpClient())
                 .build();
 

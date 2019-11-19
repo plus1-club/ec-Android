@@ -104,4 +104,21 @@ class ServerViewModel {
             }
         );
     }
+
+    static void postBasket(final Context context, List<Request> requests){
+        Network.getApi().postBasket(App.model.token, requests).enqueue(new Callback<Server>() {
+            @Override
+            public void onResponse(@NonNull Call<Server> call, @NonNull Response<Server> response) {
+                if (!response.isSuccessful()) {
+                    App.log(context, false, true, "response code " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Server> call, @NonNull Throwable t) {
+                App.log(context, true, true, "failure " + t);
+            }
+        });
+
+    }
 }
