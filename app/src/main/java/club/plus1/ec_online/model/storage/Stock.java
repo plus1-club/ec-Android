@@ -39,7 +39,7 @@ class Stock {
                 Product product;
                 if ((tokens.length > 3) && (tokens[3].contains("."))) {
                     if (tokens[3].equals("Много")) {
-                        product = new Product(tokens[0].trim().replace("\"", ""), tokens[1].trim(), tokens[2].trim(), 100);
+                        product = new Product(tokens[0].trim().replace("\"", ""), tokens[1].trim(), tokens[2].trim(), 1000);
                     } else {
                         product = new Product(tokens[0].trim().replace("\"", ""), tokens[1].trim(), tokens[2].trim());
                         String[] parts = tokens[3].split("\\.");

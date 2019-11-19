@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import club.plus1.ec_online.domain.Model;
+import club.plus1.ec_online.model.web.Network;
 
 public class App extends Application {
 
@@ -23,15 +24,16 @@ public class App extends Application {
         super.onCreate();
         mContext = this;
         model = new Model();
+        Network.getInstance();
     }
 
-    public static void log(Context context, boolean isError, String message) {
+    public static void log(Context context, boolean isError, boolean isToast, String message) {
         if (isError) {
             Log.e("ec", message);
         } else {
             Log.d("ec", message);
         }
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+        if (isToast) Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

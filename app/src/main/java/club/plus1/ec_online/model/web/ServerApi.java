@@ -41,7 +41,7 @@ public interface ServerApi {
                         @Query("fullsearch") boolean fullsearch);
 
     @GET("request/basket")
-    Call<List<Server>> getBasket(@Header("user_token") String userToken);
+    Call<Server> getBasket(@Header("user_token") String userToken);
 
     @POST("request/basket")
     Call<Server> postBasket(@Header("user_token") String userToken,

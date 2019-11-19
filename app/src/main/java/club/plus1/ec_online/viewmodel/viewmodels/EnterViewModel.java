@@ -4,20 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
-
-import com.google.gson.internal.LinkedTreeMap;
-
-import java.util.Objects;
-
-import club.plus1.ec_online.App;
-import club.plus1.ec_online.model.web.Network;
-import club.plus1.ec_online.model.web.Server;
-import club.plus1.ec_online.view.activities.MenuActivity;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class EnterViewModel {
 
@@ -38,33 +25,8 @@ public class EnterViewModel {
         return mInstance;
     }
 
-    public void onEnter(final Context context) {
-
-        Network.getInstance();
-        Network.getApi().enter(login.get(), password.get()).enqueue(new Callback<Server>() {
-            @Override
-            public void onResponse(@NonNull Call<Server> call, @NonNull Response<Server> response) {
-                if (response.isSuccessful()) {
-                    if (Objects.requireNonNull(response.body()).isSuccess()) {
-                        Object data = response.body().getData();
-                        App.model.token = (String) ((LinkedTreeMap) data).get("user_token");
-                        Intent intent = new Intent(context, MenuActivity.class);
-                        context.startActivity(intent);
-                    } else {
-                        App.log(context, false,
-                                " (" + response.body().getError() + ")"
-                                        + response.body().getMessage());
-                    }
-                } else {
-                    App.log(context, false, "response code " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Server> call, @NonNull Throwable t) {
-                App.log(context, true, "failure " + t);
-            }
-        });
+    public void onEnter(Context context) {
+        ServerViewModel.getEnter(context, login.get(), password.get());
     }
 
     public void onPhone(Context context, String phone){
