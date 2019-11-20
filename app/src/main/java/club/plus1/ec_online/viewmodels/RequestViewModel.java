@@ -22,7 +22,6 @@ import club.plus1.ec_online.Server;
 import club.plus1.ec_online.domains.Request;
 import club.plus1.ec_online.viewadapters.RequestsBasketAdapter;
 import club.plus1.ec_online.views.RequestActivity;
-import club.plus1.ec_online.views.RequestsBasketActivity;
 import club.plus1.ec_online.views.RequestsTableActivity;
 
 public class RequestViewModel {
@@ -93,9 +92,7 @@ public class RequestViewModel {
             }
         }
         Server.postBasket(context, added);
-        Intent intent = new Intent(context, RequestsBasketActivity.class);
-        intent.putExtra("title", context.getString(R.string.title_basket));
-        context.startActivity(intent);
+        Server.getBasket(context);
     }
 
     public void onClear(Context context){
@@ -104,6 +101,7 @@ public class RequestViewModel {
         Server.deleteBasket(context);
         RequestsBasketAdapter basketAdapter = (RequestsBasketAdapter) adapter.get();
         Objects.requireNonNull(basketAdapter).notifyDataSetChanged();
+        Server.getBasket(context);
     }
 
     public void addToBasket(Context context){

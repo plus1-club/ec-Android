@@ -44,7 +44,7 @@
                 android:gravity="bottom"
                 android:inputType="number|text"
                 android:text="@={`` + viewModel.count}"
-                android:onTextChanged="@{viewModel::onTextChanged}"
+                android:onTextChanged="@{(s, start, before, count) -> viewModel.onTextChanged(context, s, start, before, count)}"
                 android:textAlignment="center"
                 tools:ignore="Autofill,LabelFor" />
 

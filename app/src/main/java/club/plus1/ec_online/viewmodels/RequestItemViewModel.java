@@ -1,5 +1,6 @@
 package club.plus1.ec_online.viewmodels;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -43,14 +44,14 @@ public class RequestItemViewModel {
         parent = RequestViewModel.getInstance();
     }
 
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
+    public void onTextChanged(Context context, CharSequence s, int start, int before, int count) {
         int newCount = s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString());
         this.count.set(newCount);
         this.sum.set(newCount * price.get());
-        Request request = new Request(product.get(), count, stockCount.get(), price.get(), check.get());
+        Request request = new Request(product.get(), newCount, stockCount.get(), price.get(), check.get());
         parent.requests.set(position.get(), request);
         updateStatus();
-    }
+     }
 
     public void onFlagClick(View view) {
         this.check.set(((CheckBox) view).isChecked());
@@ -69,6 +70,7 @@ public class RequestItemViewModel {
         Server.putBasket(view.getContext(), parent.requests);
         RequestsBasketAdapter basketAdapter = (RequestsBasketAdapter) parent.adapter.get();
         Objects.requireNonNull(basketAdapter).notifyDataSetChanged();
+        Server.getBasket(view.getContext());
         updateStatus();
     }
 
@@ -86,7 +88,7 @@ public class RequestItemViewModel {
         double total = 0;
         for (Request item : parent.requests) {
             if(item.check) {
-                total = total + item.sum;
+                total = total + item.requestCount * item.price;
             }
         }
         parent.total.set(total);
