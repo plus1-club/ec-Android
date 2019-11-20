@@ -101,7 +101,7 @@ public class RequestViewModel {
     public void onClear(Context context){
         List<Request> empty = new ArrayList<>();
         App.model.basket.clear();
-        Server.deleteBasket(context, empty);
+        Server.deleteBasket(context);
         RequestsBasketAdapter basketAdapter = (RequestsBasketAdapter) adapter.get();
         Objects.requireNonNull(basketAdapter).notifyDataSetChanged();
     }

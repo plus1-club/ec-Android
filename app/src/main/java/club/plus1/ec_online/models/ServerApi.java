@@ -50,11 +50,10 @@ public interface ServerApi {
 
     @PUT("request/basket")
     Call<ServerData> putBasket(@Header("user_token") String userToken,
-                               @Query("requests") List<Request> requests);
+                               @Body List<Request> requests);
 
     @DELETE("request/basket")
-    Call<ServerData> deleteBasket(@Header("user_token") String userToken,
-                                 @Query("requests") List<Request> requests);
+    Call<ServerData> deleteBasket(@Header("user_token") String userToken);
 
     @POST("request/order")
     Call<ServerData> order(@Header("user_token") String userToken,

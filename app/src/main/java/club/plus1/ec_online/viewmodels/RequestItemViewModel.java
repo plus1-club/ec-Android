@@ -8,8 +8,6 @@ import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import club.plus1.ec_online.App;
@@ -49,21 +47,29 @@ public class RequestItemViewModel {
         int newCount = s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString());
         this.count.set(newCount);
         this.sum.set(newCount * price.get());
+        Request request = new Request(product.get(), count, stockCount.get(), price.get(), check.get());
+        parent.requests.set(position.get(), request);
         updateStatus();
     }
 
     public void onFlagClick(View view) {
         this.check.set(((CheckBox) view).isChecked());
+        Request request = new Request(product.get(), count.get(), stockCount.get(), price.get(), check.get());
+        parent.requests.set(position.get(), request);
         updateStatus();
     }
 
     public void onDeleteClick(View view) {
-        Request request = new Request(product.get(), count.get(), stockCount.get(), price.get(), check.get());
-        List<Request> deleted = new ArrayList<>();
-        deleted.add(request);
-        Server.deleteBasket(view.getContext(), deleted);
+        String deletedProduct = product.get();
+        for (Request item: parent.requests) {
+            if (item.product.equals(deletedProduct)){
+                parent.requests.remove(item);
+            }
+        }
+        Server.putBasket(view.getContext(), parent.requests);
         RequestsBasketAdapter basketAdapter = (RequestsBasketAdapter) parent.adapter.get();
         Objects.requireNonNull(basketAdapter).notifyDataSetChanged();
+        updateStatus();
     }
 
     public void updateStatus() {
@@ -77,8 +83,6 @@ public class RequestItemViewModel {
             status.set(App.getContext().getString(R.string.text_status_yellow, stockCount.get(), count.get()));
             color.set(R.color.yellow);
         }
-        Request request = new Request(product.get(), count.get(), stockCount.get(), price.get(), check.get());
-        parent.requests.set(position.get(), request);
         double total = 0;
         for (Request item : parent.requests) {
             if(item.check) {
