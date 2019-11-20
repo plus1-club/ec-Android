@@ -70,13 +70,11 @@
 
     <style name="AppTheme.ECOnline.CardText" parent="AppTheme.ECOnline">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">10dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/red</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAlignment">center</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="AppTheme.ECOnline.ImageButton" parent="AppTheme.ECOnline">

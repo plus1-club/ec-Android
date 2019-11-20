@@ -64,14 +64,13 @@
                     android:layout_height="match_parent"
                     android:layout_margin="0dp"
                     android:layout_weight="1"
-                    android:lineSpacingExtra="36sp"
                     android:paddingStart="10dp"
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
                     android:text="@string/text_product_existence"
                     android:textAlignment="viewStart"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="InefficientWeight,NestedWeights" />
             </LinearLayout>
 
@@ -106,14 +105,13 @@
                     android:layout_height="match_parent"
                     android:layout_margin="0dp"
                     android:layout_weight="1"
-                    android:lineSpacingExtra="36sp"
                     android:paddingStart="10dp"
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
                     android:text="@string/text_make_order"
                     android:textAlignment="viewStart"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="InefficientWeight" />
             </LinearLayout>
 
@@ -161,14 +159,13 @@
                     android:layout_height="match_parent"
                     android:layout_margin="0dp"
                     android:layout_weight="1"
-                    android:lineSpacingExtra="36sp"
                     android:paddingStart="10dp"
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
                     android:text="@string/text_cart"
                     android:textAlignment="viewStart"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="InefficientWeight,NestedWeights" />
             </LinearLayout>
 
@@ -203,14 +200,13 @@
                     android:layout_height="match_parent"
                     android:layout_margin="0dp"
                     android:layout_weight="1"
-                    android:lineSpacingExtra="36sp"
                     android:paddingStart="10dp"
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
                     android:text="@string/text_unconfirmed"
                     android:textAlignment="viewStart"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="InefficientWeight" />
             </LinearLayout>
 
@@ -258,14 +254,13 @@
                     android:layout_height="match_parent"
                     android:layout_margin="0dp"
                     android:layout_weight="1"
-                    android:lineSpacingExtra="36sp"
                     android:paddingStart="10dp"
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
                     android:text="@string/text_reserves"
                     android:textAlignment="viewStart"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="InefficientWeight,NestedWeights" />
             </LinearLayout>
 
@@ -300,14 +295,13 @@
                     android:layout_height="match_parent"
                     android:layout_margin="0dp"
                     android:layout_weight="1"
-                    android:lineSpacingExtra="36sp"
                     android:paddingStart="10dp"
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
                     android:text="@string/text_orders"
                     android:textAlignment="viewStart"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="InefficientWeight" />
             </LinearLayout>
 
@@ -355,14 +349,13 @@
                     android:layout_height="match_parent"
                     android:layout_margin="0dp"
                     android:layout_weight="1"
-                    android:lineSpacingExtra="36sp"
                     android:paddingStart="10dp"
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
                     android:text="@string/text_canceled"
                     android:textAlignment="viewStart"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="InefficientWeight,NestedWeights" />
             </LinearLayout>
 
@@ -397,14 +390,13 @@
                     android:layout_height="match_parent"
                     android:layout_margin="0dp"
                     android:layout_weight="1"
-                    android:lineSpacingExtra="36sp"
                     android:paddingStart="10dp"
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
                     android:text="@string/text_history"
                     android:textAlignment="viewStart"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="InefficientWeight" />
             </LinearLayout>
         </LinearLayout>

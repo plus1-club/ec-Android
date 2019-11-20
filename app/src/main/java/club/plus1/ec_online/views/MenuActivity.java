@@ -1,11 +1,7 @@
 package club.plus1.ec_online.views;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -25,22 +21,5 @@ public class MenuActivity extends AppCompatActivity {
         viewModel = new MenuViewModel(this);
         menuModel = new MenuViewModel(this);
         binding.setViewModel(viewModel);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        MenuViewModel.PrepareMenu(menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(menuModel.onOptionsItemSelected(this, item)) {
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
     }
 }
