@@ -110,6 +110,7 @@ public class Server {
             public void onResponse(@NonNull Call<ServerData> call, @NonNull Response<ServerData> response) {
                 if (!response.isSuccessful()) {
                     App.log(context, false, true, "response code " + response.code());
+                    Server.getBasket(context);
                 }
             }
 
@@ -119,4 +120,23 @@ public class Server {
             }
         });
     }
+
+
+    public static void deleteBasket(final Context context, List<Request> requests){
+        ServerNetwork.getApi().deleteBasket(App.model.token, requests).enqueue(new Callback<ServerData>() {
+            @Override
+            public void onResponse(@NonNull Call<ServerData> call, @NonNull Response<ServerData> response) {
+                if (!response.isSuccessful()) {
+                    App.log(context, false, true, "response code " + response.code());
+                    Server.getBasket(context);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
+                App.log(context, true, true, "failure " + t);
+            }
+        });
+    }
+
 }

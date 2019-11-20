@@ -50,6 +50,7 @@
     <string name="button_issue">Оформить</string>
     <string name="text_count">%1$d</string>
     <string name="text_money">%1$.2f руб.</string>
+    <string name="text_total">Итого: %1$.2f руб.</string>
     <string name="text_status_green">В наличии</string>
     <string name="text_status_yellow">Есть %1$d из %2$d</string>
     <string name="text_status_red">Нет</string>
@@ -84,5 +85,6 @@
     <string name="title_overdie">Просроченный счет</string>
     <string name="title_shipped">Отгрузка</string>
     <string name="title_invoice">Детали счета</string>
+    <string name="text_basket_item_delete">Удалить строку из корзины</string>
 
 </resources>

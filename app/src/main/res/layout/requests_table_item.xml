@@ -30,6 +30,7 @@
                 android:backgroundTintMode="add"
                 android:buttonTint="@{viewModel.color}"
                 android:checked="@={viewModel.check}"
+                android:onClick="@{(view) -> viewModel.onFlagClick(view)}"
                 android:gravity="bottom"
                 android:textSize="14sp" />
 

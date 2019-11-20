@@ -53,7 +53,7 @@ public interface ServerApi {
                                @Query("requests") List<Request> requests);
 
     @DELETE("request/basket")
-    Call<ServerData> deletBasket(@Header("user_token") String userToken,
+    Call<ServerData> deleteBasket(@Header("user_token") String userToken,
                                  @Query("requests") List<Request> requests);
 
     @POST("request/order")

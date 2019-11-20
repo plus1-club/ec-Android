@@ -26,14 +26,19 @@ public class RequestsBasketActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         menuModel = new MenuViewModel(this);
         viewModel = RequestViewModel.getInstance();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         RequestsBasketAdapter requestsBasketAdapter = new RequestsBasketAdapter();
         requestsBasketAdapter.setItems(App.model.basket);
 
         Bundle bundle = getIntent().getExtras();
         viewModel.title.set(Objects.requireNonNull(bundle).getString("title"));
+        viewModel.adapter.set(requestsBasketAdapter);
 
         RequestsBasketBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_basket);
         binding.setViewModel(viewModel);

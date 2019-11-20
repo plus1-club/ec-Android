@@ -28,6 +28,7 @@
                 android:layout_height="40dp"
                 android:buttonTint="@{viewModel.color}"
                 android:checked="@={viewModel.check}"
+                android:onClick="@{(view) -> viewModel.onFlagClick(view)}"
                 android:gravity="bottom" />
 
             <!--suppress AndroidUnknownAttribute -->
@@ -47,7 +48,7 @@
             <TextView
                 android:id="@+id/textProduct"
                 style="@style/AppTheme.ECOnline.Text"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
                 android:gravity="bottom"
@@ -56,6 +57,15 @@
                 android:textAlignment="viewStart"
                 android:textSize="14sp"
                 tools:ignore="RtlCompat" />
+
+            <ImageButton
+                android:id="@+id/buttonDelete"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/text_basket_item_delete"
+                android:onClick="@{(view) -> viewModel.onDeleteClick(view)}"
+                android:src="@android:drawable/btn_dialog" />
 
         </LinearLayout>
 

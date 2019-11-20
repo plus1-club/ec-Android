@@ -1,13 +1,22 @@
 package club.plus1.ec_online.viewmodels;
 
+import android.view.View;
+import android.widget.CheckBox;
+
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
+import club.plus1.ec_online.Server;
 import club.plus1.ec_online.domains.Request;
+import club.plus1.ec_online.viewadapters.RequestsBasketAdapter;
 
 public class RequestItemViewModel {
 
@@ -43,6 +52,20 @@ public class RequestItemViewModel {
         updateStatus();
     }
 
+    public void onFlagClick(View view) {
+        this.check.set(((CheckBox) view).isChecked());
+        updateStatus();
+    }
+
+    public void onDeleteClick(View view) {
+        Request request = new Request(product.get(), count.get(), stockCount.get(), price.get(), check.get());
+        List<Request> deleted = new ArrayList<>();
+        deleted.add(request);
+        Server.deleteBasket(view.getContext(), deleted);
+        RequestsBasketAdapter basketAdapter = (RequestsBasketAdapter) parent.adapter.get();
+        Objects.requireNonNull(basketAdapter).notifyDataSetChanged();
+    }
+
     public void updateStatus() {
         if (stockCount.get() == 0) {
             status.set(App.getContext().getString(R.string.text_status_red));
@@ -58,7 +81,9 @@ public class RequestItemViewModel {
         parent.requests.set(position.get(), request);
         double total = 0;
         for (Request item : parent.requests) {
-            total = total + item.sum;
+            if(item.check) {
+                total = total + item.sum;
+            }
         }
         parent.total.set(total);
     }

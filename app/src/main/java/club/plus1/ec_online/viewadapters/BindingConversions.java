@@ -13,6 +13,6 @@ public class BindingConversions {
     @BindingConversion
     public static String convertObservableDoubleToString(ObservableDouble value) {
         String template = App.getContext().getString(R.string.text_money);
-        return value.get() == 0.0 ? "0" : String.format(Locale.getDefault(), template, value.get());
+        return String.format(Locale.getDefault(), template, value.get());
     }
 }

@@ -14,9 +14,15 @@ import androidx.databinding.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import club.plus1.ec_online.App;
+import club.plus1.ec_online.R;
 import club.plus1.ec_online.Server;
 import club.plus1.ec_online.domains.Request;
+import club.plus1.ec_online.viewadapters.RequestsBasketAdapter;
+import club.plus1.ec_online.views.RequestActivity;
+import club.plus1.ec_online.views.RequestsBasketActivity;
 import club.plus1.ec_online.views.RequestsTableActivity;
 
 public class RequestViewModel {
@@ -30,6 +36,7 @@ public class RequestViewModel {
 
     public ObservableField<String> title;
     public ObservableList<Request> requests;
+    public ObservableField<Object> adapter;
 
     private static RequestViewModel mInstance;    // Ссылка для биндинга с View
 
@@ -46,6 +53,7 @@ public class RequestViewModel {
 
         title = new ObservableField<>();
         requests = new ObservableArrayList<>();
+        adapter = new ObservableField<>();
     }
 
     // Получение единственного экземпляра класса
@@ -77,7 +85,6 @@ public class RequestViewModel {
         context.startActivity(intent);
     }
 
-    // TODO: Добавлять всё что в списке в корзину
     public void toBasket(Context context){
         List<Request> added = new ArrayList<>();
         for (Request request: requests) {
@@ -86,17 +93,23 @@ public class RequestViewModel {
             }
         }
         Server.postBasket(context, added);
-        Server.getBasket(context);
+        Intent intent = new Intent(context, RequestsBasketActivity.class);
+        intent.putExtra("title", context.getString(R.string.title_basket));
+        context.startActivity(intent);
     }
 
-    // TODO: Реализовать очистку
     public void onClear(Context context){
-        Toast.makeText(context, "Очистить - в разработке", Toast.LENGTH_LONG).show();
+        List<Request> empty = new ArrayList<>();
+        App.model.basket.clear();
+        Server.deleteBasket(context, empty);
+        RequestsBasketAdapter basketAdapter = (RequestsBasketAdapter) adapter.get();
+        Objects.requireNonNull(basketAdapter).notifyDataSetChanged();
     }
 
-    // TODO: Реализовать добавление в корзину
     public void addToBasket(Context context){
-        Toast.makeText(context, "Добавить в корзину - в разработке", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(context, RequestActivity.class);
+        intent.putExtra("title", context.getString(R.string.title_request));
+        context.startActivity(intent);
     }
 
     // TODO: Реализовать оформление заказа
