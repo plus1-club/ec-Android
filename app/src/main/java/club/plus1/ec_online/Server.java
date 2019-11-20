@@ -85,7 +85,8 @@ public class Server {
                                         el.get("product"),
                                         Integer.parseInt(Objects.requireNonNull(el.get("requestCount"))),
                                         Integer.parseInt(Objects.requireNonNull(el.get("stockCount"))),
-                                        Double.parseDouble(Objects.requireNonNull(el.get("price"))));
+                                        Double.parseDouble(Objects.requireNonNull(el.get("price"))),
+                                        true);
                                 App.model.basket.add(request);
                              }
                         }

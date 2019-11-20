@@ -21,7 +21,7 @@ public class RequestItemViewModel {
     public ObservableDouble sum;
     public ObservableField<String> status;
     public ObservableInt color;
-    public ObservableBoolean mark;
+    public ObservableBoolean check;
 
     public RequestItemViewModel() {
         position = new ObservableInt();
@@ -32,7 +32,7 @@ public class RequestItemViewModel {
         sum = new ObservableDouble();
         status = new ObservableField<>();
         color = new ObservableInt();
-        mark = new ObservableBoolean();
+        check = new ObservableBoolean();
         parent = RequestViewModel.getInstance();
     }
 
@@ -54,7 +54,7 @@ public class RequestItemViewModel {
             status.set(App.getContext().getString(R.string.text_status_yellow, stockCount.get(), count.get()));
             color.set(R.color.yellow);
         }
-        Request request = new Request(product.get(), count.get(), stockCount.get(), price.get());
+        Request request = new Request(product.get(), count.get(), stockCount.get(), price.get(), check.get());
         parent.requests.set(position.get(), request);
         double total = 0;
         for (Request item : parent.requests) {

@@ -72,7 +72,7 @@ public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAd
             viewModel.stockCount.set(request.stockCount);
             viewModel.price.set(request.price);
             viewModel.sum.set(request.sum);
-            viewModel.mark.set(true);
+            viewModel.check.set(true);
             viewModel.updateStatus();
         }
     }

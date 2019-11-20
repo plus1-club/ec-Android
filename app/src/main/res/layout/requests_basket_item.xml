@@ -27,7 +27,7 @@
                 android:layout_width="32dp"
                 android:layout_height="40dp"
                 android:buttonTint="@{viewModel.color}"
-                android:checked="@={viewModel.mark}"
+                android:checked="@={viewModel.check}"
                 android:gravity="bottom" />
 
             <!--suppress AndroidUnknownAttribute -->

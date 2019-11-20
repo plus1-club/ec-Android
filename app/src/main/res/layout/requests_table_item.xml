@@ -29,7 +29,7 @@
                 android:layout_height="40dp"
                 android:backgroundTintMode="add"
                 android:buttonTint="@{viewModel.color}"
-                android:checked="@={viewModel.mark}"
+                android:checked="@={viewModel.check}"
                 android:gravity="bottom"
                 android:textSize="14sp" />
 

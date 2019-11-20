@@ -81,7 +81,7 @@ public class RequestViewModel {
     public void toBasket(Context context){
         List<Request> added = new ArrayList<>();
         for (Request request: requests) {
-            if (request.requestCount > 0){
+            if (request.check){
                 added.add(request);
             }
         }

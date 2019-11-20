@@ -70,7 +70,7 @@ public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdap
             viewModel.product.set(request.product);
             viewModel.count.set(request.requestCount);
             viewModel.stockCount.set(request.stockCount);
-            viewModel.mark.set(false);
+            viewModel.check.set(false);
             viewModel.updateStatus();
         }
     }
