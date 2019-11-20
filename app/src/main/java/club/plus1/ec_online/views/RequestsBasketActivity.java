@@ -2,6 +2,7 @@ package club.plus1.ec_online.views;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ public class RequestsBasketActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        viewModel.total.set(0);
         RequestsBasketAdapter requestsBasketAdapter = new RequestsBasketAdapter();
         requestsBasketAdapter.setItems(App.model.basket);
 
@@ -49,7 +51,9 @@ public class RequestsBasketActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        MenuViewModel.PrepareMenu(menu);
         return true;
     }
 
