@@ -6,8 +6,8 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import club.plus1.ec_online.domain.Model;
-import club.plus1.ec_online.model.web.Network;
+import club.plus1.ec_online.domains.Model;
+import club.plus1.ec_online.models.ServerNetwork;
 
 public class App extends Application {
 
@@ -24,7 +24,7 @@ public class App extends Application {
         super.onCreate();
         mContext = this;
         model = new Model();
-        Network.getInstance();
+        ServerNetwork.getInstance();
     }
 
     public static void log(Context context, boolean isError, boolean isToast, String message) {

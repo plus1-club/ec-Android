@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ECOnline"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name="club.plus1.ec_online.view.activities.SplashActivity">
+        <activity android:name="club.plus1.ec_online.views.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,25 +22,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="club.plus1.ec_online.view.activities.EnterActivity"
+            android:name="club.plus1.ec_online.views.EnterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="club.plus1.ec_online.view.activities.MenuActivity"
+            android:name="club.plus1.ec_online.views.MenuActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="club.plus1.ec_online.view.activities.RequestActivity"
+            android:name="club.plus1.ec_online.views.RequestActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="club.plus1.ec_online.view.activities.RequestsTableActivity"
+            android:name="club.plus1.ec_online.views.RequestsTableActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="club.plus1.ec_online.view.activities.RequestsBasketActivity"
+            android:name="club.plus1.ec_online.views.RequestsBasketActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="club.plus1.ec_online.view.activities.InvoiceTableActivity"
+            android:name="club.plus1.ec_online.views.InvoiceTableActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="club.plus1.ec_online.view.activities.InvoiceDetailsActivity"
+            android:name="club.plus1.ec_online.views.InvoiceDetailsActivity"
             android:screenOrientation="portrait"/>
     </application>
 

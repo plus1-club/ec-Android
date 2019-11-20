@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="club.plus1.ec_online.viewmodel.viewmodels.MenuViewModel" />
+            type="club.plus1.ec_online.viewmodels.MenuViewModel" />
     </data>
 
     <LinearLayout
