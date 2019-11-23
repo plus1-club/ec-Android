@@ -10,11 +10,8 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
-import java.util.Objects;
-
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.domains.Detail;
-import club.plus1.ec_online.views.InvoiceDetailsActivity;
 
 public class InvoiceTableItemViewModel {
 
@@ -40,31 +37,34 @@ public class InvoiceTableItemViewModel {
     }
 
     public void onDetails(Context context) {
-        Intent intent = new Intent(context, InvoiceDetailsActivity.class);
+
+        /*
         intent.putExtra("number", number.get());
         intent.putExtra("date", date.get());
         intent.putExtra("sum", sum.get());
         intent.putExtra("status", status.get());
         intent.putExtra("waybill", waybill.get());
         intent.putExtra("position", position.get());
+        */
 
-        if (Objects.equals(status.get(), context.getString(R.string.status_unconfirmed))) {
-            intent.putExtra("title", context.getString(R.string.title_list_unconfirmed));
-        } else if (Objects.equals(status.get(), context.getString(R.string.status_reserved))) {
-            intent.putExtra("title", context.getString(R.string.title_list_reserves));
-        } else if (Objects.equals(status.get(), context.getString(R.string.status_ordered))) {
-            intent.putExtra("title", context.getString(R.string.title_list_orders));
-        } else if (Objects.equals(status.get(), context.getString(R.string.status_canceled))) {
-            intent.putExtra("title", context.getString(R.string.title_list_canceled));
-        } else if (Objects.equals(status.get(), context.getString(R.string.status_overdie))) {
-            intent.putExtra("title", context.getString(R.string.title_list_canceled));
-        } else if (Objects.equals(status.get(), context.getString(R.string.status_shipped))) {
-            intent.putExtra("title", context.getString(R.string.title_list_history));
+        int title;
+        if (context.getString(R.string.status_unconfirmed).equals(status.get())) {
+            title = R.string.text_item_unconfirmed;
+        } else if (context.getString(R.string.status_reserved).equals(status.get())) {
+            title = R.string.text_item_reserved;
+        } else if (context.getString(R.string.status_ordered).equals(status.get())) {
+            title = R.string.text_item_ordered;
+        } else if (context.getString(R.string.status_canceled).equals(status.get())) {
+            title = R.string.text_item_canceled;
+        } else if (context.getString(R.string.status_overdie).equals(status.get())) {
+            title = R.string.text_item_overdie;
+        } else if (context.getString(R.string.status_shipped).equals(status.get())) {
+            title = R.string.text_item_shipped;
         } else {
-            intent.putExtra("title", context.getString(R.string.title_invoice));
+            title = R.string.text_item_invoice;
         }
+        MenuViewModel.getInstance().ShowFragment(context, title, "InvoiceDetails");
 
-        context.startActivity(intent);
     }
 
     // TODO: Отправлять запрос к серверу на скачивание документа

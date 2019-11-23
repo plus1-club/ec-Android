@@ -14,9 +14,9 @@ import java.util.Objects;
 import club.plus1.ec_online.domains.Request;
 import club.plus1.ec_online.models.ServerData;
 import club.plus1.ec_online.models.ServerNetwork;
+import club.plus1.ec_online.viewmodels.MenuViewModel;
 import club.plus1.ec_online.views.EnterActivity;
 import club.plus1.ec_online.views.MenuActivity;
-import club.plus1.ec_online.views.RequestsBasketActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -91,9 +91,7 @@ public class Server {
                              }
                         }
                     }
-                    Intent intent = new Intent(context, RequestsBasketActivity.class);
-                    intent.putExtra("title", context.getString(R.string.title_basket));
-                    context.startActivity(intent);
+                    MenuViewModel.getInstance().ShowFragment(context, R.string.text_basket, "RequestsBasket");
                 }
 
                 @Override
@@ -111,6 +109,7 @@ public class Server {
                 if (!response.isSuccessful()) {
                     App.log(context, false, true, "response code " + response.code());
                 }
+                MenuViewModel.getInstance().ShowFragment(context, R.string.text_basket, "RequestsBasket");
             }
 
             @Override
@@ -127,6 +126,7 @@ public class Server {
                 if (!response.isSuccessful()) {
                     App.log(context, false, true, "response code " + response.code());
                 }
+                MenuViewModel.getInstance().ShowFragment(context, R.string.text_basket, "RequestsBasket");
             }
 
             @Override
@@ -144,6 +144,7 @@ public class Server {
                 if (!response.isSuccessful()) {
                     App.log(context, false, true, "response code " + response.code());
                 }
+                MenuViewModel.getInstance().ShowFragment(context, R.string.text_basket, "RequestsBasket");
             }
 
             @Override

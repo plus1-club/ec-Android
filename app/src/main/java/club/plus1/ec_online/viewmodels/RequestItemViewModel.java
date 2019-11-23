@@ -9,6 +9,8 @@ import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import club.plus1.ec_online.App;
@@ -62,10 +64,14 @@ public class RequestItemViewModel {
 
     public void onDeleteClick(View view) {
         String deletedProduct = product.get();
+        List<Request> deleted = new ArrayList<>();
         for (Request item: parent.requests) {
             if (item.product.equals(deletedProduct)){
-                parent.requests.remove(item);
+                deleted.add(item);
             }
+        }
+        for (Request deletedItem: deleted){
+            parent.requests.remove(deletedItem);
         }
         Server.putBasket(view.getContext(), parent.requests);
         RequestsBasketAdapter basketAdapter = (RequestsBasketAdapter) parent.adapter.get();

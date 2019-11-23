@@ -11,6 +11,7 @@ import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,6 @@ import club.plus1.ec_online.R;
 import club.plus1.ec_online.Server;
 import club.plus1.ec_online.domains.Request;
 import club.plus1.ec_online.viewadapters.RequestsBasketAdapter;
-import club.plus1.ec_online.views.RequestActivity;
-import club.plus1.ec_online.views.RequestsTableActivity;
 
 public class RequestViewModel {
 
@@ -33,11 +32,11 @@ public class RequestViewModel {
     public ObservableBoolean isFullSearch;
     public ObservableDouble total;
 
-    public ObservableField<String> title;
     public ObservableList<Request> requests;
     public ObservableField<Object> adapter;
 
     private static RequestViewModel mInstance;    // Ссылка для биндинга с View
+    public FragmentManager fragmentManager;
 
     private RequestViewModel() {
         product = new ObservableField<>();
@@ -50,7 +49,6 @@ public class RequestViewModel {
         isFullSearch = new ObservableBoolean();
         total = new ObservableDouble();
 
-        title = new ObservableField<>();
         requests = new ObservableArrayList<>();
         adapter = new ObservableField<>();
     }
@@ -69,9 +67,7 @@ public class RequestViewModel {
     }
 
     public void onNext(Context context){
-        Intent intent = new Intent(context, RequestsTableActivity.class);
-        intent.putExtra("title", title.get());
-        context.startActivity(intent);
+        MenuViewModel.getInstance().ShowFragment(context, null, "RequestsTable");
     }
 
     // TODO: Подключаться к серверу и скачивать остатки
@@ -105,9 +101,7 @@ public class RequestViewModel {
     }
 
     public void addToBasket(Context context){
-        Intent intent = new Intent(context, RequestActivity.class);
-        intent.putExtra("title", context.getString(R.string.title_request));
-        context.startActivity(intent);
+        MenuViewModel.getInstance().ShowFragment(context, R.string.text_request, "Request");
     }
 
     // TODO: Реализовать оформление заказа
