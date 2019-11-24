@@ -1,5 +1,6 @@
 package club.plus1.ec_online.views;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,22 +19,22 @@ import club.plus1.ec_online.models.StorageStub;
 import club.plus1.ec_online.viewadapters.InvoiceTableAdapter;
 import club.plus1.ec_online.viewmodels.InvoiceTableViewModel;
 import club.plus1.ec_online.viewmodels.MenuViewModel;
+import club.plus1.ec_online.viewmodels.NavigationViewModel;
 
 public class InvoiceTableActivity extends AppCompatActivity {
 
     InvoiceTableViewModel viewModel;
-    MenuViewModel menuModel;
+    NavigationViewModel navigationModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        menuModel = new MenuViewModel(this);
         viewModel = InvoiceTableViewModel.getInstance();
         StorageStub storageStub = StorageStub.getInstance();
         InvoiceTableAdapter invoiceTableAdapter = new InvoiceTableAdapter();
 
         Bundle bundle = getIntent().getExtras();
+        this.setTitle(Objects.requireNonNull(bundle).getString("title"));
         viewModel.title.set(Objects.requireNonNull(bundle).getString("title"));
         if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_unconfirmed))) {
             invoiceTableAdapter.setItems(storageStub.invoicesUnconf);
@@ -54,22 +55,30 @@ public class InvoiceTableActivity extends AppCompatActivity {
         binding.list.setHasFixedSize(true);
         binding.list.setLayoutManager(new LinearLayoutManager(this));
         binding.list.setAdapter(invoiceTableAdapter);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        MenuViewModel.PrepareMenu(menu);
-        return true;
+        navigationModel = new NavigationViewModel(
+                this,  binding.drawer, binding.include.toolbar, binding.navigator);
+        // Установить Toolbar для замены ActionBar'а.
+        setSupportActionBar(navigationModel.toolbar);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (menuModel.onOptionsItemSelected(this, item)) {
+        if (navigationModel.onOptionsItemSelected(item)) {
             return true;
-        } else {
-            return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        navigationModel.actionBar.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        navigationModel.actionBar.onConfigurationChanged(newConfig);
     }
 }

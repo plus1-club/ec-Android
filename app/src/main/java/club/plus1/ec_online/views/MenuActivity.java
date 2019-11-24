@@ -21,12 +21,12 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new MenuViewModel(this);
 
         MenuBinding binding = DataBindingUtil.setContentView(this, R.layout.menu);
-        viewModel = new MenuViewModel(this);
         binding.setViewModel(viewModel);
 
-        navigationModel = NavigationViewModel.getInstance(
+        navigationModel = new NavigationViewModel(
                 this,  binding.drawer, binding.include.toolbar, binding.navigator);
         // Установить Toolbar для замены ActionBar'а.
         setSupportActionBar(navigationModel.toolbar);

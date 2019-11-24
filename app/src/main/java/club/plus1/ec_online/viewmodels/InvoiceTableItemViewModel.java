@@ -49,19 +49,19 @@ public class InvoiceTableItemViewModel {
         intent.putExtra("position", position.get());
 
         if (Objects.equals(status.get(), context.getString(R.string.status_unconfirmed))) {
-            intent.putExtra("title", context.getString(R.string.text_list_unconfirmed));
+            intent.putExtra("title", context.getString(R.string.text_item_unconfirmed));
         } else if (Objects.equals(status.get(), context.getString(R.string.status_reserved))) {
-            intent.putExtra("title", context.getString(R.string.text_list_reserved));
+            intent.putExtra("title", context.getString(R.string.text_item_reserved));
         } else if (Objects.equals(status.get(), context.getString(R.string.status_ordered))) {
-            intent.putExtra("title", context.getString(R.string.text_list_ordered));
+            intent.putExtra("title", context.getString(R.string.text_item_ordered));
         } else if (Objects.equals(status.get(), context.getString(R.string.status_canceled))) {
-            intent.putExtra("title", context.getString(R.string.text_list_canceled));
+            intent.putExtra("title", context.getString(R.string.text_item_canceled));
         } else if (Objects.equals(status.get(), context.getString(R.string.status_overdie))) {
-            intent.putExtra("title", context.getString(R.string.text_list_canceled));
+            intent.putExtra("title", context.getString(R.string.text_item_overdie));
         } else if (Objects.equals(status.get(), context.getString(R.string.status_shipped))) {
-            intent.putExtra("title", context.getString(R.string.text_list_shipped));
+            intent.putExtra("title", context.getString(R.string.text_item_shipped));
         } else {
-            intent.putExtra("title", context.getString(R.string.text_invoice));
+            intent.putExtra("title", context.getString(R.string.text_item_invoice));
         }
 
         context.startActivity(intent);

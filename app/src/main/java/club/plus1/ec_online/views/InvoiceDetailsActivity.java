@@ -1,5 +1,6 @@
 package club.plus1.ec_online.views;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,21 +19,30 @@ import club.plus1.ec_online.viewadapters.InvoiceDetailsAdapter;
 import club.plus1.ec_online.viewmodels.InvoiceDetailsViewModel;
 import club.plus1.ec_online.viewmodels.InvoiceTableViewModel;
 import club.plus1.ec_online.viewmodels.MenuViewModel;
+import club.plus1.ec_online.viewmodels.NavigationViewModel;
 
 public class InvoiceDetailsActivity extends AppCompatActivity {
 
     InvoiceDetailsViewModel viewModel;
     InvoiceTableViewModel parent;
-    MenuViewModel menuModel;
+    NavigationViewModel navigationModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        menuModel = new MenuViewModel(this);
         viewModel = InvoiceDetailsViewModel.getInstance();
+
+        Bundle bundle = getIntent().getExtras();
+        this.setTitle(Objects.requireNonNull(bundle).getString("title"));
+        viewModel.number.set(Objects.requireNonNull(bundle).getInt("number"));
+        viewModel.date.set(bundle.getString("date"));
+        viewModel.sum.set(bundle.getDouble("sum"));
+        viewModel.status.set(bundle.getString("status"));
+        viewModel.waybill.set(bundle.getInt("waybill"));
+
         parent = InvoiceTableViewModel.getInstance();
         InvoiceDetailsAdapter invoiceDetailsAdapter = new InvoiceDetailsAdapter();
+        invoiceDetailsAdapter.setItems(parent.invoices.get(bundle.getInt("position")).details);
 
         InvoiceDetailsBinding binding = DataBindingUtil.setContentView(this, R.layout.invoice_details);
         binding.setViewModel(viewModel);
@@ -40,30 +50,29 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         binding.list.setLayoutManager(new LinearLayoutManager(this));
         binding.list.setAdapter(invoiceDetailsAdapter);
 
-        Bundle bundle = getIntent().getExtras();
-        viewModel.number.set(Objects.requireNonNull(bundle).getInt("number"));
-        viewModel.date.set(bundle.getString("date"));
-        viewModel.sum.set(bundle.getDouble("sum"));
-        viewModel.status.set(bundle.getString("status"));
-        viewModel.waybill.set(bundle.getInt("waybill"));
-        invoiceDetailsAdapter.setItems(parent.invoices.get(bundle.getInt("position")).details);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        MenuViewModel.PrepareMenu(menu);
-        return true;
+        navigationModel = new NavigationViewModel(
+                this,  binding.drawer, binding.include.toolbar, binding.navigator);
+        // Установить Toolbar для замены ActionBar'а.
+        setSupportActionBar(navigationModel.toolbar);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (menuModel.onOptionsItemSelected(this, item)) {
+        if (navigationModel.onOptionsItemSelected(item)) {
             return true;
-        } else {
-            return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        navigationModel.actionBar.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        navigationModel.actionBar.onConfigurationChanged(newConfig);
+    }
 }

@@ -1,12 +1,10 @@
 package club.plus1.ec_online.viewmodels;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -17,17 +15,14 @@ import club.plus1.ec_online.R;
 
 public class NavigationViewModel {
 
-    @SuppressLint("StaticFieldLeak")
-    private static NavigationViewModel mInstance;
-
     public Toolbar toolbar;
     public ActionBarDrawerToggle actionBar;
-    private Activity activity;
+    private AppCompatActivity activity;
     private DrawerLayout drawer;
     private NavigationView navigation;
 
-    private NavigationViewModel(
-            Activity activity,
+    public NavigationViewModel(
+            AppCompatActivity activity,
             DrawerLayout drawer,
             Toolbar toolbar,
             NavigationView navigation) {
@@ -45,15 +40,6 @@ public class NavigationViewModel {
         this.navigation.setItemIconTintList(null);
     }
 
-    // Получение единственного экземпляра класса
-    public static NavigationViewModel getInstance(
-            Activity activity, DrawerLayout drawer, Toolbar toolbar, NavigationView navigation) {
-        if (mInstance == null) {
-            mInstance = new NavigationViewModel(activity, drawer, toolbar, navigation);
-        }
-        return mInstance;
-    }
-
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -68,13 +54,11 @@ public class NavigationViewModel {
     private void selectDrawerItem(MenuItem menuItem) {
         MenuViewModel.getInstance(activity).onOptionsItemSelected(activity, menuItem);
         menuItem.setChecked(true);
-        activity.setTitle(menuItem.getTitle());
         drawer.closeDrawers();
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
-        return new ActionBarDrawerToggle(
-                activity, this.drawer, this.toolbar,
+        return new ActionBarDrawerToggle(activity, this.drawer, this.toolbar,
                 R.string.drawer_open,  R.string.drawer_close);
     }
 

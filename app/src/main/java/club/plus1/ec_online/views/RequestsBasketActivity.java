@@ -1,5 +1,6 @@
 package club.plus1.ec_online.views;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,29 +18,25 @@ import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.RequestsBasketBinding;
 import club.plus1.ec_online.viewadapters.RequestsBasketAdapter;
 import club.plus1.ec_online.viewmodels.MenuViewModel;
+import club.plus1.ec_online.viewmodels.NavigationViewModel;
 import club.plus1.ec_online.viewmodels.RequestViewModel;
 
 public class RequestsBasketActivity extends AppCompatActivity {
 
     RequestViewModel viewModel;
-    MenuViewModel menuModel;
+    NavigationViewModel navigationModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        menuModel = new MenuViewModel(this);
         viewModel = RequestViewModel.getInstance();
-    }
+        Bundle bundle = getIntent().getExtras();
+        this.setTitle(Objects.requireNonNull(bundle).getString("title"));
 
-    @Override
-    public void onStart() {
-        super.onStart();
         viewModel.total.set(0);
         RequestsBasketAdapter requestsBasketAdapter = new RequestsBasketAdapter();
         requestsBasketAdapter.setItems(App.model.basket);
 
-        Bundle bundle = getIntent().getExtras();
-        viewModel.title.set(Objects.requireNonNull(bundle).getString("title"));
         viewModel.adapter.set(requestsBasketAdapter);
 
         RequestsBasketBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_basket);
@@ -47,22 +44,30 @@ public class RequestsBasketActivity extends AppCompatActivity {
         binding.list.setHasFixedSize(true);
         binding.list.setLayoutManager(new LinearLayoutManager(this));
         binding.list.setAdapter(requestsBasketAdapter);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        MenuViewModel.PrepareMenu(menu);
-        return true;
+        navigationModel = new NavigationViewModel(
+                this,  binding.drawer, binding.include.toolbar, binding.navigator);
+        // Установить Toolbar для замены ActionBar'а.
+        setSupportActionBar(navigationModel.toolbar);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(menuModel.onOptionsItemSelected(this, item)) {
+        if (navigationModel.onOptionsItemSelected(item)) {
             return true;
-        } else {
-            return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        navigationModel.actionBar.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        navigationModel.actionBar.onConfigurationChanged(newConfig);
     }
 }
