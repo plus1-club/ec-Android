@@ -14,7 +14,17 @@ import club.plus1.ec_online.views.RequestActivity;
 
 public class MenuViewModel {
 
+    private static MenuViewModel mInstance;
+
     public MenuViewModel(Context context){}
+
+    // Получение единственного экземпляра класса
+    public static MenuViewModel getInstance(Context context) {
+        if (mInstance == null) {
+            mInstance = new MenuViewModel(context);
+        }
+        return mInstance;
+    }
 
     public static void PrepareMenu(Menu menu){
         if(menu.getClass().getSimpleName()
