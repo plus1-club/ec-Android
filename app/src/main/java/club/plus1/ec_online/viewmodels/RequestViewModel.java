@@ -106,7 +106,7 @@ public class RequestViewModel {
 
     public void addToBasket(Context context){
         Intent intent = new Intent(context, RequestActivity.class);
-        intent.putExtra("title", context.getString(R.string.title_request));
+        intent.putExtra("title", context.getString(R.string.text_request));
         context.startActivity(intent);
     }
 

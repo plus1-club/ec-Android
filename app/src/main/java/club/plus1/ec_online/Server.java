@@ -92,7 +92,7 @@ public class Server {
                         }
                     }
                     Intent intent = new Intent(context, RequestsBasketActivity.class);
-                    intent.putExtra("title", context.getString(R.string.title_basket));
+                    intent.putExtra("title", context.getString(R.string.text_basket));
                     context.startActivity(intent);
                 }
 

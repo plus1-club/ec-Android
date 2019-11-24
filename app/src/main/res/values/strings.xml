@@ -10,19 +10,25 @@
         позвонив по телефону:%1$s</string>
     <string name="text_phone">+7(495)7300230</string>
 
-    <!-- Экран "2.Стартовый" и меню "8.Меню" -->
-    <string name="text_product_existence">Проверка наличия товара</string>
-    <string name="text_make_order">Сделать заказ</string>
-    <string name="text_cart">Корзина</string>
-    <string name="text_unconfirmed">Неподтвержденные резервы</string>
-    <string name="text_orders">Заказы</string>
-    <string name="text_reserves">Резервы</string>
-    <string name="text_canceled">Аннулированные и просроченные счета</string>
-    <string name="text_history">История отгрузок</string>
+    <!-- Экран "2.Стартовый" и меню "8.Меню", заголовки экранов -->
+    <string name="text_request">Проверка наличия товара</string>
+    <string name="text_order">Сделать заказ</string>
+    <string name="text_basket">Корзина</string>
+    <string name="text_list_unconfirmed">Неподтвержденные резервы</string>
+    <string name="text_list_ordered">Заказы</string>
+    <string name="text_list_reserved">Резервы</string>
+    <string name="text_list_canceled">Аннулированные и просроченные счета</string>
+    <string name="text_list_shipped">История отгрузок</string>
+    <string name="text_item_unconfirmed">Неподтвержденный резерв</string>
+    <string name="text_item_ordered">Заказ</string>
+    <string name="text_item_reserved">Резерв</string>
+    <string name="text_item_canceled">Аннулированный счет</string>
+    <string name="text_item_overdie">Просроченный счет</string>
+    <string name="text_item_shipped">Отгрузка</string>
+    <string name="text_item_invoice">Детали счета</string>
     <string name="text_exit">Выход</string>
 
     <!-- Экран "3.Заявки по коду" -->
-    <!--<string name="text_enter_number_or_product">Введите код или название товара:</string>-->
     <string name="text_enter_number_or_product">Введите код товара:</string>
     <string name="hint_product">Товар</string>
     <string name="hint_count">Количество</string>
@@ -54,6 +60,7 @@
     <string name="text_status_green">В наличии</string>
     <string name="text_status_yellow">Есть %1$d из %2$d</string>
     <string name="text_status_red">Нет</string>
+    <string name="text_basket_item_delete">Удалить строку из корзины</string>
 
     <!-- Экран "6.Счета" -->
     <string name="text_invoice">Счет № %1$d от %2$s</string>
@@ -69,22 +76,7 @@
     <string name="status_overdie">Просрочен</string>
     <string name="status_shipped">Отгружен</string>
 
-    <!-- Заголовки экранов -->
-    <string name="title_request">Проверка наличия товара</string>
-    <string name="title_order">Сделать заказ</string>
-    <string name="title_basket">Корзина</string>
-    <string name="title_list_unconfirmed">Неподтвержденные резервы</string>
-    <string name="title_list_orders">Заказы</string>
-    <string name="title_list_reserves">Резервы</string>
-    <string name="title_list_canceled">Аннулированные и просроченные счета</string>
-    <string name="title_list_history">История отгрузок</string>
-    <string name="title_unconfirmed">Неподтвержденный резерв</string>
-    <string name="title_ordered">Заказ</string>
-    <string name="title_reserved">Резерв</string>
-    <string name="title_canceled">Аннулированный счет</string>
-    <string name="title_overdie">Просроченный счет</string>
-    <string name="title_shipped">Отгрузка</string>
-    <string name="title_invoice">Детали счета</string>
-    <string name="text_basket_item_delete">Удалить строку из корзины</string>
+    <string name="drawer_open">Открыть меню</string>
+    <string name="drawer_close">Скрыть меню</string>
 
 </resources>

@@ -3,56 +3,56 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_product_existence"
+        android:id="@+id/action_request"
         android:icon="@drawable/request"
+        android:title="@string/text_request"
         android:orderInCategory="100"
-        android:title="@string/text_product_existence"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
-        android:id="@+id/action_make_order"
+        android:id="@+id/action_order"
         android:icon="@drawable/order"
+        android:title="@string/text_order"
         android:orderInCategory="100"
-        android:title="@string/text_make_order"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
-        android:id="@+id/action_cart"
+        android:id="@+id/action_basket"
         android:icon="@drawable/basket"
+        android:title="@string/text_basket"
         android:orderInCategory="100"
-        android:title="@string/text_cart"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
         android:id="@+id/action_unconfirmed"
         android:icon="@drawable/unconfirmed"
+        android:title="@string/text_list_unconfirmed"
         android:orderInCategory="100"
-        android:title="@string/text_unconfirmed"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
-        android:id="@+id/action_reserves"
+        android:id="@+id/action_reserved"
         android:icon="@drawable/reserved"
+        android:title="@string/text_list_reserved"
         android:orderInCategory="100"
-        android:title="@string/text_reserves"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
-        android:id="@+id/action_orders"
+        android:id="@+id/action_ordered"
         android:icon="@drawable/ordered"
+        android:title="@string/text_list_ordered"
         android:orderInCategory="100"
-        android:title="@string/text_orders"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
         android:id="@+id/action_canceled"
         android:icon="@drawable/canceled"
+        android:title="@string/text_list_canceled"
         android:orderInCategory="100"
-        android:title="@string/text_canceled"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
-        android:id="@+id/action_history"
+        android:id="@+id/action_shipped"
         android:icon="@drawable/shipped"
+        android:title="@string/text_list_shipped"
         android:orderInCategory="100"
-        android:title="@string/text_history"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
-        android:id="@+id/action_exit"
         android:orderInCategory="100"
+        android:id="@+id/action_exit"
         android:title="@string/text_exit"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
 </menu>
