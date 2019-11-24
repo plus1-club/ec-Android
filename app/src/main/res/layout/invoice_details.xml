@@ -14,80 +14,106 @@
         android:layout_height="fill_parent">
 
         <LinearLayout
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:baselineAligned="false"
-            android:orientation="vertical"
-            android:paddingTop="1dp"
-            tools:ignore="UseCompoundDrawables">
+            android:layout_height="30dp"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/labelScreenName"
+                style="@style/AppTheme.ECOnline.Header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_margin="0dp"
+                android:padding="0dp"
+                android:text="@{viewModel.title}"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/textProduct"
-                    style="@style/AppTheme.ECOnline.Text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="3"
-                    android:padding="0dp"
-                    android:text="@{@string/text_invoice(viewModel.number, viewModel.date)}"
-                    android:textAlignment="viewStart"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textSum"
-                    style="@style/AppTheme.ECOnline.Text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    android:padding="0dp"
-                    android:text="@{viewModel.sum}"
-                    android:textAlignment="viewEnd"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textWaybill"
-                    style="@style/AppTheme.ECOnline.Text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="2"
-                    android:padding="0dp"
-                    android:text="@{@string/text_waybill(viewModel.waybill)}"
-                    android:textAlignment="viewStart"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:visibility="@{viewModel.waybill == 0 ? View.GONE : View.VISIBLE}" />
-
-            </LinearLayout>
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list"
+        <LinearLayout
+            android:id="@+id/body"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="1dp"
-            android:scrollbars="vertical" />
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:baselineAligned="false"
+                android:orientation="vertical"
+                android:paddingTop="1dp"
+                tools:ignore="UseCompoundDrawables">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textProduct"
+                        style="@style/AppTheme.ECOnline.Text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="3"
+                        android:padding="0dp"
+                        android:text="@{@string/text_invoice(viewModel.number, viewModel.date)}"
+                        android:textAlignment="viewStart"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textSum"
+                        style="@style/AppTheme.ECOnline.Text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:padding="0dp"
+                        android:text="@{viewModel.sum}"
+                        android:textAlignment="viewEnd"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textWaybill"
+                        style="@style/AppTheme.ECOnline.Text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="2"
+                        android:padding="0dp"
+                        android:text="@{@string/text_waybill(viewModel.waybill)}"
+                        android:textAlignment="viewStart"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="@{viewModel.waybill == 0 ? View.GONE : View.VISIBLE}" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="1dp"
+                android:scrollbars="vertical" />
+        </LinearLayout>
     </LinearLayout>
 </layout>

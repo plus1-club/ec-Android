@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="6"
-                    android:contentDescription="@string/text_request"
+                    android:contentDescription="@string/text_product_existence"
                     android:padding="5dp"
                     android:src="@drawable/request" />
 
@@ -68,7 +68,7 @@
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
-                    android:text="@string/text_request"
+                    android:text="@string/text_product_existence"
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
                     tools:ignore="InefficientWeight,NestedWeights" />
@@ -94,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="6"
-                    android:contentDescription="@string/text_order"
+                    android:contentDescription="@string/text_make_order"
                     android:padding="0dp"
                     android:src="@drawable/order" />
 
@@ -109,7 +109,7 @@
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
-                    android:text="@string/text_order"
+                    android:text="@string/text_make_order"
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
                     tools:ignore="InefficientWeight" />
@@ -148,7 +148,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="6"
-                    android:contentDescription="@string/text_basket"
+                    android:contentDescription="@string/text_cart"
                     android:padding="0dp"
                     android:src="@drawable/basket" />
 
@@ -163,7 +163,7 @@
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
-                    android:text="@string/text_basket"
+                    android:text="@string/text_cart"
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
                     tools:ignore="InefficientWeight,NestedWeights" />
@@ -189,7 +189,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="6"
-                    android:contentDescription="@string/text_list_unconfirmed"
+                    android:contentDescription="@string/text_unconfirmed"
                     android:padding="5dp"
                     android:src="@drawable/unconfirmed" />
 
@@ -204,7 +204,7 @@
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
-                    android:text="@string/text_list_unconfirmed"
+                    android:text="@string/text_unconfirmed"
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
                     tools:ignore="InefficientWeight" />
@@ -243,7 +243,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="6"
-                    android:contentDescription="@string/text_list_reserved"
+                    android:contentDescription="@string/text_reserves"
                     android:padding="0dp"
                     android:src="@drawable/reserved" />
 
@@ -258,7 +258,7 @@
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
-                    android:text="@string/text_list_reserved"
+                    android:text="@string/text_reserves"
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
                     tools:ignore="InefficientWeight,NestedWeights" />
@@ -284,7 +284,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="6"
-                    android:contentDescription="@string/text_list_ordered"
+                    android:contentDescription="@string/text_orders"
                     android:padding="0dp"
                     android:src="@drawable/ordered" />
 
@@ -299,7 +299,7 @@
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
-                    android:text="@string/text_list_ordered"
+                    android:text="@string/text_orders"
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
                     tools:ignore="InefficientWeight" />
@@ -338,7 +338,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="6"
-                    android:contentDescription="@string/text_list_canceled"
+                    android:contentDescription="@string/text_canceled"
                     android:padding="5dp"
                     android:src="@drawable/canceled" />
 
@@ -353,7 +353,7 @@
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
-                    android:text="@string/text_list_canceled"
+                    android:text="@string/text_canceled"
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
                     tools:ignore="InefficientWeight,NestedWeights" />
@@ -379,7 +379,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="6"
-                    android:contentDescription="@string/text_list_shipped"
+                    android:contentDescription="@string/text_history"
                     android:padding="5dp"
                     android:src="@drawable/shipped" />
 
@@ -394,7 +394,7 @@
                     android:paddingTop="0dp"
                     android:paddingEnd="0dp"
                     android:paddingBottom="0dp"
-                    android:text="@string/text_list_shipped"
+                    android:text="@string/text_history"
                     android:textAlignment="viewStart"
                     android:textSize="16sp"
                     tools:ignore="InefficientWeight" />

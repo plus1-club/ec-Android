@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import club.plus1.ec_online.views.RequestPageFragment;
+import club.plus1.ec_online.views.RequestFragment;
 
 public class RequestFragmentAdapter extends FragmentPagerAdapter {
 
@@ -24,7 +24,7 @@ public class RequestFragmentAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        return RequestPageFragment.newInstance(position + 1);
+        return RequestFragment.newInstance(position + 1);
     }
 
     @Override

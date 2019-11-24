@@ -27,6 +27,21 @@
         <activity
             android:name="club.plus1.ec_online.views.MenuActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name="club.plus1.ec_online.views.RequestActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="club.plus1.ec_online.views.RequestsTableActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="club.plus1.ec_online.views.RequestsBasketActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="club.plus1.ec_online.views.InvoiceTableActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="club.plus1.ec_online.views.InvoiceDetailsActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

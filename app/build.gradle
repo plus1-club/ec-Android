@@ -7,7 +7,7 @@ android {
         applicationId "club.plus1.ec_electric"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 55
+        versionCode 57
         versionName "0.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,8 +45,4 @@ dependencies {
 
     // Прочее
     implementation 'org.jetbrains:annotations-java5:15.0'
-
-    implementation 'androidx.core:core:1.1.0'
-    implementation 'androidx.drawerlayout:drawerlayout:1.0.0'
-    implementation 'androidx.fragment:fragment:1.1.0'
 }
