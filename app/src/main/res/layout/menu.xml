@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewModel"
             type="club.plus1.ec_online.viewmodels.MenuViewModel" />
     </data>
-    <androidx.drawerlayout.widget.DrawerLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -49,7 +50,7 @@
                         android:layout_margin="0dp"
                         android:layout_weight="2"
                         android:baselineAligned="false"
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         android:padding="0dp">
 
                         <LinearLayout
@@ -63,7 +64,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:onClick="@{()->viewModel.onCheckExistence(context)}"
-                            android:orientation="horizontal"
+                            android:orientation="vertical"
                             android:padding="2dp"
                             tools:ignore="NestedWeights">
 
@@ -72,7 +73,7 @@
                                 style="@style/AppTheme.ECOnline.ImageButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="6"
+                                android:layout_weight="1"
                                 android:contentDescription="@string/text_request"
                                 android:padding="5dp"
                                 android:src="@drawable/request" />
@@ -84,13 +85,12 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="0dp"
                                 android:layout_weight="1"
-                                android:lineSpacingExtra="36sp"
                                 android:paddingStart="10dp"
                                 android:paddingTop="0dp"
                                 android:paddingEnd="0dp"
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_request"
-                                android:textAlignment="viewStart"
+                                android:textAlignment="center"
                                 android:textSize="12sp"
                                 tools:ignore="InefficientWeight,NestedWeights" />
                         </LinearLayout>
@@ -106,7 +106,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:onClick="@{()->viewModel.onMakeOrder(context)}"
-                            android:orientation="horizontal"
+                            android:orientation="vertical"
                             android:padding="2dp">
 
                             <ImageView
@@ -114,7 +114,7 @@
                                 style="@style/AppTheme.ECOnline.ImageButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="6"
+                                android:layout_weight="1"
                                 android:contentDescription="@string/text_order"
                                 android:padding="0dp"
                                 android:src="@drawable/order" />
@@ -126,13 +126,12 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="0dp"
                                 android:layout_weight="1"
-                                android:lineSpacingExtra="36sp"
                                 android:paddingStart="10dp"
                                 android:paddingTop="0dp"
                                 android:paddingEnd="0dp"
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_order"
-                                android:textAlignment="viewStart"
+                                android:textAlignment="center"
                                 android:textSize="12sp"
                                 tools:ignore="InefficientWeight" />
                         </LinearLayout>
@@ -146,7 +145,7 @@
                         android:layout_margin="0dp"
                         android:layout_weight="2"
                         android:baselineAligned="false"
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         android:padding="0dp">
 
                         <LinearLayout
@@ -160,7 +159,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:onClick="@{()->viewModel.onCart(context)}"
-                            android:orientation="horizontal"
+                            android:orientation="vertical"
                             android:padding="2dp"
                             tools:ignore="NestedWeights">
 
@@ -169,7 +168,7 @@
                                 style="@style/AppTheme.ECOnline.ImageButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="6"
+                                android:layout_weight="1"
                                 android:contentDescription="@string/text_basket"
                                 android:padding="0dp"
                                 android:src="@drawable/basket" />
@@ -181,13 +180,12 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="0dp"
                                 android:layout_weight="1"
-                                android:lineSpacingExtra="36sp"
                                 android:paddingStart="10dp"
                                 android:paddingTop="0dp"
                                 android:paddingEnd="0dp"
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_basket"
-                                android:textAlignment="viewStart"
+                                android:textAlignment="center"
                                 android:textSize="12sp"
                                 tools:ignore="InefficientWeight,NestedWeights" />
                         </LinearLayout>
@@ -203,7 +201,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:onClick="@{()->viewModel.onUnconfirmed(context)}"
-                            android:orientation="horizontal"
+                            android:orientation="vertical"
                             android:padding="2dp">
 
                             <ImageView
@@ -211,7 +209,7 @@
                                 style="@style/AppTheme.ECOnline.ImageButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="6"
+                                android:layout_weight="1"
                                 android:contentDescription="@string/text_list_unconfirmed"
                                 android:padding="5dp"
                                 android:src="@drawable/unconfirmed" />
@@ -223,13 +221,12 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="0dp"
                                 android:layout_weight="1"
-                                android:lineSpacingExtra="36sp"
                                 android:paddingStart="10dp"
                                 android:paddingTop="0dp"
                                 android:paddingEnd="0dp"
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_list_unconfirmed"
-                                android:textAlignment="viewStart"
+                                android:textAlignment="center"
                                 android:textSize="12sp"
                                 tools:ignore="InefficientWeight" />
                         </LinearLayout>
@@ -243,7 +240,7 @@
                         android:layout_margin="0dp"
                         android:layout_weight="2"
                         android:baselineAligned="false"
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         android:padding="0dp">
 
                         <LinearLayout
@@ -257,7 +254,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:onClick="@{()->viewModel.onReserves(context)}"
-                            android:orientation="horizontal"
+                            android:orientation="vertical"
                             android:padding="2dp"
                             tools:ignore="NestedWeights">
 
@@ -266,7 +263,7 @@
                                 style="@style/AppTheme.ECOnline.ImageButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="6"
+                                android:layout_weight="1"
                                 android:contentDescription="@string/text_list_reserved"
                                 android:padding="0dp"
                                 android:src="@drawable/reserved" />
@@ -278,13 +275,12 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="0dp"
                                 android:layout_weight="1"
-                                android:lineSpacingExtra="36sp"
                                 android:paddingStart="10dp"
                                 android:paddingTop="0dp"
                                 android:paddingEnd="0dp"
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_list_reserved"
-                                android:textAlignment="viewStart"
+                                android:textAlignment="center"
                                 android:textSize="12sp"
                                 tools:ignore="InefficientWeight,NestedWeights" />
                         </LinearLayout>
@@ -300,7 +296,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:onClick="@{()->viewModel.onOrders(context)}"
-                            android:orientation="horizontal"
+                            android:orientation="vertical"
                             android:padding="2dp">
 
                             <ImageView
@@ -308,7 +304,7 @@
                                 style="@style/AppTheme.ECOnline.ImageButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="6"
+                                android:layout_weight="1"
                                 android:contentDescription="@string/text_list_ordered"
                                 android:padding="0dp"
                                 android:src="@drawable/ordered" />
@@ -320,13 +316,12 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="0dp"
                                 android:layout_weight="1"
-                                android:lineSpacingExtra="36sp"
                                 android:paddingStart="10dp"
                                 android:paddingTop="0dp"
                                 android:paddingEnd="0dp"
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_list_ordered"
-                                android:textAlignment="viewStart"
+                                android:textAlignment="center"
                                 android:textSize="12sp"
                                 tools:ignore="InefficientWeight" />
                         </LinearLayout>
@@ -340,7 +335,7 @@
                         android:layout_margin="0dp"
                         android:layout_weight="2"
                         android:baselineAligned="false"
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         android:padding="0dp">
 
                         <LinearLayout
@@ -354,7 +349,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:onClick="@{()->viewModel.onCanceled(context)}"
-                            android:orientation="horizontal"
+                            android:orientation="vertical"
                             android:padding="2dp"
                             tools:ignore="NestedWeights">
 
@@ -363,7 +358,7 @@
                                 style="@style/AppTheme.ECOnline.ImageButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="6"
+                                android:layout_weight="1"
                                 android:contentDescription="@string/text_list_canceled"
                                 android:padding="5dp"
                                 android:src="@drawable/canceled" />
@@ -375,13 +370,12 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="0dp"
                                 android:layout_weight="1"
-                                android:lineSpacingExtra="36sp"
                                 android:paddingStart="10dp"
                                 android:paddingTop="0dp"
                                 android:paddingEnd="0dp"
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_list_canceled"
-                                android:textAlignment="viewStart"
+                                android:textAlignment="center"
                                 android:textSize="12sp"
                                 tools:ignore="InefficientWeight,NestedWeights" />
                         </LinearLayout>
@@ -397,7 +391,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:onClick="@{()->viewModel.onHistory(context)}"
-                            android:orientation="horizontal"
+                            android:orientation="vertical"
                             android:padding="2dp">
 
                             <ImageView
@@ -405,7 +399,7 @@
                                 style="@style/AppTheme.ECOnline.ImageButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="6"
+                                android:layout_weight="1"
                                 android:contentDescription="@string/text_list_shipped"
                                 android:padding="5dp"
                                 android:src="@drawable/shipped" />
@@ -417,13 +411,12 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="0dp"
                                 android:layout_weight="1"
-                                android:lineSpacingExtra="36sp"
                                 android:paddingStart="10dp"
                                 android:paddingTop="0dp"
                                 android:paddingEnd="0dp"
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_list_shipped"
-                                android:textAlignment="viewStart"
+                                android:textAlignment="center"
                                 android:textSize="12sp"
                                 tools:ignore="InefficientWeight" />
                         </LinearLayout>
@@ -441,7 +434,7 @@
                         android:layout_weight="1"
                         android:onClick="@{() -> viewModel.onExit(context)}"
                         android:text="@string/text_exit"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
             </LinearLayout>
