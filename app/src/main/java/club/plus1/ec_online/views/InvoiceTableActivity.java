@@ -40,17 +40,17 @@ public class InvoiceTableActivity extends AppCompatActivity {
             Server.unconfirmedList(this);
             //invoiceTableAdapter.setItems(storageStub.invoicesUnconf);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_reserved))) {
-            //Server.reservedList(this);
-            invoiceTableAdapter.setItems(storageStub.invoicesReserv);
+            Server.reservedList(this);
+            //invoiceTableAdapter.setItems(storageStub.invoicesReserv);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_ordered))) {
-            //Server.orderedList(this);
-            invoiceTableAdapter.setItems(storageStub.invoicesOrder);
+            Server.orderedList(this);
+            //invoiceTableAdapter.setItems(storageStub.invoicesOrder);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_canceled))) {
             Server.canceledList(this);
             //invoiceTableAdapter.setItems(storageStub.invoicesCancel);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_shipped))) {
-            //Server.shippedList(this);
-            invoiceTableAdapter.setItems(storageStub.invoicesShip);
+            Server.shippedList(this);
+            //invoiceTableAdapter.setItems(storageStub.invoicesShip);
         } else {
             invoiceTableAdapter.setItems(storageStub.invoicesEmpty);
         }
