@@ -15,13 +15,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import club.plus1.ec_online.domains.Detail;
 import club.plus1.ec_online.domains.Invoice;
 import club.plus1.ec_online.domains.Request;
 import club.plus1.ec_online.models.ServerData;
 import club.plus1.ec_online.models.ServerNetwork;
+import club.plus1.ec_online.viewadapters.InvoiceDetailsAdapter;
 import club.plus1.ec_online.viewadapters.InvoiceTableAdapter;
 import club.plus1.ec_online.viewmodels.RequestViewModel;
 import club.plus1.ec_online.views.EnterActivity;
+import club.plus1.ec_online.views.InvoiceDetailsActivity;
 import club.plus1.ec_online.views.InvoiceTableActivity;
 import club.plus1.ec_online.views.MenuActivity;
 import retrofit2.Call;
@@ -466,4 +469,296 @@ public class Server {
         });
     }
 
+    public static void unconfirmedItem(final Context context, final int number) {
+        handler = new Handler(Looper.getMainLooper());
+        ServerNetwork.getInstance();
+        ServerNetwork.getApi().unconfirmedItem(App.model.token, number).enqueue(new Callback<ServerData>() {
+            @Override
+            public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
+                if (response.isSuccessful()) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (response.body() != null && response.body().getError().isEmpty()) {
+                                Invoice invoice = null;
+                                for (Invoice item:App.model.invoices) {
+                                    if(item.number == number){
+                                        invoice = item;
+                                    }
+                                }
+                                if (invoice == null) return;
+
+                                DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+                                dfs.setDecimalSeparator(',');
+                                DecimalFormat df = new DecimalFormat();
+                                df.setDecimalFormatSymbols(dfs);
+
+                                List<?> data = (List<?>) response.body().getData();
+                                invoice.details.clear();
+                                for (Object element : data) {
+                                    @SuppressWarnings("unchecked")
+                                    Map<String, String> el = (LinkedTreeMap<String, String>) element;
+                                    Detail detail = new Detail(
+                                        el.get("product"),
+                                        Integer.parseInt(Objects.requireNonNull(el.get("count"))),
+                                        Double.parseDouble(Objects.requireNonNull(el.get("price"))
+                                            .replaceAll(" ","").replace(',','.')),
+                                        Double.parseDouble(Objects.requireNonNull(el.get("sum"))
+                                            .replaceAll(" ","").replace(',','.')),
+                                        el.get("available"),
+                                        el.get("delivery"));
+                                    invoice.details.add(detail);
+                                }
+                                InvoiceDetailsAdapter adapter = new InvoiceDetailsAdapter();
+                                adapter.setItems(invoice.details);
+                                ((InvoiceDetailsActivity)context).binding.list.setAdapter(adapter);
+                            }
+                        }
+                    });
+                } else {
+                    App.log(context, false, true, "response code " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
+                App.log(context, true, true, "failure " + t);
+            }
+        });
+    }
+
+    public static void reservedItem(final Context context, final int number) {
+        handler = new Handler(Looper.getMainLooper());
+        ServerNetwork.getInstance();
+        ServerNetwork.getApi().reservedItem(App.model.token, number).enqueue(new Callback<ServerData>() {
+            @Override
+            public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
+                if (response.isSuccessful()) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (response.body() != null && response.body().getError().isEmpty()) {
+                                Invoice invoice = null;
+                                for (Invoice item:App.model.invoices) {
+                                    if(item.number == number){
+                                        invoice = item;
+                                    }
+                                }
+                                if (invoice == null) return;
+
+                                DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+                                dfs.setDecimalSeparator(',');
+                                DecimalFormat df = new DecimalFormat();
+                                df.setDecimalFormatSymbols(dfs);
+
+                                List<?> data = (List<?>) response.body().getData();
+                                invoice.details.clear();
+                                for (Object element : data) {
+                                    @SuppressWarnings("unchecked")
+                                    Map<String, String> el = (LinkedTreeMap<String, String>) element;
+                                    Detail detail = new Detail(
+                                            el.get("product"),
+                                            Integer.parseInt(Objects.requireNonNull(el.get("count"))),
+                                            Double.parseDouble(Objects.requireNonNull(el.get("price"))
+                                                    .replaceAll(" ","").replace(',','.')),
+                                    Double.parseDouble(Objects.requireNonNull(el.get("sum"))
+                                            .replaceAll(" ","").replace(',','.')),
+                                            el.get("available"),
+                                            el.get("delivery"));
+                                    invoice.details.add(detail);
+                                }
+                                InvoiceDetailsAdapter adapter = new InvoiceDetailsAdapter();
+                                adapter.setItems(invoice.details);
+                                ((InvoiceDetailsActivity)context).binding.list.setAdapter(adapter);
+                            }
+                        }
+                    });
+                } else {
+                    App.log(context, false, true, "response code " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
+                App.log(context, true, true, "failure " + t);
+            }
+        });
+    }
+
+
+    public static void orderedItem(final Context context, final int number) {
+        handler = new Handler(Looper.getMainLooper());
+        ServerNetwork.getInstance();
+        ServerNetwork.getApi().orderedItem(App.model.token, number).enqueue(new Callback<ServerData>() {
+            @Override
+            public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
+                if (response.isSuccessful()) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (response.body() != null && response.body().getError().isEmpty()) {
+                                Invoice invoice = null;
+                                for (Invoice item:App.model.invoices) {
+                                    if(item.number == number){
+                                        invoice = item;
+                                    }
+                                }
+                                if (invoice == null) return;
+
+                                DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+                                dfs.setDecimalSeparator(',');
+                                DecimalFormat df = new DecimalFormat();
+                                df.setDecimalFormatSymbols(dfs);
+
+                                List<?> data = (List<?>) response.body().getData();
+                                invoice.details.clear();
+                                for (Object element : data) {
+                                    @SuppressWarnings("unchecked")
+                                    Map<String, String> el = (LinkedTreeMap<String, String>) element;
+                                    Detail detail = new Detail(
+                                            el.get("product"),
+                                            Integer.parseInt(Objects.requireNonNull(el.get("count"))),
+                                            Double.parseDouble(Objects.requireNonNull(el.get("price"))
+                                                    .replaceAll(" ","").replace(',','.')),
+                                            Double.parseDouble(Objects.requireNonNull(el.get("sum"))
+                                                    .replaceAll(" ","").replace(',','.')),
+                                            el.get("available"),
+                                            el.get("delivery"));
+                                    invoice.details.add(detail);
+                                }
+                                InvoiceDetailsAdapter adapter = new InvoiceDetailsAdapter();
+                                adapter.setItems(invoice.details);
+                                ((InvoiceDetailsActivity)context).binding.list.setAdapter(adapter);
+                            }
+                        }
+                    });
+                } else {
+                    App.log(context, false, true, "response code " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
+                App.log(context, true, true, "failure " + t);
+            }
+        });
+    }
+
+
+    public static void canceledItem(final Context context, final int number) {
+        handler = new Handler(Looper.getMainLooper());
+        ServerNetwork.getInstance();
+        ServerNetwork.getApi().canceledItem(App.model.token, number).enqueue(new Callback<ServerData>() {
+            @Override
+            public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
+                if (response.isSuccessful()) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (response.body() != null && response.body().getError().isEmpty()) {
+                                Invoice invoice = null;
+                                for (Invoice item:App.model.invoices) {
+                                    if(item.number == number){
+                                        invoice = item;
+                                    }
+                                }
+                                if (invoice == null) return;
+
+                                DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+                                dfs.setDecimalSeparator(',');
+                                DecimalFormat df = new DecimalFormat();
+                                df.setDecimalFormatSymbols(dfs);
+
+                                List<?> data = (List<?>) response.body().getData();
+                                invoice.details.clear();
+                                for (Object element : data) {
+                                    @SuppressWarnings("unchecked")
+                                    Map<String, String> el = (LinkedTreeMap<String, String>) element;
+                                    Detail detail = new Detail(
+                                            el.get("product"),
+                                            Integer.parseInt(Objects.requireNonNull(el.get("count"))),
+                                            Double.parseDouble(Objects.requireNonNull(el.get("price"))
+                                                    .replaceAll(" ","").replace(',','.')),
+                                            Double.parseDouble(Objects.requireNonNull(el.get("sum"))
+                                                    .replaceAll(" ","").replace(',','.')),
+                                            el.get("available"),
+                                            el.get("delivery"));
+                                    invoice.details.add(detail);
+                                }
+                                InvoiceDetailsAdapter adapter = new InvoiceDetailsAdapter();
+                                adapter.setItems(invoice.details);
+                                ((InvoiceDetailsActivity)context).binding.list.setAdapter(adapter);
+                            }
+                        }
+                    });
+                } else {
+                    App.log(context, false, true, "response code " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
+                App.log(context, true, true, "failure " + t);
+            }
+        });
+    }
+
+
+    public static void shippedItem(final Context context, final int number) {
+        handler = new Handler(Looper.getMainLooper());
+        ServerNetwork.getInstance();
+        ServerNetwork.getApi().shippedItem(App.model.token, number).enqueue(new Callback<ServerData>() {
+            @Override
+            public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
+                if (response.isSuccessful()) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (response.body() != null && response.body().getError().isEmpty()) {
+                                Invoice invoice = null;
+                                for (Invoice item:App.model.invoices) {
+                                    if(item.number == number){
+                                        invoice = item;
+                                    }
+                                }
+                                if (invoice == null) return;
+
+                                DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+                                dfs.setDecimalSeparator(',');
+                                DecimalFormat df = new DecimalFormat();
+                                df.setDecimalFormatSymbols(dfs);
+
+                                List<?> data = (List<?>) response.body().getData();
+                                invoice.details.clear();
+                                for (Object element : data) {
+                                    @SuppressWarnings("unchecked")
+                                    Map<String, String> el = (LinkedTreeMap<String, String>) element;
+                                    Detail detail = new Detail(
+                                            el.get("product"),
+                                            Integer.parseInt(Objects.requireNonNull(el.get("count"))),
+                                            Double.parseDouble(Objects.requireNonNull(el.get("price"))
+                                                    .replaceAll(" ","").replace(',','.')),
+                                            Double.parseDouble(Objects.requireNonNull(el.get("sum"))
+                                                    .replaceAll(" ","").replace(',','.')),
+                                            el.get("available"),
+                                            el.get("delivery"));
+                                    invoice.details.add(detail);
+                                }
+                                InvoiceDetailsAdapter adapter = new InvoiceDetailsAdapter();
+                                adapter.setItems(invoice.details);
+                                ((InvoiceDetailsActivity)context).binding.list.setAdapter(adapter);
+                            }
+                        }
+                    });
+                } else {
+                    App.log(context, false, true, "response code " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
+                App.log(context, true, true, "failure " + t);
+            }
+        });
+    }
 }

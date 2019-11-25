@@ -1,5 +1,6 @@
 package club.plus1.ec_online.viewmodels;
 
+import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
@@ -16,6 +17,9 @@ public class InvoiceDetailsItemViewModel {
     public ObservableField<String> available;
     public ObservableField<String> delivery;
 
+    public ObservableBoolean showAvailable;
+    public ObservableBoolean showDelivery;
+
     public InvoiceDetailsItemViewModel() {
         product = new ObservableField<>();
         count = new ObservableInt();
@@ -25,6 +29,8 @@ public class InvoiceDetailsItemViewModel {
         delivery = new ObservableField<>();
         parent = InvoiceDetailsViewModel.getInstance();
         position = new ObservableInt();
+        showAvailable = new ObservableBoolean();
+        showDelivery = new ObservableBoolean();
     }
 
 }

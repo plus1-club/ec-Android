@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.InvoiceDetailsItemBinding;
 import club.plus1.ec_online.domains.Detail;
@@ -73,6 +74,20 @@ public class InvoiceDetailsAdapter extends RecyclerView.Adapter<InvoiceDetailsAd
             viewModel.sum.set(detail.sum);
             viewModel.available.set(detail.available);
             viewModel.delivery.set(detail.delivery);
+
+            viewModel.showAvailable.set(
+                    Objects.equals(Objects.requireNonNull(viewModel.parent.status.get()).toLowerCase(),
+                            App.getContext().getString(R.string.status_unconfirmed).toLowerCase()) ||
+                    Objects.equals(Objects.requireNonNull(viewModel.parent.status.get()).toLowerCase(),
+                            App.getContext().getString(R.string.status_reserved).toLowerCase()) ||
+                    Objects.equals(Objects.requireNonNull(viewModel.parent.status.get()).toLowerCase(),
+                            App.getContext().getString(R.string.status_ordered).toLowerCase()));
+            viewModel.showDelivery.set(
+                    Objects.equals(Objects.requireNonNull(viewModel.parent.status.get()).toLowerCase(),
+                            App.getContext().getString(R.string.status_reserved).toLowerCase()) ||
+                    Objects.equals(Objects.requireNonNull(viewModel.parent.status.get()).toLowerCase(),
+                            App.getContext().getString(R.string.status_ordered).toLowerCase()));
+
         }
     }
 

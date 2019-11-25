@@ -11,9 +11,6 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
-import java.util.Objects;
-
-import club.plus1.ec_online.R;
 import club.plus1.ec_online.domains.Detail;
 import club.plus1.ec_online.views.InvoiceDetailsActivity;
 
@@ -53,23 +50,6 @@ public class InvoiceTableItemViewModel {
         intent.putExtra("status", status.get());
         intent.putExtra("waybill", waybill.get());
         intent.putExtra("position", position.get());
-
-        if (Objects.equals(status.get(), context.getString(R.string.status_unconfirmed))) {
-            intent.putExtra("title", context.getString(R.string.text_item_unconfirmed));
-        } else if (Objects.equals(status.get(), context.getString(R.string.status_reserved))) {
-            intent.putExtra("title", context.getString(R.string.text_item_reserved));
-        } else if (Objects.equals(status.get(), context.getString(R.string.status_ordered))) {
-            intent.putExtra("title", context.getString(R.string.text_item_ordered));
-        } else if (Objects.equals(status.get(), context.getString(R.string.status_canceled))) {
-            intent.putExtra("title", context.getString(R.string.text_item_canceled));
-        } else if (Objects.equals(status.get(), context.getString(R.string.status_overdie))) {
-            intent.putExtra("title", context.getString(R.string.text_item_overdie));
-        } else if (Objects.equals(status.get(), context.getString(R.string.status_shipped))) {
-            intent.putExtra("title", context.getString(R.string.text_item_shipped));
-        } else {
-            intent.putExtra("title", context.getString(R.string.text_item_invoice));
-        }
-
         context.startActivity(intent);
     }
 

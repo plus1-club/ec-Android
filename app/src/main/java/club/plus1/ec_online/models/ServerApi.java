@@ -35,7 +35,7 @@ public interface ServerApi {
                             @Query("fullsearch") boolean fullsearch);
 
     @POST("request/fromExcel")
-    Call<ServerData> byCode(@Header("user_token") String userToken,
+    Call<ServerData> fromExcel(@Header("user_token") String userToken,
                             @Query("excel") File excel,
                             @Query("productColumn") int productColumn,
                             @Query("countColumn") int countColumn,
