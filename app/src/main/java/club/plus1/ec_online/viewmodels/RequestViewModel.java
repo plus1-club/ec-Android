@@ -22,6 +22,7 @@ import club.plus1.ec_online.Server;
 import club.plus1.ec_online.domains.Request;
 import club.plus1.ec_online.viewadapters.RequestsBasketAdapter;
 import club.plus1.ec_online.views.RequestActivity;
+import club.plus1.ec_online.views.RequestsBasketActivity;
 import club.plus1.ec_online.views.RequestsTableActivity;
 
 public class RequestViewModel {
@@ -32,6 +33,7 @@ public class RequestViewModel {
     public ObservableInt countColumn;
     public ObservableBoolean isFullSearch;
     public ObservableDouble total;
+    public ObservableField<String> comment;
 
     public ObservableField<String> title;
     public ObservableList<Request> requests;
@@ -49,6 +51,7 @@ public class RequestViewModel {
         countColumn.set(2);
         isFullSearch = new ObservableBoolean();
         total = new ObservableDouble();
+        comment = new ObservableField<>();
 
         title = new ObservableField<>();
         requests = new ObservableArrayList<>();
@@ -91,17 +94,21 @@ public class RequestViewModel {
                 added.add(request);
             }
         }
+        App.model.basket.addAll(added);
         Server.postBasket(context, added);
-        Server.getBasket(context);
+        Intent intent = new Intent(context, RequestsBasketActivity.class);
+        intent.putExtra("title", context.getString(R.string.text_basket));
+        context.startActivity(intent);
+        notifyAdapter();
     }
 
     public void onClear(Context context){
-        List<Request> empty = new ArrayList<>();
         App.model.basket.clear();
         Server.deleteBasket(context);
-        RequestsBasketAdapter basketAdapter = (RequestsBasketAdapter) adapter.get();
-        Objects.requireNonNull(basketAdapter).notifyDataSetChanged();
-        Server.getBasket(context);
+        Intent intent = new Intent(context, RequestsBasketActivity.class);
+        intent.putExtra("title", context.getString(R.string.text_basket));
+        context.startActivity(intent);
+        notifyAdapter();
     }
 
     public void addToBasket(Context context){
@@ -110,8 +117,11 @@ public class RequestViewModel {
         context.startActivity(intent);
     }
 
-    // TODO: Реализовать оформление заказа
     public void onIssue(Context context){
-        Toast.makeText(context, "Оформить заказ - в разработке", Toast.LENGTH_LONG).show();
+        Server.order(context, comment.get());
+    }
+
+    public void notifyAdapter(){
+        Objects.requireNonNull((RequestsBasketAdapter) adapter.get()).notifyDataSetChanged();
     }
 }

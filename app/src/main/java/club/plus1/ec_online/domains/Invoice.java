@@ -13,6 +13,22 @@ public class Invoice {
 
     public List<Detail> details;
 
+    public Invoice(int number, String date, String status, double sum) {
+        this.number = number;
+        this.date = date;
+        this.status = status;
+        this.sum = sum;
+        this.details = new ArrayList<>();
+    }
+
+    public Invoice(int number, String date, String status, int waybill) {
+        this.number = number;
+        this.date = date;
+        this.status = status;
+        this.waybill = waybill;
+        this.details = new ArrayList<>();
+    }
+
     public Invoice(int number, String date, String status, int waybill, List<Detail> details) {
         this.number = number;
         this.date = date;

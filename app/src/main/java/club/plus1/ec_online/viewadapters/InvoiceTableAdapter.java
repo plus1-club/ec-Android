@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.InvoiceTableItemBinding;
 import club.plus1.ec_online.domains.Invoice;
@@ -72,6 +73,11 @@ public class InvoiceTableAdapter extends RecyclerView.Adapter<InvoiceTableAdapte
             viewModel.sum.set(invoice.sum);
             viewModel.status.set(invoice.status);
             viewModel.waybill.set(invoice.waybill);
+            viewModel.showWaybill.set(
+                Objects.equals(viewModel.status.get(), App.getContext().getString(R.string.status_shipped)));
+            viewModel.showInvoiceButton.set(
+                Objects.equals(viewModel.status.get(), App.getContext().getString(R.string.status_reserved)) ||
+                Objects.equals(viewModel.status.get(), App.getContext().getString(R.string.status_ordered)));
             viewModel.details.clear();
             viewModel.details.addAll(invoice.details);
         }

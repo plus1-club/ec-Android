@@ -11,6 +11,7 @@ import club.plus1.ec_online.R;
 import club.plus1.ec_online.Server;
 import club.plus1.ec_online.views.InvoiceTableActivity;
 import club.plus1.ec_online.views.RequestActivity;
+import club.plus1.ec_online.views.RequestsBasketActivity;
 
 public class MenuViewModel {
 
@@ -59,7 +60,9 @@ public class MenuViewModel {
     }
 
     public void onCart(final Context context) {
-        Server.getBasket(context);
+        Intent intent = new Intent(context, RequestsBasketActivity.class);
+        intent.putExtra("title", context.getString(R.string.text_basket));
+        context.startActivity(intent);
     }
 
     public void onUnconfirmed(Context context){
@@ -96,7 +99,7 @@ public class MenuViewModel {
         Server.getExit(context);
     }
 
-    public boolean onOptionsItemSelected(Context context, MenuItem item){
+    boolean onOptionsItemSelected(Context context, MenuItem item){
         switch (item.getItemId()) {
             case R.id.action_request:
                 onCheckExistence(context);

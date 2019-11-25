@@ -75,37 +75,37 @@ public interface ServerApi {
     // Invoices
 
     @GET("invoices/unconfirmed")
-    Call<ServerData> unconfirmed(@Header("user_token") String userToken);
+    Call<ServerData> unconfirmedList(@Header("user_token") String userToken);
 
     @GET("invoices/reserved")
-    Call<ServerData> reserved(@Header("user_token") String userToken);
+    Call<ServerData> reservedList(@Header("user_token") String userToken);
 
     @GET("invoices/ordered")
-    Call<ServerData> ordered(@Header("user_token") String userToken);
+    Call<ServerData> orderedList(@Header("user_token") String userToken);
 
     @GET("invoices/canceled")
-    Call<ServerData> canceled(@Header("user_token") String userToken);
+    Call<ServerData> canceledList(@Header("user_token") String userToken);
 
     @GET("invoices/shipped")
-    Call<ServerData> shipped(@Header("user_token") String userToken);
+    Call<ServerData> shippedList(@Header("user_token") String userToken);
 
 
     // Invoices/{number}
 
     @GET("invoices/{number}/unconfirmed")
-    Call<ServerData> unconfirmed(@Header("user_token") String userToken, @Path("number") int number);
+    Call<ServerData> unconfirmedItem(@Header("user_token") String userToken, @Path("number") int number);
 
     @GET("invoices/{number}/reserved")
-    Call<ServerData> reserved(@Header("user_token") String userToken, @Path("number") int number);
+    Call<ServerData> reservedItem(@Header("user_token") String userToken, @Path("number") int number);
 
     @GET("invoices/{number}/ordered")
-    Call<ServerData> ordered(@Header("user_token") String userToken, @Path("number") int number);
+    Call<ServerData> orderedItem(@Header("user_token") String userToken, @Path("number") int number);
 
     @GET("invoices/{number}/canceled")
-    Call<ServerData> canceled(@Header("user_token") String userToken, @Path("number") int number);
+    Call<ServerData> canceledItem(@Header("user_token") String userToken, @Path("number") int number);
 
     @GET("invoices/{number}/shipped")
-    Call<ServerData> shipped(@Header("user_token") String userToken, @Path("number") int number);
+    Call<ServerData> shippedItem(@Header("user_token") String userToken, @Path("number") int number);
 
     @GET("invoices/{number}/print")
     Call<ServerData> print(@Header("user_token") String userToken, @Path("number") int number);

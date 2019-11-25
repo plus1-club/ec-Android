@@ -2,8 +2,6 @@ package club.plus1.ec_online.views;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -15,9 +13,9 @@ import java.util.Objects;
 
 import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
+import club.plus1.ec_online.Server;
 import club.plus1.ec_online.databinding.RequestsBasketBinding;
 import club.plus1.ec_online.viewadapters.RequestsBasketAdapter;
-import club.plus1.ec_online.viewmodels.MenuViewModel;
 import club.plus1.ec_online.viewmodels.NavigationViewModel;
 import club.plus1.ec_online.viewmodels.RequestViewModel;
 
@@ -34,9 +32,9 @@ public class RequestsBasketActivity extends AppCompatActivity {
         this.setTitle(Objects.requireNonNull(bundle).getString("title"));
 
         viewModel.total.set(0);
+
         RequestsBasketAdapter requestsBasketAdapter = new RequestsBasketAdapter();
         requestsBasketAdapter.setItems(App.model.basket);
-
         viewModel.adapter.set(requestsBasketAdapter);
 
         RequestsBasketBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_basket);
@@ -49,6 +47,8 @@ public class RequestsBasketActivity extends AppCompatActivity {
                 this,  binding.drawer, binding.include.toolbar, binding.navigator);
         // Установить Toolbar для замены ActionBar'а.
         setSupportActionBar(navigationModel.toolbar);
+
+        Server.getBasket(this);
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 
 import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
@@ -28,6 +29,9 @@ public class InvoiceTableItemViewModel {
     public ObservableField<String> status;
     public ObservableInt waybill;
 
+    public ObservableBoolean showWaybill;
+    public ObservableBoolean showInvoiceButton;
+
     public InvoiceTableItemViewModel() {
         position = new ObservableInt();
         number = new ObservableInt();
@@ -37,6 +41,8 @@ public class InvoiceTableItemViewModel {
         waybill = new ObservableInt();
         parent = InvoiceTableViewModel.getInstance();
         details = new ObservableArrayList<>();
+        showWaybill = new ObservableBoolean();
+        showInvoiceButton = new ObservableBoolean();
     }
 
     public void onDetails(Context context) {

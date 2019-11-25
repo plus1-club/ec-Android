@@ -8,28 +8,28 @@
             name="viewModel"
             type="club.plus1.ec_online.viewmodels.InvoiceTableItemViewModel" />
     </data>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:baselineAligned="false"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:paddingTop="1dp"
         tools:ignore="UseCompoundDrawables">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="10dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textProduct"
                 style="@style/AppTheme.ECOnline.Text"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="3"
                 android:padding="0dp"
                 android:text="@{@string/text_invoice(viewModel.number, viewModel.date)}"
                 android:textAlignment="viewStart"
@@ -38,63 +38,46 @@
             <TextView
                 android:id="@+id/textSum"
                 style="@style/AppTheme.ECOnline.Text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
                 android:padding="0dp"
                 android:text="@{viewModel.sum}"
                 android:textAlignment="viewEnd"
                 android:textStyle="bold" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
-
             <TextView
                 android:id="@+id/textWaybill"
                 style="@style/AppTheme.ECOnline.Text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="2"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
                 android:padding="0dp"
                 android:text="@{@string/text_waybill(viewModel.waybill)}"
                 android:textAlignment="viewStart"
-                android:visibility="@{viewModel.waybill == 0 ? View.INVISIBLE : View.VISIBLE}"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/buttonDetail"
-                style="@style/AppTheme.ECOnline.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="20dp"
-                android:onClick="@{() -> viewModel.onDetails(context)}"
-                android:text="@string/button_detail"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/buttonInvoice"
-                style="@style/AppTheme.ECOnline.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="20dp"
-                android:onClick="@{() -> viewModel.onInvoice(context)}"
-                android:text="@string/button_invoice"
                 android:textSize="14sp"
-                android:visibility="gone" />
+                android:visibility="@{viewModel.showWaybill ? View.VISIBLE : View.GONE}" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonDetail"
+            style="@style/AppTheme.ECOnline.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:onClick="@{() -> viewModel.onDetails(context)}"
+            android:text="@string/button_detail"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/buttonInvoice"
+            style="@style/AppTheme.ECOnline.Button"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:onClick="@{() -> viewModel.onInvoice(context)}"
+            android:text="@string/button_invoice"
+            android:textSize="14sp"
+            android:visibility="@{viewModel.showInvoiceButton ? View.VISIBLE : View.GONE}" />
+
     </LinearLayout>
 </layout>
