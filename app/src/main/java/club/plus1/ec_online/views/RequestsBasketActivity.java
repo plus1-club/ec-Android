@@ -13,8 +13,8 @@ import java.util.Objects;
 
 import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
-import club.plus1.ec_online.Server;
 import club.plus1.ec_online.databinding.RequestsBasketBinding;
+import club.plus1.ec_online.models.ServerResponse;
 import club.plus1.ec_online.viewadapters.RequestsBasketAdapter;
 import club.plus1.ec_online.viewmodels.NavigationViewModel;
 import club.plus1.ec_online.viewmodels.RequestViewModel;
@@ -48,7 +48,7 @@ public class RequestsBasketActivity extends AppCompatActivity {
         // Установить Toolbar для замены ActionBar'а.
         setSupportActionBar(navigationModel.toolbar);
 
-        Server.getBasket(this);
+        ServerResponse.getBasket(this);
     }
 
     @Override

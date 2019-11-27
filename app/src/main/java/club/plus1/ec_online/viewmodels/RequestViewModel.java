@@ -18,8 +18,8 @@ import java.util.Objects;
 
 import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
-import club.plus1.ec_online.Server;
 import club.plus1.ec_online.domains.Request;
+import club.plus1.ec_online.models.ServerResponse;
 import club.plus1.ec_online.viewadapters.RequestsBasketAdapter;
 import club.plus1.ec_online.views.RequestActivity;
 import club.plus1.ec_online.views.RequestsBasketActivity;
@@ -95,7 +95,7 @@ public class RequestViewModel {
             }
         }
         App.model.basket.addAll(added);
-        Server.postBasket(context, added);
+        ServerResponse.postBasket(context, added);
         Intent intent = new Intent(context, RequestsBasketActivity.class);
         intent.putExtra("title", context.getString(R.string.text_basket));
         context.startActivity(intent);
@@ -104,7 +104,7 @@ public class RequestViewModel {
 
     public void onClear(Context context){
         App.model.basket.clear();
-        Server.deleteBasket(context);
+        ServerResponse.deleteBasket(context);
         Intent intent = new Intent(context, RequestsBasketActivity.class);
         intent.putExtra("title", context.getString(R.string.text_basket));
         context.startActivity(intent);
@@ -118,10 +118,10 @@ public class RequestViewModel {
     }
 
     public void onIssue(Context context){
-        Server.order(context, comment.get());
+        ServerResponse.order(context, comment.get());
     }
 
-    public void notifyAdapter(){
+    void notifyAdapter(){
         Objects.requireNonNull((RequestsBasketAdapter) adapter.get()).notifyDataSetChanged();
     }
 }

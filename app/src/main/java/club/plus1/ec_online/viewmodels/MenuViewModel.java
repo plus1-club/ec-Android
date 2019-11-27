@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import java.lang.reflect.Method;
 
 import club.plus1.ec_online.R;
-import club.plus1.ec_online.Server;
+import club.plus1.ec_online.models.ServerResponse;
 import club.plus1.ec_online.views.InvoiceTableActivity;
 import club.plus1.ec_online.views.RequestActivity;
 import club.plus1.ec_online.views.RequestsBasketActivity;
@@ -96,7 +96,7 @@ public class MenuViewModel {
     }
 
     public void onExit(final Context context) {
-        Server.getExit(context);
+        ServerResponse.getExit(context);
     }
 
     boolean onOptionsItemSelected(Context context, MenuItem item){

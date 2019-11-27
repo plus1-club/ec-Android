@@ -6,7 +6,7 @@ import android.net.Uri;
 
 import androidx.databinding.ObservableField;
 
-import club.plus1.ec_online.Server;
+import club.plus1.ec_online.models.ServerResponse;
 
 public class EnterViewModel {
 
@@ -28,7 +28,7 @@ public class EnterViewModel {
     }
 
     public void onEnter(Context context) {
-        Server.getEnter(context, login.get(), password.get());
+        ServerResponse.getEnter(context, login.get(), password.get());
     }
 
     public void onPhone(Context context, String phone){

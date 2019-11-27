@@ -17,6 +17,7 @@ import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.InvoiceDetailsItemBinding;
 import club.plus1.ec_online.domains.Detail;
+import club.plus1.ec_online.models.Service;
 import club.plus1.ec_online.viewmodels.InvoiceDetailsItemViewModel;
 
 public class InvoiceDetailsAdapter extends RecyclerView.Adapter<InvoiceDetailsAdapter.InvoiceDetailsViewHolder> {
@@ -75,18 +76,14 @@ public class InvoiceDetailsAdapter extends RecyclerView.Adapter<InvoiceDetailsAd
             viewModel.available.set(detail.available);
             viewModel.delivery.set(detail.delivery);
 
+            String status = viewModel.parent.status.get();
             viewModel.showAvailable.set(
-                    Objects.equals(Objects.requireNonNull(viewModel.parent.status.get()).toLowerCase(),
-                            App.getContext().getString(R.string.status_unconfirmed).toLowerCase()) ||
-                    Objects.equals(Objects.requireNonNull(viewModel.parent.status.get()).toLowerCase(),
-                            App.getContext().getString(R.string.status_reserved).toLowerCase()) ||
-                    Objects.equals(Objects.requireNonNull(viewModel.parent.status.get()).toLowerCase(),
-                            App.getContext().getString(R.string.status_ordered).toLowerCase()));
+                    Service.isEqual(status, App.getContext().getString(R.string.status_unconfirmed)) ||
+                    Service.isEqual(status, App.getContext().getString(R.string.status_reserved)) ||
+                    Service.isEqual(status, App.getContext().getString(R.string.status_ordered)));
             viewModel.showDelivery.set(
-                    Objects.equals(Objects.requireNonNull(viewModel.parent.status.get()).toLowerCase(),
-                            App.getContext().getString(R.string.status_reserved).toLowerCase()) ||
-                    Objects.equals(Objects.requireNonNull(viewModel.parent.status.get()).toLowerCase(),
-                            App.getContext().getString(R.string.status_ordered).toLowerCase()));
+                    Service.isEqual(status, App.getContext().getString(R.string.status_reserved)) ||
+                    Service.isEqual(status, App.getContext().getString(R.string.status_ordered)));
 
         }
     }

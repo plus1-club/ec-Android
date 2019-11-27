@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.Objects;
 
 import club.plus1.ec_online.R;
-import club.plus1.ec_online.Server;
 import club.plus1.ec_online.databinding.InvoiceDetailsBinding;
+import club.plus1.ec_online.models.ServerResponse;
+import club.plus1.ec_online.models.Service;
 import club.plus1.ec_online.viewadapters.InvoiceDetailsAdapter;
 import club.plus1.ec_online.viewmodels.InvoiceDetailsViewModel;
 import club.plus1.ec_online.viewmodels.InvoiceTableViewModel;
@@ -48,24 +49,25 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         binding.list.setLayoutManager(new LinearLayoutManager(this));
         binding.list.setAdapter(invoiceDetailsAdapter);
 
-        if (Objects.equals(Objects.requireNonNull(viewModel.status.get()).toLowerCase(), getString(R.string.status_unconfirmed).toLowerCase())) {
+        String status = viewModel.status.get();
+        if (Service.isEqual(status, getString(R.string.status_unconfirmed))) {
             setTitle(getString(R.string.text_item_unconfirmed));
-            Server.unconfirmedItem(this, viewModel.number.get());
-        } else if (Objects.equals(Objects.requireNonNull(viewModel.status.get()).toLowerCase(), getString(R.string.status_reserved).toLowerCase())) {
+            ServerResponse.unconfirmedItem(this, viewModel.number.get());
+        } else if (Service.isEqual(status, getString(R.string.status_reserved))) {
             setTitle(getString(R.string.text_item_reserved));
-            Server.reservedItem(this, viewModel.number.get());
-        } else if (Objects.equals(Objects.requireNonNull(viewModel.status.get()).toLowerCase(), getString(R.string.status_ordered).toLowerCase())) {
+            ServerResponse.reservedItem(this, viewModel.number.get());
+        } else if (Service.isEqual(status, getString(R.string.status_ordered))) {
             setTitle(getString(R.string.text_item_ordered));
-            Server.orderedItem(this, viewModel.number.get());
-        } else if (Objects.equals(Objects.requireNonNull(viewModel.status.get()).toLowerCase(), getString(R.string.status_canceled).toLowerCase())) {
+            ServerResponse.orderedItem(this, viewModel.number.get());
+        } else if (Service.isEqual(status, getString(R.string.status_canceled))) {
             setTitle(getString(R.string.text_item_canceled));
-            Server.canceledItem(this, viewModel.number.get());
-        } else if (Objects.equals(Objects.requireNonNull(viewModel.status.get()).toLowerCase(), getString(R.string.status_overdie).toLowerCase())) {
+            ServerResponse.canceledItem(this, viewModel.number.get());
+        } else if (Service.isEqual(status, getString(R.string.status_overdie))) {
             this.setTitle(getString(R.string.text_item_overdie));
-            Server.canceledItem(this, viewModel.number.get());
-        } else if (Objects.equals(Objects.requireNonNull(viewModel.status.get()).toLowerCase(), getString(R.string.status_shipped).toLowerCase())) {
+            ServerResponse.canceledItem(this, viewModel.number.get());
+        } else if (Service.isEqual(status, getString(R.string.status_shipped))) {
             this.setTitle(getString(R.string.text_item_shipped));
-            Server.shippedItem(this, viewModel.number.get());
+            ServerResponse.shippedItem(this, viewModel.number.get());
         } else {
             this.setTitle(getString(R.string.text_item_invoice));
         }

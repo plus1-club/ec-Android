@@ -13,8 +13,8 @@ import java.util.Objects;
 
 import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
-import club.plus1.ec_online.Server;
 import club.plus1.ec_online.domains.Request;
+import club.plus1.ec_online.models.ServerResponse;
 import club.plus1.ec_online.viewadapters.RequestsBasketAdapter;
 
 public class RequestItemViewModel {
@@ -67,10 +67,10 @@ public class RequestItemViewModel {
                 parent.requests.remove(item);
             }
         }
-        Server.putBasket(view.getContext(), parent.requests);
+        ServerResponse.putBasket(view.getContext(), parent.requests);
         RequestsBasketAdapter basketAdapter = (RequestsBasketAdapter) parent.adapter.get();
         Objects.requireNonNull(basketAdapter).notifyDataSetChanged();
-        Server.getBasket(view.getContext());
+        ServerResponse.getBasket(view.getContext());
         updateStatus();
     }
 

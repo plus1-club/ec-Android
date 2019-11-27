@@ -63,7 +63,7 @@
                 android:padding="0dp"
                 android:text="@{viewModel.available}"
                 android:textAlignment="viewStart"
-                android:visibility="@{viewModel.showAvailable ? View.VISIBLE : View.INVISIBLE}" />
+                android:visibility="@{viewModel.showAvailable ? View.VISIBLE : View.GONE}" />
 
             <TextView
                 android:id="@+id/textDelivery"
@@ -75,7 +75,7 @@
                 android:padding="0dp"
                 android:text="@{viewModel.delivery}"
                 android:textAlignment="viewStart"
-                android:visibility="@{viewModel.showDelivery ? View.VISIBLE : View.INVISIBLE}" />
+                android:visibility="@{viewModel.showDelivery ? View.VISIBLE : View.GONE}" />
 
             <TextView
                 android:id="@+id/textSum"

@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.Objects;
 
 import club.plus1.ec_online.R;
-import club.plus1.ec_online.Server;
 import club.plus1.ec_online.databinding.InvoiceTableBinding;
+import club.plus1.ec_online.models.ServerResponse;
 import club.plus1.ec_online.models.StorageStub;
 import club.plus1.ec_online.viewadapters.InvoiceTableAdapter;
 import club.plus1.ec_online.viewmodels.InvoiceTableViewModel;
@@ -37,19 +37,19 @@ public class InvoiceTableActivity extends AppCompatActivity {
         viewModel.title.set(Objects.requireNonNull(bundle).getString("title"));
 
         if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_unconfirmed))) {
-            Server.unconfirmedList(this);
+            ServerResponse.unconfirmedList(this);
             //invoiceTableAdapter.setItems(storageStub.invoicesUnconf);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_reserved))) {
-            Server.reservedList(this);
+            ServerResponse.reservedList(this);
             //invoiceTableAdapter.setItems(storageStub.invoicesReserv);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_ordered))) {
-            Server.orderedList(this);
+            ServerResponse.orderedList(this);
             //invoiceTableAdapter.setItems(storageStub.invoicesOrder);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_canceled))) {
-            Server.canceledList(this);
+            ServerResponse.canceledList(this);
             //invoiceTableAdapter.setItems(storageStub.invoicesCancel);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_shipped))) {
-            Server.shippedList(this);
+            ServerResponse.shippedList(this);
             //invoiceTableAdapter.setItems(storageStub.invoicesShip);
         } else {
             invoiceTableAdapter.setItems(storageStub.invoicesEmpty);
