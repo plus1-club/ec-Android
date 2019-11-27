@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="club.plus1.ec_online.models.Service" />
         <variable
             name="viewModel"
             type="club.plus1.ec_online.viewmodels.RequestViewModel" />
@@ -62,7 +63,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="10dp"
                             android:padding="0dp"
-                            android:text="@{@string/text_total(viewModel.total)}"
+                            android:text="@{Service.rub(viewModel.total,@string/text_total)}"
                             android:textAlignment="textEnd"
                             android:textStyle="bold" />
 

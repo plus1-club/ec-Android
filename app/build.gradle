@@ -7,8 +7,8 @@ android {
         applicationId "club.plus1.ec_electric"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 64
-        versionName "0.3"
+        versionCode 65
+        versionName "0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
