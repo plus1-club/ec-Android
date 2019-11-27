@@ -1,6 +1,11 @@
 package club.plus1.ec_online.viewmodels;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+
 import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
@@ -19,6 +24,8 @@ public class InvoiceDetailsViewModel {
     public ObservableField<String> title;
     public ObservableList<Detail> details;
 
+    public ObservableBoolean showInvoiceButton;
+
     private static InvoiceDetailsViewModel mInstance;    // Ссылка для биндинга с View
 
     private InvoiceDetailsViewModel() {
@@ -29,6 +36,7 @@ public class InvoiceDetailsViewModel {
         waybill = new ObservableInt();
         title = new ObservableField<>();
         details = new ObservableArrayList<>();
+        showInvoiceButton = new ObservableBoolean();
     }
 
     // Получение единственного экземпляра класса
@@ -37,5 +45,11 @@ public class InvoiceDetailsViewModel {
             mInstance = new InvoiceDetailsViewModel();
         }
         return mInstance;
+    }
+
+    // TODO: Отправлять запрос к серверу на скачивание документа
+    public void onInvoice(Context context) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ec-electric.ru/order/example.xls"));
+        context.startActivity(intent);
     }
 }

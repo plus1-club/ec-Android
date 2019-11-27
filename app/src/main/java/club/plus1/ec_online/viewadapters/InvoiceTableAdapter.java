@@ -17,6 +17,7 @@ import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.InvoiceTableItemBinding;
 import club.plus1.ec_online.domains.Invoice;
+import club.plus1.ec_online.models.Service;
 import club.plus1.ec_online.viewmodels.InvoiceTableItemViewModel;
 
 public class InvoiceTableAdapter extends RecyclerView.Adapter<InvoiceTableAdapter.InvoiceTableViewHolder> {
@@ -74,10 +75,10 @@ public class InvoiceTableAdapter extends RecyclerView.Adapter<InvoiceTableAdapte
             viewModel.status.set(invoice.status);
             viewModel.waybill.set(invoice.waybill);
             viewModel.showWaybill.set(
-                Objects.equals(viewModel.status.get(), App.getContext().getString(R.string.status_shipped)));
+                Service.isEqual(viewModel.status.get(), App.getContext().getString(R.string.status_shipped)));
             viewModel.showInvoiceButton.set(
-                Objects.equals(viewModel.status.get(), App.getContext().getString(R.string.status_reserved)) ||
-                Objects.equals(viewModel.status.get(), App.getContext().getString(R.string.status_ordered)));
+                Service.isEqual(viewModel.status.get(), App.getContext().getString(R.string.status_reserved)) ||
+                Service.isEqual(viewModel.status.get(), App.getContext().getString(R.string.status_ordered)));
             viewModel.details.clear();
             viewModel.details.addAll(invoice.details);
         }

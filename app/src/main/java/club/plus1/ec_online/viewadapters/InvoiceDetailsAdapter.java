@@ -84,7 +84,6 @@ public class InvoiceDetailsAdapter extends RecyclerView.Adapter<InvoiceDetailsAd
             viewModel.showDelivery.set(
                     Service.isEqual(status, App.getContext().getString(R.string.status_reserved)) ||
                     Service.isEqual(status, App.getContext().getString(R.string.status_ordered)));
-
         }
     }
 

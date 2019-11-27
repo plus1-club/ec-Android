@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.Objects;
 
+import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.InvoiceDetailsBinding;
 import club.plus1.ec_online.models.ServerResponse;
@@ -71,6 +72,9 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         } else {
             this.setTitle(getString(R.string.text_item_invoice));
         }
+        viewModel.showInvoiceButton.set(
+                Service.isEqual(status, App.getContext().getString(R.string.status_reserved)) ||
+                        Service.isEqual(status, App.getContext().getString(R.string.status_ordered)));
 
         navigationModel = new NavigationViewModel(
                 this,  binding.drawer, binding.include.toolbar, binding.navigator);
