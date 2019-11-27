@@ -21,29 +21,63 @@
             android:text="@string/text_enter_number_or_product"
             android:textAlignment="center" />
 
-        <EditText
-            android:id="@+id/editProduct"
-            style="@style/AppTheme.ECOnline.Edit"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:ems="10"
-            android:hint="@string/hint_product"
-            android:inputType="text"
-            android:text="@={viewModel.product}"
-            tools:ignore="Autofill" />
+            android:gravity="bottom"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editCount"
-            style="@style/AppTheme.ECOnline.Edit"
+            <TextView
+                android:id="@+id/textProduct"
+                style="@style/AppTheme.ECOnline.Text"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/editProduct"
+                android:text="@string/label_product"
+                android:textAlignment="viewStart"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editProduct"
+                style="@style/AppTheme.ECOnline.Edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:ems="10"
+                android:inputType="text"
+                android:labelFor="@id/textProduct"
+                android:text="@={viewModel.product}"
+                tools:ignore="Autofill" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:ems="10"
-            android:hint="@string/hint_count"
-            android:inputType="number"
-            android:text="@={`` + viewModel.count}"
-            tools:ignore="Autofill" />
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textCount"
+                style="@style/AppTheme.ECOnline.Text"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/editCount"
+                android:text="@string/label_count"
+                android:textAlignment="viewStart"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editCount"
+                style="@style/AppTheme.ECOnline.Edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:ems="10"
+                android:inputType="number"
+                android:labelFor="@id/textCount"
+                android:text="@={`` + viewModel.count}"
+                tools:ignore="Autofill" />
+        </LinearLayout>
 
         <CheckBox
             android:id="@+id/checkFullSearch"
