@@ -31,17 +31,17 @@ public class RequestsBasketActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         this.setTitle(Objects.requireNonNull(bundle).getString("title"));
 
-        viewModel.total.set(0);
-
         RequestsBasketAdapter requestsBasketAdapter = new RequestsBasketAdapter();
         requestsBasketAdapter.setItems(App.model.basket);
-        viewModel.adapter.set(requestsBasketAdapter);
+        viewModel.basketAdapter.set(requestsBasketAdapter);
 
         RequestsBasketBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_basket);
         binding.setViewModel(viewModel);
         binding.list.setHasFixedSize(true);
         binding.list.setLayoutManager(new LinearLayoutManager(this));
         binding.list.setAdapter(requestsBasketAdapter);
+
+        viewModel.total.set(0);
 
         navigationModel = new NavigationViewModel(
                 this,  binding.drawer, binding.include.toolbar, binding.navigator);

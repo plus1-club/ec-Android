@@ -21,9 +21,10 @@ import club.plus1.ec_online.R;
 import club.plus1.ec_online.domains.Request;
 import club.plus1.ec_online.models.ServerResponse;
 import club.plus1.ec_online.viewadapters.RequestsBasketAdapter;
+import club.plus1.ec_online.viewadapters.RequestsSearchAdapter;
 import club.plus1.ec_online.views.RequestActivity;
 import club.plus1.ec_online.views.RequestsBasketActivity;
-import club.plus1.ec_online.views.RequestsTableActivity;
+import club.plus1.ec_online.views.RequestsSearchActivity;
 
 public class RequestViewModel {
 
@@ -37,7 +38,8 @@ public class RequestViewModel {
 
     public ObservableField<String> title;
     public ObservableList<Request> requests;
-    public ObservableField<Object> adapter;
+    public ObservableField<Object> searchAdapter;
+    public ObservableField<Object> basketAdapter;
 
     private static RequestViewModel mInstance;    // Ссылка для биндинга с View
 
@@ -55,7 +57,8 @@ public class RequestViewModel {
 
         title = new ObservableField<>();
         requests = new ObservableArrayList<>();
-        adapter = new ObservableField<>();
+        searchAdapter = new ObservableField<>();
+        basketAdapter = new ObservableField<>();
     }
 
     // Получение единственного экземпляра класса
@@ -72,7 +75,7 @@ public class RequestViewModel {
     }
 
     public void onNext(Context context){
-        Intent intent = new Intent(context, RequestsTableActivity.class);
+        Intent intent = new Intent(context, RequestsSearchActivity.class);
         intent.putExtra("title", title.get());
         context.startActivity(intent);
     }
@@ -99,7 +102,7 @@ public class RequestViewModel {
         Intent intent = new Intent(context, RequestsBasketActivity.class);
         intent.putExtra("title", context.getString(R.string.text_basket));
         context.startActivity(intent);
-        notifyAdapter();
+        notifyBasket();
     }
 
     public void onClear(Context context){
@@ -108,7 +111,7 @@ public class RequestViewModel {
         Intent intent = new Intent(context, RequestsBasketActivity.class);
         intent.putExtra("title", context.getString(R.string.text_basket));
         context.startActivity(intent);
-        notifyAdapter();
+        notifyBasket();
     }
 
     public void addToBasket(Context context){
@@ -121,7 +124,11 @@ public class RequestViewModel {
         ServerResponse.order(context, comment.get());
     }
 
-    void notifyAdapter(){
-        Objects.requireNonNull((RequestsBasketAdapter) adapter.get()).notifyDataSetChanged();
+    void notifySearch(){
+        Objects.requireNonNull((RequestsSearchAdapter) searchAdapter.get()).notifyDataSetChanged();
+    }
+
+    void notifyBasket(){
+        Objects.requireNonNull((RequestsBasketAdapter) basketAdapter.get()).notifyDataSetChanged();
     }
 }

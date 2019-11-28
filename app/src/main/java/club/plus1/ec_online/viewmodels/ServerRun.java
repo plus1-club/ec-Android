@@ -58,6 +58,24 @@ public class ServerRun {
         context.startActivity(intent);
     }
 
+    public void getByCode(Context context, Response<ServerData> response){
+        App.model.search.clear();
+        if (response.body() != null && response.body().getError().isEmpty()) {
+            List<?> data = (List<?>) response.body().getData();
+            for (Object element : data) {
+                @SuppressWarnings("unchecked")
+                Map<String, String> el = (LinkedTreeMap<String, String>) element;
+                Request request = new Request(
+                        el.get("product"),
+                        Service.getInt(el.get("requestCount")),
+                        Service.getInt(el.get("stockCount")),
+                        true);
+                App.model.search.add(request);
+            }
+        }
+        RequestViewModel.getInstance().notifySearch();
+    }
+
     public void getBasket(Context context, Response<ServerData> response){
         App.model.basket.clear();
         if (response.body() != null && response.body().getError().isEmpty()) {
@@ -74,7 +92,7 @@ public class ServerRun {
                 App.model.basket.add(request);
             }
         }
-        RequestViewModel.getInstance().notifyAdapter();
+        RequestViewModel.getInstance().notifyBasket();
     }
 
     public void putBasket(Context context, Response<ServerData> response){

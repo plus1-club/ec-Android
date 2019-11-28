@@ -2,10 +2,7 @@ package club.plus1.ec_online.viewmodels;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.Menu;
 import android.view.MenuItem;
-
-import java.lang.reflect.Method;
 
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.models.ServerResponse;
@@ -25,26 +22,6 @@ public class MenuViewModel {
             mInstance = new MenuViewModel(context);
         }
         return mInstance;
-    }
-
-    public static void PrepareMenu(Menu menu){
-        if(menu.getClass().getSimpleName()
-                .equals("MenuBuilder")){
-            try{
-                Method m = menu.getClass()
-                        .getDeclaredMethod (
-                                "setOptionalIconsVisible",
-                                Boolean.TYPE);
-                m.setAccessible(true);
-                m.invoke(menu, true);
-            }
-            catch(NoSuchMethodException e){
-                System.err.println("onCreateOptionsMenu");
-            }
-            catch(Exception e){
-                throw new RuntimeException(e);
-            }
-        }
     }
 
     public void onCheckExistence(Context context){

@@ -2,8 +2,6 @@ package club.plus1.ec_online.views;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -15,7 +13,6 @@ import java.util.Objects;
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.RequestBinding;
 import club.plus1.ec_online.viewadapters.RequestFragmentAdapter;
-import club.plus1.ec_online.viewmodels.MenuViewModel;
 import club.plus1.ec_online.viewmodels.NavigationViewModel;
 import club.plus1.ec_online.viewmodels.RequestViewModel;
 

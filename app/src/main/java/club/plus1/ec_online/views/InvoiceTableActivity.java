@@ -9,12 +9,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import club.plus1.ec_online.R;
 import club.plus1.ec_online.databinding.InvoiceTableBinding;
+import club.plus1.ec_online.domains.Invoice;
 import club.plus1.ec_online.models.ServerResponse;
-import club.plus1.ec_online.models.StorageStub;
 import club.plus1.ec_online.viewadapters.InvoiceTableAdapter;
 import club.plus1.ec_online.viewmodels.InvoiceTableViewModel;
 import club.plus1.ec_online.viewmodels.NavigationViewModel;
@@ -29,7 +30,6 @@ public class InvoiceTableActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = InvoiceTableViewModel.getInstance();
-        StorageStub storageStub = StorageStub.getInstance();
         InvoiceTableAdapter invoiceTableAdapter = new InvoiceTableAdapter();
 
         Bundle bundle = getIntent().getExtras();
@@ -38,21 +38,16 @@ public class InvoiceTableActivity extends AppCompatActivity {
 
         if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_unconfirmed))) {
             ServerResponse.unconfirmedList(this);
-            //invoiceTableAdapter.setItems(storageStub.invoicesUnconf);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_reserved))) {
             ServerResponse.reservedList(this);
-            //invoiceTableAdapter.setItems(storageStub.invoicesReserv);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_ordered))) {
             ServerResponse.orderedList(this);
-            //invoiceTableAdapter.setItems(storageStub.invoicesOrder);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_canceled))) {
             ServerResponse.canceledList(this);
-            //invoiceTableAdapter.setItems(storageStub.invoicesCancel);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_shipped))) {
             ServerResponse.shippedList(this);
-            //invoiceTableAdapter.setItems(storageStub.invoicesShip);
         } else {
-            invoiceTableAdapter.setItems(storageStub.invoicesEmpty);
+            invoiceTableAdapter.setItems(new ArrayList<Invoice>());
         }
 
         binding = DataBindingUtil.setContentView(this, R.layout.invoice_table);

@@ -14,16 +14,16 @@ import java.util.List;
 import java.util.Objects;
 
 import club.plus1.ec_online.R;
-import club.plus1.ec_online.databinding.RequestsTableItemBinding;
+import club.plus1.ec_online.databinding.RequestsSearchItemBinding;
 import club.plus1.ec_online.domains.Request;
 import club.plus1.ec_online.viewmodels.RequestItemViewModel;
 
-public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdapter.RequestsTableViewHolder> {
+public class RequestsSearchAdapter extends RecyclerView.Adapter<RequestsSearchAdapter.RequestsTableViewHolder> {
 
     private List<Request> requests;
     private RequestItemViewModel viewModel;
 
-    public RequestsTableAdapter() {
+    public RequestsSearchAdapter() {
         requests = new ArrayList<>();
     }
 
@@ -34,12 +34,12 @@ public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdap
 
     @NonNull
     @Override
-    public RequestsTableAdapter.RequestsTableViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RequestsSearchAdapter.RequestsTableViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         viewModel = new RequestItemViewModel();
         viewModel.parent.requests.clear();
         viewModel.parent.requests.addAll(requests);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        RequestsTableItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.requests_table_item, parent, false);
+        RequestsSearchItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.requests_search_item, parent, false);
         binding.setViewModel(viewModel);
         return new RequestsTableViewHolder(binding.getRoot());
     }
@@ -56,7 +56,7 @@ public class RequestsTableAdapter extends RecyclerView.Adapter<RequestsTableAdap
 
     static class RequestsTableViewHolder extends RecyclerView.ViewHolder {
 
-        private RequestsTableItemBinding binding;
+        private RequestsSearchItemBinding binding;
         private RequestItemViewModel viewModel;
 
         RequestsTableViewHolder(View view) {

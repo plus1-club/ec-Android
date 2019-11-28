@@ -68,7 +68,7 @@ public class RequestItemViewModel {
             }
         }
         ServerResponse.putBasket(view.getContext(), parent.requests);
-        RequestsBasketAdapter basketAdapter = (RequestsBasketAdapter) parent.adapter.get();
+        RequestsBasketAdapter basketAdapter = (RequestsBasketAdapter) parent.basketAdapter.get();
         Objects.requireNonNull(basketAdapter).notifyDataSetChanged();
         ServerResponse.getBasket(view.getContext());
         updateStatus();

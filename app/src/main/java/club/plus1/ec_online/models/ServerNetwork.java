@@ -1,6 +1,8 @@
 package club.plus1.ec_online.models;
 
 import android.annotation.SuppressLint;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,9 +24,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServerNetwork {
 
-    private static ServerApi serverApi;
     private static ServerNetwork mInstance;
+    private static ServerApi serverApi;
     private Retrofit retrofit;
+
+    static Handler handler;
 
     // Получение единственного экземпляра класса
     public static ServerNetwork getInstance() {
@@ -50,6 +54,8 @@ public class ServerNetwork {
 
         //Создаем объект, при помощи которого будем выполнять запросы
         serverApi = retrofit.create(ServerApi.class);
+
+        handler = new Handler(Looper.getMainLooper());
     }
 
     public static ServerApi getApi() {

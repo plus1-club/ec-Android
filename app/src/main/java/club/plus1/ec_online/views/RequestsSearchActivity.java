@@ -2,8 +2,6 @@ package club.plus1.ec_online.views;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -13,15 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.Objects;
 
+import club.plus1.ec_online.App;
 import club.plus1.ec_online.R;
-import club.plus1.ec_online.databinding.RequestsTableBinding;
-import club.plus1.ec_online.models.StorageStub;
-import club.plus1.ec_online.viewadapters.RequestsTableAdapter;
-import club.plus1.ec_online.viewmodels.MenuViewModel;
+import club.plus1.ec_online.databinding.RequestsSearchBinding;
+import club.plus1.ec_online.models.ServerResponse;
+import club.plus1.ec_online.viewadapters.RequestsSearchAdapter;
 import club.plus1.ec_online.viewmodels.NavigationViewModel;
 import club.plus1.ec_online.viewmodels.RequestViewModel;
 
-public class RequestsTableActivity extends AppCompatActivity {
+public class RequestsSearchActivity extends AppCompatActivity {
 
     RequestViewModel viewModel;
     NavigationViewModel navigationModel;
@@ -33,20 +31,22 @@ public class RequestsTableActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         this.setTitle(Objects.requireNonNull(bundle).getString("title"));
 
-        StorageStub storageStub = StorageStub.getInstance();
-        RequestsTableAdapter requestsTableAdapter = new RequestsTableAdapter();
-        requestsTableAdapter.setItems(storageStub.getRequests(Objects.requireNonNull(viewModel.product.get()), viewModel.count.get()));
+        RequestsSearchAdapter requestsSearchAdapter = new RequestsSearchAdapter();
+        requestsSearchAdapter.setItems(App.model.search);
+        viewModel.searchAdapter.set(requestsSearchAdapter);
 
-        RequestsTableBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_table);
+        RequestsSearchBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_search);
         binding.setViewModel(viewModel);
         binding.list.setHasFixedSize(true);
         binding.list.setLayoutManager(new LinearLayoutManager(this));
-        binding.list.setAdapter(requestsTableAdapter);
+        binding.list.setAdapter(requestsSearchAdapter);
 
         navigationModel = new NavigationViewModel(
                 this,  binding.drawer, binding.include.toolbar, binding.navigator);
         // Установить Toolbar для замены ActionBar'а.
         setSupportActionBar(navigationModel.toolbar);
+
+        ServerResponse.byCode(this, viewModel.product.get(), viewModel.count.get(), viewModel.isFullSearch.get());
     }
 
     @Override
