@@ -66,7 +66,8 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         } else if (Service.isEqual(status, getString(R.string.status_overdie))) {
             this.setTitle(getString(R.string.text_item_overdie));
             ServerResponse.canceledItem(this, viewModel.number.get());
-        } else if (Service.isEqual(status, getString(R.string.status_shipped))) {
+        } else if (Service.isEqual(status, getString(R.string.status_shipped)) ||
+                Service.isEqual(status, getString(R.string.text_item_shipped))) {
             this.setTitle(getString(R.string.text_item_shipped));
             ServerResponse.shippedItem(this, viewModel.number.get());
         } else {

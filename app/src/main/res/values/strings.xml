@@ -75,5 +75,6 @@
 
     <string name="drawer_open">Открыть меню</string>
     <string name="drawer_close">Скрыть меню</string>
+    <string name="permission_explanation">Доступ к файлам нужен для возможности загрузки счетов в формате pdf</string>
 
 </resources>

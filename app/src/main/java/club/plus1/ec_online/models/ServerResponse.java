@@ -428,4 +428,27 @@ public class ServerResponse {
             }
         });
     }
+
+    public static void print(final Context context, final int number) {
+        ServerNetwork.getApi().print(App.model.token, number).enqueue(new Callback<ServerData>() {
+            @Override
+            public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
+                if (response.isSuccessful()) {
+                    ServerNetwork.handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ServerRun.getInstance().getPrint(context, response, number);
+                        }
+                    });
+                } else {
+                    App.log(context, false, true, "response code " + response.code());
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
+                App.log(context, true, true, "failure " + t);
+            }
+        });
+    }
+
 }

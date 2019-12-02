@@ -2,6 +2,7 @@ package club.plus1.ec_online.viewmodels;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import com.google.gson.internal.LinkedTreeMap;
 
@@ -23,6 +24,7 @@ import club.plus1.ec_online.views.EnterActivity;
 import club.plus1.ec_online.views.InvoiceDetailsActivity;
 import club.plus1.ec_online.views.InvoiceTableActivity;
 import club.plus1.ec_online.views.MenuActivity;
+import club.plus1.ec_online.views.RequestsSearchActivity;
 import retrofit2.Response;
 
 public class ServerRun {
@@ -74,6 +76,9 @@ public class ServerRun {
             }
         }
         RequestViewModel.getInstance().notifySearch();
+        Intent intent = new Intent(context, RequestsSearchActivity.class);
+        intent.putExtra("title", context.getString(R.string.text_request));
+        context.startActivity(intent);
     }
 
     public void getBasket(Context context, Response<ServerData> response){
@@ -157,6 +162,22 @@ public class ServerRun {
             InvoiceDetailsAdapter adapter = new InvoiceDetailsAdapter();
             adapter.setItems(invoice.details);
             ((InvoiceDetailsActivity)context).binding.list.setAdapter(adapter);
+        }
+    }
+
+    public void getPrint(Context context, final Response<ServerData> response, final int number) {
+        if (response.body() != null && response.body().getError().isEmpty()) {
+            try {
+                Map<String, String> data = (LinkedTreeMap<String, String>) response.body().getData();
+                final String srcUrl = data.get("file");
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(srcUrl));
+                context.startActivity(intent);
+            } catch (Exception e){
+                App.log(context, true, false, e.getMessage());
+            }
+            //final String destPath = Environment.getExternalStorageDirectory() + "/Download/" + number + ".pdf";
+            //FileLoader longTask = FileLoader.getInstance(context, destPath, srcUrl); // Создаем экземпляр
+            //longTask.execute();
         }
     }
 }
