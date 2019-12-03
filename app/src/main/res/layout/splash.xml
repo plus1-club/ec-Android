@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="club.plus1.ec_online.viewmodels.SplashViewModel" />
+            type="ru.electric.ec.online.viewmodels.SplashViewModel" />
     </data>
     <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         tools:ignore="UseCompoundDrawables"

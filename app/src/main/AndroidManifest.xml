@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="club.plus1.ec_online">
+    package="ru.electric.ec.online">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ECOnline"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name="club.plus1.ec_online.views.SplashActivity">
+        <activity android:name="ru.electric.ec.online.views.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,25 +25,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="club.plus1.ec_online.views.EnterActivity"
+            android:name="ru.electric.ec.online.views.EnterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="club.plus1.ec_online.views.MenuActivity"
+            android:name="ru.electric.ec.online.views.MenuActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="club.plus1.ec_online.views.RequestActivity"
+            android:name="ru.electric.ec.online.views.RequestActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="club.plus1.ec_online.views.RequestsSearchActivity"
+            android:name="ru.electric.ec.online.views.RequestsSearchActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="club.plus1.ec_online.views.RequestsBasketActivity"
+            android:name="ru.electric.ec.online.views.RequestsBasketActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="club.plus1.ec_online.views.InvoiceTableActivity"
+            android:name="ru.electric.ec.online.views.InvoiceTableActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="club.plus1.ec_online.views.InvoiceDetailsActivity"
+            android:name="ru.electric.ec.online.views.InvoiceDetailsActivity"
             android:screenOrientation="portrait"/>
     </application>
 

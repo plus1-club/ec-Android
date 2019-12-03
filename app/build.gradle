@@ -4,11 +4,11 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "club.plus1.ec_electric"
+        applicationId "ru.electric.ec.online"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 68
-        versionName "0.4"
+        versionCode 69
+        versionName "0.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

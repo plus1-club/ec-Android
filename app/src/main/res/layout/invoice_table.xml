@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="club.plus1.ec_online.viewmodels.InvoiceTableViewModel" />
+            type="ru.electric.ec.online.viewmodels.InvoiceTableViewModel" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"

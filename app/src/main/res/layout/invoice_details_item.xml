@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="android.view.View" />
-        <import type="club.plus1.ec_online.models.Service" />
+        <import type="ru.electric.ec.online.models.Service" />
         <variable
             name="viewModel"
-            type="club.plus1.ec_online.viewmodels.InvoiceDetailsItemViewModel" />
+            type="ru.electric.ec.online.viewmodels.InvoiceDetailsItemViewModel" />
     </data>
     <LinearLayout
         android:layout_width="fill_parent"
