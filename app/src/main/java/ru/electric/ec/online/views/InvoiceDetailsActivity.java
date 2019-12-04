@@ -2,18 +2,21 @@ package ru.electric.ec.online.views;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Objects;
 
 import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.InvoiceDetailsBinding;
+import ru.electric.ec.online.domains.Invoice;
 import ru.electric.ec.online.models.ServerResponse;
 import ru.electric.ec.online.models.Service;
 import ru.electric.ec.online.viewadapters.InvoiceDetailsAdapter;
@@ -25,12 +28,17 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
 
     InvoiceDetailsViewModel viewModel;
     InvoiceTableViewModel parent;
-    public InvoiceDetailsBinding binding;
     NavigationViewModel navigationModel;
+
+    private InvoiceDetailsAdapter adapter;
+    public InvoiceDetailsBinding binding;
+    private LinearLayoutManager layoutManager;
+    private AppCompatActivity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = this;
         viewModel = InvoiceDetailsViewModel.getInstance();
 
         Bundle bundle = getIntent().getExtras();
@@ -40,17 +48,68 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         viewModel.status.set(bundle.getString("status"));
         viewModel.waybill.set(bundle.getInt("waybill"));
 
-        parent = InvoiceTableViewModel.getInstance();
-        InvoiceDetailsAdapter invoiceDetailsAdapter = new InvoiceDetailsAdapter();
-        invoiceDetailsAdapter.setItems(parent.invoices.get(bundle.getInt("position")).details);
+        String status = viewModel.status.get();
+        updateItem(status);
 
+        // Подготовка биндинга
         binding = DataBindingUtil.setContentView(this, R.layout.invoice_details);
         binding.setViewModel(viewModel);
         binding.list.setHasFixedSize(true);
-        binding.list.setLayoutManager(new LinearLayoutManager(this));
-        binding.list.setAdapter(invoiceDetailsAdapter);
 
-        String status = viewModel.status.get();
+        // Подготовка и установка лайаут-менеджера
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        binding.list.setLayoutManager(layoutManager);
+
+        // Подготовка и установка адаптера
+        parent = InvoiceTableViewModel.getInstance();
+        adapter = new InvoiceDetailsAdapter();
+        binding.list.setAdapter(adapter);
+        adapter.setItems(parent.invoices.get(bundle.getInt("position")).details);
+
+        viewModel.showInvoiceButton.set(
+                Service.isEqual(status, App.getContext().getString(R.string.status_reserved)) ||
+                        Service.isEqual(status, App.getContext().getString(R.string.status_ordered)));
+
+        // Подключение навигации
+        navigationModel = new NavigationViewModel(
+                this,  binding.drawer, binding.include.toolbar, binding.navigator);
+        setSupportActionBar(navigationModel.toolbar);
+
+        // Обновление списка
+        binding.swiperefresh.setRefreshing(true);
+        binding.swiperefresh.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        refresh();
+                    }
+                }
+        );
+        binding.swiperefresh.setRefreshing(false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (navigationModel.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        navigationModel.actionBar.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        navigationModel.actionBar.onConfigurationChanged(newConfig);
+    }
+
+    public void updateItem(String status){
         if (Service.isEqual(status, getString(R.string.status_unconfirmed))) {
             setTitle(getString(R.string.text_item_unconfirmed));
             ServerResponse.unconfirmedItem(this, viewModel.number.get());
@@ -73,33 +132,28 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         } else {
             this.setTitle(getString(R.string.text_item_invoice));
         }
-        viewModel.showInvoiceButton.set(
-                Service.isEqual(status, App.getContext().getString(R.string.status_reserved)) ||
-                        Service.isEqual(status, App.getContext().getString(R.string.status_ordered)));
-
-        navigationModel = new NavigationViewModel(
-                this,  binding.drawer, binding.include.toolbar, binding.navigator);
-        // Установить Toolbar для замены ActionBar'а.
-        setSupportActionBar(navigationModel.toolbar);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (navigationModel.onOptionsItemSelected(item)) {
-            return true;
+    public void refresh(){
+        int number = viewModel.number.get();
+        Invoice invoice = null;
+        for (Invoice item:App.model.invoices) {
+            if(item.number == number){
+                invoice = item;
+            }
         }
-        return super.onOptionsItemSelected(item);
-    }
+        if (invoice == null) return;
+        final Invoice thisInvoice = invoice;
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        navigationModel.actionBar.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        navigationModel.actionBar.onConfigurationChanged(newConfig);
+        updateItem(viewModel.status.get());
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                adapter = new InvoiceDetailsAdapter();
+                adapter.setItems(thisInvoice.details);
+                binding.list.setAdapter(adapter);
+                binding.swiperefresh.setRefreshing(false);
+            }
+        }, 1000);
     }
 }
