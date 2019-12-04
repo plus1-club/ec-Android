@@ -112,7 +112,7 @@ public class ServerResponse {
                     ServerNetwork.handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            ServerResponse.getBasket(context);
+                            ServerRun.getInstance().postBasket(context, response);
                         }
                     });
                 } else {

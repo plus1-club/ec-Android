@@ -33,7 +33,7 @@ public class RequestViewModel {
     public ObservableDouble total;
     public ObservableField<String> comment;
 
-    public ObservableField<String> title;
+    private ObservableField<String> title;
     public ObservableList<Request> requests;
     public ObservableField<Object> searchAdapter;
     public ObservableField<Object> basketAdapter;
@@ -105,9 +105,8 @@ public class RequestViewModel {
     public void onClear(final Context context){
         App.model.basket.clear();
         ServerResponse.deleteBasket(context);
-        Intent intent = new Intent(context, RequestsBasketActivity.class);
-        intent.putExtra("title", context.getString(R.string.text_basket));
-        context.startActivity(intent);
+        ((RequestsBasketActivity)context).refreshBasket();
+        total.set(0);
     }
 
     public void addToBasket(Context context){

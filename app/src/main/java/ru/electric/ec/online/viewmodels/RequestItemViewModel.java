@@ -1,7 +1,6 @@
 package ru.electric.ec.online.viewmodels;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -45,11 +44,17 @@ public class RequestItemViewModel {
 
     public void onTextChanged(Context context, CharSequence s, int start, int before, int count) {
         int newCount = s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString());
-        this.count.set(newCount);
-        this.sum.set(newCount * price.get());
-        Request request = new Request(product.get(), newCount, stockCount.get(), price.get(), check.get());
-        parent.requests.set(position.get(), request);
-        updateStatus();
+        if (newCount != this.count.get() && newCount != 0)
+        {
+            this.count.set(newCount);
+            this.sum.set(newCount * price.get());
+            Request request = new Request(product.get(), newCount, stockCount.get(), price.get(), check.get());
+            parent.requests.set(position.get(), request);
+
+            ServerResponse.putBasket(context, parent.requests);
+            ((RequestsBasketActivity)context).refreshBasket();
+            updateStatus();
+        }
      }
 
     public void onFlagClick(View view) {
@@ -68,10 +73,7 @@ public class RequestItemViewModel {
             }
         }
         ServerResponse.putBasket(view.getContext(), parent.requests);
-
-        Intent intent = new Intent(context, RequestsBasketActivity.class);
-        intent.putExtra("title", context.getString(R.string.text_basket));
-        context.startActivity(intent);
+        ((RequestsBasketActivity)context).refreshBasket();
         updateStatus();
     }
 

@@ -6,6 +6,7 @@ import android.net.Uri;
 
 import com.google.gson.internal.LinkedTreeMap;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -94,6 +95,10 @@ public class ServerRun {
         }
      }
 
+    public void postBasket(Context context, Response<ServerData> response){
+        ServerResponse.getBasket(context);
+    }
+
     public void putBasket(Context context, Response<ServerData> response){
         ServerResponse.getBasket(context);
     }
@@ -159,7 +164,8 @@ public class ServerRun {
 
     public void getPrint(Context context, final Response<ServerData> response, final int number) {
         if (response.body() != null && response.body().getError().isEmpty()) {
-            Map<String, String> data = (Map<String, String>) response.body().getData();
+            @SuppressWarnings("unchecked")
+            Map<String, String> data = (LinkedHashMap<String, String>) response.body().getData();
             final String srcUrl = data.get("file");
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(srcUrl));
             context.startActivity(intent);
