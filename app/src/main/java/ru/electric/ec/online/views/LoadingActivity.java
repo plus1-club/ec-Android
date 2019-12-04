@@ -7,40 +7,23 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import java.util.Objects;
-
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.databinding.RequestsBasketBinding;
-import ru.electric.ec.online.viewadapters.RequestsBasketAdapter;
+import ru.electric.ec.online.databinding.LoadingBinding;
+import ru.electric.ec.online.viewmodels.LoadingViewModel;
 import ru.electric.ec.online.viewmodels.NavigationViewModel;
-import ru.electric.ec.online.viewmodels.RequestViewModel;
 
-public class RequestsBasketActivity extends AppCompatActivity {
+public class LoadingActivity extends AppCompatActivity {
 
-    RequestViewModel viewModel;
+    LoadingViewModel viewModel;
     NavigationViewModel navigationModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = RequestViewModel.getInstance();
-        Bundle bundle = getIntent().getExtras();
-        this.setTitle(Objects.requireNonNull(bundle).getString("title"));
-
-        RequestsBasketAdapter requestsBasketAdapter = new RequestsBasketAdapter();
-        requestsBasketAdapter.setItems(App.model.basket);
-        viewModel.basketAdapter.set(requestsBasketAdapter);
-
-        RequestsBasketBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_basket);
+        viewModel = LoadingViewModel.getInstance(this);
+        LoadingBinding binding = DataBindingUtil.setContentView(this, R.layout.loading);
         binding.setViewModel(viewModel);
-        binding.list.setHasFixedSize(true);
-        binding.list.setLayoutManager(new LinearLayoutManager(this));
-        binding.list.setAdapter(requestsBasketAdapter);
-
-        viewModel.total.set(0);
 
         navigationModel = new NavigationViewModel(
                 this,  binding.drawer, binding.include.toolbar, binding.navigator);

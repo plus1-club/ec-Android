@@ -7,8 +7,8 @@ import android.view.MenuItem;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.models.ServerResponse;
 import ru.electric.ec.online.views.InvoiceTableActivity;
+import ru.electric.ec.online.views.LoadingActivity;
 import ru.electric.ec.online.views.RequestActivity;
-import ru.electric.ec.online.views.RequestsBasketActivity;
 
 public class MenuViewModel {
 
@@ -37,9 +37,10 @@ public class MenuViewModel {
     }
 
     public void onCart(final Context context) {
-        Intent intent = new Intent(context, RequestsBasketActivity.class);
+        Intent intent = new Intent(context, LoadingActivity.class);
         intent.putExtra("title", context.getString(R.string.text_basket));
         context.startActivity(intent);
+        ServerResponse.getBasket(context);
     }
 
     public void onUnconfirmed(Context context){

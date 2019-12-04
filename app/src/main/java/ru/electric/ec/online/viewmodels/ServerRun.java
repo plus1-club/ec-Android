@@ -25,7 +25,7 @@ import ru.electric.ec.online.views.EnterActivity;
 import ru.electric.ec.online.views.InvoiceDetailsActivity;
 import ru.electric.ec.online.views.InvoiceTableActivity;
 import ru.electric.ec.online.views.MenuActivity;
-import ru.electric.ec.online.views.RequestsSearchActivity;
+import ru.electric.ec.online.views.RequestsBasketActivity;
 
 public class ServerRun {
 
@@ -76,9 +76,9 @@ public class ServerRun {
             }
         }
         RequestViewModel.getInstance().notifySearch();
-        Intent intent = new Intent(context, RequestsSearchActivity.class);
-        intent.putExtra("title", context.getString(R.string.text_request));
-        context.startActivity(intent);
+        //Intent intent = new Intent(context, RequestsSearchActivity.class);
+        //intent.putExtra("title", context.getString(R.string.text_request));
+        //context.startActivity(intent);
     }
 
     public void getBasket(Context context, Response<ServerData> response){
@@ -97,7 +97,9 @@ public class ServerRun {
                 App.model.basket.add(request);
             }
         }
-        RequestViewModel.getInstance().notifyBasket();
+        Intent intent = new Intent(context, RequestsBasketActivity.class);
+        intent.putExtra("title", context.getString(R.string.text_request));
+        context.startActivity(intent);
     }
 
     public void putBasket(Context context, Response<ServerData> response){
