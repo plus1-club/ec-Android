@@ -3,6 +3,7 @@ package ru.electric.ec.online.viewmodels;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.widget.Toast;
 
 import androidx.databinding.ObservableArrayList;
@@ -115,7 +116,16 @@ public class RequestViewModel {
         context.startActivity(intent);
     }
 
-    public void onIssue(Context context){
+    public void onIssue(final Context context){
         ServerResponse.order(context, comment.get());
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                App.model.basket.clear();
+                ServerResponse.deleteBasket(context);
+                ((RequestsBasketActivity)context).refreshBasket();
+                total.set(0);
+            }
+        }, 500);
     }
 }
