@@ -58,12 +58,12 @@ public class RequestsBasketActivity extends AppCompatActivity {
         binding.list.setAdapter(adapter);
         viewModel.basketAdapter.set(adapter);
 
-        // Подклчение навигации
+        // Подключение навигации
         navigationModel = new NavigationViewModel(
                 this,  binding.drawer, binding.include.toolbar, binding.navigator);
-        // Установить Toolbar для замены ActionBar'а.
         setSupportActionBar(navigationModel.toolbar);
 
+        // Обновление списка
         binding.swiperefresh.setRefreshing(true);
         refreshBasket();
         binding.swiperefresh.setOnRefreshListener(

@@ -2,12 +2,14 @@ package ru.electric.ec.online.views;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Objects;
 
@@ -24,29 +26,51 @@ public class RequestsSearchActivity extends AppCompatActivity {
     RequestViewModel viewModel;
     NavigationViewModel navigationModel;
 
+    private RequestsSearchAdapter adapter;
+    private RequestsSearchBinding binding;
+    private LinearLayoutManager layoutManager;
+    private AppCompatActivity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = this;
         viewModel = RequestViewModel.getInstance();
         Bundle bundle = getIntent().getExtras();
         this.setTitle(Objects.requireNonNull(bundle).getString("title"));
 
-        RequestsSearchAdapter requestsSearchAdapter = new RequestsSearchAdapter();
-        requestsSearchAdapter.setItems(App.model.search);
-        viewModel.searchAdapter.set(requestsSearchAdapter);
-
-        RequestsSearchBinding binding = DataBindingUtil.setContentView(this, R.layout.requests_search);
+        // Подготовка биндинга
+        binding = DataBindingUtil.setContentView(this, R.layout.requests_search);
         binding.setViewModel(viewModel);
         binding.list.setHasFixedSize(true);
-        binding.list.setLayoutManager(new LinearLayoutManager(this));
-        binding.list.setAdapter(requestsSearchAdapter);
 
+        // Подготовка и установка лайаут-менеджера
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        binding.list.setLayoutManager(layoutManager);
+
+        // Подготовка и установка адаптера
+        adapter = new RequestsSearchAdapter();
+        adapter.setItems(App.model.search);
+        viewModel.searchAdapter.set(adapter);
+        binding.list.setAdapter(adapter);
+
+        // Подключение навигации
         navigationModel = new NavigationViewModel(
                 this,  binding.drawer, binding.include.toolbar, binding.navigator);
-        // Установить Toolbar для замены ActionBar'а.
         setSupportActionBar(navigationModel.toolbar);
 
-        ServerResponse.byCode(this, viewModel.product.get(), viewModel.count.get(), viewModel.isFullSearch.get());
+        // Обновление списка
+        binding.swiperefresh.setRefreshing(true);
+        refreshSearch();
+        binding.swiperefresh.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        refreshSearch();
+                    }
+                }
+        );
     }
 
     @Override
@@ -68,4 +92,20 @@ public class RequestsSearchActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         navigationModel.actionBar.onConfigurationChanged(newConfig);
     }
+
+
+    public void refreshSearch(){
+        ServerResponse.byCode(this, viewModel.product.get(), viewModel.count.get(), viewModel.isFullSearch.get());
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                adapter = new RequestsSearchAdapter();
+                adapter.setItems(App.model.search);
+                binding.list.setAdapter(adapter);
+                viewModel.searchAdapter.set(adapter);
+                binding.swiperefresh.setRefreshing(false);
+            }
+        }, 1000);
+    }
+
 }
