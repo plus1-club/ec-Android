@@ -125,6 +125,7 @@ public class RequestViewModel {
                 ServerResponse.deleteBasket(context);
                 ((RequestsBasketActivity)context).refreshBasket();
                 total.set(0);
+                comment.set("");
             }
         }, 500);
     }
