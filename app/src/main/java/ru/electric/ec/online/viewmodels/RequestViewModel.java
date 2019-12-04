@@ -14,14 +14,11 @@ import androidx.databinding.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.domains.Request;
 import ru.electric.ec.online.models.ServerResponse;
-import ru.electric.ec.online.viewadapters.RequestsBasketAdapter;
-import ru.electric.ec.online.viewadapters.RequestsSearchAdapter;
 import ru.electric.ec.online.views.RequestActivity;
 import ru.electric.ec.online.views.RequestsBasketActivity;
 import ru.electric.ec.online.views.RequestsSearchActivity;
@@ -90,7 +87,7 @@ public class RequestViewModel {
         context.startActivity(intent);
     }
 
-    public void toBasket(Context context){
+    public void toBasket(final Context context){
         List<Request> added = new ArrayList<>();
         for (Request request: requests) {
             if (request.check){
@@ -99,19 +96,18 @@ public class RequestViewModel {
         }
         App.model.basket.addAll(added);
         ServerResponse.postBasket(context, added);
+
         Intent intent = new Intent(context, RequestsBasketActivity.class);
         intent.putExtra("title", context.getString(R.string.text_basket));
         context.startActivity(intent);
-        notifyBasket();
     }
 
-    public void onClear(Context context){
+    public void onClear(final Context context){
         App.model.basket.clear();
         ServerResponse.deleteBasket(context);
         Intent intent = new Intent(context, RequestsBasketActivity.class);
         intent.putExtra("title", context.getString(R.string.text_basket));
         context.startActivity(intent);
-        notifyBasket();
     }
 
     public void addToBasket(Context context){
@@ -122,13 +118,5 @@ public class RequestViewModel {
 
     public void onIssue(Context context){
         ServerResponse.order(context, comment.get());
-    }
-
-    void notifySearch(){
-        Objects.requireNonNull((RequestsSearchAdapter) searchAdapter.get()).notifyDataSetChanged();
-    }
-
-    void notifyBasket(){
-        Objects.requireNonNull((RequestsBasketAdapter) basketAdapter.get()).notifyDataSetChanged();
     }
 }

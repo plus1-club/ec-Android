@@ -25,7 +25,6 @@ import ru.electric.ec.online.views.EnterActivity;
 import ru.electric.ec.online.views.InvoiceDetailsActivity;
 import ru.electric.ec.online.views.InvoiceTableActivity;
 import ru.electric.ec.online.views.MenuActivity;
-import ru.electric.ec.online.views.RequestsBasketActivity;
 
 public class ServerRun {
 
@@ -75,10 +74,6 @@ public class ServerRun {
                 App.model.search.add(request);
             }
         }
-        RequestViewModel.getInstance().notifySearch();
-        //Intent intent = new Intent(context, RequestsSearchActivity.class);
-        //intent.putExtra("title", context.getString(R.string.text_request));
-        //context.startActivity(intent);
     }
 
     public void getBasket(Context context, Response<ServerData> response){
@@ -97,10 +92,7 @@ public class ServerRun {
                 App.model.basket.add(request);
             }
         }
-        Intent intent = new Intent(context, RequestsBasketActivity.class);
-        intent.putExtra("title", context.getString(R.string.text_request));
-        context.startActivity(intent);
-    }
+     }
 
     public void putBasket(Context context, Response<ServerData> response){
         ServerResponse.getBasket(context);
@@ -111,9 +103,7 @@ public class ServerRun {
     }
 
     public void order(Context context, Response<ServerData> response){
-        Intent intent = new Intent(context, InvoiceTableActivity.class);
-        intent.putExtra("title", context.getString(R.string.text_list_unconfirmed));
-        context.startActivity(intent);
+        ServerResponse.getBasket(context);
     }
 
     public void invoiceList(Context context, Response<ServerData> response){
@@ -169,6 +159,12 @@ public class ServerRun {
 
     public void getPrint(Context context, final Response<ServerData> response, final int number) {
         if (response.body() != null && response.body().getError().isEmpty()) {
+            Map<String, String> data = (Map<String, String>) response.body().getData();
+            final String srcUrl = data.get("file");
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(srcUrl));
+            context.startActivity(intent);
+
+            /*
             try {
                 Map<String, String> data = (LinkedTreeMap<String, String>) response.body().getData();
                 final String srcUrl = data.get("file");
@@ -177,6 +173,7 @@ public class ServerRun {
             } catch (Exception e){
                 App.log(context, true, false, e.getMessage());
             }
+            */
             //final String destPath = Environment.getExternalStorageDirectory() + "/Download/" + number + ".pdf";
             //FileLoader longTask = FileLoader.getInstance(context, destPath, srcUrl); // Создаем экземпляр
             //longTask.execute();

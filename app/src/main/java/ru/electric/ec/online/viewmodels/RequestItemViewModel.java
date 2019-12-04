@@ -1,6 +1,7 @@
 package ru.electric.ec.online.viewmodels;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -9,13 +10,11 @@ import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
-import java.util.Objects;
-
 import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.domains.Request;
 import ru.electric.ec.online.models.ServerResponse;
-import ru.electric.ec.online.viewadapters.RequestsBasketAdapter;
+import ru.electric.ec.online.views.RequestsBasketActivity;
 
 public class RequestItemViewModel {
 
@@ -61,6 +60,7 @@ public class RequestItemViewModel {
     }
 
     public void onDeleteClick(View view) {
+        final Context context = view.getContext();
         String deletedProduct = product.get();
         for (Request item: parent.requests) {
             if (item.product.equals(deletedProduct)){
@@ -68,9 +68,10 @@ public class RequestItemViewModel {
             }
         }
         ServerResponse.putBasket(view.getContext(), parent.requests);
-        RequestsBasketAdapter basketAdapter = (RequestsBasketAdapter) parent.basketAdapter.get();
-        Objects.requireNonNull(basketAdapter).notifyDataSetChanged();
-        ServerResponse.getBasket(view.getContext());
+
+        Intent intent = new Intent(context, RequestsBasketActivity.class);
+        intent.putExtra("title", context.getString(R.string.text_basket));
+        context.startActivity(intent);
         updateStatus();
     }
 
