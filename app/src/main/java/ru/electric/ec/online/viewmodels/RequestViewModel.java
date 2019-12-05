@@ -97,10 +97,17 @@ public class RequestViewModel {
         }
         App.model.basket.addAll(added);
         ServerResponse.postBasket(context, added);
+        total.set(0);
+        comment.set("");
 
-        Intent intent = new Intent(context, RequestsBasketActivity.class);
-        intent.putExtra("title", context.getString(R.string.text_basket));
-        context.startActivity(intent);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(context, RequestsBasketActivity.class);
+                intent.putExtra("title", context.getString(R.string.text_basket));
+                context.startActivity(intent);
+            }
+        }, 500);
     }
 
     public void onClear(final Context context){

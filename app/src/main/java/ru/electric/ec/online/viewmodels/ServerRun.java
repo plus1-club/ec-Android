@@ -84,10 +84,17 @@ public class ServerRun {
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
+                int stockCount;
+                if (Objects.requireNonNull(el.get("stockCount")).toLowerCase()
+                        .equals("Частично доступно".toLowerCase())){
+                    stockCount = -1;
+                } else {
+                    stockCount = Service.getInt(el.get("stockCount"));
+                }
                 Request request = new Request(
                         el.get("product"),
                         Service.getInt(el.get("requestCount")),
-                        Service.getInt(el.get("stockCount")),
+                        stockCount,
                         Service.getDouble(el.get("price")),
                         true);
                 App.model.basket.add(request);

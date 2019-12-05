@@ -9,13 +9,13 @@ import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
-import ru.electric.ec.online.App;
-import ru.electric.ec.online.R;
+import ru.electric.ec.online.domains.Count;
 import ru.electric.ec.online.domains.Request;
 import ru.electric.ec.online.models.ServerResponse;
+import ru.electric.ec.online.models.Service;
 import ru.electric.ec.online.views.RequestsBasketActivity;
 
-public class RequestItemViewModel {
+public class RequestBasketItemViewModel {
 
     public RequestViewModel parent;
 
@@ -29,7 +29,7 @@ public class RequestItemViewModel {
     public ObservableInt color;
     public ObservableBoolean check;
 
-    public RequestItemViewModel() {
+    public RequestBasketItemViewModel() {
         position = new ObservableInt();
         product = new ObservableField<>();
         count = new ObservableInt();
@@ -78,16 +78,10 @@ public class RequestItemViewModel {
     }
 
     public void updateStatus() {
-        if (stockCount.get() == 0) {
-            status.set(App.getContext().getString(R.string.text_status_red));
-            color.set(R.color.red);
-        } else if (stockCount.get() >= count.get()) {
-            status.set(App.getContext().getString(R.string.text_status_green));
-            color.set(R.color.green);
-        } else {
-            status.set(App.getContext().getString(R.string.text_status_yellow, stockCount.get(), count.get()));
-            color.set(R.color.yellow);
-        }
+        Count countStatus = Service.status(count.get(), stockCount.get());
+        status.set(countStatus.status);
+        color.set(countStatus.color);
+
         double total = 0;
         for (Request item : parent.requests) {
             if(item.check) {

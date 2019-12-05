@@ -7,6 +7,10 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 import java.util.Objects;
 
+import ru.electric.ec.online.App;
+import ru.electric.ec.online.R;
+import ru.electric.ec.online.domains.Count;
+
 public class Service {
 
     public static String rub(ObservableDouble value, String template){
@@ -14,6 +18,8 @@ public class Service {
         DecimalFormatSymbols symbols=DecimalFormatSymbols.getInstance();
         symbols.setGroupingSeparator(' '); //явно задаем символ разделителя тысяч
         symbols.setDecimalSeparator(',');
+        formatter.setMinimumFractionDigits(2);
+        formatter.setMaximumFractionDigits(2);
         formatter.setDecimalFormatSymbols(symbols);
         String textValue = formatter.format(value.get());
         return String.format(Locale.getDefault(), template, textValue);
@@ -32,5 +38,31 @@ public class Service {
 
     public static boolean isEqual(String one, String two){
         return Objects.requireNonNull(one).toLowerCase().equals(two.toLowerCase());
+    }
+
+    public static Count status(int count, int stockCount){
+        String text;
+        int color;
+        if (count == 0) {
+            text = App.getContext().getString(R.string.text_status_black);
+            color = R.color.black;
+        } else if (stockCount == -2) {
+            text = App.getContext().getString(R.string.text_status_violet);
+            color = R.color.violet;
+        } else if (stockCount == 0) {
+            text = App.getContext().getString(R.string.text_status_red);
+            color = R.color.red;
+        } else if (count > 500 && (stockCount > 500 || stockCount == -1)) {
+            text = App.getContext().getString(R.string.text_status_orange);
+            color = R.color.orange;
+        } else if (stockCount < count) {
+            text = App.getContext().getString(R.string.text_status_yellow, stockCount);
+            color = R.color.yellow;
+        } else {
+            text = App.getContext().getString(R.string.text_status_green);
+            color = R.color.green;
+        }
+
+        return new Count(count, stockCount, text, color);
     }
 }

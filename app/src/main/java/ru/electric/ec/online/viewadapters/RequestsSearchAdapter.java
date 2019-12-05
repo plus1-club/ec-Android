@@ -16,12 +16,12 @@ import java.util.Objects;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.RequestsSearchItemBinding;
 import ru.electric.ec.online.domains.Request;
-import ru.electric.ec.online.viewmodels.RequestItemViewModel;
+import ru.electric.ec.online.viewmodels.RequestSearchItemViewModel;
 
 public class RequestsSearchAdapter extends RecyclerView.Adapter<RequestsSearchAdapter.RequestsTableViewHolder> {
 
     private List<Request> requests;
-    private RequestItemViewModel viewModel;
+    private RequestSearchItemViewModel viewModel;
 
     public RequestsSearchAdapter() {
         requests = new ArrayList<>();
@@ -35,7 +35,7 @@ public class RequestsSearchAdapter extends RecyclerView.Adapter<RequestsSearchAd
     @NonNull
     @Override
     public RequestsSearchAdapter.RequestsTableViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        viewModel = new RequestItemViewModel();
+        viewModel = new RequestSearchItemViewModel();
         viewModel.parent.requests.clear();
         viewModel.parent.requests.addAll(requests);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -57,7 +57,7 @@ public class RequestsSearchAdapter extends RecyclerView.Adapter<RequestsSearchAd
     static class RequestsTableViewHolder extends RecyclerView.ViewHolder {
 
         private RequestsSearchItemBinding binding;
-        private RequestItemViewModel viewModel;
+        private RequestSearchItemViewModel viewModel;
 
         RequestsTableViewHolder(View view) {
             super(view);

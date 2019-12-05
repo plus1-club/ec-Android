@@ -54,9 +54,12 @@
     <string name="text_count">%1$d</string>
     <string name="text_money">%1$s руб.</string>
     <string name="text_total">Итого: %1$s руб.</string>
-    <string name="text_status_green">В наличии</string>
-    <string name="text_status_yellow">Есть %1$d из %2$d</string>
+    <string name="text_status_black">Неизвестно</string>
+    <string name="text_status_violet">Превышено допустимое число проверок количества, попробуйте позднее</string>
     <string name="text_status_red">Нет</string>
+    <string name="text_status_orange">Частично доступно</string>
+    <string name="text_status_yellow">Доступно %1$d</string>
+    <string name="text_status_green">В наличии</string>
     <string name="text_basket_item_delete">Удалить строку из корзины</string>
 
     <!-- Экран "6.Счета" -->

@@ -16,12 +16,12 @@ import java.util.Objects;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.RequestsBasketItemBinding;
 import ru.electric.ec.online.domains.Request;
-import ru.electric.ec.online.viewmodels.RequestItemViewModel;
+import ru.electric.ec.online.viewmodels.RequestBasketItemViewModel;
 
 public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAdapter.RequestsBasketViewHolder> {
 
     private List<Request> requests;
-    private RequestItemViewModel viewModel;
+    private RequestBasketItemViewModel viewModel;
 
     public RequestsBasketAdapter() {
         requests = new ArrayList<>();
@@ -35,7 +35,7 @@ public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAd
     @NonNull
     @Override
     public RequestsBasketAdapter.RequestsBasketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        viewModel = new RequestItemViewModel();
+        viewModel = new RequestBasketItemViewModel();
         viewModel.parent.requests.clear();
         viewModel.parent.requests.addAll(requests);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -57,7 +57,7 @@ public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAd
     static class RequestsBasketViewHolder extends RecyclerView.ViewHolder {
 
         private RequestsBasketItemBinding binding;
-        private RequestItemViewModel viewModel;
+        private RequestBasketItemViewModel viewModel;
 
         RequestsBasketViewHolder(View view) {
             super(view);
