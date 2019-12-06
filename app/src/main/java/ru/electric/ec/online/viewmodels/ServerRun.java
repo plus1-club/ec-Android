@@ -3,10 +3,10 @@ package ru.electric.ec.online.viewmodels;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.widget.Toast;
 
 import com.google.gson.internal.LinkedTreeMap;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -71,7 +71,12 @@ public class ServerRun {
                         el.get("product"),
                         Service.getInt(el.get("requestCount")),
                         Service.getInt(el.get("stockCount")),
+                        Service.getInt(el.get("multiplicity")),
+                        el.get("unit"),
                         true);
+                if (request.requestCount % request.multiplicity > 0){
+                    request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
+                }
                 App.model.search.add(request);
             }
         }
@@ -84,19 +89,17 @@ public class ServerRun {
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
-                int stockCount;
-                if (Objects.requireNonNull(el.get("stockCount")).toLowerCase()
-                        .equals("Частично доступно".toLowerCase())){
-                    stockCount = -1;
-                } else {
-                    stockCount = Service.getInt(el.get("stockCount"));
-                }
                 Request request = new Request(
                         el.get("product"),
                         Service.getInt(el.get("requestCount")),
-                        stockCount,
+                        Service.getInt(el.get("stockCount")),
+                        Service.getInt(el.get("multiplicity")),
+                        el.get("unit"),
                         Service.getDouble(el.get("price")),
                         true);
+                if (request.requestCount % request.multiplicity > 0){
+                    request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
+                }
                 App.model.basket.add(request);
             }
         }
@@ -171,10 +174,15 @@ public class ServerRun {
 
     public void getPrint(Context context, final Response<ServerData> response, final int number) {
         if (response.body() != null && response.body().getError().isEmpty()) {
+            /*
             @SuppressWarnings("unchecked")
             Map<String, String> data = (LinkedHashMap<String, String>) response.body().getData();
             final String srcUrl = data.get("file");
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(srcUrl));
+            context.startActivity(intent);
+             */
+            Toast.makeText(context, "Скачивание счета - в разработке", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ec-electric.ru/order/example.xls"));
             context.startActivity(intent);
 
             /*

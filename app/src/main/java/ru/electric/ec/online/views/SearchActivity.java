@@ -62,6 +62,7 @@ public class SearchActivity extends AppCompatActivity {
 
         // Обновление списка
         binding.swiperefresh.setRefreshing(true);
+        ServerResponse.byCode(this, viewModel.product.get(), viewModel.count.get(), viewModel.isFullSearch.get());
         refreshSearch();
         binding.swiperefresh.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
@@ -93,9 +94,7 @@ public class SearchActivity extends AppCompatActivity {
         navigationModel.actionBar.onConfigurationChanged(newConfig);
     }
 
-
     public void refreshSearch(){
-        ServerResponse.byCode(this, viewModel.product.get(), viewModel.count.get(), viewModel.isFullSearch.get());
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -107,5 +106,4 @@ public class SearchActivity extends AppCompatActivity {
             }
         }, 1000);
     }
-
 }

@@ -3,12 +3,18 @@ package ru.electric.ec.online.viewmodels;
 import android.content.Context;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ru.electric.ec.online.App;
+import ru.electric.ec.online.R;
 import ru.electric.ec.online.domains.Count;
 import ru.electric.ec.online.domains.Request;
 import ru.electric.ec.online.models.ServerResponse;
@@ -23,6 +29,8 @@ public class BasketItemViewModel {
     public ObservableField<String> product;
     public ObservableInt count;
     public ObservableInt stockCount;
+    public ObservableInt multiplicity;
+    public ObservableField<String> unit;
     public ObservableDouble price;
     public ObservableDouble sum;
     public ObservableField<String> status;
@@ -34,6 +42,8 @@ public class BasketItemViewModel {
         product = new ObservableField<>();
         count = new ObservableInt();
         stockCount = new ObservableInt();
+        multiplicity = new ObservableInt();
+        unit = new ObservableField<>();
         price = new ObservableDouble();
         sum = new ObservableDouble();
         status = new ObservableField<>();
@@ -46,10 +56,21 @@ public class BasketItemViewModel {
         int newCount = s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString());
         if (newCount != this.count.get() && newCount != 0)
         {
-            this.count.set(newCount);
+            if (newCount % multiplicity.get() > 0){
+                this.count.set(newCount + (multiplicity.get() - (newCount % multiplicity.get())));
+                Toast.makeText(context,
+                        context.getString(R.string.text_multiplicity, multiplicity.get()),
+                        Toast.LENGTH_LONG).show();
+
+            } else {
+                this.count.set(newCount);
+            }
             this.sum.set(newCount * price.get());
-            Request request = new Request(product.get(), newCount, stockCount.get(), price.get(), check.get());
+            Request request = new Request(product.get(), this.count.get(), stockCount.get(),
+                    multiplicity.get(), unit.get(), price.get(), check.get());
             parent.requests.set(position.get(), request);
+            App.model.basket.clear();
+            App.model.basket.addAll(parent.requests);
 
             ServerResponse.putBasket(context, parent.requests);
             ((BasketActivity)context).refreshBasket();
@@ -59,7 +80,8 @@ public class BasketItemViewModel {
 
     public void onFlagClick(View view) {
         this.check.set(((CheckBox) view).isChecked());
-        Request request = new Request(product.get(), count.get(), stockCount.get(), price.get(), check.get());
+        Request request = new Request(product.get(), count.get(), stockCount.get(),
+                multiplicity.get(), unit.get(), price.get(), check.get());
         parent.requests.set(position.get(), request);
         updateStatus();
     }
@@ -67,10 +89,14 @@ public class BasketItemViewModel {
     public void onDeleteClick(View view) {
         final Context context = view.getContext();
         String deletedProduct = product.get();
+        List<Request> deleted = new ArrayList<>();
         for (Request item: parent.requests) {
             if (item.product.equals(deletedProduct)){
-                parent.requests.remove(item);
+                deleted.add(item);
             }
+        }
+        for (Request item: deleted){
+            parent.requests.remove(item);
         }
         ServerResponse.putBasket(view.getContext(), parent.requests);
         ((BasketActivity)context).refreshBasket();

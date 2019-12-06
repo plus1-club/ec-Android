@@ -82,6 +82,8 @@ public class RequestViewModel {
     // TODO: Подключаться к серверу и скачивать остатки
     public void linkStock(Context context){
         Toast.makeText(context, "Скачивание остатков - в разработке", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ec-electric.ru/order/example.xls"));
+        context.startActivity(intent);
     }
 
     public void linkSample(Context context){

@@ -3,15 +3,19 @@ package ru.electric.ec.online.viewmodels;
 import android.content.Context;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
+import ru.electric.ec.online.App;
+import ru.electric.ec.online.R;
 import ru.electric.ec.online.domains.Count;
 import ru.electric.ec.online.domains.Request;
 import ru.electric.ec.online.models.Service;
+import ru.electric.ec.online.views.SearchActivity;
 
 public class SearchItemViewModel {
 
@@ -21,6 +25,8 @@ public class SearchItemViewModel {
     public ObservableField<String> product;
     public ObservableInt count;
     public ObservableInt stockCount;
+    public ObservableInt multiplicity;
+    public ObservableField<String> unit;
     private ObservableDouble price;
     public ObservableDouble sum;
     public ObservableField<String> status;
@@ -32,6 +38,8 @@ public class SearchItemViewModel {
         product = new ObservableField<>();
         count = new ObservableInt();
         stockCount = new ObservableInt();
+        multiplicity = new ObservableInt();
+        unit = new ObservableField<>();
         price = new ObservableDouble();
         sum = new ObservableDouble();
         status = new ObservableField<>();
@@ -44,17 +52,30 @@ public class SearchItemViewModel {
         int newCount = s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString());
         if (newCount != this.count.get() && newCount != 0)
         {
-            this.count.set(newCount);
+            if (newCount % multiplicity.get() > 0){
+                this.count.set(newCount + (multiplicity.get() - (newCount % multiplicity.get())));
+                Toast.makeText(context,
+                        context.getString(R.string.text_multiplicity, multiplicity.get()),
+                        Toast.LENGTH_LONG).show();
+            } else {
+                this.count.set(newCount);
+            }
             this.sum.set(newCount * price.get());
-            Request request = new Request(product.get(), newCount, stockCount.get(), price.get(), check.get());
+            Request request = new Request(product.get(), this.count.get(), stockCount.get(),
+                    multiplicity.get(), unit.get(), price.get(), check.get());
             parent.requests.set(position.get(), request);
+            App.model.search.clear();
+            App.model.search.addAll(parent.requests);
+
+            ((SearchActivity)context).refreshSearch();
             updateStatus();
         }
      }
 
     public void onFlagClick(View view) {
         this.check.set(((CheckBox) view).isChecked());
-        Request request = new Request(product.get(), count.get(), stockCount.get(), price.get(), check.get());
+        Request request = new Request(product.get(), count.get(), stockCount.get(),
+                multiplicity.get(), unit.get(), price.get(), check.get());
         parent.requests.set(position.get(), request);
         updateStatus();
     }

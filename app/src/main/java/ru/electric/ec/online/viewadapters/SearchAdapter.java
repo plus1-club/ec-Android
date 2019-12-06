@@ -70,6 +70,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.RequestsTa
             viewModel.product.set(request.product);
             viewModel.count.set(request.requestCount);
             viewModel.stockCount.set(request.stockCount);
+            viewModel.multiplicity.set(request.multiplicity);
+            viewModel.unit.set(request.unit);
             viewModel.check.set(false);
             viewModel.updateStatus();
         }

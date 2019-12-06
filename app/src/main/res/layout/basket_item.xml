@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <import type="android.view.View" />
         <import type="ru.electric.ec.online.models.Service" />
         <variable
             name="viewModel"
@@ -46,9 +47,25 @@
                 tools:ignore="Autofill,LabelFor" />
 
             <TextView
+                android:id="@+id/editUnit"
+                style="@style/AppTheme.ECOnline.Text"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="0dp"
+                android:paddingStart="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="5dp"
+                android:text="@={viewModel.unit}"
+                android:textAlignment="viewStart"
+                android:textColor="@{viewModel.color}"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+
+            <TextView
                 android:id="@+id/textProduct"
                 style="@style/AppTheme.ECOnline.Text"
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
                 android:gravity="bottom"

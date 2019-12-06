@@ -81,5 +81,6 @@
     <string name="permission_explanation">Доступ к файлам нужен для возможности загрузки счетов в формате pdf</string>
     <string name="loading">Идёт загрузка данных с сервера… Подождите…</string>
     <string name="order_processed">Заказ оформлен</string>
+    <string name="text_multiplicity">Количество увеличено до кратности минимальной упаковки: %1$d (по %1$d в упаковке).</string>
 
 </resources>

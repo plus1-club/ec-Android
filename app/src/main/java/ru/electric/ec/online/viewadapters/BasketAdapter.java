@@ -70,6 +70,8 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.RequestsBa
             viewModel.product.set(request.product);
             viewModel.count.set(request.requestCount);
             viewModel.stockCount.set(request.stockCount);
+            viewModel.multiplicity.set(request.multiplicity);
+            viewModel.unit.set(request.unit);
             viewModel.price.set(request.price);
             viewModel.sum.set(request.sum);
             viewModel.check.set(true);
