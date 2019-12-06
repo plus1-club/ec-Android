@@ -28,6 +28,7 @@
             android:hint="@string/edit_login"
             android:inputType="textPersonName"
             android:text="@={viewModel.login}"
+            android:textColorHint="?android:attr/colorPrimaryDark"
             tools:ignore="Autofill" />
 
         <EditText
@@ -39,6 +40,7 @@
             android:hint="@string/edit_password"
             android:inputType="textPassword"
             android:text="@={viewModel.password}"
+            android:textColorHint="?android:attr/colorPrimaryDark"
             tools:ignore="Autofill" />
 
         <Button
@@ -56,9 +58,11 @@
             style="@style/AppTheme.ECOnline.Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{@string/text_ender(@string/text_phone)}"
             android:onClick="@{()->viewModel.onPhone(context, @string/text_phone)}"
-            android:textAlignment="center" />
+            android:text="@{@string/text_ender(@string/text_phone)}"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
 
     </LinearLayout>
 </layout>

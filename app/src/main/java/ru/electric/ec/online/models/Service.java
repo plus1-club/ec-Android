@@ -52,15 +52,15 @@ public class Service {
         } else if (stockCount == 0) {
             text = App.getContext().getString(R.string.text_status_red);
             color = R.color.red;
-        } else if (count > 500 && (stockCount > 500 || stockCount == -1)) {
-            text = App.getContext().getString(R.string.text_status_orange);
-            color = R.color.orange;
-        } else if (stockCount < count) {
-            text = App.getContext().getString(R.string.text_status_yellow, stockCount);
-            color = R.color.yellow;
-        } else {
+        } else if (stockCount >= count) {
             text = App.getContext().getString(R.string.text_status_green);
             color = R.color.green;
+        } else if (stockCount > 500 || stockCount == -1) {
+            text = App.getContext().getString(R.string.text_status_orange);
+            color = R.color.orange;
+        } else {
+            text = App.getContext().getString(R.string.text_status_yellow, stockCount);
+            color = R.color.yellow;
         }
 
         return new Count(count, stockCount, text, color);
