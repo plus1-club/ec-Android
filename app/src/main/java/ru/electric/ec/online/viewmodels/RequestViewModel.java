@@ -20,6 +20,7 @@ import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.domains.Request;
 import ru.electric.ec.online.models.ServerResponse;
+import ru.electric.ec.online.views.InfoActivity;
 import ru.electric.ec.online.views.RequestActivity;
 import ru.electric.ec.online.views.RequestsBasketActivity;
 import ru.electric.ec.online.views.RequestsSearchActivity;
@@ -125,6 +126,12 @@ public class RequestViewModel {
 
     public void onIssue(final Context context){
         ServerResponse.order(context, comment.get());
+        Intent intent = new Intent(context, InfoActivity.class);
+        intent.putExtra("title", context.getString(R.string.text_basket));
+        intent.putExtra("info", context.getString(R.string.order_processed));
+        intent.putExtra("activityName", "RequestsBasketActivity");
+        context.startActivity(intent);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
