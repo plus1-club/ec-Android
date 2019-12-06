@@ -34,10 +34,10 @@
             android:name=".views.RequestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".views.RequestsSearchActivity"
+            android:name=".views.SearchActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".views.RequestsBasketActivity"
+            android:name=".views.BasketActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".views.InvoiceTableActivity"

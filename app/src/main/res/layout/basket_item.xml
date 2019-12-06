@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
+        <import type="ru.electric.ec.online.models.Service" />
         <variable
             name="viewModel"
-            type="ru.electric.ec.online.viewmodels.RequestSearchItemViewModel" />
+            type="ru.electric.ec.online.viewmodels.BasketItemViewModel" />
     </data>
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:baselineAligned="false"
@@ -18,19 +20,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/checkMark"
                 android:layout_width="32dp"
                 android:layout_height="40dp"
-                android:backgroundTintMode="add"
                 android:buttonTint="@{viewModel.color}"
                 android:checked="@={viewModel.check}"
                 android:onClick="@{(view) -> viewModel.onFlagClick(view)}"
-                android:gravity="bottom"
-                android:textSize="14sp" />
+                android:gravity="bottom" />
 
             <!--suppress AndroidUnknownAttribute -->
             <EditText
@@ -49,7 +48,7 @@
             <TextView
                 android:id="@+id/textProduct"
                 style="@style/AppTheme.ECOnline.Text"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
                 android:gravity="bottom"
@@ -59,22 +58,30 @@
                 android:textSize="14sp"
                 tools:ignore="RtlCompat" />
 
+            <ImageButton
+                android:id="@+id/buttonDelete"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/text_basket_item_delete"
+                android:onClick="@{(view) -> viewModel.onDeleteClick(view)}"
+                android:src="@android:drawable/btn_dialog" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
             android:baselineAligned="false"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/editStatus"
                 style="@style/AppTheme.ECOnline.Text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="5dp"
                 android:text="@={viewModel.status}"
@@ -82,6 +89,18 @@
                 android:textColor="@{viewModel.color}"
                 android:textSize="14sp"
                 tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/editSum"
+                style="@style/AppTheme.ECOnline.Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:padding="0dp"
+                android:text="@{Service.rub(viewModel.sum,@string/text_money)}"
+                android:textAlignment="viewEnd"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>

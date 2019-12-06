@@ -15,19 +15,19 @@ import java.util.Objects;
 
 import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.databinding.RequestsSearchBinding;
+import ru.electric.ec.online.databinding.SearchBinding;
 import ru.electric.ec.online.models.ServerResponse;
-import ru.electric.ec.online.viewadapters.RequestsSearchAdapter;
+import ru.electric.ec.online.viewadapters.SearchAdapter;
 import ru.electric.ec.online.viewmodels.NavigationViewModel;
 import ru.electric.ec.online.viewmodels.RequestViewModel;
 
-public class RequestsSearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
 
     RequestViewModel viewModel;
     NavigationViewModel navigationModel;
 
-    private RequestsSearchAdapter adapter;
-    private RequestsSearchBinding binding;
+    private SearchAdapter adapter;
+    private SearchBinding binding;
     private LinearLayoutManager layoutManager;
     private AppCompatActivity activity;
 
@@ -40,7 +40,7 @@ public class RequestsSearchActivity extends AppCompatActivity {
         this.setTitle(Objects.requireNonNull(bundle).getString("title"));
 
         // Подготовка биндинга
-        binding = DataBindingUtil.setContentView(this, R.layout.requests_search);
+        binding = DataBindingUtil.setContentView(this, R.layout.search);
         binding.setViewModel(viewModel);
         binding.list.setHasFixedSize(true);
 
@@ -50,7 +50,7 @@ public class RequestsSearchActivity extends AppCompatActivity {
         binding.list.setLayoutManager(layoutManager);
 
         // Подготовка и установка адаптера
-        adapter = new RequestsSearchAdapter();
+        adapter = new SearchAdapter();
         adapter.setItems(App.model.search);
         viewModel.searchAdapter.set(adapter);
         binding.list.setAdapter(adapter);
@@ -99,7 +99,7 @@ public class RequestsSearchActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                adapter = new RequestsSearchAdapter();
+                adapter = new SearchAdapter();
                 adapter.setItems(App.model.search);
                 binding.list.setAdapter(adapter);
                 viewModel.searchAdapter.set(adapter);

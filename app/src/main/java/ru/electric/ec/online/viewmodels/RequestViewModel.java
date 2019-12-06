@@ -20,10 +20,10 @@ import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.domains.Request;
 import ru.electric.ec.online.models.ServerResponse;
+import ru.electric.ec.online.views.BasketActivity;
 import ru.electric.ec.online.views.InfoActivity;
 import ru.electric.ec.online.views.RequestActivity;
-import ru.electric.ec.online.views.RequestsBasketActivity;
-import ru.electric.ec.online.views.RequestsSearchActivity;
+import ru.electric.ec.online.views.SearchActivity;
 
 public class RequestViewModel {
 
@@ -74,7 +74,7 @@ public class RequestViewModel {
     }
 
     public void onNext(Context context){
-        Intent intent = new Intent(context, RequestsSearchActivity.class);
+        Intent intent = new Intent(context, SearchActivity.class);
         intent.putExtra("title", title.get());
         context.startActivity(intent);
     }
@@ -104,7 +104,7 @@ public class RequestViewModel {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(context, RequestsBasketActivity.class);
+                Intent intent = new Intent(context, BasketActivity.class);
                 intent.putExtra("title", context.getString(R.string.text_basket));
                 context.startActivity(intent);
             }
@@ -114,7 +114,7 @@ public class RequestViewModel {
     public void onClear(final Context context){
         App.model.basket.clear();
         ServerResponse.deleteBasket(context);
-        ((RequestsBasketActivity)context).refreshBasket();
+        ((BasketActivity)context).refreshBasket();
         total.set(0);
     }
 
@@ -129,7 +129,7 @@ public class RequestViewModel {
         Intent intent = new Intent(context, InfoActivity.class);
         intent.putExtra("title", context.getString(R.string.text_basket));
         intent.putExtra("info", context.getString(R.string.order_processed));
-        intent.putExtra("activityName", "RequestsBasketActivity");
+        intent.putExtra("activityName", "BasketActivity");
         context.startActivity(intent);
 
         new Handler().postDelayed(new Runnable() {
@@ -137,7 +137,7 @@ public class RequestViewModel {
             public void run() {
                 App.model.basket.clear();
                 ServerResponse.deleteBasket(context);
-                ((RequestsBasketActivity)context).refreshBasket();
+                ((BasketActivity)context).refreshBasket();
                 total.set(0);
                 comment.set("");
             }

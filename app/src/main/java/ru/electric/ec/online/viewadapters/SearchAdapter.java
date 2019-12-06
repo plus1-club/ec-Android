@@ -14,16 +14,16 @@ import java.util.List;
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.databinding.RequestsSearchItemBinding;
+import ru.electric.ec.online.databinding.SearchItemBinding;
 import ru.electric.ec.online.domains.Request;
-import ru.electric.ec.online.viewmodels.RequestSearchItemViewModel;
+import ru.electric.ec.online.viewmodels.SearchItemViewModel;
 
-public class RequestsSearchAdapter extends RecyclerView.Adapter<RequestsSearchAdapter.RequestsTableViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.RequestsTableViewHolder> {
 
     private List<Request> requests;
-    private RequestSearchItemViewModel viewModel;
+    private SearchItemViewModel viewModel;
 
-    public RequestsSearchAdapter() {
+    public SearchAdapter() {
         requests = new ArrayList<>();
     }
 
@@ -34,12 +34,12 @@ public class RequestsSearchAdapter extends RecyclerView.Adapter<RequestsSearchAd
 
     @NonNull
     @Override
-    public RequestsSearchAdapter.RequestsTableViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        viewModel = new RequestSearchItemViewModel();
+    public SearchAdapter.RequestsTableViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        viewModel = new SearchItemViewModel();
         viewModel.parent.requests.clear();
         viewModel.parent.requests.addAll(requests);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        RequestsSearchItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.requests_search_item, parent, false);
+        SearchItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.search_item, parent, false);
         binding.setViewModel(viewModel);
         return new RequestsTableViewHolder(binding.getRoot());
     }
@@ -56,8 +56,8 @@ public class RequestsSearchAdapter extends RecyclerView.Adapter<RequestsSearchAd
 
     static class RequestsTableViewHolder extends RecyclerView.ViewHolder {
 
-        private RequestsSearchItemBinding binding;
-        private RequestSearchItemViewModel viewModel;
+        private SearchItemBinding binding;
+        private SearchItemViewModel viewModel;
 
         RequestsTableViewHolder(View view) {
             super(view);

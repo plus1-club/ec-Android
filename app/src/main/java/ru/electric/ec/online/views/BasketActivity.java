@@ -16,19 +16,19 @@ import java.util.Objects;
 
 import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.databinding.RequestsBasketBinding;
+import ru.electric.ec.online.databinding.BasketBinding;
 import ru.electric.ec.online.models.ServerResponse;
-import ru.electric.ec.online.viewadapters.RequestsBasketAdapter;
+import ru.electric.ec.online.viewadapters.BasketAdapter;
 import ru.electric.ec.online.viewmodels.NavigationViewModel;
 import ru.electric.ec.online.viewmodels.RequestViewModel;
 
-public class RequestsBasketActivity extends AppCompatActivity {
+public class BasketActivity extends AppCompatActivity {
 
     RequestViewModel viewModel;
     NavigationViewModel navigationModel;
 
-    private RequestsBasketAdapter adapter;
-    private RequestsBasketBinding binding;
+    private BasketAdapter adapter;
+    private BasketBinding binding;
     private LinearLayoutManager layoutManager;
     private AppCompatActivity activity;
 
@@ -42,7 +42,7 @@ public class RequestsBasketActivity extends AppCompatActivity {
         viewModel.total.set(0);
 
         // Подготовка биндинга
-        binding = DataBindingUtil.setContentView(this, R.layout.requests_basket);
+        binding = DataBindingUtil.setContentView(this, R.layout.basket);
         binding.setViewModel(viewModel);
         binding.list.setHasFixedSize(true);
         binding.list.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -53,7 +53,7 @@ public class RequestsBasketActivity extends AppCompatActivity {
         binding.list.setLayoutManager(layoutManager);
 
         // Подготовка и установка адаптера
-        adapter = new RequestsBasketAdapter();
+        adapter = new BasketAdapter();
         adapter.setItems(App.model.basket);
         binding.list.setAdapter(adapter);
         viewModel.basketAdapter.set(adapter);
@@ -101,7 +101,7 @@ public class RequestsBasketActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                adapter = new RequestsBasketAdapter();
+                adapter = new BasketAdapter();
                 adapter.setItems(App.model.basket);
                 binding.list.setAdapter(adapter);
                 viewModel.basketAdapter.set(adapter);

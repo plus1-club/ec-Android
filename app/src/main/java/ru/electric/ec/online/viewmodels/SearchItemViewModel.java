@@ -13,7 +13,7 @@ import ru.electric.ec.online.domains.Count;
 import ru.electric.ec.online.domains.Request;
 import ru.electric.ec.online.models.Service;
 
-public class RequestSearchItemViewModel {
+public class SearchItemViewModel {
 
     public RequestViewModel parent;
 
@@ -27,7 +27,7 @@ public class RequestSearchItemViewModel {
     public ObservableInt color;
     public ObservableBoolean check;
 
-    public RequestSearchItemViewModel() {
+    public SearchItemViewModel() {
         position = new ObservableInt();
         product = new ObservableField<>();
         count = new ObservableInt();

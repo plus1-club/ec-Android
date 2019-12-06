@@ -14,16 +14,16 @@ import java.util.List;
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.databinding.RequestsBasketItemBinding;
+import ru.electric.ec.online.databinding.BasketItemBinding;
 import ru.electric.ec.online.domains.Request;
-import ru.electric.ec.online.viewmodels.RequestBasketItemViewModel;
+import ru.electric.ec.online.viewmodels.BasketItemViewModel;
 
-public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAdapter.RequestsBasketViewHolder> {
+public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.RequestsBasketViewHolder> {
 
     private List<Request> requests;
-    private RequestBasketItemViewModel viewModel;
+    private BasketItemViewModel viewModel;
 
-    public RequestsBasketAdapter() {
+    public BasketAdapter() {
         requests = new ArrayList<>();
     }
 
@@ -34,14 +34,14 @@ public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAd
 
     @NonNull
     @Override
-    public RequestsBasketAdapter.RequestsBasketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        viewModel = new RequestBasketItemViewModel();
+    public BasketAdapter.RequestsBasketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        viewModel = new BasketItemViewModel();
         viewModel.parent.requests.clear();
         viewModel.parent.requests.addAll(requests);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        RequestsBasketItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.requests_basket_item, parent, false);
+        BasketItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.basket_item, parent, false);
         binding.setViewModel(viewModel);
-        return new RequestsBasketAdapter.RequestsBasketViewHolder(binding.getRoot());
+        return new BasketAdapter.RequestsBasketViewHolder(binding.getRoot());
     }
 
     @Override
@@ -56,8 +56,8 @@ public class RequestsBasketAdapter extends RecyclerView.Adapter<RequestsBasketAd
 
     static class RequestsBasketViewHolder extends RecyclerView.ViewHolder {
 
-        private RequestsBasketItemBinding binding;
-        private RequestBasketItemViewModel viewModel;
+        private BasketItemBinding binding;
+        private BasketItemViewModel viewModel;
 
         RequestsBasketViewHolder(View view) {
             super(view);

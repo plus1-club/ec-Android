@@ -13,9 +13,9 @@ import ru.electric.ec.online.domains.Count;
 import ru.electric.ec.online.domains.Request;
 import ru.electric.ec.online.models.ServerResponse;
 import ru.electric.ec.online.models.Service;
-import ru.electric.ec.online.views.RequestsBasketActivity;
+import ru.electric.ec.online.views.BasketActivity;
 
-public class RequestBasketItemViewModel {
+public class BasketItemViewModel {
 
     public RequestViewModel parent;
 
@@ -29,7 +29,7 @@ public class RequestBasketItemViewModel {
     public ObservableInt color;
     public ObservableBoolean check;
 
-    public RequestBasketItemViewModel() {
+    public BasketItemViewModel() {
         position = new ObservableInt();
         product = new ObservableField<>();
         count = new ObservableInt();
@@ -52,7 +52,7 @@ public class RequestBasketItemViewModel {
             parent.requests.set(position.get(), request);
 
             ServerResponse.putBasket(context, parent.requests);
-            ((RequestsBasketActivity)context).refreshBasket();
+            ((BasketActivity)context).refreshBasket();
             updateStatus();
         }
      }
@@ -73,7 +73,7 @@ public class RequestBasketItemViewModel {
             }
         }
         ServerResponse.putBasket(view.getContext(), parent.requests);
-        ((RequestsBasketActivity)context).refreshBasket();
+        ((BasketActivity)context).refreshBasket();
         updateStatus();
     }
 
