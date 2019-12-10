@@ -91,7 +91,7 @@
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_request"
                                 android:textAlignment="center"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/menu_font"
                                 tools:ignore="InefficientWeight,NestedWeights" />
                         </LinearLayout>
 
@@ -132,7 +132,7 @@
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_order"
                                 android:textAlignment="center"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/menu_font"
                                 tools:ignore="InefficientWeight" />
                         </LinearLayout>
 
@@ -186,7 +186,7 @@
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_basket"
                                 android:textAlignment="center"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/menu_font"
                                 tools:ignore="InefficientWeight,NestedWeights" />
                         </LinearLayout>
 
@@ -227,7 +227,7 @@
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_list_unconfirmed"
                                 android:textAlignment="center"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/menu_font"
                                 tools:ignore="InefficientWeight" />
                         </LinearLayout>
 
@@ -281,7 +281,7 @@
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_list_reserved"
                                 android:textAlignment="center"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/menu_font"
                                 tools:ignore="InefficientWeight,NestedWeights" />
                         </LinearLayout>
 
@@ -322,7 +322,7 @@
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_list_ordered"
                                 android:textAlignment="center"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/menu_font"
                                 tools:ignore="InefficientWeight" />
                         </LinearLayout>
 
@@ -376,7 +376,7 @@
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_list_canceled"
                                 android:textAlignment="center"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/menu_font"
                                 tools:ignore="InefficientWeight,NestedWeights" />
                         </LinearLayout>
 
@@ -417,7 +417,7 @@
                                 android:paddingBottom="0dp"
                                 android:text="@string/text_list_shipped"
                                 android:textAlignment="center"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/menu_font"
                                 tools:ignore="InefficientWeight" />
                         </LinearLayout>
                     </LinearLayout>
