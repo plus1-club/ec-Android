@@ -40,5 +40,6 @@ public class App extends Application {
     public void onTerminate() {
         super.onTerminate();
         mContext = null;
+        model = null;
     }
 }

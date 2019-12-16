@@ -14,7 +14,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.InvoiceTableBinding;
 import ru.electric.ec.online.domains.Invoice;
@@ -38,7 +37,7 @@ public class InvoiceTableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activity = this;
         viewModel = InvoiceTableViewModel.getInstance();
-        App.model.invoices.clear();
+        viewModel.invoices.clear();
 
         Bundle bundle = getIntent().getExtras();
         this.setTitle(Objects.requireNonNull(bundle).getString("title"));
@@ -59,7 +58,7 @@ public class InvoiceTableActivity extends AppCompatActivity {
         // Подготовка и установка адаптера
         adapter = new InvoiceTableAdapter();
         binding.list.setAdapter(adapter);
-        adapter.setItems(App.model.invoices);
+        adapter.setItems(viewModel.invoices);
 
         // Подключение навигации
         navigationModel = new NavigationViewModel(
@@ -121,11 +120,10 @@ public class InvoiceTableActivity extends AppCompatActivity {
             @Override
             public void run() {
                 adapter = new InvoiceTableAdapter();
-                adapter.setItems(App.model.invoices);
+                adapter.setItems(viewModel.invoices);
                 binding.list.setAdapter(adapter);
                 binding.swiperefresh.setRefreshing(false);
             }
         }, 1000);
     }
-
 }

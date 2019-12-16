@@ -40,26 +40,29 @@ public class Service {
         return Objects.requireNonNull(one).toLowerCase().equals(two.toLowerCase());
     }
 
-    public static Count status(int count, int stockCount){
+    public static Count status(int count, int stockCount, boolean needUpdate){
         String text;
         int color;
         if (count == 0) {
-            text = App.getContext().getString(R.string.text_status_black);
+            text = App.getContext().getString(R.string.status_black);
             color = R.color.black;
         } else if (stockCount == -2) {
-            text = App.getContext().getString(R.string.text_status_violet);
+            text = App.getContext().getString(R.string.status_violet);
             color = R.color.violet;
+        } else if (needUpdate) {
+            text = App.getContext().getString(R.string.status_blue);
+            color = R.color.blue;
         } else if (stockCount == 0) {
-            text = App.getContext().getString(R.string.text_status_red);
+            text = App.getContext().getString(R.string.status_red);
             color = R.color.red;
         } else if (stockCount >= count) {
-            text = App.getContext().getString(R.string.text_status_green);
+            text = App.getContext().getString(R.string.status_green);
             color = R.color.green;
         } else if (stockCount > 500 || stockCount == -1) {
-            text = App.getContext().getString(R.string.text_status_orange);
+            text = App.getContext().getString(R.string.status_orange);
             color = R.color.orange;
         } else {
-            text = App.getContext().getString(R.string.text_status_yellow, stockCount);
+            text = App.getContext().getString(R.string.status_yellow, stockCount);
             color = R.color.yellow;
         }
 

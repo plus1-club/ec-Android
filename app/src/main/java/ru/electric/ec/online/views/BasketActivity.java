@@ -14,9 +14,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Objects;
 
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.BasketBinding;
+import ru.electric.ec.online.domains.Request;
 import ru.electric.ec.online.models.ServerResponse;
 import ru.electric.ec.online.viewadapters.BasketAdapter;
 import ru.electric.ec.online.viewmodels.NavigationViewModel;
@@ -54,7 +54,7 @@ public class BasketActivity extends AppCompatActivity {
 
         // Подготовка и установка адаптера
         adapter = new BasketAdapter();
-        adapter.setItems(App.model.basket);
+        adapter.setItems(viewModel.basket);
         binding.list.setAdapter(adapter);
         viewModel.basketAdapter.set(adapter);
 
@@ -65,11 +65,13 @@ public class BasketActivity extends AppCompatActivity {
 
         // Обновление списка
         binding.swiperefresh.setRefreshing(true);
+        ServerResponse.getBasket(activity);
         refreshBasket();
         binding.swiperefresh.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
+                        ServerResponse.getBasket(activity);
                         refreshBasket();
                     }
                 }
@@ -97,14 +99,19 @@ public class BasketActivity extends AppCompatActivity {
     }
 
     public void refreshBasket(){
-        ServerResponse.getBasket(activity);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 adapter = new BasketAdapter();
-                adapter.setItems(App.model.basket);
+                adapter.setItems(viewModel.basket);
                 binding.list.setAdapter(adapter);
+                viewModel.total.set(0);
                 viewModel.basketAdapter.set(adapter);
+                for (Request item : viewModel.basket) {
+                    if(item.check) {
+                        viewModel.total.set(viewModel.total.get() + item.requestCount * item.price);
+                    }
+                }
                 binding.swiperefresh.setRefreshing(false);
             }
         }, 1000);

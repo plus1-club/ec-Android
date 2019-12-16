@@ -13,7 +13,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Objects;
 
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.SearchBinding;
 import ru.electric.ec.online.models.ServerResponse;
@@ -29,12 +28,10 @@ public class SearchActivity extends AppCompatActivity {
     private SearchAdapter adapter;
     private SearchBinding binding;
     private LinearLayoutManager layoutManager;
-    private AppCompatActivity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = this;
         viewModel = RequestViewModel.getInstance();
         Bundle bundle = getIntent().getExtras();
         this.setTitle(Objects.requireNonNull(bundle).getString("title"));
@@ -51,7 +48,7 @@ public class SearchActivity extends AppCompatActivity {
 
         // Подготовка и установка адаптера
         adapter = new SearchAdapter();
-        adapter.setItems(App.model.search);
+        adapter.setItems(viewModel.search);
         viewModel.searchAdapter.set(adapter);
         binding.list.setAdapter(adapter);
 
@@ -95,11 +92,12 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void refreshSearch(){
+        binding.swiperefresh.setRefreshing(true);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 adapter = new SearchAdapter();
-                adapter.setItems(App.model.search);
+                adapter.setItems(viewModel.search);
                 binding.list.setAdapter(adapter);
                 viewModel.searchAdapter.set(adapter);
                 binding.swiperefresh.setRefreshing(false);

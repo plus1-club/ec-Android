@@ -35,9 +35,9 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.RequestsBa
     @NonNull
     @Override
     public BasketAdapter.RequestsBasketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        viewModel = new BasketItemViewModel();
-        viewModel.parent.requests.clear();
-        viewModel.parent.requests.addAll(requests);
+        viewModel = BasketItemViewModel.getInstance();
+        viewModel.parent.basket.clear();
+        viewModel.parent.basket.addAll(requests);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         BasketItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.basket_item, parent, false);
         binding.setViewModel(viewModel);

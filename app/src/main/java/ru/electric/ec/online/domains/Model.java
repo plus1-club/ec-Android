@@ -1,19 +1,16 @@
 package ru.electric.ec.online.domains;
 
-import java.util.ArrayList;
-import java.util.List;
+import ru.electric.ec.online.viewmodels.InvoiceTableViewModel;
+import ru.electric.ec.online.viewmodels.RequestViewModel;
 
 public class Model {
     public String token;
-    public List<Request> search;
-    public List<Request> basket;
-    public List<Invoice> invoices;
+    public RequestViewModel request;
+    public InvoiceTableViewModel invoice;
 
     public Model() {
         token = "";
-        search = new ArrayList<>();
-        basket = new ArrayList<>();
-        invoices = new ArrayList<>();
+        request = RequestViewModel.getInstance();
+        invoice = InvoiceTableViewModel.getInstance();
     }
-
 }

@@ -10,15 +10,16 @@ import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.domains.Count;
 import ru.electric.ec.online.domains.Request;
+import ru.electric.ec.online.models.ServerResponse;
 import ru.electric.ec.online.models.Service;
 import ru.electric.ec.online.views.SearchActivity;
 
 public class SearchItemViewModel {
 
+    private static SearchItemViewModel mInstance;
     public RequestViewModel parent;
 
     public ObservableInt position;
@@ -32,8 +33,9 @@ public class SearchItemViewModel {
     public ObservableField<String> status;
     public ObservableInt color;
     public ObservableBoolean check;
+    private ObservableBoolean needUpdate;
 
-    public SearchItemViewModel() {
+    private SearchItemViewModel() {
         position = new ObservableInt();
         product = new ObservableField<>();
         count = new ObservableInt();
@@ -45,29 +47,40 @@ public class SearchItemViewModel {
         status = new ObservableField<>();
         color = new ObservableInt();
         check = new ObservableBoolean();
+        needUpdate = new ObservableBoolean();
+        needUpdate.set(false);
         parent = RequestViewModel.getInstance();
     }
 
-    public void onTextChanged(Context context, CharSequence s, int start, int before, int count) {
+    // Получение единственного экземпляра класса
+    public static SearchItemViewModel getInstance() {
+        if (mInstance == null) {
+            mInstance = new SearchItemViewModel();
+        }
+        return mInstance;
+    }
+
+    public void onTextChanged(Context context, CharSequence s, int start, int before, int charCount) {
         int newCount = s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString());
-        if (newCount != this.count.get() && newCount != 0)
+        if (newCount != count.get() && newCount != 0)
         {
+            needUpdate.set(true);
             if (newCount % multiplicity.get() > 0){
-                this.count.set(newCount + (multiplicity.get() - (newCount % multiplicity.get())));
+                count.set(newCount + (multiplicity.get() - (newCount % multiplicity.get())));
                 Toast.makeText(context,
                         context.getString(R.string.text_multiplicity, multiplicity.get()),
                         Toast.LENGTH_LONG).show();
             } else {
-                this.count.set(newCount);
+                count.set(newCount);
             }
-            this.sum.set(newCount * price.get());
-            Request request = new Request(product.get(), this.count.get(), stockCount.get(),
+            sum.set(newCount * price.get());
+            Request request = new Request(product.get(), count.get(), stockCount.get(),
                     multiplicity.get(), unit.get(), price.get(), check.get());
-            parent.requests.set(position.get(), request);
-            App.model.search.clear();
-            App.model.search.addAll(parent.requests);
+            parent.search.set(position.get(), request);
 
-            ((SearchActivity)context).refreshSearch();
+            if (!needUpdate.get()) {
+                ((SearchActivity) context).refreshSearch();
+            }
             updateStatus();
         }
      }
@@ -76,12 +89,19 @@ public class SearchItemViewModel {
         this.check.set(((CheckBox) view).isChecked());
         Request request = new Request(product.get(), count.get(), stockCount.get(),
                 multiplicity.get(), unit.get(), price.get(), check.get());
-        parent.requests.set(position.get(), request);
+        parent.search.set(position.get(), request);
+        updateStatus();
+    }
+
+    public void onUpdateStatus(Context context){
+        ServerResponse.byCode(context, parent.product.get(), count.get(), parent.isFullSearch.get());
+        ((SearchActivity)context).refreshSearch();
+        needUpdate.set(false);
         updateStatus();
     }
 
     public void updateStatus() {
-        Count countStatus = Service.status(count.get(), stockCount.get());
+        Count countStatus = Service.status(count.get(), stockCount.get(), needUpdate.get());
         status.set(countStatus.status);
         color.set(countStatus.color);
     }

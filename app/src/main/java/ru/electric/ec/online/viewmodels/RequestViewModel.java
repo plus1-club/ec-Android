@@ -16,7 +16,6 @@ import androidx.databinding.ObservableList;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.domains.Request;
 import ru.electric.ec.online.models.ServerResponse;
@@ -36,7 +35,8 @@ public class RequestViewModel {
     public ObservableField<String> comment;
 
     private ObservableField<String> title;
-    public ObservableList<Request> requests;
+    public ObservableList<Request> search;
+    public ObservableList<Request> basket;
     public ObservableField<Object> searchAdapter;
     public ObservableField<Object> basketAdapter;
 
@@ -55,7 +55,8 @@ public class RequestViewModel {
         comment = new ObservableField<>();
 
         title = new ObservableField<>();
-        requests = new ObservableArrayList<>();
+        search = new ObservableArrayList<>();
+        basket = new ObservableArrayList<>();
         searchAdapter = new ObservableField<>();
         basketAdapter = new ObservableField<>();
     }
@@ -93,12 +94,12 @@ public class RequestViewModel {
 
     public void toBasket(final Context context){
         List<Request> added = new ArrayList<>();
-        for (Request request: requests) {
+        for (Request request: search) {
             if (request.check){
                 added.add(request);
             }
         }
-        App.model.basket.addAll(added);
+        basket.addAll(added);
         ServerResponse.postBasket(context, added);
         total.set(0);
         comment.set("");
@@ -114,8 +115,9 @@ public class RequestViewModel {
     }
 
     public void onClear(final Context context){
-        App.model.basket.clear();
+        basket.clear();
         ServerResponse.deleteBasket(context);
+        ServerResponse.getBasket(context);
         ((BasketActivity)context).refreshBasket();
         total.set(0);
     }
@@ -130,15 +132,16 @@ public class RequestViewModel {
         ServerResponse.order(context, comment.get());
         Intent intent = new Intent(context, InfoActivity.class);
         intent.putExtra("title", context.getString(R.string.text_basket));
-        intent.putExtra("info", context.getString(R.string.order_processed));
+        intent.putExtra("info", context.getString(R.string.text_order_processed));
         intent.putExtra("activityName", "BasketActivity");
         context.startActivity(intent);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                App.model.basket.clear();
+                basket.clear();
                 ServerResponse.deleteBasket(context);
+                ServerResponse.getBasket(context);
                 ((BasketActivity)context).refreshBasket();
                 total.set(0);
                 comment.set("");

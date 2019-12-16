@@ -13,7 +13,6 @@ import androidx.databinding.ObservableInt;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.domains.Count;
 import ru.electric.ec.online.domains.Request;
@@ -23,6 +22,7 @@ import ru.electric.ec.online.views.BasketActivity;
 
 public class BasketItemViewModel {
 
+    private static BasketItemViewModel mInstance;
     public RequestViewModel parent;
 
     public ObservableInt position;
@@ -36,8 +36,9 @@ public class BasketItemViewModel {
     public ObservableField<String> status;
     public ObservableInt color;
     public ObservableBoolean check;
+    private ObservableBoolean needUpdate;
 
-    public BasketItemViewModel() {
+    private BasketItemViewModel() {
         position = new ObservableInt();
         product = new ObservableField<>();
         count = new ObservableInt();
@@ -49,31 +50,41 @@ public class BasketItemViewModel {
         status = new ObservableField<>();
         color = new ObservableInt();
         check = new ObservableBoolean();
+        needUpdate = new ObservableBoolean();
+        needUpdate.set(false);
         parent = RequestViewModel.getInstance();
     }
 
-    public void onTextChanged(Context context, CharSequence s, int start, int before, int count) {
+    // Получение единственного экземпляра класса
+    public static BasketItemViewModel getInstance() {
+        if (mInstance == null) {
+            mInstance = new BasketItemViewModel();
+        }
+        return mInstance;
+    }
+
+    public void onTextChanged(Context context, CharSequence s, int start, int before, int charCount) {
         int newCount = s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString());
-        if (newCount != this.count.get() && newCount != 0)
+        if (newCount != count.get() && newCount != 0)
         {
+            needUpdate.set(true);
             if (newCount % multiplicity.get() > 0){
-                this.count.set(newCount + (multiplicity.get() - (newCount % multiplicity.get())));
+                count.set(newCount + (multiplicity.get() - (newCount % multiplicity.get())));
                 Toast.makeText(context,
                         context.getString(R.string.text_multiplicity, multiplicity.get()),
                         Toast.LENGTH_LONG).show();
 
             } else {
-                this.count.set(newCount);
+                count.set(newCount);
             }
-            this.sum.set(newCount * price.get());
-            Request request = new Request(product.get(), this.count.get(), stockCount.get(),
+            sum.set(newCount * price.get());
+            Request request = new Request(product.get(), count.get(), stockCount.get(),
                     multiplicity.get(), unit.get(), price.get(), check.get());
-            parent.requests.set(position.get(), request);
-            App.model.basket.clear();
-            App.model.basket.addAll(parent.requests);
+            parent.basket.set(position.get(), request);
 
-            ServerResponse.putBasket(context, parent.requests);
-            ((BasketActivity)context).refreshBasket();
+            if (!needUpdate.get()){
+                ((BasketActivity)context).refreshBasket();
+            }
             updateStatus();
         }
      }
@@ -82,7 +93,7 @@ public class BasketItemViewModel {
         this.check.set(((CheckBox) view).isChecked());
         Request request = new Request(product.get(), count.get(), stockCount.get(),
                 multiplicity.get(), unit.get(), price.get(), check.get());
-        parent.requests.set(position.get(), request);
+        parent.basket.set(position.get(), request);
         updateStatus();
     }
 
@@ -90,26 +101,35 @@ public class BasketItemViewModel {
         final Context context = view.getContext();
         String deletedProduct = product.get();
         List<Request> deleted = new ArrayList<>();
-        for (Request item: parent.requests) {
+        for (Request item: parent.basket) {
             if (item.product.equals(deletedProduct)){
                 deleted.add(item);
             }
         }
         for (Request item: deleted){
-            parent.requests.remove(item);
+            parent.basket.remove(item);
         }
-        ServerResponse.putBasket(view.getContext(), parent.requests);
+        ServerResponse.putBasket(view.getContext(), parent.basket);
+        ServerResponse.getBasket(context);
         ((BasketActivity)context).refreshBasket();
         updateStatus();
     }
 
+    public void onUpdateStatus(Context context){
+        ServerResponse.putBasket(context, parent.basket);
+        ServerResponse.getBasket(context);
+        ((BasketActivity)context).refreshBasket();
+        needUpdate.set(false);
+        updateStatus();
+    }
+
     public void updateStatus() {
-        Count countStatus = Service.status(count.get(), stockCount.get());
+        Count countStatus = Service.status(count.get(), stockCount.get(), needUpdate.get());
         status.set(countStatus.status);
         color.set(countStatus.color);
 
         double total = 0;
-        for (Request item : parent.requests) {
+        for (Request item : parent.basket) {
             if(item.check) {
                 total = total + item.requestCount * item.price;
             }

@@ -59,7 +59,7 @@ public class NavigationViewModel {
 
     private ActionBarDrawerToggle setupDrawerToggle() {
         return new ActionBarDrawerToggle(activity, this.drawer, this.toolbar,
-                R.string.drawer_open,  R.string.drawer_close);
+                R.string.text_drawer_open,  R.string.text_drawer_close);
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -69,5 +69,4 @@ public class NavigationViewModel {
         }
         return actionBar.onOptionsItemSelected(item);
     }
-
 }

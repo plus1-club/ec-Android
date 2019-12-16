@@ -61,7 +61,7 @@ public class ServerRun {
     }
 
     public void getByCode(Context context, Response<ServerData> response){
-        App.model.search.clear();
+        App.model.request.search.clear();
         if (response.body() != null && response.body().getError().isEmpty()) {
             List<?> data = (List<?>) response.body().getData();
             for (Object element : data) {
@@ -77,13 +77,13 @@ public class ServerRun {
                 if (request.requestCount % request.multiplicity > 0){
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
                 }
-                App.model.search.add(request);
+                App.model.request.search.add(request);
             }
         }
     }
 
     public void getBasket(Context context, Response<ServerData> response){
-        App.model.basket.clear();
+        App.model.request.basket.clear();
         if (response.body() != null && response.body().getError().isEmpty()) {
             List<?> data = (List<?>) response.body().getData();
             for (Object element : data) {
@@ -100,7 +100,7 @@ public class ServerRun {
                 if (request.requestCount % request.multiplicity > 0){
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
                 }
-                App.model.basket.add(request);
+                App.model.request.basket.add(request);
             }
         }
      }
@@ -122,7 +122,7 @@ public class ServerRun {
     }
 
     public void invoiceList(Context context, Response<ServerData> response){
-        App.model.invoices.clear();
+        App.model.invoice.invoices.clear();
         if (response.body() != null && response.body().getError().isEmpty()) {
             List<?> data = (List<?>) response.body().getData();
             for (Object element : data) {
@@ -134,10 +134,10 @@ public class ServerRun {
                         el.get("status"),
                         Service.isEqual(el.get("status"),context.getString(R.string.status_shipped))
                             ? Service.getInt(el.get("waybill")) : Service.getDouble((el.get("sum"))));
-                App.model.invoices.add(invoice);
+                App.model.invoice.invoices.add(invoice);
             }
             InvoiceTableAdapter adapter = new InvoiceTableAdapter();
-            adapter.setItems(App.model.invoices);
+            adapter.setItems(App.model.invoice.invoices);
             ((InvoiceTableActivity)context).binding.list.setAdapter(adapter);
         }
     }
@@ -145,7 +145,7 @@ public class ServerRun {
     public void invoiceDetails(Context context, Response<ServerData> response, int number){
         if (response.body() != null && response.body().getError().isEmpty()) {
             Invoice invoice = null;
-            for (Invoice item:App.model.invoices) {
+            for (Invoice item:App.model.invoice.invoices) {
                 if(item.number == number){
                     invoice = item;
                 }
@@ -174,30 +174,9 @@ public class ServerRun {
 
     public void getPrint(Context context, final Response<ServerData> response, final int number) {
         if (response.body() != null && response.body().getError().isEmpty()) {
-            /*
-            @SuppressWarnings("unchecked")
-            Map<String, String> data = (LinkedHashMap<String, String>) response.body().getData();
-            final String srcUrl = data.get("file");
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(srcUrl));
-            context.startActivity(intent);
-             */
             Toast.makeText(context, "Скачивание счета - в разработке", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ec-electric.ru/order/example.xls"));
             context.startActivity(intent);
-
-            /*
-            try {
-                Map<String, String> data = (LinkedTreeMap<String, String>) response.body().getData();
-                final String srcUrl = data.get("file");
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(srcUrl));
-                context.startActivity(intent);
-            } catch (Exception e){
-                App.log(context, true, false, e.getMessage());
-            }
-            */
-            //final String destPath = Environment.getExternalStorageDirectory() + "/Download/" + number + ".pdf";
-            //FileLoader longTask = FileLoader.getInstance(context, destPath, srcUrl); // Создаем экземпляр
-            //longTask.execute();
         }
     }
 }

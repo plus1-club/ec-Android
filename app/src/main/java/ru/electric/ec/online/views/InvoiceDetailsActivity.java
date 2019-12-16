@@ -137,7 +137,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
     public void refresh(){
         int number = viewModel.number.get();
         Invoice invoice = null;
-        for (Invoice item:App.model.invoices) {
+        for (Invoice item:parent.invoices) {
             if(item.number == number){
                 invoice = item;
             }

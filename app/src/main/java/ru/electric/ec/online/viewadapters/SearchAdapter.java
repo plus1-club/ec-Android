@@ -35,9 +35,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.RequestsTa
     @NonNull
     @Override
     public SearchAdapter.RequestsTableViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        viewModel = new SearchItemViewModel();
-        viewModel.parent.requests.clear();
-        viewModel.parent.requests.addAll(requests);
+        viewModel = SearchItemViewModel.getInstance();
+        viewModel.parent.search.clear();
+        viewModel.parent.search.addAll(requests);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         SearchItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.search_item, parent, false);
         binding.setViewModel(viewModel);

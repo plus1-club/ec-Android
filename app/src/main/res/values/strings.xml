@@ -27,6 +27,8 @@
     <string name="text_item_shipped">Отгрузка</string>
     <string name="text_item_invoice">Детали счета</string>
     <string name="text_exit">Выход</string>
+    <string name="text_drawer_open">Открыть меню</string>
+    <string name="text_drawer_close">Скрыть меню</string>
 
     <!-- Экран "3.Заявки по коду" -->
     <string name="text_enter_number_or_product">Введите код и количество товара:</string>
@@ -55,15 +57,17 @@
     <string name="text_money">%1$s руб.</string>
     <string name="text_total">Итого: %1$s руб.</string>
     <string name="text_basket_item_delete">Удалить строку из корзины</string>
+    <string name="text_order_processed">Заказ оформлен</string>
 
     <!-- Статусы количества -->
-    <string name="text_status_black">Неизвестно</string>
-    <string name="text_status_violet">Превышено допустимое число проверок количества, попробуйте позднее</string>
-    <string name="text_status_blue">Проверить наличие</string>
-    <string name="text_status_red">Нет</string>
-    <string name="text_status_orange">Частично доступно</string>
-    <string name="text_status_yellow">Доступно %1$d</string>
-    <string name="text_status_green">В наличии</string>
+    <string name="status_black">Неизвестно</string>
+    <string name="status_violet">Превышено допустимое число проверок количества, попробуйте позднее</string>
+    <string name="status_blue">Проверить наличие</string>
+    <string name="status_red">Нет</string>
+    <string name="status_orange">Частично доступно</string>
+    <string name="status_yellow">Доступно %1$d</string>
+    <string name="status_green">В наличии</string>
+    <string name="text_multiplicity">Количество увеличено до кратности минимальной упаковки: %1$d (по %1$d в упаковке).</string>
 
     <!-- Экран "6.Счета" -->
     <string name="text_invoice">Счет № %1$d от %2$s</string>
@@ -78,12 +82,5 @@
     <string name="status_canceled">Аннулирован</string>
     <string name="status_overdie">Просрочен</string>
     <string name="status_shipped">Отгружен</string>
-
-    <string name="drawer_open">Открыть меню</string>
-    <string name="drawer_close">Скрыть меню</string>
-    <string name="permission_explanation">Доступ к файлам нужен для возможности загрузки счетов в формате pdf</string>
-    <string name="loading">Идёт загрузка данных с сервера… Подождите…</string>
-    <string name="order_processed">Заказ оформлен</string>
-    <string name="text_multiplicity">Количество увеличено до кратности минимальной упаковки: %1$d (по %1$d в упаковке).</string>
 
 </resources>
