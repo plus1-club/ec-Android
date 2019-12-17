@@ -13,12 +13,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.InvoiceTableItemBinding;
-import ru.electric.ec.online.domains.Invoice;
-import ru.electric.ec.online.models.Service;
+import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.viewmodels.InvoiceTableItemViewModel;
+import ru.electric.ec.online.viewmodels.Service;
 
 public class InvoiceTableAdapter extends RecyclerView.Adapter<InvoiceTableAdapter.InvoiceTableViewHolder> {
 
@@ -75,10 +74,10 @@ public class InvoiceTableAdapter extends RecyclerView.Adapter<InvoiceTableAdapte
             viewModel.status.set(invoice.status);
             viewModel.waybill.set(invoice.waybill);
             viewModel.showWaybill.set(
-                Service.isEqual(viewModel.status.get(), App.getContext().getString(R.string.status_shipped)));
+                Service.isEqual(viewModel.status.get(), Service.getStr(R.string.status_shipped)));
             viewModel.showInvoiceButton.set(
-                Service.isEqual(viewModel.status.get(), App.getContext().getString(R.string.status_reserved)) ||
-                Service.isEqual(viewModel.status.get(), App.getContext().getString(R.string.status_ordered)));
+                Service.isEqual(viewModel.status.get(), Service.getStr(R.string.status_reserved)) ||
+                Service.isEqual(viewModel.status.get(), Service.getStr(R.string.status_ordered)));
             viewModel.details.clear();
             viewModel.details.addAll(invoice.details);
         }

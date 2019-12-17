@@ -9,8 +9,7 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
-import ru.electric.ec.online.domains.Detail;
-import ru.electric.ec.online.models.ServerResponse;
+import ru.electric.ec.online.models.Detail;
 
 public class InvoiceDetailsViewModel {
 

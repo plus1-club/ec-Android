@@ -12,14 +12,11 @@ import java.util.Map;
 import java.util.Objects;
 
 import retrofit2.Response;
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.domains.Detail;
-import ru.electric.ec.online.domains.Invoice;
-import ru.electric.ec.online.domains.Request;
+import ru.electric.ec.online.models.Detail;
+import ru.electric.ec.online.models.Invoice;
+import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.models.ServerData;
-import ru.electric.ec.online.models.ServerResponse;
-import ru.electric.ec.online.models.Service;
 import ru.electric.ec.online.viewadapters.InvoiceDetailsAdapter;
 import ru.electric.ec.online.viewadapters.InvoiceTableAdapter;
 import ru.electric.ec.online.views.EnterActivity;
@@ -42,7 +39,7 @@ public class ServerRun {
         return mInstance;
     }
 
-    public void getEnter(Context context, Response<ServerData> response){
+    void getEnter(Context context, Response<ServerData> response){
         if (Objects.requireNonNull(response.body()).isSuccess()) {
             Object data = response.body().getData();
             App.model.token = (String) ((LinkedTreeMap) data).get("user_token");
@@ -51,16 +48,16 @@ public class ServerRun {
         } else {
             String message = " (" + response.body().getError() + ")"
                     + response.body().getMessage();
-            App.log(context, false, true, message);
+            Service.log(context, false, true, message);
         }
     }
 
-    public void getExit(Context context, Response<ServerData> response){
+    void getExit(Context context, Response<ServerData> response){
         Intent intent = new Intent(context, EnterActivity.class);
         context.startActivity(intent);
     }
 
-    public void getByCode(Context context, Response<ServerData> response){
+    void getByCode(Context context, Response<ServerData> response){
         App.model.request.search.clear();
         if (response.body() != null && response.body().getError().isEmpty()) {
             List<?> data = (List<?>) response.body().getData();
@@ -82,7 +79,7 @@ public class ServerRun {
         }
     }
 
-    public void getBasket(Context context, Response<ServerData> response){
+    void getBasket(Context context, Response<ServerData> response){
         App.model.request.basket.clear();
         if (response.body() != null && response.body().getError().isEmpty()) {
             List<?> data = (List<?>) response.body().getData();
@@ -105,23 +102,23 @@ public class ServerRun {
         }
      }
 
-    public void postBasket(Context context, Response<ServerData> response){
+    void postBasket(Context context, Response<ServerData> response){
         ServerResponse.getBasket(context);
     }
 
-    public void putBasket(Context context, Response<ServerData> response){
+    void putBasket(Context context, Response<ServerData> response){
         ServerResponse.getBasket(context);
     }
 
-    public void deleteBasket(Context context, Response<ServerData> response){
+    void deleteBasket(Context context, Response<ServerData> response){
         ServerResponse.getBasket(context);
     }
 
-    public void order(Context context, Response<ServerData> response){
+    void order(Context context, Response<ServerData> response){
         ServerResponse.getBasket(context);
     }
 
-    public void invoiceList(Context context, Response<ServerData> response){
+    void invoiceList(Context context, Response<ServerData> response){
         App.model.invoice.invoices.clear();
         if (response.body() != null && response.body().getError().isEmpty()) {
             List<?> data = (List<?>) response.body().getData();
@@ -142,7 +139,7 @@ public class ServerRun {
         }
     }
 
-    public void invoiceDetails(Context context, Response<ServerData> response, int number){
+    void invoiceDetails(Context context, Response<ServerData> response, int number){
         if (response.body() != null && response.body().getError().isEmpty()) {
             Invoice invoice = null;
             for (Invoice item:App.model.invoice.invoices) {
@@ -172,7 +169,7 @@ public class ServerRun {
         }
     }
 
-    public void getPrint(Context context, final Response<ServerData> response, final int number) {
+    void getPrint(Context context, final Response<ServerData> response, final int number) {
         if (response.body() != null && response.body().getError().isEmpty()) {
             Toast.makeText(context, "Скачивание счета - в разработке", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ec-electric.ru/order/example.xls"));

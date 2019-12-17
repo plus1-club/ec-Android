@@ -1,4 +1,4 @@
-package ru.electric.ec.online.models;
+package ru.electric.ec.online.viewmodels;
 
 import android.content.Context;
 
@@ -9,13 +9,13 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import ru.electric.ec.online.App;
-import ru.electric.ec.online.domains.Request;
-import ru.electric.ec.online.viewmodels.ServerRun;
+import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.models.ServerData;
+import ru.electric.ec.online.models.ServerNetwork;
 
 public class ServerResponse {
 
-    public static void getEnter(final Context context, String login, String password) {
+    static void getEnter(final Context context, String login, String password) {
         ServerNetwork.getApi().enter(login, password).enqueue(new Callback<ServerData>() {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
@@ -27,18 +27,18 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
 
-    public static void getExit(final Context context) {
+    static void getExit(final Context context) {
         ServerNetwork.getApi().exit(App.model.token).enqueue(new Callback<ServerData>() {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
@@ -50,12 +50,12 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
@@ -72,12 +72,12 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
@@ -94,17 +94,17 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
 
-    public static void postBasket(final Context context, List<Request> requests){
+    static void postBasket(final Context context, List<Request> requests){
         ServerNetwork.getApi().postBasket(App.model.token, requests).enqueue(new Callback<ServerData>() {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
@@ -116,18 +116,18 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
 
-    public static void putBasket(final Context context, List<Request> requests){
+    static void putBasket(final Context context, List<Request> requests){
         ServerNetwork.getApi().putBasket(App.model.token, requests).enqueue(new Callback<ServerData>() {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
@@ -139,18 +139,18 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
 
 
-    public static void deleteBasket(final Context context){
+    static void deleteBasket(final Context context){
         ServerNetwork.getApi().deleteBasket(App.model.token).enqueue(new Callback<ServerData>() {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
@@ -162,18 +162,18 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
 
-    public static void order(final Context context, String comment){
+    static void order(final Context context, String comment){
         ServerNetwork.getApi().order(App.model.token, comment).enqueue(new Callback<ServerData>() {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
@@ -185,13 +185,13 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
@@ -208,13 +208,13 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
@@ -231,13 +231,13 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
@@ -254,13 +254,13 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
@@ -277,13 +277,13 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
@@ -300,13 +300,13 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
@@ -323,13 +323,13 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
@@ -346,13 +346,13 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
@@ -370,13 +370,13 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
@@ -394,13 +394,13 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
@@ -418,18 +418,18 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }
 
-    public static void print(final Context context, final int number) {
+    static void print(final Context context, final int number) {
         ServerNetwork.getApi().print(App.model.token, number).enqueue(new Callback<ServerData>() {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
@@ -441,12 +441,12 @@ public class ServerResponse {
                         }
                     });
                 } else {
-                    App.log(context, false, true, "response code " + response.code());
+                    Service.log(context, false, true, "response code " + response.code());
                 }
             }
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                App.log(context, true, true, "failure " + t);
+                Service.log(context, true, true, "failure " + t);
             }
         });
     }

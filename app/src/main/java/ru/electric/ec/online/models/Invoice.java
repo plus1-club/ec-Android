@@ -1,4 +1,4 @@
-package ru.electric.ec.online.domains;
+package ru.electric.ec.online.models;
 
 import java.util.ArrayList;
 import java.util.List;

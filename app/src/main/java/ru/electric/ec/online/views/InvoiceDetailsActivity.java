@@ -13,16 +13,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Objects;
 
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.InvoiceDetailsBinding;
-import ru.electric.ec.online.domains.Invoice;
-import ru.electric.ec.online.models.ServerResponse;
-import ru.electric.ec.online.models.Service;
+import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.viewadapters.InvoiceDetailsAdapter;
 import ru.electric.ec.online.viewmodels.InvoiceDetailsViewModel;
 import ru.electric.ec.online.viewmodels.InvoiceTableViewModel;
 import ru.electric.ec.online.viewmodels.NavigationViewModel;
+import ru.electric.ec.online.viewmodels.ServerResponse;
+import ru.electric.ec.online.viewmodels.Service;
 
 public class InvoiceDetailsActivity extends AppCompatActivity {
 
@@ -68,8 +67,8 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         adapter.setItems(parent.invoices.get(bundle.getInt("position")).details);
 
         viewModel.showInvoiceButton.set(
-                Service.isEqual(status, App.getContext().getString(R.string.status_reserved)) ||
-                        Service.isEqual(status, App.getContext().getString(R.string.status_ordered)));
+                Service.isEqual(status, Service.getStr(R.string.status_reserved)) ||
+                        Service.isEqual(status, Service.getStr(R.string.status_ordered)));
 
         // Подключение навигации
         navigationModel = new NavigationViewModel(

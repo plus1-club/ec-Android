@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.MenuItem;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.models.ServerResponse;
 import ru.electric.ec.online.views.BasketActivity;
 import ru.electric.ec.online.views.InvoiceTableActivity;
 import ru.electric.ec.online.views.RequestActivity;

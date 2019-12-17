@@ -28,7 +28,7 @@ public class ServerNetwork {
     private static ServerApi serverApi;
     private Retrofit retrofit;
 
-    static Handler handler;
+    public static Handler handler;
 
     // Получение единственного экземпляра класса
     public static ServerNetwork getInstance() {

@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.domains.Request;
-import ru.electric.ec.online.models.ServerResponse;
+import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.views.BasketActivity;
 import ru.electric.ec.online.views.InfoActivity;
 import ru.electric.ec.online.views.RequestActivity;

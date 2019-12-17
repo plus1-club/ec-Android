@@ -16,11 +16,11 @@ import java.util.Objects;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.InvoiceTableBinding;
-import ru.electric.ec.online.domains.Invoice;
-import ru.electric.ec.online.models.ServerResponse;
+import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.viewadapters.InvoiceTableAdapter;
 import ru.electric.ec.online.viewmodels.InvoiceTableViewModel;
 import ru.electric.ec.online.viewmodels.NavigationViewModel;
+import ru.electric.ec.online.viewmodels.ServerResponse;
 
 public class InvoiceTableActivity extends AppCompatActivity {
 

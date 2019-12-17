@@ -4,7 +4,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
-import ru.electric.ec.online.domains.Invoice;
+import ru.electric.ec.online.models.Invoice;
 
 public class InvoiceTableViewModel {
 

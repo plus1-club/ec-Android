@@ -16,11 +16,11 @@ import java.util.Objects;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.BasketBinding;
-import ru.electric.ec.online.domains.Request;
-import ru.electric.ec.online.models.ServerResponse;
+import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.viewadapters.BasketAdapter;
 import ru.electric.ec.online.viewmodels.NavigationViewModel;
 import ru.electric.ec.online.viewmodels.RequestViewModel;
+import ru.electric.ec.online.viewmodels.ServerResponse;
 
 public class BasketActivity extends AppCompatActivity {
 

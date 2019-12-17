@@ -15,10 +15,10 @@ import java.util.Objects;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.SearchBinding;
-import ru.electric.ec.online.models.ServerResponse;
 import ru.electric.ec.online.viewadapters.SearchAdapter;
 import ru.electric.ec.online.viewmodels.NavigationViewModel;
 import ru.electric.ec.online.viewmodels.RequestViewModel;
+import ru.electric.ec.online.viewmodels.ServerResponse;
 
 public class SearchActivity extends AppCompatActivity {
 

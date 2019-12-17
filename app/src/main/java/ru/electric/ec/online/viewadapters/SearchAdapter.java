@@ -15,7 +15,7 @@ import java.util.Objects;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.SearchItemBinding;
-import ru.electric.ec.online.domains.Request;
+import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.viewmodels.SearchItemViewModel;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.RequestsTableViewHolder> {

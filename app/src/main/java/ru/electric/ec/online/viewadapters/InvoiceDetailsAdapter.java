@@ -13,12 +13,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.InvoiceDetailsItemBinding;
-import ru.electric.ec.online.domains.Detail;
-import ru.electric.ec.online.models.Service;
+import ru.electric.ec.online.models.Detail;
 import ru.electric.ec.online.viewmodels.InvoiceDetailsItemViewModel;
+import ru.electric.ec.online.viewmodels.Service;
 
 public class InvoiceDetailsAdapter extends RecyclerView.Adapter<InvoiceDetailsAdapter.InvoiceDetailsViewHolder> {
 
@@ -78,12 +77,12 @@ public class InvoiceDetailsAdapter extends RecyclerView.Adapter<InvoiceDetailsAd
 
             String status = viewModel.parent.status.get();
             viewModel.showAvailable.set(
-                    Service.isEqual(status, App.getContext().getString(R.string.status_unconfirmed)) ||
-                    Service.isEqual(status, App.getContext().getString(R.string.status_reserved)) ||
-                    Service.isEqual(status, App.getContext().getString(R.string.status_ordered)));
+                    Service.isEqual(status, Service.getStr(R.string.status_unconfirmed)) ||
+                    Service.isEqual(status, Service.getStr(R.string.status_reserved)) ||
+                    Service.isEqual(status, Service.getStr(R.string.status_ordered)));
             viewModel.showDelivery.set(
-                    Service.isEqual(status, App.getContext().getString(R.string.status_reserved)) ||
-                    Service.isEqual(status, App.getContext().getString(R.string.status_ordered)));
+                    Service.isEqual(status, Service.getStr(R.string.status_reserved)) ||
+                    Service.isEqual(status, Service.getStr(R.string.status_ordered)));
         }
     }
 

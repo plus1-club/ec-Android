@@ -1,4 +1,4 @@
-package ru.electric.ec.online.domains;
+package ru.electric.ec.online.models;
 
 public class Request {
     public String product;

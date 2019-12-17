@@ -15,7 +15,7 @@ import java.util.Objects;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.BasketItemBinding;
-import ru.electric.ec.online.domains.Request;
+import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.viewmodels.BasketItemViewModel;
 
 public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.RequestsBasketViewHolder> {
