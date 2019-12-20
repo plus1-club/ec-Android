@@ -40,14 +40,14 @@ public class ServerRun {
     }
 
     void getEnter(Context context, Response<ServerData> response){
-        if (Objects.requireNonNull(response.body()).isSuccess()) {
-            Object data = response.body().getData();
+        if (Objects.requireNonNull(response.body()).success) {
+            Object data = response.body().data;
             App.model.token = (String) ((LinkedTreeMap) data).get("user_token");
             Intent intent = new Intent(context, MenuActivity.class);
             context.startActivity(intent);
         } else {
-            String message = " (" + response.body().getError() + ")"
-                    + response.body().getMessage();
+            String message = " (" + response.body().error + ")"
+                    + response.body().message;
             Service.log(context, false, true, message);
         }
     }
@@ -59,8 +59,8 @@ public class ServerRun {
 
     void getByCode(Context context, Response<ServerData> response){
         App.model.request.search.clear();
-        if (response.body() != null && response.body().getError().isEmpty()) {
-            List<?> data = (List<?>) response.body().getData();
+        if (response.body() != null && response.body().error.isEmpty()) {
+            List<?> data = (List<?>) response.body().data;
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
@@ -81,8 +81,8 @@ public class ServerRun {
 
     void getBasket(Context context, Response<ServerData> response){
         App.model.request.basket.clear();
-        if (response.body() != null && response.body().getError().isEmpty()) {
-            List<?> data = (List<?>) response.body().getData();
+        if (response.body() != null && response.body().error.isEmpty()) {
+            List<?> data = (List<?>) response.body().data;
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
@@ -120,8 +120,8 @@ public class ServerRun {
 
     void invoiceList(Context context, Response<ServerData> response){
         App.model.invoice.invoices.clear();
-        if (response.body() != null && response.body().getError().isEmpty()) {
-            List<?> data = (List<?>) response.body().getData();
+        if (response.body() != null && response.body().error.isEmpty()) {
+            List<?> data = (List<?>) response.body().data;
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
@@ -149,7 +149,7 @@ public class ServerRun {
     }
 
     void invoiceDetails(Context context, Response<ServerData> response, int number){
-        if (response.body() != null && response.body().getError().isEmpty()) {
+        if (response.body() != null && response.body().error.isEmpty()) {
             Invoice invoice = null;
             for (Invoice item:App.model.invoice.invoices) {
                 if(item.number == number){
@@ -158,7 +158,7 @@ public class ServerRun {
             }
             if (invoice == null) return;
 
-            List<?> data = (List<?>) response.body().getData();
+            List<?> data = (List<?>) response.body().data;
             invoice.details.clear();
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
@@ -179,7 +179,7 @@ public class ServerRun {
     }
 
     void getPrint(Context context, final Response<ServerData> response, final int number) {
-        if (response.body() != null && response.body().getError().isEmpty()) {
+        if (response.body() != null && response.body().error.isEmpty()) {
             Toast.makeText(context, "Скачивание счета - в разработке", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ec-electric.ru/order/example.xls"));
             context.startActivity(intent);
