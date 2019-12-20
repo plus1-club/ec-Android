@@ -11,6 +11,11 @@ public class Detail {
 
     public Detail(String product, int count, double price, double sum,
                   String available, String delivery) {
+        init(product, count, price, sum, available, delivery);
+    }
+
+    private void init(String product, int count, double price, double sum,
+              String available, String delivery){
         this.product = product;
         this.count = count;
         this.price = price;

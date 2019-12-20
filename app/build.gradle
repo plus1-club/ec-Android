@@ -7,7 +7,7 @@ android {
         applicationId "ru.electric.ec.online"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 86
+        versionCode 87
         versionName "0.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,11 +45,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.0'
 
     // Тестирование
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-
-    // Прочее
-    implementation 'org.jetbrains:annotations-java5:15.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
 }

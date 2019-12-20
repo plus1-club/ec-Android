@@ -125,12 +125,21 @@ public class ServerRun {
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
-                Invoice invoice = new Invoice(
-                        Service.getInt(el.get("number")),
-                        el.get("date"),
-                        el.get("status"),
-                        Service.isEqual(el.get("status"),context.getString(R.string.status_shipped))
-                            ? Service.getInt(el.get("waybill")) : Service.getDouble((el.get("sum"))));
+                Invoice invoice;
+                if (Service.isEqual(el.get("status"),context.getString(R.string.status_shipped))) {
+                    invoice = new Invoice(
+                            Service.getInt(el.get("number")),
+                            el.get("date"),
+                            el.get("status"),
+                            Service.getInt(el.get("waybill")));
+
+                } else {
+                    invoice = new Invoice(
+                            Service.getInt(el.get("number")),
+                            el.get("date"),
+                            Service.getDouble(el.get("sum")),
+                            el.get("status"));
+                }
                 App.model.invoice.invoices.add(invoice);
             }
             InvoiceTableAdapter adapter = new InvoiceTableAdapter();

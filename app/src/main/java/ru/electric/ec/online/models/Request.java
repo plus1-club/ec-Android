@@ -12,6 +12,16 @@ public class Request {
 
     public Request(String product, int requestCount, int stockCount,
                    int multiplicity, String unit, double price, boolean check) {
+        init(product, requestCount, stockCount, multiplicity, unit, price, check);
+    }
+
+    public Request(String product, int requestCount, int stockCount,
+                   int multiplicity, String unit, boolean check) {
+        init(product, requestCount, stockCount, multiplicity, unit, 0, check);
+    }
+
+    private void init(String product, int requestCount, int stockCount,
+                      int multiplicity, String unit, double price, boolean check){
         this.product = product;
         this.requestCount = requestCount;
         this.stockCount = stockCount;
@@ -20,17 +30,5 @@ public class Request {
         this.price = price;
         this.check = check;
         sum = requestCount * price;
-    }
-
-    public Request(String product, int requestCount, int stockCount,
-                   int multiplicity, String unit, boolean check) {
-        this.product = product;
-        this.requestCount = requestCount;
-        this.stockCount = stockCount;
-        this.multiplicity = multiplicity;
-        this.unit = unit;
-        this.check = check;
-        price = 0;
-        sum = 0;
     }
 }
