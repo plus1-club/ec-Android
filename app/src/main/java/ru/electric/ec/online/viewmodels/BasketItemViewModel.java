@@ -16,6 +16,7 @@ import java.util.List;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.models.Count;
 import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.models.Service;
 import ru.electric.ec.online.views.BasketActivity;
 
 public class BasketItemViewModel {

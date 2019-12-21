@@ -1,6 +1,7 @@
 package ru.electric.ec.online.viewmodels;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -11,29 +12,29 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.models.ServerData;
-import ru.electric.ec.online.models.ServerNetwork;
+import ru.electric.ec.online.models.Service;
 
 public class ServerResponse {
+
+    private static void log(Context context, boolean isError, boolean showToast, String message){
+        Service.log(isError, message);
+        if (showToast) Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+    }
 
     static void getEnter(final Context context, String login, String password) {
         ServerNetwork.getApi().enter(login, password).enqueue(new Callback<ServerData>() {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().getEnter(context, response);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().getEnter(context, response));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -43,19 +44,14 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().getExit(context, response);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().getExit(context, response));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -65,19 +61,14 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().getByCode(context, response);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().getByCode(context, response));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -87,19 +78,14 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().getBasket(context, response);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().getBasket(context, response));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -109,20 +95,15 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().postBasket(context, response);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().postBasket(context, response));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -132,19 +113,14 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().putBasket(context, response);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().putBasket(context, response));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -155,20 +131,15 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().deleteBasket(context, response);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().deleteBasket(context, response));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -178,20 +149,15 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().order(context, response);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().order(context, response));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -201,20 +167,15 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().invoiceList(context, response);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().invoiceList(context, response));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -224,20 +185,15 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().invoiceList(context, response);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().invoiceList(context, response));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -247,20 +203,15 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().invoiceList(context, response);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().invoiceList(context, response));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -270,20 +221,15 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().invoiceList(context, response);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().invoiceList(context, response));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -293,20 +239,15 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().invoiceList(context, response);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().invoiceList(context, response));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -316,20 +257,15 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().invoiceDetails(context, response, number);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().invoiceDetails(context, response, number));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -339,20 +275,15 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().invoiceDetails(context, response, number);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().invoiceDetails(context, response, number));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -363,20 +294,15 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().invoiceDetails(context, response, number);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().invoiceDetails(context, response, number));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -387,20 +313,15 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().invoiceDetails(context, response, number);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().invoiceDetails(context, response, number));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -411,20 +332,15 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().invoiceDetails(context, response, number);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().invoiceDetails(context, response, number));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }
@@ -434,19 +350,14 @@ public class ServerResponse {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ServerRun.getInstance().getPrint(context, response, number);
-                        }
-                    });
+                    ServerNetwork.handler.post(() -> ServerRun.getInstance().getPrint(context, response, number));
                 } else {
-                    Service.log(context, false, true, "response code " + response.code());
+                    log(context, false, true, "response code " + response.code());
                 }
             }
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                Service.log(context, true, true, "failure " + t);
+                log(context, true, true, "failure " + t);
             }
         });
     }

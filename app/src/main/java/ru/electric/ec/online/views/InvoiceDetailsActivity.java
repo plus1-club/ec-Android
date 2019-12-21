@@ -9,19 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.InvoiceDetailsBinding;
 import ru.electric.ec.online.models.Invoice;
+import ru.electric.ec.online.models.Service;
 import ru.electric.ec.online.viewadapters.InvoiceDetailsAdapter;
 import ru.electric.ec.online.viewmodels.InvoiceDetailsViewModel;
 import ru.electric.ec.online.viewmodels.InvoiceTableViewModel;
 import ru.electric.ec.online.viewmodels.NavigationViewModel;
 import ru.electric.ec.online.viewmodels.ServerResponse;
-import ru.electric.ec.online.viewmodels.Service;
 
 public class InvoiceDetailsActivity extends AppCompatActivity {
 
@@ -78,12 +77,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         // Обновление списка
         binding.swiperefresh.setRefreshing(true);
         binding.swiperefresh.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        refresh();
-                    }
-                }
+                this::refresh
         );
         binding.swiperefresh.setRefreshing(false);
     }
@@ -145,14 +139,11 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         final Invoice thisInvoice = invoice;
 
         updateItem(viewModel.status.get());
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                adapter = new InvoiceDetailsAdapter();
-                adapter.setItems(thisInvoice.details);
-                binding.list.setAdapter(adapter);
-                binding.swiperefresh.setRefreshing(false);
-            }
+        new Handler().postDelayed(() -> {
+            adapter = new InvoiceDetailsAdapter();
+            adapter.setItems(thisInvoice.details);
+            binding.list.setAdapter(adapter);
+            binding.swiperefresh.setRefreshing(false);
         }, 1000);
     }
 }

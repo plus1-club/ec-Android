@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import ru.electric.ec.online.R;
+
 public class ServerData {
 
     @SerializedName("success")
@@ -27,9 +29,9 @@ public class ServerData {
     @Override
     public String toString() {
         if (this.success) {
-            return "Успешно.\nДанные: " + this.data;
+            return Service.getStr(R.string.text_server_data_success, this.data);
         } else {
-            return "Ошибка!\n" + this.error + "\nСообщение: " + this.message;
+            return Service.getStr(R.string.text_server_data_error, this.error, this.message);
         }
     }
 

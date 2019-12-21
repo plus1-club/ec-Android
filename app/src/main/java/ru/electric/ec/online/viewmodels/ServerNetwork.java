@@ -1,4 +1,4 @@
-package ru.electric.ec.online.models;
+package ru.electric.ec.online.viewmodels;
 
 import android.annotation.SuppressLint;
 import android.os.Handler;
@@ -9,9 +9,7 @@ import com.google.gson.GsonBuilder;
 
 import java.security.cert.X509Certificate;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -20,7 +18,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.electric.ec.online.BuildConfig;
+import ru.electric.ec.online.models.ServerApi;
 
 public class ServerNetwork {
 
@@ -28,7 +26,7 @@ public class ServerNetwork {
     private static ServerApi serverApi;
     private Retrofit retrofit;
 
-    public static Handler handler;
+    static Handler handler;
 
     // Получение единственного экземпляра класса
     public static ServerNetwork getInstance() {
@@ -41,7 +39,6 @@ public class ServerNetwork {
     private ServerNetwork() {
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
 
         Gson gson = new GsonBuilder().setLenient().create();
         retrofit = new Retrofit.Builder()
@@ -95,16 +92,9 @@ public class ServerNetwork {
 
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
-            builder.hostnameVerifier(new HostnameVerifier() {
-                @SuppressLint("BadHostnameVerifier")
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
-                }
-            });
+            builder.hostnameVerifier((hostname, session) -> true);
 
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
 
             return builder.addInterceptor(interceptor).build();
         } catch (Exception e) {

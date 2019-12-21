@@ -17,6 +17,7 @@ import ru.electric.ec.online.models.Detail;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.models.ServerData;
+import ru.electric.ec.online.models.Service;
 import ru.electric.ec.online.viewadapters.InvoiceDetailsAdapter;
 import ru.electric.ec.online.viewadapters.InvoiceTableAdapter;
 import ru.electric.ec.online.views.EnterActivity;
@@ -38,6 +39,11 @@ public class ServerRun {
         }
         return mInstance;
     }
+    
+    private static void log(Context context, boolean isError, boolean showToast, String message){
+        Service.log(isError, message);
+        if (showToast) Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+    }
 
     void getEnter(Context context, Response<ServerData> response){
         if (Objects.requireNonNull(response.body()).success) {
@@ -48,7 +54,7 @@ public class ServerRun {
         } else {
             String message = " (" + response.body().error + ")"
                     + response.body().message;
-            Service.log(context, false, true, message);
+            log(context, false, true, message);
         }
     }
 

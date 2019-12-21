@@ -54,7 +54,7 @@
     <string name="button_add">Добавить</string>
     <string name="button_issue">Оформить</string>
     <string name="text_count">%1$d</string>
-    <string name="text_money">%1$s руб.</string>
+    <string name="text_money">%1$d руб.</string>
     <string name="text_total">Итого: %1$s руб.</string>
     <string name="text_basket_item_delete">Удалить строку из корзины</string>
     <string name="text_order_processed">Заказ оформлен</string>
@@ -82,5 +82,9 @@
     <string name="status_canceled">Аннулирован</string>
     <string name="status_overdie">Просрочен</string>
     <string name="status_shipped">Отгружен</string>
+
+    <!-- Прочее -->
+    <string name="text_server_data_success">Успешно.\nДанные: %1$s</string>
+    <string name="text_server_data_error">Ошибка!\n%1$s\nСообщение: %2$s</string>
 
 </resources>
