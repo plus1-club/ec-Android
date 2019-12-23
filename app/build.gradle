@@ -7,7 +7,7 @@ android {
         applicationId "ru.electric.ec.online"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 90
+        versionCode 91
         versionName "0.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -21,6 +21,9 @@ android {
                     output.outputFileName = name
                 }
             }
+        }
+        debug {
+            testCoverageEnabled = true
         }
     }
     dataBinding {
@@ -36,27 +39,30 @@ android {
             includeAndroidResources = true
         }
     }
+    useLibrary 'android.test.runner'
+    useLibrary 'android.test.base'
+    useLibrary 'android.test.mock'
 }
 
 dependencies {
     // Система
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
-
-    // Интерфейс
     implementation 'com.google.android.material:material:1.0.0'
+
+    // Интерфейс (ConstraintLayout, RecycleView, DrawerLayout, SwipeRefreshLayout)
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.drawerlayout:drawerlayout:1.0.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
-    // Работа с сетью и API (OkHttp, Retrofit)
+    // Работа с сетью и API (OkHttp3, Retrofit2)
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
     implementation 'com.squareup.retrofit2:retrofit:2.7.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.0'
 
-    // Тестирование
+    // Unit-тесты (JUnit5, Mockito2, Robolectric4, PowerMock2)
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
     testImplementation 'org.mockito:mockito-core:2.27.0'
@@ -66,6 +72,23 @@ dependencies {
     testImplementation 'org.powermock:powermock-module-junit4-rule-agent:2.0.0-beta.5'
     testImplementation 'org.powermock:powermock-module-junit4-rule:2.0.0-beta.5'
     testImplementation 'org.powermock:powermock-module-junit4:2.0.0-beta.5'
+
+    // UI-тестирование (Espresso3)
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-accessibility:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-web:3.2.0'
+    androidTestImplementation 'androidx.test.espresso.idling:idling-concurrent:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
+    androidTestImplementation 'androidx.test:core:1.2.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.ext:truth:1.2.0'
+    androidTestImplementation 'com.google.truth:truth:0.42'
 }
 
 task javadoc(type: Javadoc) {
@@ -84,4 +107,20 @@ afterEvaluate {
     javadoc.classpath += files(android.applicationVariants.collect { variant ->
         variant.javaCompileProvider.get().classpath.files
     })
+}
+
+def browse(path) {
+    def os = org.gradle.internal.os.OperatingSystem.current()
+    if (os.isWindows()) {
+        exec { commandLine 'cmd', '/c', "start $path" }
+    } else if (os.isMacOsX()) {
+        exec { commandLine 'open', "$path" }
+    }
+}
+
+gradle.taskGraph.afterTask { Task task, TaskState state ->
+    if (task.name == "connectedDebugAndroidTest") {
+        def file = project.file('build/reports/androidTests/connected/index.html')
+        browse file
+    }
 }

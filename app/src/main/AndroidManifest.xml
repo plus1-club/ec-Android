@@ -59,6 +59,7 @@
             android:name=".views.InfoActivity"
             android:screenOrientation="portrait"
             android:noHistory="true"/>
+        <uses-library android:name="android.test.runner" android:required="false" />
     </application>
 
 </manifest>
