@@ -11,8 +11,19 @@ import java.util.Objects;
 
 import ru.electric.ec.online.R;
 
+/**
+ * Класс общих сервисных функций
+ * @author Сергей Лавров
+ * @version 0.5
+ */
 public class Service {
 
+    /**
+     * Форматирование суммы в рублях
+     * @param value значение для форматировние
+     * @param template шаблон текста для подстановки отформатированной цифры
+     * @return сумма в рублях
+     */
     public static String rub(ObservableDouble value, String template){
         DecimalFormat formatter=new DecimalFormat();
         DecimalFormatSymbols symbols=DecimalFormatSymbols.getInstance();
@@ -25,6 +36,11 @@ public class Service {
         return template.replace("%1$d",textValue);
     }
 
+    /**
+     * Получение целого числа из строки
+     * @param string строка с текстом для распознавания
+     * @return целое число из строки
+     */
     public static int getInt(String string) {
         if (string == null || string.isEmpty()) {
             return 0;
@@ -33,6 +49,11 @@ public class Service {
         }
     }
 
+    /**
+     * Получение дробного числа из строки
+     * @param string строка с текстом для распознавания
+     * @return дробное число из строки
+     */
     public static double getDouble(String string){
         if (string == null || string.isEmpty()) {
             return 0.0;
@@ -44,10 +65,24 @@ public class Service {
         }
     }
 
+    /**
+     * Сравнение строк на равенство без учёта регистра букв и с защитой от пустого значения
+     * @param one первая строка
+     * @param two вторая строка
+     * @return равны ли две строки
+     */
     public static boolean isEqual(String one, String two){
         return Objects.requireNonNull(one).toLowerCase().equals(two.toLowerCase());
     }
 
+    /**
+     * Получение статуса количества товара на основе переданных данных
+     * @param count запрашиваемое количество товара
+     * @param stockCount количество товара на складе или статус количества
+     *                   (-1 - товара недостаточно, но более 500; -2 - превышено количество проверок)
+     * @param needUpdate требуется ли проверить количество (оно в клиенте не известно)
+     * @return статус количества товара
+     */
     public static Count status(int count, int stockCount, boolean needUpdate){
         String textStatus;
         String colorName;
@@ -85,17 +120,25 @@ public class Service {
         return new Count(count, stockCount, textStatus, color, colorName);
     }
 
+
+    /**
+     * Вывод в информации или ошибки в консоль
+     * @param isError это ошибка?
+     * @param message сообщение для вывода в консоль
+     */
     public static void log(boolean isError, String message) {
-        try{
-            if (isError) {
-                Log.e("ec", message);
-            } else {
-                Log.d("ec", message);
-            }
-        } catch (Exception ignored){
+        if (isError) {
+            Log.e("ec", message);
+        } else {
+            Log.d("ec", message);
         }
     }
 
+    /**
+     * Получение строки из ресурсов (без параметров)
+     * @param res идентификатор строки
+     * @return строка из ресурсов
+     */
     public static String getStr(int res){
         try{
             return Resources.getSystem().getString(res);
@@ -104,6 +147,12 @@ public class Service {
         }
     }
 
+    /**
+     * Получение строки из ресурсов (с 1 параметром)
+     * @param res идентификатор строки
+     * @param param параметр строки
+     * @return строка из ресурсов
+     */
     static String getStr(int res, Object param){
         try {
             return Resources.getSystem().getString(res, param);
@@ -112,6 +161,13 @@ public class Service {
         }
     }
 
+    /**
+     * Получение строки из ресурсов (с 2 параметрами)
+     * @param res идентификатор строки
+     * @param param1 1й параметр строки
+     * @param param2 2й параметр строки
+     * @return строка из ресурсов
+     */
     static String getStr(int res, Object param1, Object param2){
         try {
             return Resources.getSystem().getString(res, param1, param2);

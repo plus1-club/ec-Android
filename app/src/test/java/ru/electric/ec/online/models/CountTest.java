@@ -2,6 +2,7 @@ package ru.electric.ec.online.models;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ru.electric.ec.online.R;
@@ -23,6 +24,7 @@ class CountTest {
     }
 
     @Test
+    @DisplayName("Создание объекта Count")
     void init() {
         assertEquals(2, object.count);
         assertEquals(1, object.stockCount);

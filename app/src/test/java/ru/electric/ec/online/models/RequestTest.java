@@ -2,6 +2,7 @@ package ru.electric.ec.online.models;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,6 +25,7 @@ class RequestTest {
     }
 
     @Test
+    @DisplayName("Создание объекта Request")
     void init() {
         assertEquals("old", object.product);
         assertEquals(3, object.requestCount);

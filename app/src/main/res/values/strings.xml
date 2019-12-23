@@ -85,6 +85,6 @@
 
     <!-- Прочее -->
     <string name="text_server_data_success">Успешно.\nДанные: %1$s</string>
-    <string name="text_server_data_error">Ошибка!\n%1$s\nСообщение: %2$s</string>
+    <string name="text_server_data_error">Ошибка %1$s\nСообщение: %2$s</string>
 
 </resources>

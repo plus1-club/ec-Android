@@ -2,6 +2,7 @@ package ru.electric.ec.online.models;
 
 import androidx.databinding.ObservableDouble;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import ru.electric.ec.online.R;
@@ -36,6 +37,13 @@ class ServiceTest {
     }
 
     @Test
+    void getInt_null() {
+        int expected = 0;
+        int actual = Service.getInt(null);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void getDouble_Dot() {
         double expected = 1000000.0;
         double actual = Service.getDouble("1 000 000.00");
@@ -60,6 +68,13 @@ class ServiceTest {
     void getDouble_0() {
         double expected = 0.0;
         double actual = Service.getDouble("");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getDouble_null() {
+        double expected = 0.0;
+        double actual = Service.getDouble(null);
         assertEquals(expected, actual);
     }
 
@@ -190,7 +205,8 @@ class ServiceTest {
     void log_success() {
         try{
             Service.log(false, "test");
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            Assert.assertNotEquals("", e.getMessage());
         }
     }
 
@@ -198,11 +214,23 @@ class ServiceTest {
     void log_error() {
         try{
             Service.log(true, "test");
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            Assert.assertNotEquals("", e.getMessage());
         }
     }
 
     @Test
-    void getStr() {
+    void getStr_0() {
+        assertEquals("", Service.getStr(0));
+    }
+
+    @Test
+    void getStr_1() {
+        assertEquals("1", Service.getStr(0, 1));
+    }
+
+    @Test
+    void getStr_2() {
+        assertEquals("12", Service.getStr(0, 1, 2));
     }
 }

@@ -2,6 +2,7 @@ package ru.electric.ec.online.models;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,6 +22,7 @@ class InvoiceTest {
     }
 
     @Test
+    @DisplayName("Создание объекта Invoice")
     void init() {
         assertEquals(123, object.number);
         assertEquals("01.01.2000", object.date);
