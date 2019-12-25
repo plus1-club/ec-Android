@@ -5,6 +5,10 @@ import android.content.Intent;
 
 import androidx.databinding.ObservableField;
 
+import ru.electric.ec.online.R;
+import ru.electric.ec.online.models.Service;
+import ru.electric.ec.online.views.InfoActivity;
+
 public class InfoViewModel {
 
     private static InfoViewModel mInstance;    // Ссылка для биндинга с View
@@ -34,6 +38,21 @@ public class InfoViewModel {
             context.startActivity(intent);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void log(Context context, boolean isError, boolean showToast, String message){
+        Service.log(isError, message);
+        if (showToast) {
+            Intent intent = new Intent(context, InfoActivity.class);
+            if (isError) {
+                intent.putExtra("title", Service.getStr(R.string.text_error));
+            } else {
+                intent.putExtra("title", Service.getStr(R.string.text_info));
+            }
+            intent.putExtra("info", message);
+            intent.putExtra("activityName", context.getClass().getSimpleName());
+            context.startActivity(intent);
         }
     }
 }

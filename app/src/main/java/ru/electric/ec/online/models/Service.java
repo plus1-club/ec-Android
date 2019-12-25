@@ -1,14 +1,13 @@
 package ru.electric.ec.online.models;
 
-import android.content.res.Resources;
 import android.util.Log;
 
 import androidx.databinding.ObservableDouble;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.Objects;
 
+import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 
 /**
@@ -72,7 +71,10 @@ public class Service {
      * @return равны ли две строки
      */
     public static boolean isEqual(String one, String two){
-        return Objects.requireNonNull(one).toLowerCase().equals(two.toLowerCase());
+        if (one == null || two == null)
+            return false;
+        else
+            return one.toLowerCase().equals(two.toLowerCase());
     }
 
     /**
@@ -141,7 +143,7 @@ public class Service {
      */
     public static String getStr(int res){
         try{
-            return Resources.getSystem().getString(res);
+            return App.appContext.getString(res);
         } catch (Exception e){
             return "";
         }
@@ -153,9 +155,9 @@ public class Service {
      * @param param параметр строки
      * @return строка из ресурсов
      */
-    static String getStr(int res, Object param){
+    public static String getStr(int res, Object param){
         try {
-            return Resources.getSystem().getString(res, param);
+            return App.appContext.getString(res, param);
         } catch (Exception e) {
             return param.toString();
         }
@@ -168,9 +170,9 @@ public class Service {
      * @param param2 2й параметр строки
      * @return строка из ресурсов
      */
-    static String getStr(int res, Object param1, Object param2){
+    public static String getStr(int res, Object param1, Object param2){
         try {
-            return Resources.getSystem().getString(res, param1, param2);
+            return App.appContext.getString(res, param1, param2);
         } catch (Exception e) {
             return param1.toString() + param2.toString();
         }

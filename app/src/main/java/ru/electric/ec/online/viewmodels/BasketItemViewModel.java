@@ -3,7 +3,6 @@ package ru.electric.ec.online.viewmodels;
 import android.content.Context;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.Toast;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
@@ -17,6 +16,7 @@ import ru.electric.ec.online.R;
 import ru.electric.ec.online.models.Count;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.models.Service;
+import ru.electric.ec.online.server.ServerResponse;
 import ru.electric.ec.online.views.BasketActivity;
 
 public class BasketItemViewModel {
@@ -69,10 +69,8 @@ public class BasketItemViewModel {
             needUpdate.set(true);
             if (newCount % multiplicity.get() > 0){
                 count.set(newCount + (multiplicity.get() - (newCount % multiplicity.get())));
-                Toast.makeText(context,
-                        context.getString(R.string.text_multiplicity, multiplicity.get()),
-                        Toast.LENGTH_LONG).show();
-
+                InfoViewModel.log(context, false, true,
+                        Service.getStr(R.string.text_multiplicity, multiplicity.get()));
             } else {
                 count.set(newCount);
             }

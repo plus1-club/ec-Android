@@ -1,8 +1,11 @@
-package ru.electric.ec.online.viewmodels;
+package ru.electric.ec.online.server;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+
+import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,9 +19,16 @@ import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.electric.ec.online.R;
 import ru.electric.ec.online.models.ServerApi;
+import ru.electric.ec.online.models.ServerData;
+import ru.electric.ec.online.models.Service;
+import ru.electric.ec.online.viewmodels.InfoViewModel;
 
 public class ServerNetwork {
 
@@ -26,7 +36,7 @@ public class ServerNetwork {
     private static ServerApi serverApi;
     private Retrofit retrofit;
 
-    static Handler handler;
+    private static Handler handler;
 
     // Получение единственного экземпляра класса
     public static ServerNetwork getInstance() {
@@ -101,4 +111,25 @@ public class ServerNetwork {
             throw new RuntimeException(e);
         }
     }
+
+    static Callback<ServerData> callback(final Context context, ServerRunInterface func, int number){
+        return new Callback<ServerData>() {
+            @Override
+            public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
+                if (response.isSuccessful()) {
+                    ServerNetwork.handler.post(() -> func.run(context, response, number));
+                } else {
+                    InfoViewModel.log(context, false, true,
+                            Service.getStr(R.string.text_response_error, response.code(), response.message()));
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
+                InfoViewModel.log(context, true, true,
+                        Service.getStr(R.string.text_response_failure, t));
+            }
+        };
+    }
+
+
 }

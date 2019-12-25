@@ -55,7 +55,7 @@
     <string name="button_issue">Оформить</string>
     <string name="text_count">%1$d</string>
     <string name="text_money">%1$d руб.</string>
-    <string name="text_total">Итого: %1$s руб.</string>
+    <string name="text_total">Итого: %1$d руб.</string>
     <string name="text_basket_item_delete">Удалить строку из корзины</string>
     <string name="text_order_processed">Заказ оформлен</string>
 
@@ -83,8 +83,19 @@
     <string name="status_overdie">Просрочен</string>
     <string name="status_shipped">Отгружен</string>
 
-    <!-- Прочее -->
+    <!-- Показ информации и ошибок -->
+    <string name="text_info">Информация</string>
+    <string name="text_error">Ошибка</string>
     <string name="text_server_data_success">Успешно.\nДанные: %1$s</string>
     <string name="text_server_data_error">Ошибка %1$s\nСообщение: %2$s</string>
+    <string name="text_response_error">Ошибка %1$s:\n%2$s</string>
+    <string name="text_response_failure">Ошибка:\n%1$s</string>
+
+    <!-- В разработке -->
+    <string name="text_in_develop_choose_file">Выбор файла - в разработке</string>
+    <string name="text_in_develop_download_remains">Скачивание остатков - в разработке</string>
+    <string name="test_in_develop_download_invoice">Скачивание счета - в разработке</string>
+
+    <!-- Прочее -->
 
 </resources>

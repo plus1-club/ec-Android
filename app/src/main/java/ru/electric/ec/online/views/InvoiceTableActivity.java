@@ -9,18 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.InvoiceTableBinding;
-import ru.electric.ec.online.models.Invoice;
+import ru.electric.ec.online.server.ServerResponse;
 import ru.electric.ec.online.viewadapters.InvoiceTableAdapter;
 import ru.electric.ec.online.viewmodels.InvoiceTableViewModel;
 import ru.electric.ec.online.viewmodels.NavigationViewModel;
-import ru.electric.ec.online.viewmodels.ServerResponse;
 
 public class InvoiceTableActivity extends AppCompatActivity {
 
@@ -43,8 +41,6 @@ public class InvoiceTableActivity extends AppCompatActivity {
         this.setTitle(Objects.requireNonNull(bundle).getString("title"));
         viewModel.title.set(Objects.requireNonNull(bundle).getString("title"));
 
-        updateList();
-
         // Подготовка биндинга
         binding = DataBindingUtil.setContentView(this, R.layout.invoice_table);
         binding.setViewModel(viewModel);
@@ -66,15 +62,9 @@ public class InvoiceTableActivity extends AppCompatActivity {
         setSupportActionBar(navigationModel.toolbar);
 
         // Обновление списка
+        updateList();
         binding.swiperefresh.setRefreshing(true);
-        binding.swiperefresh.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        refresh();
-                    }
-                }
-        );
+        binding.swiperefresh.setOnRefreshListener(this::refresh);
         binding.swiperefresh.setRefreshing(false);
     }
 
@@ -110,20 +100,17 @@ public class InvoiceTableActivity extends AppCompatActivity {
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_shipped))) {
             ServerResponse.shippedList(this);
         } else {
-            adapter.setItems(new ArrayList<Invoice>());
+            adapter.setItems(new ArrayList<>());
         }
     }
 
     public void refresh(){
         updateList();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                adapter = new InvoiceTableAdapter();
-                adapter.setItems(viewModel.invoices);
-                binding.list.setAdapter(adapter);
-                binding.swiperefresh.setRefreshing(false);
-            }
+        new Handler().postDelayed(() -> {
+            adapter = new InvoiceTableAdapter();
+            adapter.setItems(viewModel.invoices);
+            binding.list.setAdapter(adapter);
+            binding.swiperefresh.setRefreshing(false);
         }, 1000);
     }
 }

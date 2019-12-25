@@ -11,6 +11,7 @@ import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
 import ru.electric.ec.online.models.Detail;
+import ru.electric.ec.online.server.ServerResponse;
 import ru.electric.ec.online.views.InvoiceDetailsActivity;
 
 public class InvoiceTableItemViewModel {

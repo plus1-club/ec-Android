@@ -6,6 +6,8 @@ import android.net.Uri;
 
 import androidx.databinding.ObservableField;
 
+import ru.electric.ec.online.server.ServerResponse;
+
 public class EnterViewModel {
 
     private static EnterViewModel mInstance;

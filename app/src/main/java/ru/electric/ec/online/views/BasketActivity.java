@@ -10,17 +10,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.BasketBinding;
 import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.server.ServerResponse;
 import ru.electric.ec.online.viewadapters.BasketAdapter;
 import ru.electric.ec.online.viewmodels.NavigationViewModel;
 import ru.electric.ec.online.viewmodels.RequestViewModel;
-import ru.electric.ec.online.viewmodels.ServerResponse;
 
 public class BasketActivity extends AppCompatActivity {
 
@@ -68,13 +67,10 @@ public class BasketActivity extends AppCompatActivity {
         ServerResponse.getBasket(activity);
         refreshBasket();
         binding.swiperefresh.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        ServerResponse.getBasket(activity);
-                        refreshBasket();
-                    }
-                }
+            () -> {
+                ServerResponse.getBasket(activity);
+                refreshBasket();
+            }
         );
     }
 
@@ -99,21 +95,18 @@ public class BasketActivity extends AppCompatActivity {
     }
 
     public void refreshBasket(){
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                adapter = new BasketAdapter();
-                adapter.setItems(viewModel.basket);
-                binding.list.setAdapter(adapter);
-                viewModel.total.set(0);
-                viewModel.basketAdapter.set(adapter);
-                for (Request item : viewModel.basket) {
-                    if(item.check) {
-                        viewModel.total.set(viewModel.total.get() + item.requestCount * item.price);
-                    }
+        new Handler().postDelayed(() -> {
+            adapter = new BasketAdapter();
+            adapter.setItems(viewModel.basket);
+            binding.list.setAdapter(adapter);
+            viewModel.total.set(0);
+            viewModel.basketAdapter.set(adapter);
+            for (Request item : viewModel.basket) {
+                if(item.check) {
+                    viewModel.total.set(viewModel.total.get() + item.requestCount * item.price);
                 }
-                binding.swiperefresh.setRefreshing(false);
             }
+            binding.swiperefresh.setRefreshing(false);
         }, 1000);
     }
 }

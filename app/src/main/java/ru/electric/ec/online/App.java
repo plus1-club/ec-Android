@@ -1,8 +1,10 @@
-package ru.electric.ec.online.viewmodels;
+package ru.electric.ec.online;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+
+import ru.electric.ec.online.server.ServerNetwork;
 
 public class App extends Application {
 

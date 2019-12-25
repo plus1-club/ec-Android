@@ -16,11 +16,11 @@ import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.InvoiceDetailsBinding;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.Service;
+import ru.electric.ec.online.server.ServerResponse;
 import ru.electric.ec.online.viewadapters.InvoiceDetailsAdapter;
 import ru.electric.ec.online.viewmodels.InvoiceDetailsViewModel;
 import ru.electric.ec.online.viewmodels.InvoiceTableViewModel;
 import ru.electric.ec.online.viewmodels.NavigationViewModel;
-import ru.electric.ec.online.viewmodels.ServerResponse;
 
 public class InvoiceDetailsActivity extends AppCompatActivity {
 
@@ -45,9 +45,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         viewModel.sum.set(bundle.getDouble("sum"));
         viewModel.status.set(bundle.getString("status"));
         viewModel.waybill.set(bundle.getInt("waybill"));
-
         String status = viewModel.status.get();
-        updateItem(status);
 
         // Подготовка биндинга
         binding = DataBindingUtil.setContentView(this, R.layout.invoice_details);
@@ -75,10 +73,9 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
         setSupportActionBar(navigationModel.toolbar);
 
         // Обновление списка
+        updateItem(status);
         binding.swiperefresh.setRefreshing(true);
-        binding.swiperefresh.setOnRefreshListener(
-                this::refresh
-        );
+        binding.swiperefresh.setOnRefreshListener(this::refresh);
         binding.swiperefresh.setRefreshing(false);
     }
 

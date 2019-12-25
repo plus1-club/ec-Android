@@ -1,9 +1,8 @@
-package ru.electric.ec.online.viewmodels;
+package ru.electric.ec.online.server;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.widget.Toast;
 
 import com.google.gson.internal.LinkedTreeMap;
 
@@ -12,6 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import retrofit2.Response;
+import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.models.Detail;
 import ru.electric.ec.online.models.Invoice;
@@ -20,6 +20,7 @@ import ru.electric.ec.online.models.ServerData;
 import ru.electric.ec.online.models.Service;
 import ru.electric.ec.online.viewadapters.InvoiceDetailsAdapter;
 import ru.electric.ec.online.viewadapters.InvoiceTableAdapter;
+import ru.electric.ec.online.viewmodels.InfoViewModel;
 import ru.electric.ec.online.views.EnterActivity;
 import ru.electric.ec.online.views.InvoiceDetailsActivity;
 import ru.electric.ec.online.views.InvoiceTableActivity;
@@ -39,31 +40,26 @@ public class ServerRun {
         }
         return mInstance;
     }
-    
-    private static void log(Context context, boolean isError, boolean showToast, String message){
-        Service.log(isError, message);
-        if (showToast) Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-    }
 
-    void getEnter(Context context, Response<ServerData> response){
+    void getEnter(Context context, Response<ServerData> response, final int number){
         if (Objects.requireNonNull(response.body()).success) {
             Object data = response.body().data;
             App.model.token = (String) ((LinkedTreeMap) data).get("user_token");
             Intent intent = new Intent(context, MenuActivity.class);
             context.startActivity(intent);
         } else {
-            String message = " (" + response.body().error + ")"
-                    + response.body().message;
-            log(context, false, true, message);
+            InfoViewModel.log(context, false, true,
+                Service.getStr(R.string.text_response_error,
+                    response.body().error, response.body().message));
         }
     }
 
-    void getExit(Context context, Response<ServerData> response){
+    void getExit(Context context, Response<ServerData> response, final int number){
         Intent intent = new Intent(context, EnterActivity.class);
         context.startActivity(intent);
     }
 
-    void getByCode(Context context, Response<ServerData> response){
+    void getByCode(Context context, Response<ServerData> response, final int number){
         App.model.request.search.clear();
         if (response.body() != null && response.body().error.isEmpty()) {
             List<?> data = (List<?>) response.body().data;
@@ -85,7 +81,7 @@ public class ServerRun {
         }
     }
 
-    void getBasket(Context context, Response<ServerData> response){
+    void getBasket(Context context, Response<ServerData> response, final int number){
         App.model.request.basket.clear();
         if (response.body() != null && response.body().error.isEmpty()) {
             List<?> data = (List<?>) response.body().data;
@@ -108,23 +104,23 @@ public class ServerRun {
         }
      }
 
-    void postBasket(Context context, Response<ServerData> response){
+    void postBasket(Context context, Response<ServerData> response, final int number){
         ServerResponse.getBasket(context);
     }
 
-    void putBasket(Context context, Response<ServerData> response){
+    void putBasket(Context context, Response<ServerData> response, final int number){
         ServerResponse.getBasket(context);
     }
 
-    void deleteBasket(Context context, Response<ServerData> response){
+    void deleteBasket(Context context, Response<ServerData> response, final int number){
         ServerResponse.getBasket(context);
     }
 
-    void order(Context context, Response<ServerData> response){
+    void order(Context context, Response<ServerData> response, final int number){
         ServerResponse.getBasket(context);
     }
 
-    void invoiceList(Context context, Response<ServerData> response){
+    void invoiceList(Context context, Response<ServerData> response, final int number){
         App.model.invoice.invoices.clear();
         if (response.body() != null && response.body().error.isEmpty()) {
             List<?> data = (List<?>) response.body().data;
@@ -184,10 +180,13 @@ public class ServerRun {
         }
     }
 
+    // TODO: Подключаться к серверу и скачивать счет
     void getPrint(Context context, final Response<ServerData> response, final int number) {
         if (response.body() != null && response.body().error.isEmpty()) {
-            Toast.makeText(context, "Скачивание счета - в разработке", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ec-electric.ru/order/example.xls"));
+            InfoViewModel.log(context, false, true,
+                    Service.getStr(R.string.test_in_develop_download_invoice));
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.ec-electric.ru/order/example.xls"));
             context.startActivity(intent);
         }
     }

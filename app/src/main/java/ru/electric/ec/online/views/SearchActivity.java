@@ -9,16 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.SearchBinding;
+import ru.electric.ec.online.server.ServerResponse;
 import ru.electric.ec.online.viewadapters.SearchAdapter;
 import ru.electric.ec.online.viewmodels.NavigationViewModel;
 import ru.electric.ec.online.viewmodels.RequestViewModel;
-import ru.electric.ec.online.viewmodels.ServerResponse;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -61,14 +60,7 @@ public class SearchActivity extends AppCompatActivity {
         binding.swiperefresh.setRefreshing(true);
         ServerResponse.byCode(this, viewModel.product.get(), viewModel.count.get(), viewModel.isFullSearch.get());
         refreshSearch();
-        binding.swiperefresh.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        refreshSearch();
-                    }
-                }
-        );
+        binding.swiperefresh.setOnRefreshListener(this::refreshSearch);
     }
 
     @Override
@@ -93,15 +85,12 @@ public class SearchActivity extends AppCompatActivity {
 
     public void refreshSearch(){
         binding.swiperefresh.setRefreshing(true);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                adapter = new SearchAdapter();
-                adapter.setItems(viewModel.search);
-                binding.list.setAdapter(adapter);
-                viewModel.searchAdapter.set(adapter);
-                binding.swiperefresh.setRefreshing(false);
-            }
+        new Handler().postDelayed(() -> {
+            adapter = new SearchAdapter();
+            adapter.setItems(viewModel.search);
+            binding.list.setAdapter(adapter);
+            viewModel.searchAdapter.set(adapter);
+            binding.swiperefresh.setRefreshing(false);
         }, 1000);
     }
 }
