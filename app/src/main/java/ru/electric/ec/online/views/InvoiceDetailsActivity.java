@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
+import ru.electric.ec.online.Service;
 import ru.electric.ec.online.databinding.InvoiceDetailsBinding;
 import ru.electric.ec.online.models.Invoice;
-import ru.electric.ec.online.models.Service;
 import ru.electric.ec.online.server.ServerResponse;
 import ru.electric.ec.online.viewadapters.InvoiceDetailsAdapter;
 import ru.electric.ec.online.viewmodels.InvoiceDetailsViewModel;

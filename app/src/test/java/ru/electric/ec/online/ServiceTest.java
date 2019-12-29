@@ -1,11 +1,11 @@
-package ru.electric.ec.online.models;
+package ru.electric.ec.online;
 
 import androidx.databinding.ObservableDouble;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-import ru.electric.ec.online.R;
+import ru.electric.ec.online.models.Count;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -76,6 +76,16 @@ class ServiceTest {
         double expected = 0.0;
         double actual = Service.getDouble(null);
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void isEqual_NullOne() {
+        assertFalse(Service.isEqual(null, "Тест "));
+    }
+
+    @Test
+    void isEqual_NullTwo() {
+        assertFalse(Service.isEqual("Тест ", null));
     }
 
     @Test

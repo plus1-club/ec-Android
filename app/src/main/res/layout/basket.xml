@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="ru.electric.ec.online.models.Service" />
+        <import type="ru.electric.ec.online.Service" />
         <variable
             name="viewModel"
             type="ru.electric.ec.online.viewmodels.RequestViewModel" />

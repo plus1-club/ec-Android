@@ -6,7 +6,7 @@ import android.content.Intent;
 import androidx.databinding.ObservableField;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.models.Service;
+import ru.electric.ec.online.Service;
 import ru.electric.ec.online.views.InfoActivity;
 
 public class InfoViewModel {

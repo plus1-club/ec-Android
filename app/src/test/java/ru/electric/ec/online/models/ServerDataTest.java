@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ru.electric.ec.online.R;
+import ru.electric.ec.online.Service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

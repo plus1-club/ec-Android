@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
+import ru.electric.ec.online.Service;
 import ru.electric.ec.online.databinding.InvoiceDetailsItemBinding;
 import ru.electric.ec.online.models.Detail;
-import ru.electric.ec.online.models.Service;
 import ru.electric.ec.online.viewmodels.InvoiceDetailsItemViewModel;
 
 public class InvoiceDetailsAdapter extends RecyclerView.Adapter<InvoiceDetailsAdapter.InvoiceDetailsViewHolder> {

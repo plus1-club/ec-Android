@@ -9,6 +9,10 @@ public class Model {
     public String token;
 
     Model() {
+        init();
+    }
+
+    private void init() {
         token = "";
         request = RequestViewModel.getInstance();
         invoice = InvoiceTableViewModel.getInstance();

@@ -20,7 +20,7 @@ public class Count {
     public int color;
 
     /** Название цвета */
-    String colorName;
+    public String colorName;
 
     /**
      * Создание нового статуса количества
@@ -30,7 +30,7 @@ public class Count {
      * @param color идентификатор цвета статуса количества из ресурсов
      * @param colorName название цвета (для удобства отладки)
      */
-    Count(int count, int stockCount, String status, int color, String colorName){
+    public Count(int count, int stockCount, String status, int color, String colorName){
         init(count, stockCount, status, color, colorName);
     }
 
