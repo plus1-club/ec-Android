@@ -1,11 +1,34 @@
-#EC-Online
+# EC-Online
 «ЕС-Онлайн» - приложение под Android, аналог сайта www.ec-electric.ru
 
-![Экран входа](https://github.com/lavsexpert/ec-Android/raw/master/screenshots/enter.png)
-![Стартовый экран](https://github.com/lavsexpert/ec-Android/raw/master/screenshots/start.png)
-![Экран поиска](https://github.com/lavsexpert/ec-Android/raw/master/screenshots/search.png)
-![Экран найденных товаров](https://github.com/lavsexpert/ec-Android/raw/master/screenshots/find.png)
-![Экран с корзиной](https://github.com/lavsexpert/ec-Android/raw/master/screenshots/basket.png)
-![Экран с боковым меню](https://github.com/lavsexpert/ec-Android/raw/master/screenshots/menu.png)
-![Экран со списком счетов](https://github.com/lavsexpert/ec-Android/raw/master/screenshots/invoice.png)
-![Экран с деталями счета](https://github.com/lavsexpert/ec-Android/raw/master/screenshots/detail.png)
+Сначала партнёры ЕС Электрик входят в приложение по логину и паролю
+
+<img src="https://github.com/plus1-club/ec-Android/raw/develop/screenshots/enter.png" width="200" alt="Экран входа">
+
+И попадают на стартовый экран, с которого доступны поиск, корзина и разные виды счетов
+
+<img src="https://github.com/plus1-club/ec-Android/raw/develop/screenshots/start.png" width="200" alt="Стартовый экран">
+
+Поиск товара по коду или наименованию
+
+<img src="https://github.com/plus1-club/ec-Android/raw/develop/screenshots/search.png" width="200" alt="Экран поиска">
+
+Когда товар найден - достаточно его выбрать, и добавить в корзину
+
+<img src="https://github.com/plus1-club/ec-Android/raw/develop/screenshots/find.png" width="200" alt="Экран найденных товаров">
+
+Корзина товаров
+
+<img src="https://github.com/plus1-club/ec-Android/raw/develop/screenshots/basket.png" width="200" alt="Экран с корзиной">
+
+Всегда доступно боковое меню со всеми возможностями приложения
+
+<img src="https://github.com/plus1-club/ec-Android/raw/develop/screenshots/menu.png" width="200" alt="Экран с боковым меню">
+
+Разделы "Неподтвержденные резервы", "Резервы", "Заказы", "Аннулированные и просроченные счета" и "История отгрузок" выглядят похоже
+
+<img src="https://github.com/plus1-club/ec-Android/raw/develop/screenshots/invoice.png" width="200" alt="Экран со списком счетов">
+
+По любому резерву/заказу/счету/отгрузке можно посмотреть детали
+
+<img src="https://github.com/plus1-club/ec-Android/raw/develop/screenshots/details.png" width="200" alt="Экран с деталями счета">
