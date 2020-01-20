@@ -71,6 +71,7 @@
 
     <!-- Экран "6.Счета" -->
     <string name="text_invoice">Счет № %1$d от %2$s</string>
+    <string name="text_invoice_short">Счет № %1$d</string>
     <string name="text_waybill">Накладная № %1$d</string>
     <string name="button_detail">Подробнее</string>
     <string name="button_invoice">Счет</string>
@@ -95,6 +96,8 @@
     <string name="text_in_develop_choose_file">Выбор файла - в разработке</string>
     <string name="text_in_develop_download_remains">Скачивание остатков - в разработке</string>
     <string name="test_in_develop_download_invoice">Скачивание счета - в разработке</string>
+    <string name="pdf">pdf</string>
+    <string name="text_share">Поделиться</string>
 
     <!-- Прочее -->
 

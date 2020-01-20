@@ -3,6 +3,7 @@ package ru.electric.ec.online.models;
 import java.io.File;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -12,6 +13,8 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 /**
  * Интерфейс для вызова методов API с сервера
@@ -236,4 +239,13 @@ public interface ServerApi {
     @GET("invoices/{number}/print")
     Call<ServerData> print(@Header("user_token") String userToken, @Path("number") int number);
 
+
+    /**
+     * Скачивание файла с сервера
+     * @param fileUrl адрес для скачивания файла
+     * @return ответ сервера ({@see ResponseBody})
+     * */
+    @Streaming
+    @GET
+    Call<ResponseBody> downloadFile(@Url String fileUrl);
 }

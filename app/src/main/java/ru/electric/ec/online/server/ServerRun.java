@@ -2,7 +2,6 @@ package ru.electric.ec.online.server;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 
 import com.google.gson.internal.LinkedTreeMap;
 
@@ -25,6 +24,7 @@ import ru.electric.ec.online.views.EnterActivity;
 import ru.electric.ec.online.views.InvoiceDetailsActivity;
 import ru.electric.ec.online.views.InvoiceTableActivity;
 import ru.electric.ec.online.views.MenuActivity;
+import ru.electric.ec.online.views.PdfActivity;
 
 public class ServerRun {
 
@@ -183,11 +183,25 @@ public class ServerRun {
     // TODO: Подключаться к серверу и скачивать счет
     void getPrint(Context context, final Response<ServerData> response, final int number) {
         if (response.body() != null && response.body().error.isEmpty()) {
+            try {
+                LinkedTreeMap data = (LinkedTreeMap<String, Object>) response.body().data;
+                String link = (String) data.get("file");
+                Intent intent = new Intent(context, PdfActivity.class);
+                intent.putExtra("title", Service.getStr(R.string.text_invoice_short, number));
+                intent.putExtra("number", number);
+                intent.putExtra("link", link);
+                context.startActivity(intent);
+           /*
             InfoViewModel.log(context, false, true,
                     Service.getStr(R.string.test_in_develop_download_invoice));
             Intent intent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://www.ec-electric.ru/order/example.xls"));
             context.startActivity(intent);
+            */
+            }
+            catch (Exception e){
+                //e.toString();
+            }
         }
     }
 }

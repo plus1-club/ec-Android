@@ -4,9 +4,8 @@
     package="ru.electric.ec.online">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -19,8 +18,8 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".views.SplashActivity"
-            android:screenOrientation="portrait"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,37 +28,45 @@
         </activity>
         <activity
             android:name=".views.EnterActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".views.MenuActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".views.RequestActivity"
-            android:screenOrientation="portrait"
-            android:noHistory="true" />
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".views.SearchActivity"
-            android:screenOrientation="portrait"
-            android:noHistory="true" />
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".views.BasketActivity"
-            android:screenOrientation="portrait"
-            android:noHistory="true" />
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".views.InvoiceTableActivity"
-            android:screenOrientation="portrait"
-            android:noHistory="true" />
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".views.InvoiceDetailsActivity"
-            android:screenOrientation="portrait"
-            android:noHistory="true" />
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".views.InfoActivity"
-            android:screenOrientation="portrait"
-            android:noHistory="true"/>
-        <uses-library android:name="android.test.runner" android:required="false" />
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.PdfActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+
+        <uses-library
+            android:name="android.test.runner"
+            android:required="false" />
+
     </application>
 
 </manifest>

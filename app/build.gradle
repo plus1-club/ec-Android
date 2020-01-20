@@ -7,7 +7,7 @@ android {
         applicationId "ru.electric.ec.online"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 92
+        versionCode 93
         versionName "0.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -89,6 +89,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.ext:truth:1.2.0'
     androidTestImplementation 'com.google.truth:truth:0.42'
+
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 }
 
 task javadoc(type: Javadoc) {
