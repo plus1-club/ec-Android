@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="ru.electric.ec.online.viewmodels.PdfViewModel" />
+            type="ru.electric.ec.online.ui.pdf.PdfViewModel" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"

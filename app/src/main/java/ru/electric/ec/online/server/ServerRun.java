@@ -17,14 +17,14 @@ import ru.electric.ec.online.models.Detail;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.models.ServerData;
-import ru.electric.ec.online.viewadapters.InvoiceDetailsAdapter;
-import ru.electric.ec.online.viewadapters.InvoiceTableAdapter;
-import ru.electric.ec.online.viewmodels.InfoViewModel;
-import ru.electric.ec.online.views.EnterActivity;
-import ru.electric.ec.online.views.InvoiceDetailsActivity;
-import ru.electric.ec.online.views.InvoiceTableActivity;
-import ru.electric.ec.online.views.MenuActivity;
-import ru.electric.ec.online.views.PdfActivity;
+import ru.electric.ec.online.ui.enter.EnterActivity;
+import ru.electric.ec.online.ui.info.InfoViewModel;
+import ru.electric.ec.online.ui.invoice.InvoiceDetailsActivity;
+import ru.electric.ec.online.ui.invoice.InvoiceDetailsAdapter;
+import ru.electric.ec.online.ui.invoice.InvoiceTableActivity;
+import ru.electric.ec.online.ui.invoice.InvoiceTableAdapter;
+import ru.electric.ec.online.ui.menu.MenuActivity;
+import ru.electric.ec.online.ui.pdf.PdfActivity;
 
 public class ServerRun {
 
@@ -44,7 +44,7 @@ public class ServerRun {
     void getEnter(Context context, Response<ServerData> response, final int number){
         if (Objects.requireNonNull(response.body()).success) {
             Object data = response.body().data;
-            App.model.token = (String) ((LinkedTreeMap) data).get("user_token");
+            App.getModel().token = (String) ((LinkedTreeMap) data).get("user_token");
             Intent intent = new Intent(context, MenuActivity.class);
             context.startActivity(intent);
         } else {
@@ -60,7 +60,7 @@ public class ServerRun {
     }
 
     void getByCode(Context context, Response<ServerData> response, final int number){
-        App.model.request.search.clear();
+        App.getModel().request.search.clear();
         if (response.body() != null && response.body().error.isEmpty()) {
             List<?> data = (List<?>) response.body().data;
             for (Object element : data) {
@@ -76,13 +76,13 @@ public class ServerRun {
                 if (request.requestCount % request.multiplicity > 0){
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
                 }
-                App.model.request.search.add(request);
+                App.getModel().request.search.add(request);
             }
         }
     }
 
     void getBasket(Context context, Response<ServerData> response, final int number){
-        App.model.request.basket.clear();
+        App.getModel().request.basket.clear();
         if (response.body() != null && response.body().error.isEmpty()) {
             List<?> data = (List<?>) response.body().data;
             for (Object element : data) {
@@ -99,7 +99,7 @@ public class ServerRun {
                 if (request.requestCount % request.multiplicity > 0){
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
                 }
-                App.model.request.basket.add(request);
+                App.getModel().request.basket.add(request);
             }
         }
      }
@@ -121,7 +121,7 @@ public class ServerRun {
     }
 
     void invoiceList(Context context, Response<ServerData> response, final int number){
-        App.model.invoice.invoices.clear();
+        App.getModel().invoice.invoices.clear();
         if (response.body() != null && response.body().error.isEmpty()) {
             List<?> data = (List<?>) response.body().data;
             for (Object element : data) {
@@ -142,10 +142,10 @@ public class ServerRun {
                             Service.getDouble(el.get("sum")),
                             el.get("status"));
                 }
-                App.model.invoice.invoices.add(invoice);
+                App.getModel().invoice.invoices.add(invoice);
             }
             InvoiceTableAdapter adapter = new InvoiceTableAdapter();
-            adapter.setItems(App.model.invoice.invoices);
+            adapter.setItems(App.getModel().invoice.invoices);
             ((InvoiceTableActivity)context).binding.list.setAdapter(adapter);
         }
     }
@@ -153,7 +153,7 @@ public class ServerRun {
     void invoiceDetails(Context context, Response<ServerData> response, int number){
         if (response.body() != null && response.body().error.isEmpty()) {
             Invoice invoice = null;
-            for (Invoice item:App.model.invoice.invoices) {
+            for (Invoice item: App.getModel().invoice.invoices) {
                 if(item.number == number){
                     invoice = item;
                 }
@@ -184,20 +184,20 @@ public class ServerRun {
     void getPrint(Context context, final Response<ServerData> response, final int number) {
         if (response.body() != null && response.body().error.isEmpty()) {
             try {
-                LinkedTreeMap data = (LinkedTreeMap<String, Object>) response.body().data;
+                LinkedTreeMap<String, Object> data = (LinkedTreeMap) response.body().data;
                 String link = (String) data.get("file");
                 Intent intent = new Intent(context, PdfActivity.class);
                 intent.putExtra("title", Service.getStr(R.string.text_invoice_short, number));
                 intent.putExtra("number", number);
                 intent.putExtra("link", link);
                 context.startActivity(intent);
-           /*
-            InfoViewModel.log(context, false, true,
-                    Service.getStr(R.string.test_in_develop_download_invoice));
-            Intent intent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://www.ec-electric.ru/order/example.xls"));
-            context.startActivity(intent);
-            */
+               /*
+                InfoViewModel.log(context, false, true,
+                        Service.getStr(R.string.test_in_develop_download_invoice));
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://www.ec-electric.ru/order/example.xls"));
+                context.startActivity(intent);
+                */
             }
             catch (Exception e){
                 //e.toString();

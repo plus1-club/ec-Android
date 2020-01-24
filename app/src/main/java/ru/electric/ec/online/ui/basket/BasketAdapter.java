@@ -1,0 +1,80 @@
+package ru.electric.ec.online.ui.basket;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+
+import ru.electric.ec.online.R;
+import ru.electric.ec.online.databinding.BasketItemBinding;
+import ru.electric.ec.online.models.Request;
+
+public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.RequestsBasketViewHolder> {
+
+    private List<Request> requests;
+    private BasketItemViewModel viewModel;
+
+    BasketAdapter() {
+        requests = new ArrayList<>();
+    }
+
+    void setItems(Collection<Request> collection) {
+        requests.addAll(collection);
+        notifyDataSetChanged();
+    }
+
+    @NonNull
+    @Override
+    public BasketAdapter.RequestsBasketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        viewModel = BasketItemViewModel.getInstance();
+        viewModel.parent.basket.clear();
+        viewModel.parent.basket.addAll(requests);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        BasketItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.basket_item, parent, false);
+        binding.setViewModel(viewModel);
+        return new BasketAdapter.RequestsBasketViewHolder(binding.getRoot());
+    }
+
+    @Override
+    public void onBindViewHolder(RequestsBasketViewHolder holder, int position) {
+        holder.bind(requests.get(position), position);
+    }
+
+    @Override
+    public int getItemCount() {
+        return requests.size();
+    }
+
+    static class RequestsBasketViewHolder extends RecyclerView.ViewHolder {
+
+        private BasketItemBinding binding;
+        private BasketItemViewModel viewModel;
+
+        RequestsBasketViewHolder(View view) {
+            super(view);
+            binding = DataBindingUtil.bind(view);
+            viewModel = Objects.requireNonNull(binding).getViewModel();
+        }
+
+        void bind(Request request, int position) {
+            viewModel.position.set(position);
+            viewModel.product.set(request.product);
+            viewModel.count.set(request.requestCount);
+            viewModel.stockCount.set(request.stockCount);
+            viewModel.multiplicity.set(request.multiplicity);
+            viewModel.unit.set(request.unit);
+            viewModel.price.set(request.price);
+            viewModel.sum.set(request.sum);
+            viewModel.check.set(true);
+            viewModel.updateStatus();
+        }
+    }
+}

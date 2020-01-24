@@ -7,7 +7,7 @@
         <import type="ru.electric.ec.online.Service" />
         <variable
             name="viewModel"
-            type="ru.electric.ec.online.viewmodels.BasketItemViewModel" />
+            type="ru.electric.ec.online.ui.basket.BasketItemViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

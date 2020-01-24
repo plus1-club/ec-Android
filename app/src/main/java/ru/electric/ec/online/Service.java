@@ -142,7 +142,7 @@ public class Service {
      */
     public static String getStr(int res){
         try{
-            return App.appContext.getString(res);
+            return App.getAppContext().getString(res);
         } catch (Exception e){
             return "";
         }
@@ -156,7 +156,7 @@ public class Service {
      */
     public static String getStr(int res, Object param){
         try {
-            return App.appContext.getString(res, param);
+            return App.getAppContext().getString(res, param);
         } catch (Exception e) {
             return param.toString();
         }
@@ -171,7 +171,7 @@ public class Service {
      */
     public static String getStr(int res, Object param1, Object param2){
         try {
-            return App.appContext.getString(res, param1, param2);
+            return App.getAppContext().getString(res, param1, param2);
         } catch (Exception e) {
             return param1.toString() + param2.toString();
         }

@@ -1,6 +1,5 @@
 package ru.electric.ec.online;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
@@ -8,22 +7,45 @@ import ru.electric.ec.online.server.ServerNetwork;
 
 public class App extends Application {
 
-    @SuppressLint("StaticFieldLeak")
-    public static Context appContext;
-    public static Model model;
+    private static Context appContext;
+    private static Model model;
+
+    public static Context getAppContext() {
+        return appContext;
+    }
+
+    public static void setAppContext(Context appContext) {
+        App.appContext = appContext;
+    }
+
+    public static Model getModel() {
+        return model;
+    }
+
+    public static void setModel(Model model) {
+        App.model = model;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        appContext = this;
-        model = new Model();
-        ServerNetwork.getInstance();
+        init();
     }
 
     @Override
     public void onTerminate() {
         super.onTerminate();
-        appContext = null;
-        model = null;
+        terminate();
+    }
+
+    private void init(){
+        setAppContext(this);
+        setModel(new Model());
+        ServerNetwork.getInstance();
+    }
+
+    private void terminate(){
+        setAppContext(null);
+        setModel(null);
     }
 }

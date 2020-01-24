@@ -1,7 +1,7 @@
 package ru.electric.ec.online;
 
-import ru.electric.ec.online.viewmodels.InvoiceTableViewModel;
-import ru.electric.ec.online.viewmodels.RequestViewModel;
+import ru.electric.ec.online.ui.invoice.InvoiceTableViewModel;
+import ru.electric.ec.online.ui.request.RequestViewModel;
 
 public class Model {
     public RequestViewModel request;

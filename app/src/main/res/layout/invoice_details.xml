@@ -7,7 +7,7 @@
         <import type="ru.electric.ec.online.Service" />
         <variable
             name="viewModel"
-            type="ru.electric.ec.online.viewmodels.InvoiceDetailsViewModel" />
+            type="ru.electric.ec.online.ui.invoice.InvoiceDetailsViewModel" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"
