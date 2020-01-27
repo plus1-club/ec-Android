@@ -42,7 +42,7 @@ public class InfoViewModel {
 
     public static void log(Context context, boolean isError, boolean showToast, String message){
         Service.log(isError, message);
-        if (showToast) {
+        if (showToast && context != null) {
             Intent intent = new Intent(context, InfoActivity.class);
             if (isError) {
                 intent.putExtra("title", Service.getStr(R.string.text_error));

@@ -19,6 +19,9 @@ public class App extends Application {
     }
 
     public static Model getModel() {
+        if (model == null){
+            setModel(new Model());
+        }
         return model;
     }
 

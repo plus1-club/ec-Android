@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 
 import javax.net.ssl.SSLContext;
@@ -47,69 +49,82 @@ public class ServerNetwork {
     }
 
     private ServerNetwork() {
+        init();
+    }
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+    public void init() {
+        try{
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            OkHttpClient okHttpClient = getUnsafeOkHttpClient();
 
-        Gson gson = new GsonBuilder().setLenient().create();
-        retrofit = new Retrofit.Builder()
+            Gson gson = new GsonBuilder().setLenient().create();
+            Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 //Базовая часть адреса
                 .baseUrl("https://www.ec-electric.ru/api/v1/")
                 //Конвертер, необходимый для преобразования JSON'а в объекты
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(getUnsafeOkHttpClient())
-                .build();
+                .addConverterFactory(GsonConverterFactory.create(gson));
 
-        //Создаем объект, при помощи которого будем выполнять запросы
-        serverApi = retrofit.create(ServerApi.class);
+            retrofitBuilder = retrofitBuilder.client(okHttpClient);
 
-        handler = new Handler(Looper.getMainLooper());
+            retrofit = retrofitBuilder.build();
+
+            //Создаем объект, при помощи которого будем выполнять запросы
+            serverApi = retrofit.create(ServerApi.class);
+
+            handler = new Handler(Looper.getMainLooper());
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static ServerApi getApi() {
+        if (serverApi == null) {
+            ServerNetwork.getInstance();
+        }
         return serverApi;
     }
 
-    private static OkHttpClient getUnsafeOkHttpClient() {
-        try {
-            // Create a trust manager that does not validate certificate chains
-            final TrustManager[] trustAllCerts = new TrustManager[]{
-                    new X509TrustManager() {
-                        @SuppressLint("TrustAllX509TrustManager")
-                        @Override
-                        public void checkClientTrusted(
-                                X509Certificate[] chain, String authType) {
-                        }
+    OkHttpClient getUnsafeOkHttpClient() throws KeyManagementException, NoSuchAlgorithmException {
+        // Create a trust manager that does not validate certificate chains
+        final TrustManager[] trustAllCerts = getTrustToAllCerts();
 
-                        @SuppressLint("TrustAllX509TrustManager")
-                        @Override
-                        public void checkServerTrusted(
-                                X509Certificate[] chain, String authType) {
-                        }
+        // Install the all-trusting trust manager
+        final SSLContext sslContext = getSSLContext(trustAllCerts);
 
-                        @Override
-                        public X509Certificate[] getAcceptedIssuers() {
-                            return new X509Certificate[]{};
-                        }
-                    }
-            };
+        // Create an ssl socket factory with our all-trusting manager
+        final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
-            // Install the all-trusting trust manager
-            final SSLContext sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
+        builder.hostnameVerifier((hostname, session) -> true);
 
-            // Create an ssl socket factory with our all-trusting manager
-            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
 
-            OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
-            builder.hostnameVerifier((hostname, session) -> true);
+        return builder.addInterceptor(interceptor).build();
+    }
 
-            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+    private static SSLContext getSSLContext(TrustManager[] trustAllCerts) throws NoSuchAlgorithmException, KeyManagementException {
+        // Install the all-trusting trust manager
+        SSLContext sslContext = SSLContext.getInstance("SSL");
+        sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+        return sslContext;
+    }
 
-            return builder.addInterceptor(interceptor).build();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    private static TrustManager[] getTrustToAllCerts(){
+        return new TrustManager[]{
+            new X509TrustManager() {
+                @SuppressLint("TrustAllX509TrustManager")
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType) {}
+
+                @SuppressLint("TrustAllX509TrustManager")
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType) {}
+
+                @Override
+                public X509Certificate[] getAcceptedIssuers() { return new X509Certificate[]{};                    }
+            }
+        };
     }
 
     static Callback<ServerData> callback(final Context context, ServerRunInterface func, int number){
@@ -117,7 +132,7 @@ public class ServerNetwork {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {
                 if (response.isSuccessful()) {
-                    ServerNetwork.handler.post(() -> func.run(context, response, number));
+                    handler.post(() -> func.run(context, response, number));
                 } else {
                     InfoViewModel.log(context, false, true,
                             Service.getStr(R.string.text_response_error, response.code(), response.message()));
@@ -130,6 +145,4 @@ public class ServerNetwork {
             }
         };
     }
-
-
 }

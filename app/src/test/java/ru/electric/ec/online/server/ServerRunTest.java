@@ -15,10 +15,6 @@ class ServerRunTest {
     }
 
     @Test
-    void getInstance() {
-    }
-
-    @Test
     void getEnter() {
     }
 

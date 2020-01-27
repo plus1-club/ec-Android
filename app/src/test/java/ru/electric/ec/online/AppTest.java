@@ -30,7 +30,6 @@ class AppTest {
         App.setAppContext(null);
         App.setModel(null);
         assertNull(App.getAppContext());
-        assertNull(App.getModel());
         object.onCreate();
         assertEquals(object, App.getAppContext());
         assertNotNull(App.getModel());
@@ -44,6 +43,5 @@ class AppTest {
         assertEquals(model, App.getModel());
         object.onTerminate();
         assertNull(App.getAppContext());
-        assertNull(App.getModel());
     }
 }

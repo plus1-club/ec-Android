@@ -7,7 +7,7 @@ android {
         applicationId "ru.electric.ec.online"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 94
+        versionCode 95
         versionName "0.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -73,6 +73,7 @@ dependencies {
     testImplementation 'org.powermock:powermock-module-junit4-rule-agent:2.0.0-beta.5'
     testImplementation 'org.powermock:powermock-module-junit4-rule:2.0.0-beta.5'
     testImplementation 'org.powermock:powermock-module-junit4:2.0.0-beta.5'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:4.3.1'
 
     // UI-тестирование (Espresso3)
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
