@@ -1,5 +1,6 @@
 package ru.electric.ec.online.ui.invoice;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.Service;
 import ru.electric.ec.online.databinding.InvoiceTableItemBinding;
 import ru.electric.ec.online.models.Invoice;
+import ru.electric.ec.online.ui.info.InfoViewModel;
 
 public class InvoiceTableAdapter extends RecyclerView.Adapter<InvoiceTableAdapter.InvoiceTableViewHolder> {
 
@@ -27,9 +30,22 @@ public class InvoiceTableAdapter extends RecyclerView.Adapter<InvoiceTableAdapte
         invoices = new ArrayList<>();
     }
 
-    public void setItems(Collection<Invoice> collection) {
-        invoices.addAll(collection);
-        notifyDataSetChanged();
+    public void updateAdapter(InvoiceTableViewModel invoice, Context context){
+        this.setItems(invoice.invoices);
+        try{
+            ((InvoiceTableActivity)context).binding.list.setAdapter(this);
+        } catch (Exception e){
+            InfoViewModel.log(context, true, false, "Ошибка вывода списка");
+        }
+    }
+
+    void setItems(Collection<Invoice> collection) {
+        try{
+            invoices.addAll(collection);
+            notifyDataSetChanged();
+        } catch (Exception e){
+            InfoViewModel.log(App.getAppContext(), true, false, "Ошибка добавления значений");
+        }
     }
 
     @NonNull

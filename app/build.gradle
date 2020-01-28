@@ -7,7 +7,7 @@ android {
         applicationId "ru.electric.ec.online"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 95
+        versionCode 96
         versionName "0.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -51,11 +51,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
 
-    // Интерфейс (ConstraintLayout, RecycleView, DrawerLayout, SwipeRefreshLayout)
+    // Интерфейс (ConstraintLayout, RecycleView, DrawerLayout, SwipeRefreshLayout, AndroidPdfViewer)
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.drawerlayout:drawerlayout:1.0.0'
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 
     // Работа с сетью и API (OkHttp3, Retrofit2)
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
@@ -63,16 +64,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.0'
 
-    // Unit-тесты (JUnit5, Mockito2, Robolectric4, PowerMock2)
+    // Unit-тесты (JUnit5, Mockito2, OkHttp3.MockWebServer)
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
     testImplementation 'org.mockito:mockito-core:2.27.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:2.27.0'
-    testImplementation 'org.robolectric:robolectric:4.3.1'
-    testImplementation 'org.powermock:powermock-api-mockito2:2.0.0-beta.5'
-    testImplementation 'org.powermock:powermock-module-junit4-rule-agent:2.0.0-beta.5'
-    testImplementation 'org.powermock:powermock-module-junit4-rule:2.0.0-beta.5'
-    testImplementation 'org.powermock:powermock-module-junit4:2.0.0-beta.5'
     testImplementation 'com.squareup.okhttp3:mockwebserver:4.3.1'
 
     // UI-тестирование (Espresso3)
@@ -91,8 +87,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.ext:truth:1.2.0'
     androidTestImplementation 'com.google.truth:truth:0.42'
-
-    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 }
 
 task javadoc(type: Javadoc) {
