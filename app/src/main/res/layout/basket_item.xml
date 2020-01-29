@@ -9,10 +9,11 @@
             name="viewModel"
             type="ru.electric.ec.online.ui.basket.BasketItemViewModel" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:baselineAligned="false"
         android:orientation="vertical"
         android:paddingTop="1dp"
@@ -21,6 +22,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <CheckBox
@@ -29,96 +32,94 @@
                 android:layout_height="40dp"
                 android:buttonTint="@{viewModel.color}"
                 android:checked="@={viewModel.check}"
-                android:onClick="@{(view) -> viewModel.onFlagClick(view)}"
-                android:gravity="bottom" />
+                android:gravity="center_vertical"
+                android:onClick="@{(view) -> viewModel.onFlagClick(view)}" />
 
             <!--suppress AndroidUnknownAttribute -->
             <EditText
                 android:id="@+id/editCount"
+                style="@style/AppTheme.ECOnline.Edit"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_margin="0dp"
                 android:backgroundTint="@{viewModel.color}"
-                android:ems="10"
-                android:gravity="bottom"
+                android:gravity="center_vertical"
                 android:inputType="number|text"
-                android:text="@={`` + viewModel.count}"
                 android:onTextChanged="@{(s, start, before, count) -> viewModel.onTextChanged(context, s, start, before, count)}"
+                android:text="@={`` + viewModel.count}"
                 android:textAlignment="center"
                 tools:ignore="Autofill,LabelFor" />
 
             <TextView
-                android:id="@+id/editUnit"
+                android:id="@+id/textUnit"
                 style="@style/AppTheme.ECOnline.Text"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="0dp"
-                android:paddingStart="0dp"
-                android:paddingTop="0dp"
-                android:paddingEnd="0dp"
-                android:paddingBottom="5dp"
+                android:gravity="center_vertical"
                 android:text="@={viewModel.unit}"
                 android:textAlignment="viewStart"
                 android:textColor="@{viewModel.color}"
-                android:textSize="14sp"
                 tools:ignore="RtlCompat" />
 
             <TextView
                 android:id="@+id/textProduct"
                 style="@style/AppTheme.ECOnline.Text"
-                android:layout_width="250dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
-                android:gravity="bottom"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:padding="0dp"
                 android:text="@={viewModel.product}"
                 android:textAlignment="viewStart"
-                android:textSize="14sp"
                 tools:ignore="RtlCompat" />
 
-            <ImageButton
+            <Button
                 android:id="@+id/buttonDelete"
-                android:layout_width="0dp"
+                style="@style/AppTheme.ECOnline.Button"
+                android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
+                android:layout_margin="0dp"
                 android:contentDescription="@string/text_basket_item_delete"
+                android:gravity="center_horizontal|center_vertical"
                 android:onClick="@{(view) -> viewModel.onDeleteClick(view)}"
-                android:src="@android:drawable/btn_dialog" />
+                android:text="@string/x" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
+            android:layout_marginEnd="5dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/editStatus"
+                android:id="@+id/textStatus"
+                style="@style/AppTheme.ECOnline.Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="0dp"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.onUpdateStatus(context)}"
+                android:text="@={viewModel.status}"
+                android:textAlignment="viewStart"
+                android:textColor="@{viewModel.color}"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/textSum"
                 style="@style/AppTheme.ECOnline.Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
                 android:layout_weight="1"
-                android:gravity="center_horizontal|center_vertical"
-                android:onClick="@{() -> viewModel.onUpdateStatus(context)}"
-                android:padding="5dp"
-                android:text="@={viewModel.status}"
-                android:textAlignment="viewStart"
-                android:textColor="@{viewModel.color}"
-                android:textSize="14sp"
-                tools:ignore="RtlCompat" />
-
-            <TextView
-                android:id="@+id/editSum"
-                style="@style/AppTheme.ECOnline.Text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:padding="0dp"
                 android:text="@{Service.rub(viewModel.sum,@string/text_money)}"
                 android:textAlignment="viewEnd"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="RtlCompat" />
 
         </LinearLayout>
     </LinearLayout>

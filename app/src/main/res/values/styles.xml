@@ -1,90 +1,122 @@
 <resources>
 
+    // Общий базовый стиль
     <style name="AppTheme.ECOnline" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryDark">@color/dark</item>
         <item name="colorAccent">@color/red</item>
     </style>
 
+    // Стиль логотипа в стартовом экране и в меню
     <style name="AppTheme.ECOnline.Logo" parent="AppTheme.ECOnline">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">10dp</item>
-        <item name="android:layout_weight">1</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:contentDescription">@string/app_name</item>
     </style>
 
-    <style name="AppTheme.ECOnline.Button" parent="AppTheme.ECOnline">
+    // Стиль линий в стартовом экране меню
+    <style name="AppTheme.ECOnline.MenuLine" parent="AppTheme.ECOnline">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:background">@drawable/button_border</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:orientation">horizontal</item>
     </style>
 
-    <style name="AppTheme.ECOnline.Edit" parent="AppTheme.ECOnline">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:ems">10</item>
-        <item name="android:textSize">24sp</item>
-    </style>
-
-    <style name="AppTheme.ECOnline.Text" parent="AppTheme.ECOnline">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textSize">18sp</item>
-    </style>
-
-    <style name="AppTheme.ECOnline.Link" parent="AppTheme.ECOnline">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/red</item>
-    </style>
-
-    <style name="AppTheme.ECOnline.Header" parent="AppTheme.ECOnline">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textSize">24sp</item>
-    </style>
-
+    // Стиль плашек в стартовом экране меню
     <style name="AppTheme.ECOnline.Card" parent="AppTheme.ECOnline">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:padding">1dp</item>
-        <item name="android:background">@color/gray</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/button_border</item>
     </style>
 
-    <style name="AppTheme.ECOnline.CardText" parent="AppTheme.ECOnline">
+    // Стиль для картинок на плашках в стартовом экране меню
+    <style name="AppTheme.ECOnline.ImageButton" parent="AppTheme.ECOnline">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@color/red</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:gravity">center_vertical</item>
-    </style>
-
-    <style name="AppTheme.ECOnline.ImageButton" parent="AppTheme.ECOnline">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">10dp</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:padding">2dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:background">@color/white</item>
     </style>
 
+    // Стиль для текста на плашках в стартовом экране меню
+    <style name="AppTheme.ECOnline.MenuText" parent="AppTheme.ECOnline">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:paddingStart">5dp</item>
+        <item name="android:paddingEnd">5dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@color/red</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/menu_font</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    // Все кнопки
+    <style name="AppTheme.ECOnline.Button" parent="AppTheme.ECOnline">
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@drawable/button_border</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/button_font</item>
+    </style>
+
+    // Все заголовки
+    <style name="AppTheme.ECOnline.Header" parent="AppTheme.ECOnline">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/header_font</item>
+    </style>
+
+    // Все ссылки
+    <style name="AppTheme.ECOnline.Link" parent="AppTheme.ECOnline">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/link_font</item>
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    // Все подписи слева к полям
+    <style name="AppTheme.ECOnline.Label" parent="AppTheme.ECOnline">
+        <item name="android:textSize">@dimen/label_font</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    // Весь текст
+    <style name="AppTheme.ECOnline.Text" parent="AppTheme.ECOnline">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/text_font</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
+
+    // Все поля ввода
+    <style name="AppTheme.ECOnline.Edit" parent="AppTheme.ECOnline">
+        <item name="android:textSize">@dimen/edit_font</item>
+        <item name="android:textColorHint">@color/dark</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
 
 </resources>

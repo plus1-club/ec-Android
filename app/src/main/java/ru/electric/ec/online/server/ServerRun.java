@@ -165,6 +165,7 @@ public class ServerRun {
                 Detail detail = new Detail(
                         el.get("product"),
                         Service.getInt(el.get("count")),
+                        el.get("unit"),
                         Service.getDouble(el.get("price")),
                         Service.getDouble(el.get("sum")),
                         el.get("available"),

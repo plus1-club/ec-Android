@@ -48,8 +48,7 @@
                             style="@style/AppTheme.ECOnline.Text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{viewModel.info}"
-                            android:textAlignment="center" />
+                            android:text="@{viewModel.info}" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

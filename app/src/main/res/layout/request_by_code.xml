@@ -14,36 +14,32 @@
 
         <TextView
             android:id="@+id/textInfo"
-            style="@style/AppTheme.ECOnline.Text"
+            style="@style/AppTheme.ECOnline.Header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="@string/text_enter_number_or_product"
-            android:textAlignment="center" />
+            android:layout_marginTop="10dp"
+            android:text="@string/text_enter_number_or_product" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:gravity="bottom"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textProduct"
-                style="@style/AppTheme.ECOnline.Text"
-                android:layout_width="120dp"
+                style="@style/AppTheme.ECOnline.Label"
+                android:layout_width="@dimen/label_width"
                 android:layout_height="wrap_content"
                 android:labelFor="@id/editProduct"
-                android:text="@string/label_product"
-                android:textAlignment="viewStart"
-                android:textSize="18sp" />
+                android:text="@string/label_product" />
 
             <EditText
                 android:id="@+id/editProduct"
                 style="@style/AppTheme.ECOnline.Edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:ems="10"
                 android:inputType="text"
                 android:labelFor="@id/textProduct"
                 android:text="@={viewModel.product}"
@@ -53,26 +49,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:gravity="bottom"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textCount"
-                style="@style/AppTheme.ECOnline.Text"
-                android:layout_width="120dp"
+                style="@style/AppTheme.ECOnline.Label"
+                android:layout_width="@dimen/label_width"
                 android:layout_height="wrap_content"
                 android:labelFor="@id/editCount"
-                android:text="@string/label_count"
-                android:textAlignment="viewStart"
-                android:textSize="18sp" />
+                android:text="@string/label_count" />
 
             <EditText
                 android:id="@+id/editCount"
                 style="@style/AppTheme.ECOnline.Edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:ems="10"
                 android:inputType="number"
                 android:labelFor="@id/textCount"
                 android:text="@={`` + viewModel.count}"
@@ -81,10 +74,9 @@
 
         <CheckBox
             android:id="@+id/checkFullSearch"
-            style="@style/AppTheme.ECOnline.Text"
+            style="@style/AppTheme.ECOnline.Label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:checked="@={viewModel.isFullSearch}"
             android:text="@string/check_fulltext_search" />
 
@@ -93,17 +85,14 @@
             style="@style/AppTheme.ECOnline.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:onClick="@{() -> viewModel.onNext(context)}"
-            android:text="@string/button_check"
-            android:textSize="18sp" />
+            android:text="@string/button_check" />
 
         <TextView
             android:id="@+id/linkStock"
             style="@style/AppTheme.ECOnline.Link"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:onClick="@{() -> viewModel.linkStock(context)}"
             android:text="@string/link_store_file" />
 

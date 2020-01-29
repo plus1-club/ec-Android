@@ -86,6 +86,7 @@ public class InvoiceDetailsAdapter extends RecyclerView.Adapter<InvoiceDetailsAd
             viewModel.position.set(position);
             viewModel.product.set(detail.product);
             viewModel.count.set(detail.count);
+            viewModel.unit.set(detail.unit);
             viewModel.price.set(detail.price);
             viewModel.sum.set(detail.sum);
             viewModel.available.set(detail.available);

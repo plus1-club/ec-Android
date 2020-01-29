@@ -1,3 +1,12 @@
 <resources> 
     <dimen name="menu_font">11sp</dimen>
+    <dimen name="text_font">13sp</dimen>
+    <dimen name="button_font">15sp</dimen>
+    <dimen name="link_font">15sp</dimen>
+    <dimen name="header_font">15sp</dimen>
+    <dimen name="label_font">15sp</dimen>
+    <dimen name="edit_font">15sp</dimen>
+
+    <dimen name="label_width">90dp</dimen>
+    <dimen name="big_label_width">120dp</dimen>
 </resources>

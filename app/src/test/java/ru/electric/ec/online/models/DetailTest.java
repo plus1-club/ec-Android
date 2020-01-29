@@ -13,7 +13,7 @@ class DetailTest {
 
     @BeforeEach
     void setUp() {
-        object = new Detail("test", 2, 2.0, 4.0, "old", "old2");
+        object = new Detail("test", 2, "шт", 2.0, 4.0, "old", "old2");
     }
 
     @AfterEach
@@ -31,7 +31,7 @@ class DetailTest {
         assertEquals("old", object.available);
         assertEquals("old2", object.delivery);
 
-        object = new Detail("test2", 3, 5.0, 15.0, "new", "new2");
+        object = new Detail("test2", 3, "шт",5.0, 15.0, "new", "new2");
 
         assertEquals("test2", object.product);
         assertEquals(3, object.count);

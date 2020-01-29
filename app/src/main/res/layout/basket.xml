@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <import type="ru.electric.ec.online.Service" />
@@ -7,7 +8,7 @@
             name="viewModel"
             type="ru.electric.ec.online.ui.request.RequestViewModel" />
     </data>
-    <androidx.drawerlayout.widget.DrawerLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -66,23 +67,17 @@
                             style="@style/AppTheme.ECOnline.Text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:padding="0dp"
                             android:text="@{Service.rub(viewModel.total,@string/text_total)}"
                             android:textAlignment="textEnd"
                             android:textStyle="bold" />
 
                         <EditText
                             android:id="@+id/editComment"
+                            style="@style/AppTheme.ECOnline.Edit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:ems="10"
                             android:hint="@string/text_comment"
                             android:inputType="textMultiLine"
-                            android:padding="10dp"
                             android:text="@={viewModel.comment}"
                             tools:ignore="Autofill" />
 
@@ -101,8 +96,7 @@
                                 android:layout_marginEnd="5dp"
                                 android:layout_weight="1"
                                 android:onClick="@{() -> viewModel.onClear(context)}"
-                                android:text="@string/button_clear"
-                                android:textSize="14sp" />
+                                android:text="@string/button_clear" />
 
                             <Button
                                 android:id="@+id/checkMark"
@@ -113,8 +107,7 @@
                                 android:layout_marginEnd="5dp"
                                 android:layout_weight="1"
                                 android:onClick="@{() -> viewModel.addToBasket(context)}"
-                                android:text="@string/button_add"
-                                android:textSize="14sp" />
+                                android:text="@string/button_add" />
 
                             <Button
                                 android:id="@+id/buttonIssue"
@@ -125,8 +118,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:layout_weight="1"
                                 android:onClick="@{() -> viewModel.onIssue(context)}"
-                                android:text="@string/button_issue"
-                                android:textSize="14sp" />
+                                android:text="@string/button_issue" />
 
                         </LinearLayout>
 

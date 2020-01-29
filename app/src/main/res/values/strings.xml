@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ec-electric</string>
     <string name="full_name">EC-Online</string>
+    <string name="version">version %1$s.%2$d</string>
 
     <!-- Экран "1.Вход" -->
     <string name="edit_login">Логин</string>
@@ -42,8 +43,8 @@
     <!-- Экран "4.Заявки из Excel" -->
     <string name="text_select_file">Выберите Excel-файл (формат XLS, XLSX, ODS) В файле должен быть столбец с товарами и столбец с количеством товаров.</string>
     <string name="button_select">Обзор…</string>
-    <string name="label_product_column_number">№ колонки с кодом товара</string>
-    <string name="label_count_column_number">№ колонки с количеством</string>
+    <string name="label_product_column_number">№ столбца с кодом товара</string>
+    <string name="label_count_column_number">№ столбца с количеством</string>
     <string name="link_file_example">Пример файла</string>
 
     <!-- Экран "5.Таблица заявок" -->
@@ -98,6 +99,7 @@
     <string name="test_in_develop_download_invoice">Скачивание счета - в разработке</string>
     <string name="pdf">pdf</string>
     <string name="text_share">Поделиться</string>
+    <string name="x">X</string>
 
     <!-- Прочее -->
 

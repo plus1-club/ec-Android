@@ -17,18 +17,17 @@
             style="@style/AppTheme.ECOnline.Logo"
             android:layout_weight="1"
             android:src="@drawable/splash"
-            tools:ignore="ContentDescription" android:layout_height="0dp"/>
+            tools:ignore="ContentDescription" android:layout_height="0dp"
+            android:layout_width="wrap_content" />
 
         <EditText
             android:id="@+id/editLogin"
             style="@style/AppTheme.ECOnline.Edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="@string/edit_login"
             android:inputType="textPersonName"
             android:text="@={viewModel.login}"
-            android:textColorHint="?android:attr/colorPrimaryDark"
             tools:ignore="Autofill" />
 
         <EditText
@@ -36,11 +35,9 @@
             style="@style/AppTheme.ECOnline.Edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="@string/edit_password"
             android:inputType="textPassword"
             android:text="@={viewModel.password}"
-            android:textColorHint="?android:attr/colorPrimaryDark"
             tools:ignore="Autofill" />
 
         <Button
@@ -58,6 +55,7 @@
             style="@style/AppTheme.ECOnline.Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:onClick="@{()->viewModel.onPhone(context, @string/text_phone)}"
             android:text="@{@string/text_ender(@string/text_phone)}"
             android:textAlignment="center"

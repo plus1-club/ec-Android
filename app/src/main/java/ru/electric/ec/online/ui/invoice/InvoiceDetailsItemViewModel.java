@@ -12,6 +12,7 @@ public class InvoiceDetailsItemViewModel {
 
     public ObservableField<String> product;
     public ObservableInt count;
+    public ObservableField<String> unit;
     public ObservableDouble price;
     public ObservableDouble sum;
     public ObservableField<String> available;
@@ -23,6 +24,7 @@ public class InvoiceDetailsItemViewModel {
     InvoiceDetailsItemViewModel() {
         product = new ObservableField<>();
         count = new ObservableInt();
+        unit = new ObservableField<>();
         price = new ObservableDouble();
         sum = new ObservableDouble();
         available = new ObservableField<>();

@@ -46,8 +46,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp"
-                            android:baselineAligned="false"
+                            android:layout_marginBottom="10dp"
                             android:orientation="vertical"
                             android:paddingTop="1dp"
                             tools:ignore="UseCompoundDrawables">
@@ -57,10 +56,6 @@
                                 style="@style/AppTheme.ECOnline.Text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="5dp"
-                                android:padding="0dp"
                                 android:text="@{@string/text_invoice(viewModel.number, viewModel.date)}"
                                 android:textAlignment="viewStart"
                                 android:textStyle="bold" />
@@ -70,9 +65,6 @@
                                 style="@style/AppTheme.ECOnline.Text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="10dp"
-                                android:padding="0dp"
                                 android:text="@{@string/text_waybill(viewModel.waybill)}"
                                 android:textAlignment="viewStart"
                                 android:textStyle="bold"
@@ -83,10 +75,6 @@
                                 style="@style/AppTheme.ECOnline.Text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginEnd="10dp"
-                                android:layout_marginBottom="5dp"
-                                android:padding="0dp"
                                 android:text="@{Service.rub(viewModel.sum,@string/text_total)}"
                                 android:textAlignment="viewEnd"
                                 android:textStyle="bold" />
@@ -114,10 +102,8 @@
                         style="@style/AppTheme.ECOnline.Button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
                         android:onClick="@{() -> viewModel.onInvoice(context)}"
                         android:text="@string/button_invoice"
-                        android:textSize="14sp"
                         android:visibility="@{viewModel.showInvoiceButton ? View.VISIBLE : View.GONE}" />
                 </LinearLayout>
             </LinearLayout>
