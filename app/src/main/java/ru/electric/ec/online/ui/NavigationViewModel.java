@@ -12,17 +12,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.ui.menu.MenuViewModel;
 
 public class NavigationViewModel {
 
     public Toolbar toolbar;
-    public ActionBarDrawerToggle actionBar;
+    ActionBarDrawerToggle actionBar;
     private AppCompatActivity activity;
     private DrawerLayout drawer;
     private NavigationView navigation;
 
-    public NavigationViewModel(
+    NavigationViewModel(
             AppCompatActivity activity,
             DrawerLayout drawer,
             Toolbar toolbar,

@@ -22,7 +22,7 @@ import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.ServerData;
-import ru.electric.ec.online.ui.invoice.InvoiceDetailsActivity;
+import ru.electric.ec.online.ui.InvoiceDetailsActivity;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

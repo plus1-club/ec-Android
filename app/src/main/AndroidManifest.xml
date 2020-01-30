@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme.ECOnline"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name=".ui.SplashActivity"
             android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -27,39 +27,39 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.enter.EnterActivity"
+            android:name=".ui.EnterActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.menu.MenuActivity"
+            android:name=".ui.MenuActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.request.RequestActivity"
+            android:name=".ui.RequestActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.search.SearchActivity"
+            android:name=".ui.SearchActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.basket.BasketActivity"
+            android:name=".ui.BasketActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.invoice.InvoiceTableActivity"
+            android:name=".ui.InvoiceTableActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.invoice.InvoiceDetailsActivity"
+            android:name=".ui.InvoiceDetailsActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.info.InfoActivity"
+            android:name=".ui.InfoActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.pdf.PdfActivity"
+            android:name=".ui.PdfActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
 

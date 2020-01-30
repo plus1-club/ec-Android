@@ -6,7 +6,7 @@
         <import type="ru.electric.ec.online.Service" />
         <variable
             name="viewModel"
-            type="ru.electric.ec.online.ui.invoice.InvoiceDetailsItemViewModel" />
+            type="ru.electric.ec.online.ui.InvoiceDetailsItemViewModel" />
     </data>
 
     <LinearLayout

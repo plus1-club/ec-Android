@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="ru.electric.ec.online.ui.menu.MenuViewModel" />
+            type="ru.electric.ec.online.ui.MenuViewModel" />
     </data>
     <LinearLayout
         android:layout_height="match_parent"

@@ -17,12 +17,12 @@ import ru.electric.ec.online.models.Detail;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.models.ServerData;
-import ru.electric.ec.online.ui.enter.EnterActivity;
-import ru.electric.ec.online.ui.info.InfoViewModel;
-import ru.electric.ec.online.ui.invoice.InvoiceDetailsAdapter;
-import ru.electric.ec.online.ui.invoice.InvoiceTableAdapter;
-import ru.electric.ec.online.ui.menu.MenuActivity;
-import ru.electric.ec.online.ui.pdf.PdfActivity;
+import ru.electric.ec.online.ui.EnterActivity;
+import ru.electric.ec.online.ui.InfoViewModel;
+import ru.electric.ec.online.ui.InvoiceDetailsAdapter;
+import ru.electric.ec.online.ui.InvoiceTableAdapter;
+import ru.electric.ec.online.ui.MenuActivity;
+import ru.electric.ec.online.ui.PdfActivity;
 
 public class ServerRun {
 
@@ -70,7 +70,7 @@ public class ServerRun {
                         Service.getInt(el.get("stockCount")),
                         Service.getInt(el.get("multiplicity")),
                         el.get("unit"),
-                        true);
+                        false);
                 if (request.requestCount % request.multiplicity > 0){
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
                 }
