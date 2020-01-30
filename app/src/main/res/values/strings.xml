@@ -58,7 +58,7 @@
     <string name="text_money">%1$d руб.</string>
     <string name="text_total">Итого: %1$d руб.</string>
     <string name="text_basket_item_delete">Удалить строку из корзины</string>
-    <string name="text_order_processed">Заказ оформлен</string>
+    <string name="text_order_processed">Заказ № %1$d оформлен</string>
     <string name="text_product_not_found">Товар не найден</string>
     <string name="text_product_not_select">Ни один товар не выбран для добавления в корзину</string>
 

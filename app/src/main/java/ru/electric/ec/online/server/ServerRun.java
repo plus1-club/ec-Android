@@ -18,6 +18,7 @@ import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.models.ServerData;
 import ru.electric.ec.online.ui.EnterActivity;
+import ru.electric.ec.online.ui.InfoActivity;
 import ru.electric.ec.online.ui.InfoViewModel;
 import ru.electric.ec.online.ui.InvoiceDetailsAdapter;
 import ru.electric.ec.online.ui.InvoiceTableAdapter;
@@ -115,6 +116,16 @@ public class ServerRun {
     }
 
     void order(Context context, Response<ServerData> response, final int number){
+        if (isSuccess(response)) {
+            LinkedTreeMap data = (LinkedTreeMap) Objects.requireNonNull(response.body()).data;
+            int orderNumber = Service.getInt((String)data.get("number"));
+            App.getModel().request.orderNumber.set(orderNumber);
+            Intent intent = new Intent(context, InfoActivity.class);
+            intent.putExtra("title", context.getString(R.string.text_basket));
+            intent.putExtra("info", context.getString(R.string.text_order_processed, orderNumber));
+            intent.putExtra("activityName", "BasketActivity");
+            context.startActivity(intent);
+        }
         ServerResponse.getBasket(context);
     }
 

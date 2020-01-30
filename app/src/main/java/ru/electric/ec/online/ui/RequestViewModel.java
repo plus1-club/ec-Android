@@ -30,12 +30,13 @@ public class RequestViewModel {
     public ObservableBoolean isFullSearch;
     public ObservableDouble total;
     public ObservableField<String> comment;
+    public ObservableInt orderNumber;
 
     private ObservableField<String> title;
     public ObservableList<Request> search;
     public ObservableList<Request> basket;
-    public ObservableField<Object> searchAdapter;
-    public ObservableField<Object> basketAdapter;
+    ObservableField<Object> searchAdapter;
+    ObservableField<Object> basketAdapter;
 
     private static RequestViewModel mInstance;    // Ссылка для биндинга с View
 
@@ -50,6 +51,7 @@ public class RequestViewModel {
         isFullSearch = new ObservableBoolean();
         total = new ObservableDouble();
         comment = new ObservableField<>();
+        orderNumber = new ObservableInt();
 
         title = new ObservableField<>();
         search = new ObservableArrayList<>();
@@ -144,11 +146,6 @@ public class RequestViewModel {
 
     public void onIssue(final Context context){
         ServerResponse.order(context, comment.get());
-        Intent intent = new Intent(context, InfoActivity.class);
-        intent.putExtra("title", context.getString(R.string.text_basket));
-        intent.putExtra("info", context.getString(R.string.text_order_processed));
-        intent.putExtra("activityName", "BasketActivity");
-        context.startActivity(intent);
 
         new Handler().postDelayed(() -> {
             basket.clear();
@@ -157,6 +154,6 @@ public class RequestViewModel {
             ((BasketActivity)context).refreshBasket();
             total.set(0);
             comment.set("");
-        }, 500);
+        }, 1000);
     }
 }
