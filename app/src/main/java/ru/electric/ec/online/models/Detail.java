@@ -51,6 +51,6 @@ public class Detail {
         this.price = price;
         this.sum = sum;
         this.available = available;
-        this.delivery = delivery;
+        this.delivery = (delivery == null) ? "" : delivery;
     }
 }

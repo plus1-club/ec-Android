@@ -46,36 +46,27 @@
                 android:layout_weight="1"
                 android:text="@{`` + viewModel.count + ` ` + viewModel.unit}"
                 android:textAlignment="viewStart"
+                android:textColor="@{viewModel.color}"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textAvailable"
                 style="@style/AppTheme.ECOnline.Text"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="3"
-                android:text="@{viewModel.available}"
+                android:text="@{viewModel.available + viewModel.delivery}"
                 android:textAlignment="viewStart"
+                android:textColor="@{viewModel.color}"
                 android:visibility="@{viewModel.showAvailable ? View.VISIBLE : View.GONE}" />
-
-            <TextView
-                android:id="@+id/textDelivery"
-                style="@style/AppTheme.ECOnline.Text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="3"
-                android:text="@{viewModel.delivery}"
-                android:textAlignment="viewStart"
-                android:visibility="@{viewModel.showDelivery ? View.VISIBLE : View.GONE}" />
 
             <TextView
                 android:id="@+id/textSum"
                 style="@style/AppTheme.ECOnline.Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
+                android:layout_weight="2"
                 android:text="@{Service.rub(viewModel.sum,@string/text_money)}"
                 android:textAlignment="viewEnd"
                 android:textStyle="bold" />

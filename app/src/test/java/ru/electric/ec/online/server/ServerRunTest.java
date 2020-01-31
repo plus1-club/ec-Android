@@ -169,7 +169,18 @@ class ServerRunTest {
     }
 
     @Test
-    void order() {
+    void order_success() {
+        Map<String, String> map = new LinkedTreeMap<>();
+        map.put("number", "654321");
+        body.success = true;
+        body.data = map;
+        body.error = "";
+        object.order(mockContext, response, 0);
+    }
+
+    @Test
+    void order_not_success() {
+        body.success = false;
         object.order(mockContext, response, 0);
     }
 
