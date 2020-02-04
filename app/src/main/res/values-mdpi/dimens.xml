@@ -7,6 +7,7 @@
     <dimen name="label_font">15sp</dimen>
     <dimen name="edit_font">15sp</dimen>
 
+    <dimen name="label_height">22dp</dimen>
     <dimen name="label_width">90dp</dimen>
     <dimen name="big_label_width">120dp</dimen>
 </resources>
