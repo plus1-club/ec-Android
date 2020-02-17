@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="viewModel"
             type="ru.electric.ec.online.ui.SplashViewModel" />
     </data>
-    <LinearLayout
-        tools:ignore="UseCompoundDrawables"
-        android:orientation="vertical"
+
+    <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
         <ImageView
             android:id="@+id/splash_screen"
-            style="@style/AppTheme.ECOnline.Logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
             android:src="@drawable/splash"
-            tools:ignore="ContentDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:contentDescription="@string/image_logo" />
 
         <TextView
             android:id="@+id/textProduct"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/label_height"
+            android:layout_height="match_parent"
             android:gravity="bottom"
             android:padding="10dp"
             android:text="@{@string/version(viewModel.versionName, viewModel.versionCode)}"
             android:textAlignment="center" />
 
-    </LinearLayout>
+    </FrameLayout>
 </layout>

@@ -2,6 +2,7 @@ package ru.electric.ec.online.ui;
 
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -23,4 +24,10 @@ public class BindingAdapters {
     public static void setTextColor(TextView view, int colorId) {
         view.setTextColor(ContextCompat.getColorStateList(view.getContext(), colorId));
     }
+
+    @BindingAdapter({"android:src"})
+    public static void setSrc(ImageView view, int icon) {
+        view.setImageResource(icon);
+    }
+
 }

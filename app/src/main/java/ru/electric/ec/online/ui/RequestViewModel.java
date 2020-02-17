@@ -68,10 +68,10 @@ public class RequestViewModel {
         return mInstance;
     }
 
-    // TODO: Реализовать выбор файла из папки
     public void onBrowse(Context context) {
-        InfoViewModel.log(context, false, true,
-                Service.getStr(R.string.text_in_develop_choose_file));
+        Intent intent = new Intent(context, FilesActivity.class);
+        intent.putExtra("title", "Выбор файла");
+        context.startActivity(intent);
     }
 
     public void onNext(Context context){

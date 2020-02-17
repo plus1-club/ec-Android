@@ -102,6 +102,8 @@
     <string name="pdf">pdf</string>
     <string name="text_share">Поделиться</string>
     <string name="x">X</string>
+    <string name="image_logo">Логотип EC-Online</string>
+    <string name="image_file_icon">Иконка файла</string>
 
     <!-- Прочее -->
 
