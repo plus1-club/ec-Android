@@ -201,7 +201,7 @@ public class ServerRun {
         }
     }
 
-    private boolean isSuccess(final Response<ServerData> response){
+    boolean isSuccess(final Response<ServerData> response){
         return (response.body() != null && response.body().success && response.body().error.isEmpty());
     }
 }

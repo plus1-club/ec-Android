@@ -24,6 +24,8 @@ import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.ServerData;
 import ru.electric.ec.online.ui.InvoiceDetailsActivity;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -274,4 +276,39 @@ class ServerRunTest {
         body.error = "";
         object.getPrint(mockContext, response, 0);
     }
+
+    @Test
+    void isSuccess_body_null() {
+        body = null;
+        assertFalse(object.isSuccess(response));
+    }
+
+    @Test
+    void isSuccess_success_false_error_empty() {
+        body.success = false;
+        body.error = "";
+        assertFalse(object.isSuccess(response));
+    }
+
+    @Test
+    void isSuccess_success_false_error_not_empty() {
+        body.success = false;
+        body.error = "test";
+        assertFalse(object.isSuccess(response));
+    }
+
+    @Test
+    void isSuccess_success_true_error_not_empty() {
+        body.success = true;
+        body.error = "test";
+        assertFalse(object.isSuccess(response));
+    }
+
+    @Test
+    void isSuccess_success_true_error_empty() {
+        body.success = true;
+        body.error = "";
+        assertTrue(object.isSuccess(response));
+    }
+
 }
