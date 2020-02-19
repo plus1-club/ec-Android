@@ -1,11 +1,11 @@
 package ru.electric.ec.online;
 
-import ru.electric.ec.online.ui.InvoiceTableViewModel;
-import ru.electric.ec.online.ui.RequestViewModel;
+import ru.electric.ec.online.ui.invoice.InvoiceViewModel;
+import ru.electric.ec.online.ui.request.RequestViewModel;
 
 public class Model {
     public RequestViewModel request;
-    public InvoiceTableViewModel invoice;
+    public InvoiceViewModel invoice;
     public String token;
 
     Model() {
@@ -15,6 +15,6 @@ public class Model {
     private void init() {
         token = "";
         request = RequestViewModel.getInstance();
-        invoice = InvoiceTableViewModel.getInstance();
+        invoice = InvoiceViewModel.getInstance();
     }
 }

@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="ru.electric.ec.online.ui.SplashViewModel" />
+            type="ru.electric.ec.online.ui.splash.SplashViewModel" />
     </data>
 
     <FrameLayout

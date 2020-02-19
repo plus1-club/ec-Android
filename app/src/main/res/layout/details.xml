@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View" />
+        <import type="ru.electric.ec.online.Service" />
+        <variable
+            name="viewModel"
+            type="ru.electric.ec.online.ui.details.DetailsViewModel" />
+    </data>
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
+
+                <include
+                    android:id="@+id/include"
+                    layout="@layout/_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <LinearLayout
+                        android:id="@+id/body"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="3"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="vertical"
+                            android:paddingTop="1dp"
+                            tools:ignore="UseCompoundDrawables">
+
+                            <TextView
+                                android:id="@+id/textProduct"
+                                style="@style/AppTheme.ECOnline.Text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{@string/text_invoice(viewModel.number, viewModel.date)}"
+                                android:textAlignment="viewStart"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textWaybill"
+                                style="@style/AppTheme.ECOnline.Text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{@string/text_waybill(viewModel.waybill)}"
+                                android:textAlignment="viewStart"
+                                android:textStyle="bold"
+                                android:visibility="@{viewModel.waybill == 0 ? View.GONE : View.VISIBLE}" />
+
+                            <TextView
+                                android:id="@+id/textSum"
+                                style="@style/AppTheme.ECOnline.Text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@{Service.rub(viewModel.sum,@string/text_total)}"
+                                android:textAlignment="viewEnd"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                            android:id="@+id/swiperefresh"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/list"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="1dp"
+                                android:scrollbars="vertical" />
+                        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/buttonInvoice"
+                        style="@style/AppTheme.ECOnline.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{() -> viewModel.onInvoice(context)}"
+                        android:text="@string/button_invoice"
+                        android:visibility="@{viewModel.showInvoiceButton ? View.VISIBLE : View.GONE}" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- Основной контейнер разметки -->
+
+        </RelativeLayout>
+
+        <!-- Контейнер, содержащий выдвижное меню -->
+        <RelativeLayout
+            android:id="@+id/left_drawer"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#FFFFFF"
+            android:choiceMode="none"
+            android:clickable="true"
+            android:focusable="true">
+
+            <!--suppress AndroidUnknownAttribute -->
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/navigator"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@android:color/white"
+                app:headerLayout="@layout/_header"
+                app:itemHorizontalPadding="10dp"
+                app:itemIconPadding="10dp"
+                app:menu="@menu/menu" />
+        </RelativeLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

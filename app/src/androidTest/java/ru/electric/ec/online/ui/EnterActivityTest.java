@@ -15,6 +15,8 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import ru.electric.ec.online.R;
+import ru.electric.ec.online.ui.enter.EnterActivity;
+import ru.electric.ec.online.ui.menu.MenuActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;

@@ -17,13 +17,13 @@ import ru.electric.ec.online.models.Detail;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.models.ServerData;
-import ru.electric.ec.online.ui.EnterActivity;
-import ru.electric.ec.online.ui.InfoActivity;
-import ru.electric.ec.online.ui.InfoViewModel;
-import ru.electric.ec.online.ui.InvoiceDetailsViewAdapter;
-import ru.electric.ec.online.ui.InvoiceTableViewAdapter;
-import ru.electric.ec.online.ui.MenuActivity;
-import ru.electric.ec.online.ui.PdfActivity;
+import ru.electric.ec.online.ui.bill.BillActivity;
+import ru.electric.ec.online.ui.details.DetailsViewAdapter;
+import ru.electric.ec.online.ui.enter.EnterActivity;
+import ru.electric.ec.online.ui.info.InfoActivity;
+import ru.electric.ec.online.ui.info.InfoViewModel;
+import ru.electric.ec.online.ui.invoice.InvoiceViewAdapter;
+import ru.electric.ec.online.ui.menu.MenuActivity;
 
 public class ServerRun {
 
@@ -153,7 +153,7 @@ public class ServerRun {
                 }
                 App.getModel().invoice.invoices.add(invoice);
             }
-            InvoiceTableViewAdapter adapter = new InvoiceTableViewAdapter();
+            InvoiceViewAdapter adapter = new InvoiceViewAdapter();
             adapter.updateAdapter(App.getModel().invoice, context);
         }
     }
@@ -183,7 +183,7 @@ public class ServerRun {
                         el.get("delivery"));
                 invoice.details.add(detail);
             }
-            InvoiceDetailsViewAdapter adapter = new InvoiceDetailsViewAdapter();
+            DetailsViewAdapter adapter = new DetailsViewAdapter();
             adapter.updateAdapter(invoice, context);
         }
     }
@@ -193,7 +193,7 @@ public class ServerRun {
         if (isSuccess(response)) {
             LinkedTreeMap data = (LinkedTreeMap) Objects.requireNonNull(response.body()).data;
             String link = (String) data.get("file");
-            Intent intent = new Intent(context, PdfActivity.class);
+            Intent intent = new Intent(context, BillActivity.class);
             intent.putExtra("title", Service.getStr(R.string.text_invoice_short, number));
             intent.putExtra("number", number);
             intent.putExtra("link", link);

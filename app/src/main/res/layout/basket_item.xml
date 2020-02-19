@@ -7,7 +7,7 @@
         <import type="ru.electric.ec.online.Service" />
         <variable
             name="viewModel"
-            type="ru.electric.ec.online.ui.BasketItemViewModel" />
+            type="ru.electric.ec.online.ui.basket.BasketItemViewModel" />
     </data>
 
     <LinearLayout

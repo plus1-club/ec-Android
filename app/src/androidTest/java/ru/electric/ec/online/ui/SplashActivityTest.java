@@ -9,6 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import ru.electric.ec.online.R;
+import ru.electric.ec.online.ui.splash.SplashActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;

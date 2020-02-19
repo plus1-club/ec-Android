@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme.ECOnline"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -28,43 +28,43 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.EnterActivity"
+            android:name=".ui.enter.EnterActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.MenuActivity"
+            android:name=".ui.menu.MenuActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.RequestActivity"
+            android:name=".ui.request.RequestActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.SearchActivity"
+            android:name=".ui.search.SearchActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.BasketActivity"
+            android:name=".ui.basket.BasketActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.InvoiceTableActivity"
+            android:name=".ui.invoice.InvoiceActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.InvoiceDetailsActivity"
+            android:name=".ui.details.DetailsActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.InfoActivity"
+            android:name=".ui.info.InfoActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.PdfActivity"
+            android:name=".ui.bill.BillActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.FilesActivity"
+            android:name=".ui.files.FilesActivity"
             android:noHistory="true"
             android:screenOrientation="portrait" />
 

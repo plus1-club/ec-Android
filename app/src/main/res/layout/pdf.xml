@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="ru.electric.ec.online.ui.PdfViewModel" />
+            type="ru.electric.ec.online.ui.bill.BillViewModel" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"
@@ -103,7 +103,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:background="@android:color/white"
-                app:headerLayout="@layout/_navigator"
+                app:headerLayout="@layout/_header"
                 app:itemHorizontalPadding="10dp"
                 app:itemIconPadding="10dp"
                 app:menu="@menu/menu" />

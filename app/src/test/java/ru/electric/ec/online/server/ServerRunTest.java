@@ -22,7 +22,7 @@ import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.ServerData;
-import ru.electric.ec.online.ui.InvoiceDetailsActivity;
+import ru.electric.ec.online.ui.details.DetailsActivity;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -35,7 +35,7 @@ class ServerRunTest {
     private Response<ServerData> response;
     private ServerData body;
 
-    @Mock(extraInterfaces = {InvoiceDetailsActivity.class})
+    @Mock(extraInterfaces = {DetailsActivity.class})
     Context mockContext;
 
     @BeforeEach
