@@ -25,7 +25,7 @@ public class FilesViewModel {
 
     public ObservableField<String> title;
     ObservableList<File> files;
-    ObservableField<FilesAdapter> adapter;
+    ObservableField<FilesViewAdapter> adapter;
 
     private static FilesViewModel mInstance;    // Ссылка для биндинга с View
 

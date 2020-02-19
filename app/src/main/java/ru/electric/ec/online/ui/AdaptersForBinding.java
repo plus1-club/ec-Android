@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 
-public class BindingAdapters {
+public class AdaptersForBinding {
 
     @BindingAdapter({"android:buttonTint"})
     public static void setButtonTintList(CheckBox view, int colorId) {

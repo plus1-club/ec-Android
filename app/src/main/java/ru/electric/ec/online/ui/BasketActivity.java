@@ -23,7 +23,7 @@ public class BasketActivity extends AppCompatActivity {
     RequestViewModel viewModel;
     NavigationViewModel navigationModel;
 
-    private BasketAdapter adapter;
+    private BasketViewAdapter adapter;
     private BasketBinding binding;
     private LinearLayoutManager layoutManager;
     private AppCompatActivity activity;
@@ -49,7 +49,7 @@ public class BasketActivity extends AppCompatActivity {
         binding.list.setLayoutManager(layoutManager);
 
         // Подготовка и установка адаптера
-        adapter = new BasketAdapter();
+        adapter = new BasketViewAdapter();
         adapter.setItems(viewModel.basket);
         binding.list.setAdapter(adapter);
         viewModel.basketAdapter.set(adapter);
@@ -93,7 +93,7 @@ public class BasketActivity extends AppCompatActivity {
 
     public void refreshBasket(){
         new Handler().postDelayed(() -> {
-            adapter = new BasketAdapter();
+            adapter = new BasketViewAdapter();
             adapter.setItems(viewModel.basket);
             binding.list.setAdapter(adapter);
             viewModel.total.set(0);

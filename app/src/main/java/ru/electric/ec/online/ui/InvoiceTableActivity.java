@@ -22,7 +22,7 @@ public class InvoiceTableActivity extends AppCompatActivity {
     public InvoiceTableViewModel viewModel;
     NavigationViewModel navigationModel;
 
-    private InvoiceTableAdapter adapter;
+    private InvoiceTableViewAdapter adapter;
     public InvoiceTableBinding binding;
     private LinearLayoutManager layoutManager;
     private AppCompatActivity activity;
@@ -49,7 +49,7 @@ public class InvoiceTableActivity extends AppCompatActivity {
         binding.list.setLayoutManager(layoutManager);
 
         // Подготовка и установка адаптера
-        adapter = new InvoiceTableAdapter();
+        adapter = new InvoiceTableViewAdapter();
         binding.list.setAdapter(adapter);
         adapter.setItems(viewModel.invoices);
 
@@ -104,7 +104,7 @@ public class InvoiceTableActivity extends AppCompatActivity {
     public void refresh(){
         updateList();
         new Handler().postDelayed(() -> {
-            adapter = new InvoiceTableAdapter();
+            adapter = new InvoiceTableViewAdapter();
             adapter.setItems(viewModel.invoices);
             binding.list.setAdapter(adapter);
             binding.swiperefresh.setRefreshing(false);

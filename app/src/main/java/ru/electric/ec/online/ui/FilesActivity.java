@@ -27,7 +27,7 @@ public class FilesActivity extends AppCompatActivity {
     FilesViewModel viewModel;
     NavigationViewModel navigationModel;
 
-    private FilesAdapter adapter;
+    private FilesViewAdapter adapter;
     private FilesBinding binding;
     private LinearLayoutManager layoutManager;
 
@@ -50,7 +50,7 @@ public class FilesActivity extends AppCompatActivity {
         binding.files.setLayoutManager(layoutManager);
 
         // Подготовка и установка адаптера
-        adapter = new FilesAdapter();
+        adapter = new FilesViewAdapter();
         adapter.setFiles(viewModel.files);
         binding.files.setAdapter(adapter);
         viewModel.adapter.set(adapter);

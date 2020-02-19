@@ -22,7 +22,7 @@ public class SearchActivity extends AppCompatActivity {
     RequestViewModel viewModel;
     NavigationViewModel navigationModel;
 
-    private SearchAdapter adapter;
+    private SearchViewAdapter adapter;
     private SearchBinding binding;
     private LinearLayoutManager layoutManager;
 
@@ -44,7 +44,7 @@ public class SearchActivity extends AppCompatActivity {
         binding.list.setLayoutManager(layoutManager);
 
         // Подготовка и установка адаптера
-        adapter = new SearchAdapter();
+        adapter = new SearchViewAdapter();
         adapter.setItems(viewModel.search);
         viewModel.searchAdapter.set(adapter);
         binding.list.setAdapter(adapter);
@@ -84,7 +84,7 @@ public class SearchActivity extends AppCompatActivity {
     public void refreshSearch(){
         binding.swiperefresh.setRefreshing(true);
         new Handler().postDelayed(() -> {
-            adapter = new SearchAdapter();
+            adapter = new SearchViewAdapter();
             if (viewModel.search.size() > 0){
                 adapter.setItems(viewModel.search);
                 binding.list.setAdapter(adapter);

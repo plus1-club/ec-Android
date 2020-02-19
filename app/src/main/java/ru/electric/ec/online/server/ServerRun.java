@@ -20,8 +20,8 @@ import ru.electric.ec.online.models.ServerData;
 import ru.electric.ec.online.ui.EnterActivity;
 import ru.electric.ec.online.ui.InfoActivity;
 import ru.electric.ec.online.ui.InfoViewModel;
-import ru.electric.ec.online.ui.InvoiceDetailsAdapter;
-import ru.electric.ec.online.ui.InvoiceTableAdapter;
+import ru.electric.ec.online.ui.InvoiceDetailsViewAdapter;
+import ru.electric.ec.online.ui.InvoiceTableViewAdapter;
 import ru.electric.ec.online.ui.MenuActivity;
 import ru.electric.ec.online.ui.PdfActivity;
 
@@ -153,7 +153,7 @@ public class ServerRun {
                 }
                 App.getModel().invoice.invoices.add(invoice);
             }
-            InvoiceTableAdapter adapter = new InvoiceTableAdapter();
+            InvoiceTableViewAdapter adapter = new InvoiceTableViewAdapter();
             adapter.updateAdapter(App.getModel().invoice, context);
         }
     }
@@ -183,7 +183,7 @@ public class ServerRun {
                         el.get("delivery"));
                 invoice.details.add(detail);
             }
-            InvoiceDetailsAdapter adapter = new InvoiceDetailsAdapter();
+            InvoiceDetailsViewAdapter adapter = new InvoiceDetailsViewAdapter();
             adapter.updateAdapter(invoice, context);
         }
     }

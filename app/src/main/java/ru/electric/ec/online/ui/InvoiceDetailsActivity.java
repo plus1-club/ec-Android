@@ -24,7 +24,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
     InvoiceTableViewModel parent;
     NavigationViewModel navigationModel;
 
-    private InvoiceDetailsAdapter adapter;
+    private InvoiceDetailsViewAdapter adapter;
     public InvoiceDetailsBinding binding;
     private LinearLayoutManager layoutManager;
     private AppCompatActivity activity;
@@ -55,7 +55,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
 
         // Подготовка и установка адаптера
         parent = InvoiceTableViewModel.getInstance();
-        adapter = new InvoiceDetailsAdapter();
+        adapter = new InvoiceDetailsViewAdapter();
         binding.list.setAdapter(adapter);
         adapter.setItems(parent.invoices.get(bundle.getInt("position")).details);
 
@@ -133,7 +133,7 @@ public class InvoiceDetailsActivity extends AppCompatActivity {
 
         updateItem(viewModel.status.get());
         new Handler().postDelayed(() -> {
-            adapter = new InvoiceDetailsAdapter();
+            adapter = new InvoiceDetailsViewAdapter();
             adapter.setItems(thisInvoice.details);
             binding.list.setAdapter(adapter);
             binding.swiperefresh.setRefreshing(false);
