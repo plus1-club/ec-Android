@@ -139,6 +139,6 @@ public class DetailsActivity extends AppCompatActivity {
             adapter.setItems(thisInvoice.details);
             binding.list.setAdapter(adapter);
             binding.swiperefresh.setRefreshing(false);
-        }, 1000);
+        }, 3000);
     }
 }

@@ -115,7 +115,7 @@
             style="@style/AppTheme.ECOnline.Label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="@={viewModel.isFullSearch}"
+            android:checked="@={!viewModel.isFullSearch}"
             android:text="@string/check_fulltext_search" />
 
         <Button

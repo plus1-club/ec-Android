@@ -106,6 +106,6 @@ public class BasketActivity extends AppCompatActivity {
                 }
             }
             binding.swiperefresh.setRefreshing(false);
-        }, 1000);
+        }, 3000);
     }
 }

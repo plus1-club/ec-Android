@@ -100,6 +100,6 @@ public class SearchActivity extends AppCompatActivity {
                 intent.putExtra("activityName", "RequestActivity");
                 this.startActivity(intent);
             }
-        }, 1000);
+        }, 3000);
     }
 }

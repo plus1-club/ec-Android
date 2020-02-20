@@ -57,6 +57,7 @@ public class RequestViewModel {
         total = new ObservableDouble();
         comment = new ObservableField<>();
         orderNumber = new ObservableInt();
+        isFullSearch.set(true);
 
         title = new ObservableField<>();
         search = new ObservableArrayList<>();
@@ -125,7 +126,7 @@ public class RequestViewModel {
                 Intent intent = new Intent(context, BasketActivity.class);
                 intent.putExtra("title", context.getString(R.string.text_basket));
                 context.startActivity(intent);
-            }, 500);
+            }, 3000);
         } else {
             Intent intent = new Intent(context, InfoActivity.class);
             intent.putExtra("title", title.get());
@@ -159,6 +160,6 @@ public class RequestViewModel {
             ((BasketActivity)context).refreshBasket();
             total.set(0);
             comment.set("");
-        }, 1000);
+        }, 3000);
     }
 }

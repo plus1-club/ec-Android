@@ -109,6 +109,6 @@ public class InvoiceActivity extends AppCompatActivity {
             adapter.setItems(viewModel.invoices);
             binding.list.setAdapter(adapter);
             binding.swiperefresh.setRefreshing(false);
-        }, 1000);
+        }, 3000);
     }
 }

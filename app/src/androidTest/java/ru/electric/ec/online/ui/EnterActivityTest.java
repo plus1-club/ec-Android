@@ -76,7 +76,7 @@ public class EnterActivityTest {
         onView(withId(R.id.editPassword)).perform(typeText("As12345"));
         Espresso.closeSoftKeyboard();
         onView(withId(R.id.buttonEnter)).perform(click());
-        sleep(1000);
+        sleep(3000);
         intended(hasComponent(MenuActivity.class.getName()));
     }
 }
