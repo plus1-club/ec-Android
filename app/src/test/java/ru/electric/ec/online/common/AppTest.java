@@ -1,13 +1,15 @@
-package ru.electric.ec.online;
+package ru.electric.ec.online.common;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayName("common.App")
 class AppTest {
 
     private App object;
@@ -26,7 +28,8 @@ class AppTest {
     }
 
     @Test
-    void init() {
+    @DisplayName("onCreate(): Создание приложения")
+    void onCreate() {
         App.setAppContext(null);
         App.setModel(null);
         assertNull(App.getAppContext());
@@ -36,7 +39,8 @@ class AppTest {
     }
 
     @Test
-    void terminate() {
+    @DisplayName("onTerminate(): Уничтожение приложения")
+    void onTerminate() {
         App.setAppContext(object);
         App.setModel(model);
         assertEquals(object, App.getAppContext());

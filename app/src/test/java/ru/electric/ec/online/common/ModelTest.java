@@ -1,13 +1,15 @@
-package ru.electric.ec.online;
+package ru.electric.ec.online.common;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@DisplayName("common.Model")
 class ModelTest {
 
     private Model object;
@@ -23,7 +25,8 @@ class ModelTest {
     }
 
     @Test
-    void init() {
+    @DisplayName("new Model(): Создание модели")
+    void newModel() {
         object.token = "1";
         object.request = null;
         object.invoice = null;

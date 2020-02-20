@@ -9,6 +9,7 @@ import com.google.gson.internal.LinkedTreeMap;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
@@ -18,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 import retrofit2.Response;
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
+import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.ui.details.DetailsActivity;
 
@@ -28,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@DisplayName("server.ServerRun")
 class ServerRunTest {
 
     private ServerRun object;
@@ -43,7 +45,6 @@ class ServerRunTest {
         mockContext = mock(Context.class);
         response = Response.success(new ServerData());
         body = response.body();
-        assert body != null;
     }
 
     @AfterEach
@@ -54,6 +55,7 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("getEnter(): Успешный вход на сервер")
     void getEnter_success() {
         Map<String, String> map = new LinkedTreeMap<>();
         map.put("user_token", "0");
@@ -64,6 +66,7 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("getEnter(): Вход на сервер с ошибкой")
     void getEnter_error() {
         body.success = false;
         body.error = "Test error";
@@ -72,17 +75,20 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("getExit(): Выход с сервера")
     void getExit() {
         object.getExit(mockContext, response, 0);
     }
 
     @Test
+    @DisplayName("getByCode(): Не успешный поиск товара по коду")
     void getByCode_not_success() {
         body.success = false;
         object.getByCode(mockContext, response, 0);
     }
 
     @Test
+    @DisplayName("getByCode(): Поиск неделимого товара по коду")
     void getByCode_success_not_divided() {
         List<Object> list = new LinkedList<>();
         Map<String, String> map = new LinkedTreeMap<>();
@@ -99,6 +105,7 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("getByCode(): Поиск делимого товара по коду")
     void getByCode_success_divided() {
         List<Object> list = new LinkedList<>();
         Map<String, String> map = new LinkedTreeMap<>();
@@ -115,12 +122,14 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("getBasket(): Не успешное получение корзины")
     void getBasket_not_success() {
         body.success = false;
         object.getBasket(mockContext, response, 0);
     }
 
     @Test
+    @DisplayName("getBasket(): Получение корзины с неделимым товаром")
     void getBasket_success_not_divided() {
         List<Object> list = new LinkedList<>();
         Map<String, String> map = new LinkedTreeMap<>();
@@ -138,6 +147,7 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("getBasket(): Получение корзины с делимым товаром")
     void getBasket_success_divided() {
         List<Object> list = new LinkedList<>();
         Map<String, String> map = new LinkedTreeMap<>();
@@ -155,21 +165,25 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("postBasket(): Отправка корзины на сервер")
     void postBasket() {
         object.postBasket(mockContext, response, 0);
     }
 
     @Test
+    @DisplayName("putBasket(): Обновление корзины на сервере")
     void putBasket() {
         object.putBasket(mockContext, response, 0);
     }
 
     @Test
+    @DisplayName("deleteBasket(): Очистка/удаление из корзины на сервере")
     void deleteBasket() {
         object.deleteBasket(mockContext, response, 0);
     }
 
     @Test
+    @DisplayName("order(): Успешное создание заказа")
     void order_success() {
         Map<String, String> map = new LinkedTreeMap<>();
         map.put("number", "654321");
@@ -180,18 +194,21 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("order(): Не успешное создание заказа")
     void order_not_success() {
         body.success = false;
         object.order(mockContext, response, 0);
     }
 
     @Test
+    @DisplayName("invoiceList(): Не успешное получение списка счетов")
     void invoiceList_not_success() {
         body.success = false;
         object.invoiceList(mockContext, response, 0);
     }
 
     @Test
+    @DisplayName("invoiceList(): Успешное получение списка счетов (не отгрузки)")
     void invoiceList_success_not_shipped() {
         List<Object> list = new ArrayList<>();
         Map<String, Object> map = new LinkedTreeMap<>();
@@ -207,6 +224,7 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("invoiceList(): Успешное получение списка счетов (отгрузки)")
     void invoiceList_success_shipped() {
         List<Object> list = new ArrayList<>();
         Map<String, Object> map = new LinkedTreeMap<>();
@@ -223,12 +241,14 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("invoiceDetails(): Не успешное получение деталей счета")
     void invoiceDetails_not_success() {
         body.success = false;
         object.invoiceDetails(mockContext, response, 0);
     }
 
     @Test
+    @DisplayName("invoiceDetails(): Успешное получение деталей пустого счета")
     void invoiceDetails_success_invoices_null() {
         body.success = true;
         body.error = "";
@@ -236,6 +256,7 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("invoiceDetails(): Успешное получение деталей заполненного счета")
     void invoiceDetails_success_invoices_has() {
         body.success = true;
         body.error = "";
@@ -261,12 +282,14 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("getPrint(): Не успешная печать счета (не получен файл)")
     void getPrint_not_success() {
         body.success = false;
         object.getPrint(mockContext, response, 0);
     }
 
     @Test
+    @DisplayName("getPrint(): Успешная печать счета (получен файл)")
     void getPrint_success() {
         Map<String, String> map = new LinkedTreeMap<>();
         map.put("file", "File.test");
@@ -277,12 +300,14 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("isSuccess(): Не успешно - тело null")
     void isSuccess_body_null() {
-        body = null;
-        assertFalse(object.isSuccess(response));
+        Response<ServerData> nullResponse = Response.success(null);
+        assertFalse(object.isSuccess(nullResponse));
     }
 
     @Test
+    @DisplayName("isSuccess(): Не успешно - пустая ошибка и успех = false")
     void isSuccess_success_false_error_empty() {
         body.success = false;
         body.error = "";
@@ -290,6 +315,7 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("isSuccess(): Не успешно - не пустая ошибка и успех = false")
     void isSuccess_success_false_error_not_empty() {
         body.success = false;
         body.error = "test";
@@ -297,6 +323,7 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("isSuccess(): Не успешно - не пустая ошибка и успех = true")
     void isSuccess_success_true_error_not_empty() {
         body.success = true;
         body.error = "test";
@@ -304,6 +331,7 @@ class ServerRunTest {
     }
 
     @Test
+    @DisplayName("isSuccess(): Успешно - пустая ошибка и успех = true")
     void isSuccess_success_true_error_empty() {
         body.success = true;
         body.error = "";

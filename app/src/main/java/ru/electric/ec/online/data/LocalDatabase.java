@@ -22,12 +22,17 @@ public abstract class LocalDatabase extends RoomDatabase {
     public abstract InvoiceDao invoiceDao();
     public abstract DetailDao detailDao();
 
-    private static LocalDatabase mInstance;
+    static LocalDatabase mInstance;
 
-    public static LocalDatabase getAppDatabase(Context context) {
+    public static LocalDatabase getLocalDatabase(Context context) {
+        if (context.getApplicationContext() == null){
+            return null;
+        }
         if (mInstance == null) {
-            mInstance = Room.databaseBuilder(context.getApplicationContext(),
-                    LocalDatabase.class, "db").fallbackToDestructiveMigration().build();
+            mInstance = Room
+                .databaseBuilder(context.getApplicationContext(), LocalDatabase.class, "db")
+                .fallbackToDestructiveMigration()
+                .build();
         } else {
             return null;
         }

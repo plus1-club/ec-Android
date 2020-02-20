@@ -2,13 +2,15 @@ package ru.electric.ec.online.server;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.Service;
+import ru.electric.ec.online.common.Service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayName("server.ServerData")
 class ServerDataTest {
 
     private ServerData object;
@@ -24,6 +26,7 @@ class ServerDataTest {
     }
 
     @Test
+    @DisplayName("getStr(): Строка с успешным сообщением")
     void toString_success() {
         object.success = true;
         object.data = "data";
@@ -32,6 +35,7 @@ class ServerDataTest {
     }
 
     @Test
+    @DisplayName("getStr(): Строка с ошибкой")
     void toString_error() {
         object.success = false;
         object.error = "error";

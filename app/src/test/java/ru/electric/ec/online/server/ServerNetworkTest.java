@@ -4,6 +4,7 @@ import android.content.Context;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
@@ -27,6 +28,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+@DisplayName("server.ServerNetwork")
 class ServerNetworkTest {
 
     private ServerNetwork object;
@@ -47,11 +49,13 @@ class ServerNetworkTest {
     }
 
     @Test
+    @DisplayName("getApi(): Получение API сервера")
     void getApi() {
         assertNotNull(ServerNetwork.getApi());
     }
 
     @Test
+    @DisplayName("init(): Исключение NoSuchAlgorithmException при создании подключения к API")
     void init_NoSuchAlgorithmException() {
         Throwable thrown = assertThrows(RuntimeException.class, () -> {
             object = spy(ServerNetwork.getInstance());
@@ -62,6 +66,7 @@ class ServerNetworkTest {
     }
 
     @Test
+    @DisplayName("init(): Исключение KeyManagementException при создании подключения к API")
     void init_KeyManagementException() {
         Throwable thrown = assertThrows(RuntimeException.class, () -> {
             object = spy(ServerNetwork.getInstance());
@@ -72,14 +77,15 @@ class ServerNetworkTest {
     }
 
     @Test
+    @DisplayName("callback(): Успешное получение ответа с сервера")
     void callback_response_success() throws IOException {
         MockWebServer mockWebServer = new MockWebServer();
         MockResponse mockResponse = new MockResponse().setBody("Test");
         mockWebServer.enqueue(mockResponse);
-
         Response<ServerData> response = Response.success(new ServerData());
 
         Callback<ServerData> callback = ServerNetwork.callback(mockContext, null, 0);
+
         @SuppressWarnings("unchecked")
         Call<ServerData> call = (Call<ServerData>) mock(Call.class);
         callback.onResponse(call, response);
@@ -88,16 +94,17 @@ class ServerNetworkTest {
     }
 
     @Test
+    @DisplayName("callback(): Не успешное получение ответа с сервера")
     void callback_response_not_success() throws IOException {
         MockWebServer mockWebServer = new MockWebServer();
         MockResponse mockResponse = new MockResponse().setBody("Test");
         mockWebServer.enqueue(mockResponse);
-
         MediaType contentType = MediaType.parse("application/json; charset=utf-8");
         ResponseBody body = ResponseBody.create("Test", contentType);
         Response<ServerData> response = Response.error(500, body);
 
         Callback<ServerData> callback = ServerNetwork.callback(mockContext, null, 0);
+
         @SuppressWarnings("unchecked")
         Call<ServerData> call = (Call<ServerData>) mock(Call.class);
         callback.onResponse(call, response);
@@ -106,12 +113,14 @@ class ServerNetworkTest {
     }
 
     @Test
+    @DisplayName("callback(): Исключение при получении ответа с сервера")
     void callback_error() throws IOException {
         MockWebServer mockWebServer = new MockWebServer();
         MockResponse mockResponse = new MockResponse().setBody("Test");
         mockWebServer.enqueue(mockResponse);
 
         Callback<ServerData> callback = ServerNetwork.callback(mockContext, null, 0);
+
         @SuppressWarnings("unchecked")
         Call<ServerData> call = (Call<ServerData>) mock(Call.class);
         callback.onFailure(call, new Throwable("Test"));

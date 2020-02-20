@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@DisplayName("models.Invoice")
 class InvoiceTest {
 
     private Invoice object;
@@ -23,8 +24,8 @@ class InvoiceTest {
     }
 
     @Test
-    @DisplayName("Создание пустого объекта Invoice")
-    void init_empty() {
+    @DisplayName("new Invoice(): Создание пустого счета")
+    void newInvoice_empty() {
         assertEquals(123, object.number);
         assertEquals("01.01.2000", object.date);
         assertEquals(110.0, object.sum, 0.1);
@@ -41,8 +42,8 @@ class InvoiceTest {
     }
 
     @Test
-    @DisplayName("Создание объекта Invoice")
-    void init() {
+    @DisplayName("new Invoice(): Создание заполненного счета")
+    void newInvoice_ok() {
         assertEquals(123, object.number);
         assertEquals("01.01.2000", object.date);
         assertEquals(110.0, object.sum, 0.1);

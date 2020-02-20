@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@DisplayName("models.Request")
 class RequestTest {
 
     private Request object;
@@ -26,8 +27,8 @@ class RequestTest {
     }
 
     @Test
-    @DisplayName("Создание пустого объекта Request")
-    void init_empty() {
+    @DisplayName("new Request(): Создание пустой строки поиска")
+    void newRequest_empty() {
         assertEquals("old", object.product);
         assertEquals(3, object.requestCount);
         assertEquals(2, object.stockCount);
@@ -50,8 +51,8 @@ class RequestTest {
     }
 
     @Test
-    @DisplayName("Создание объекта Request")
-    void init() {
+    @DisplayName("new Request(): Создание заполненной строки поиска")
+    void newRequest_ok() {
         assertEquals("old", object.product);
         assertEquals(3, object.requestCount);
         assertEquals(2, object.stockCount);

@@ -55,7 +55,7 @@ public class App extends Application {
     private void init(){
         setAppContext(this);
         setModel(new Model());
-        setDb(LocalDatabase.getAppDatabase(getAppContext()));
+        setDb(LocalDatabase.getLocalDatabase(this));
         ServerNetwork.getInstance();
     }
 

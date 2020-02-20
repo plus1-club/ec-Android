@@ -9,6 +9,7 @@ import ru.electric.ec.online.R;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayName("models.Count")
 class CountTest {
 
     private Count object;
@@ -24,8 +25,8 @@ class CountTest {
     }
 
     @Test
-    @DisplayName("Создание объекта Count")
-    void init() {
+    @DisplayName("new Count(): Проверка заполнения статуса количества")
+    void newCount() {
         assertEquals(2, object.count);
         assertEquals(1, object.stockCount);
         assertEquals("old", object.status);

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@DisplayName("models.Detail")
 class DetailTest {
 
     private Detail object;
@@ -23,8 +24,8 @@ class DetailTest {
     }
 
     @Test
-    @DisplayName("Создание пустого объекта Detail")
-    void init_empty() {
+    @DisplayName("new Detail(): Создание пустой строки деталей счета")
+    void newDetail_empty() {
         assertEquals("test", object.product);
         assertEquals(2, object.count);
         assertEquals(2.0, object.price, 0.1);
@@ -43,8 +44,8 @@ class DetailTest {
     }
 
     @Test
-    @DisplayName("Создание объекта Detail")
-    void init() {
+    @DisplayName("new Detail(): Создание строки деталей счета c доставкой")
+    void newDetail_delivery() {
         assertEquals("test", object.product);
         assertEquals(2, object.count);
         assertEquals(2.0, object.price, 0.1);
@@ -63,8 +64,8 @@ class DetailTest {
     }
 
     @Test
-    @DisplayName("Создание объекта Detail с пустым delivery")
-    void init_delivery_null() {
+    @DisplayName("new Detail(): Создание строки деталей счета без доставки")
+    void newDetail_delivery_null() {
         assertEquals("test", object.product);
         assertEquals(2, object.count);
         assertEquals(2.0, object.price, 0.1);

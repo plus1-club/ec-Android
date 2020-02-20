@@ -2,11 +2,13 @@ package ru.electric.ec.online.models;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@DisplayName("models.Basket")
 class BasketTest {
 
     private Basket object;
@@ -22,7 +24,8 @@ class BasketTest {
     }
 
     @Test
-    void test() {
+    @DisplayName("new Basket(): Проверка заполнения элемента корзины")
+    void newBasket() {
         object.product = "new";
         object.requestCount = 4;
         object.stockCount = 3;

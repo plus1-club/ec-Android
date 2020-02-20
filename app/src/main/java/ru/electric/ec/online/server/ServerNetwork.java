@@ -50,9 +50,8 @@ public class ServerNetwork {
         init();
     }
 
-    public void init() {
+    void init() {
         try{
-            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             OkHttpClient okHttpClient = getUnsafeOkHttpClient();
 
             Gson gson = new GsonBuilder().setLenient().create();
