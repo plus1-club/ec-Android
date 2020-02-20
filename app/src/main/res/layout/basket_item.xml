@@ -4,7 +4,7 @@
 
     <data>
         <import type="android.view.View" />
-        <import type="ru.electric.ec.online.Service" />
+        <import type="ru.electric.ec.online.common.Service" />
         <variable
             name="viewModel"
             type="ru.electric.ec.online.ui.basket.BasketItemViewModel" />

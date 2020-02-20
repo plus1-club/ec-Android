@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.Objects;
 
 import retrofit2.Response;
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.Service;
+import ru.electric.ec.online.common.App;
+import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Detail;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.Request;
@@ -201,7 +201,12 @@ public class ServerRun {
     }
 
     boolean isSuccess(final Response<ServerData> response){
-        return (response.body() != null && response.body().success && response.body().error.isEmpty());
+        if (response.body() != null)
+        {
+            return response.body().success && response.body().error.isEmpty();
+        } else {
+            return false;
+        }
     }
 }
 

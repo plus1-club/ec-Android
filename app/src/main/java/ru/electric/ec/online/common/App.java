@@ -1,4 +1,4 @@
-package ru.electric.ec.online;
+package ru.electric.ec.online.common;
 
 import android.app.Application;
 import android.content.Context;

@@ -12,10 +12,8 @@ import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.models.User;
 
-@Database(
-        entities = {User.class, Request.class, Basket.class, Invoice.class, Detail.class},
-        version = 3,
-        exportSchema = false)
+@Database(version = 3, exportSchema = false,
+          entities = {User.class, Request.class, Basket.class, Invoice.class, Detail.class})
 public abstract class LocalDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
@@ -27,9 +25,11 @@ public abstract class LocalDatabase extends RoomDatabase {
     private static LocalDatabase mInstance;
 
     public static LocalDatabase getAppDatabase(Context context) {
-        if (mInstance == null && context.getApplicationContext() != null) {
+        if (mInstance == null) {
             mInstance = Room.databaseBuilder(context.getApplicationContext(),
                     LocalDatabase.class, "db").fallbackToDestructiveMigration().build();
+        } else {
+            return null;
         }
         return mInstance;
     }

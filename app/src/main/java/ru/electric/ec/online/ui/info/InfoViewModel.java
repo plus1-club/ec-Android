@@ -8,7 +8,7 @@ import androidx.databinding.ObservableField;
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.Service;
+import ru.electric.ec.online.common.Service;
 
 public class InfoViewModel {
 

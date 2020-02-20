@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="ru.electric.ec.online.Service" />
+        <import type="ru.electric.ec.online.common.Service" />
         <variable
             name="viewModel"
             type="ru.electric.ec.online.ui.request.RequestViewModel" />

@@ -18,7 +18,7 @@ import org.ajoberstar.grgit.Grgit
 
 ext {
     git = Grgit.open(currentDir: projectDir)
-    gitVersionName = git.describe(tags: true)
+    gitVersionName = git.describe(tags: true).split('-')[0]
     gitVersionCode = git.tag.list().size() + 108 // Автогенерация верии подключена в 108 сборке
 }
 

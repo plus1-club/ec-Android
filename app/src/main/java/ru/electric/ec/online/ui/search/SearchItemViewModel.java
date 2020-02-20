@@ -10,7 +10,7 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.Service;
+import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Count;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.server.ServerResponse;

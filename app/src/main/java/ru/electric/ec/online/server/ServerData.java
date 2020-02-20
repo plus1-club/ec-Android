@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.Service;
+import ru.electric.ec.online.common.Service;
 
 /**
  * Класс полученного ответа от сервера

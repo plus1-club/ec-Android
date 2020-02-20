@@ -1,4 +1,4 @@
-package ru.electric.ec.online;
+package ru.electric.ec.online.common;
 
 import ru.electric.ec.online.ui.invoice.InvoiceViewModel;
 import ru.electric.ec.online.ui.request.RequestViewModel;

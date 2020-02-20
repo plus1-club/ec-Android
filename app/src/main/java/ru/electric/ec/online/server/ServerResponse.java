@@ -5,7 +5,7 @@ import android.content.Context;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import ru.electric.ec.online.App;
+import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.data.DataService;
 import ru.electric.ec.online.models.Request;
 

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.Service;
+import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.InvoiceItemBinding;
 import ru.electric.ec.online.models.Invoice;
 

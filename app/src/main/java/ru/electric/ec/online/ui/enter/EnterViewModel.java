@@ -9,7 +9,7 @@ import androidx.databinding.ObservableField;
 
 import java.util.concurrent.Executors;
 
-import ru.electric.ec.online.App;
+import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.data.DataService;
 import ru.electric.ec.online.models.User;
 import ru.electric.ec.online.server.ServerResponse;

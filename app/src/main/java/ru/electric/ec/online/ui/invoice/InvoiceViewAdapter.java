@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import ru.electric.ec.online.App;
 import ru.electric.ec.online.R;
+import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.databinding.InvoiceItemBinding;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.ui.info.InfoViewModel;

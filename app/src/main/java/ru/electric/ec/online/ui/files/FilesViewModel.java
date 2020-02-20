@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import ru.electric.ec.online.Service;
+import ru.electric.ec.online.common.Service;
 
 /**
  * Менеджер файлов

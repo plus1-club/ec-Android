@@ -1,4 +1,4 @@
-package ru.electric.ec.online;
+package ru.electric.ec.online.common;
 
 import android.util.Log;
 
@@ -7,6 +7,7 @@ import androidx.databinding.ObservableDouble;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
+import ru.electric.ec.online.R;
 import ru.electric.ec.online.models.Count;
 
 /**

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.Service;
+import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.FilesBinding;
 import ru.electric.ec.online.ui.menu.MenuViewModel;
 

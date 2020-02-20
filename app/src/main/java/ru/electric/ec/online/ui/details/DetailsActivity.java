@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.Service;
+import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.DetailsBinding;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.server.ServerResponse;

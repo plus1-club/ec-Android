@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.Service;
+import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.server.ServerResponse;
 import ru.electric.ec.online.ui.basket.BasketActivity;
