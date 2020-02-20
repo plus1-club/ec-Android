@@ -47,7 +47,7 @@ class ServerResponseTest {
 
     @Test
     void getEnter() {
-        ServerResponse.getEnter(mockContext, "Login", "Password");
+        ServerResponse.getEnter(mockContext, "Login", "Password", false);
     }
 
     @Test
@@ -143,14 +143,14 @@ class ServerResponseTest {
     @Test
     void createUser_null() {
         App.setDb(null);
-        ServerResponse.createUser("1", "2");
+        ServerResponse.createUser("1", "2", false);
     }
 
     @Test
     void createUser_empty() {
         when(db.userDao()).thenReturn(mock(UserDao.class));
         App.setDb(db);
-        ServerResponse.createUser("1", "2");
+        ServerResponse.createUser("1", "2", false);
     }
 
     @Test
@@ -158,6 +158,6 @@ class ServerResponseTest {
         when(db.userDao()).thenReturn(mock(UserDao.class));
         when(db.userDao().readUser("1", "2")).thenReturn(mock(User.class));
         App.setDb(db);
-        ServerResponse.createUser("1", "2");
+        ServerResponse.createUser("1", "2", false);
     }
 }

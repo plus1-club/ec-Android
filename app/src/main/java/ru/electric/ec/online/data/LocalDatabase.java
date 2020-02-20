@@ -14,7 +14,7 @@ import ru.electric.ec.online.models.User;
 
 @Database(
         entities = {User.class, Request.class, Basket.class, Invoice.class, Detail.class},
-        version = 2,
+        version = 3,
         exportSchema = false)
 public abstract class LocalDatabase extends RoomDatabase {
 

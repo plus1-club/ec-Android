@@ -29,4 +29,8 @@ public class User {
     /** Дата получения данных с сервера */
     @ColumnInfo(name = "date")
     public long date;
+
+    /** Нужно ли сохранять этот логин/пароль */
+    @ColumnInfo(name = "save")
+    public boolean save;
 }

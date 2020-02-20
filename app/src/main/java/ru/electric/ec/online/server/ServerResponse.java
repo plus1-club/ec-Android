@@ -13,8 +13,8 @@ import ru.electric.ec.online.models.User;
 
 public class ServerResponse {
 
-    public static void getEnter(final Context context, String login, String password) {
-        Executors.newSingleThreadExecutor().execute(() -> createUser(login, password));
+    public static void getEnter(final Context context, String login, String password, boolean save) {
+        Executors.newSingleThreadExecutor().execute(() -> createUser(login, password, save));
         ServerNetwork.getApi().enter(login, password).enqueue(
             ServerNetwork.callback(context, ServerRun.getInstance()::getEnter, 0));
     }
@@ -109,7 +109,7 @@ public class ServerResponse {
             ServerNetwork.callback(context, ServerRun.getInstance()::getPrint, number));
     }
 
-    static void createUser(String login, String password){
+    public static void createUser(String login, String password, boolean save){
         if (App.getDb() != null){
             User user = App.getDb().userDao().readUser(login, password);
             if (user == null) {
@@ -117,9 +117,11 @@ public class ServerResponse {
                 user.login = login;
                 user.password = password;
                 user.date = DateConverter.fromDate(new Date());
+                user.save = save;
                 App.getDb().userDao().create(user);
             } else {
                 user.date = DateConverter.fromDate(new Date());
+                user.save = save;
                 App.getDb().userDao().update(user);
             }
         }

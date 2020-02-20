@@ -40,6 +40,16 @@
             android:text="@={viewModel.password}"
             tools:ignore="Autofill" />
 
+        <CheckBox
+            android:id="@+id/checkSave"
+            style="@style/AppTheme.ECOnline.Edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="@={viewModel.save}"
+            android:onClick="@{()->viewModel.onSave()}"
+            android:text="@string/text_save_login"
+            android:textColor="@color/dark" />
+
         <Button
             android:id="@+id/buttonEnter"
             style="@style/AppTheme.ECOnline.Button"

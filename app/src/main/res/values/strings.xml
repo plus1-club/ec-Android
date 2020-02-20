@@ -104,6 +104,7 @@
     <string name="x">X</string>
     <string name="image_logo">Логотип EC-Online</string>
     <string name="image_file_icon">Иконка файла</string>
+    <string name="text_save_login">Сохранить логин и пароль</string>
 
     <!-- Прочее -->
 
