@@ -7,7 +7,7 @@ android {
         applicationId "ru.electric.ec.online"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 105
+        versionCode 106
         versionName "0.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -63,6 +63,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.7.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.0'
+
+    // Работа с локальной базой данных (SQLite, Room)
+    implementation 'androidx.room:room-runtime:2.2.3'
+    annotationProcessor 'androidx.room:room-compiler:2.2.3'
+    testImplementation 'androidx.room:room-testing:2.2.3'
 
     // Unit-тесты (JUnit5, Mockito2, OkHttp3.MockWebServer)
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'

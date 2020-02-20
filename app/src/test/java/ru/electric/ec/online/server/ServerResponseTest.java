@@ -11,8 +11,13 @@ import java.io.IOException;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+import ru.electric.ec.online.App;
+import ru.electric.ec.online.data.LocalDatabase;
+import ru.electric.ec.online.data.UserDao;
+import ru.electric.ec.online.models.User;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class ServerResponseTest {
 
@@ -21,18 +26,23 @@ class ServerResponseTest {
     @Mock
     Context mockContext;
 
+    @Mock
+    LocalDatabase db;
+
     @BeforeEach
     void setUp() {
         mockWebServer = new MockWebServer();
         MockResponse mockResponse = new MockResponse().setBody("Test");
         mockWebServer.enqueue(mockResponse);
         mockContext = mock(Context.class);
+        db = mock(LocalDatabase.class);
     }
 
     @AfterEach
     void tearDown() throws IOException {
         mockWebServer.shutdown();
         mockContext = null;
+        db = null;
     }
 
     @Test
@@ -128,5 +138,26 @@ class ServerResponseTest {
     @Test
     void print() {
         ServerResponse.print(mockContext, 0);
+    }
+
+    @Test
+    void createUser_null() {
+        App.setDb(null);
+        ServerResponse.createUser("1", "2");
+    }
+
+    @Test
+    void createUser_empty() {
+        when(db.userDao()).thenReturn(mock(UserDao.class));
+        App.setDb(db);
+        ServerResponse.createUser("1", "2");
+    }
+
+    @Test
+    void createUser_mock() {
+        when(db.userDao()).thenReturn(mock(UserDao.class));
+        when(db.userDao().readUser("1", "2")).thenReturn(mock(User.class));
+        App.setDb(db);
+        ServerResponse.createUser("1", "2");
     }
 }

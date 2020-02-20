@@ -6,6 +6,10 @@ import android.net.Uri;
 
 import androidx.databinding.ObservableField;
 
+import java.util.concurrent.Executors;
+
+import ru.electric.ec.online.App;
+import ru.electric.ec.online.models.User;
 import ru.electric.ec.online.server.ServerResponse;
 
 public class EnterViewModel {
@@ -17,6 +21,14 @@ public class EnterViewModel {
     private EnterViewModel() {
         login = new ObservableField<>();
         password = new ObservableField<>();
+        Executors.newSingleThreadExecutor().execute(() -> {
+            User user = App.getDb().userDao().readLast();
+            if (user != null){
+                login.set(user.login);
+                password.set(user.password);
+                App.getModel().token = user.token;
+            }
+        });
     }
 
     // Получение единственного экземпляра класса

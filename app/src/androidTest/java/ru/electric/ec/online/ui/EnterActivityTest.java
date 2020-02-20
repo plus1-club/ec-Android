@@ -19,6 +19,7 @@ import ru.electric.ec.online.ui.enter.EnterActivity;
 import ru.electric.ec.online.ui.menu.MenuActivity;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -68,8 +69,10 @@ public class EnterActivityTest {
     @MediumTest
     @Test
     public void onLoginEnter() throws Exception {
+        onView(withId(R.id.editLogin)).perform(clearText());
         onView(withId(R.id.editLogin)).perform(typeText("1770"));
         Espresso.closeSoftKeyboard();
+        onView(withId(R.id.editPassword)).perform(clearText());
         onView(withId(R.id.editPassword)).perform(typeText("As12345"));
         Espresso.closeSoftKeyboard();
         onView(withId(R.id.buttonEnter)).perform(click());

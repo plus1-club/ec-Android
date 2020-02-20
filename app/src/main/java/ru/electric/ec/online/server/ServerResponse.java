@@ -2,14 +2,19 @@ package ru.electric.ec.online.server;
 
 import android.content.Context;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import ru.electric.ec.online.App;
+import ru.electric.ec.online.data.DateConverter;
 import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.models.User;
 
 public class ServerResponse {
 
     public static void getEnter(final Context context, String login, String password) {
+        Executors.newSingleThreadExecutor().execute(() -> createUser(login, password));
         ServerNetwork.getApi().enter(login, password).enqueue(
             ServerNetwork.callback(context, ServerRun.getInstance()::getEnter, 0));
     }
@@ -102,5 +107,21 @@ public class ServerResponse {
     public static void print(final Context context, final int number) {
         ServerNetwork.getApi().print(App.getModel().token, number).enqueue(
             ServerNetwork.callback(context, ServerRun.getInstance()::getPrint, number));
+    }
+
+    static void createUser(String login, String password){
+        if (App.getDb() != null){
+            User user = App.getDb().userDao().readUser(login, password);
+            if (user == null) {
+                user = new User();
+                user.login = login;
+                user.password = password;
+                user.date = DateConverter.fromDate(new Date());
+                App.getDb().userDao().create(user);
+            } else {
+                user.date = DateConverter.fromDate(new Date());
+                App.getDb().userDao().update(user);
+            }
+        }
     }
 }

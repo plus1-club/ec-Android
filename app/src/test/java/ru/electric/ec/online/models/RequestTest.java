@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RequestTest {
@@ -22,6 +23,30 @@ class RequestTest {
     @AfterEach
     void tearDown() {
         object = null;
+    }
+
+    @Test
+    @DisplayName("Создание пустого объекта Request")
+    void init_empty() {
+        assertEquals("old", object.product);
+        assertEquals(3, object.requestCount);
+        assertEquals(2, object.stockCount);
+        assertEquals(0.0, object.price, 0.1);
+        assertEquals(0.0, object.sum, 0.1);
+        assertEquals(1, object.multiplicity);
+        assertEquals("шт", object.unit);
+        assertFalse(object.check);
+
+        object = new Request();
+
+        assertNull(object.product);
+        assertEquals(0, object.requestCount);
+        assertEquals(0, object.stockCount);
+        assertEquals(0.0, object.price, 0.1);
+        assertEquals(0.0, object.sum, 0.1);
+        assertEquals(0, object.multiplicity);
+        assertNull(object.unit);
+        assertFalse(object.check);
     }
 
     @Test

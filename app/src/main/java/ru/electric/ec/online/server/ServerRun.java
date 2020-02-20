@@ -16,7 +16,6 @@ import ru.electric.ec.online.Service;
 import ru.electric.ec.online.models.Detail;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.Request;
-import ru.electric.ec.online.models.ServerData;
 import ru.electric.ec.online.ui.bill.BillActivity;
 import ru.electric.ec.online.ui.details.DetailsViewAdapter;
 import ru.electric.ec.online.ui.enter.EnterActivity;

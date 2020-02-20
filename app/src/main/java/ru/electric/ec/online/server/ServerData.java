@@ -1,4 +1,4 @@
-package ru.electric.ec.online.models;
+package ru.electric.ec.online.server;
 
 import androidx.annotation.NonNull;
 
@@ -18,7 +18,7 @@ public class ServerData {
     /** Запрос на сервер прошёл успешно */
     @SerializedName("success")
     @Expose
-    public boolean success;
+    boolean success;
 
     /** Данные, возвращённые сервером */
     @SerializedName("data")
@@ -28,12 +28,12 @@ public class ServerData {
     /** Код ошибки */
     @SerializedName("error")
     @Expose
-    public String error;
+    String error;
 
     /** Текст сообщения ошибки */
     @SerializedName("message")
     @Expose
-    public String message;
+    String message;
 
     /**
      * Вывод ответа сервера для польозователя или отладки

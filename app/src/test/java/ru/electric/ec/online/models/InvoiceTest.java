@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class InvoiceTest {
 
@@ -19,6 +20,24 @@ class InvoiceTest {
     @AfterEach
     void tearDown() {
         object = null;
+    }
+
+    @Test
+    @DisplayName("Создание пустого объекта Invoice")
+    void init_empty() {
+        assertEquals(123, object.number);
+        assertEquals("01.01.2000", object.date);
+        assertEquals(110.0, object.sum, 0.1);
+        assertEquals("old", object.status);
+        assertEquals(0, object.waybill);
+
+        object = new Invoice();
+
+        assertEquals(0, object.number);
+        assertNull(object.date);
+        assertEquals(0.0, object.sum, 0.1);
+        assertNull(object.status);
+        assertEquals(0, object.waybill);
     }
 
     @Test

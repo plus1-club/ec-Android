@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class DetailTest {
 
@@ -19,6 +20,26 @@ class DetailTest {
     @AfterEach
     void tearDown() {
         object = null;
+    }
+
+    @Test
+    @DisplayName("Создание пустого объекта Detail")
+    void init_empty() {
+        assertEquals("test", object.product);
+        assertEquals(2, object.count);
+        assertEquals(2.0, object.price, 0.1);
+        assertEquals(4.0, object.sum, 0.1);
+        assertEquals("old", object.available);
+        assertEquals("old2", object.delivery);
+
+        object = new Detail();
+
+        assertNull(object.product);
+        assertEquals(0, object.count);
+        assertEquals(0.0, object.price, 0.1);
+        assertEquals(0.0, object.sum, 0.1);
+        assertNull(object.available);
+        assertNull(object.delivery);
     }
 
     @Test

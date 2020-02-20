@@ -1,4 +1,4 @@
-package ru.electric.ec.online.models;
+package ru.electric.ec.online.server;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

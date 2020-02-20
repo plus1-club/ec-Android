@@ -28,8 +28,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.Service;
-import ru.electric.ec.online.models.ServerApi;
-import ru.electric.ec.online.models.ServerData;
 import ru.electric.ec.online.ui.info.InfoViewModel;
 
 public class ServerNetwork {

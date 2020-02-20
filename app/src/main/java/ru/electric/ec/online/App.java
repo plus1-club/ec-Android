@@ -3,12 +3,14 @@ package ru.electric.ec.online;
 import android.app.Application;
 import android.content.Context;
 
+import ru.electric.ec.online.data.LocalDatabase;
 import ru.electric.ec.online.server.ServerNetwork;
 
 public class App extends Application {
 
     private static Context appContext;
     private static Model model;
+    private static LocalDatabase db;
 
     public static Context getAppContext() {
         return appContext;
@@ -29,6 +31,15 @@ public class App extends Application {
         App.model = model;
     }
 
+    public static LocalDatabase getDb() {
+        return db;
+    }
+
+    public static void setDb(LocalDatabase db) {
+        App.db = db;
+    }
+
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -44,11 +55,14 @@ public class App extends Application {
     private void init(){
         setAppContext(this);
         setModel(new Model());
+        setDb(LocalDatabase.getAppDatabase(getAppContext()));
         ServerNetwork.getInstance();
     }
 
     private void terminate(){
         setAppContext(null);
         setModel(null);
+        LocalDatabase.destroyInstance();
+        setDb(null);
     }
 }
