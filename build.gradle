@@ -7,10 +7,24 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'org.ajoberstar.grgit:grgit-gradle:3.1.1'
         
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+}
+
+import org.ajoberstar.grgit.Grgit
+
+ext {
+    git = Grgit.open(currentDir: projectDir)
+    gitVersionName = git.describe(tags: true)
+    gitVersionCode = git.tag.list().size() + 108 // Автогенерация верии подключена в 108 сборке
+}
+
+task printVersion() {
+    println("Version Name: $gitVersionName")
+    println("Version Code: $gitVersionCode")
 }
 
 allprojects {
