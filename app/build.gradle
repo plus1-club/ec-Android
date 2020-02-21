@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+// Основные настройки приложения
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -39,12 +40,16 @@ android {
             includeAndroidResources = true
             returnDefaultValues = true
         }
+        unitTests.all {
+            useJUnitPlatform()
+        }
     }
     useLibrary 'android.test.runner'
     useLibrary 'android.test.base'
     useLibrary 'android.test.mock'
 }
 
+// Зависимости
 dependencies {
     // Система
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -94,7 +99,7 @@ dependencies {
     androidTestImplementation 'com.google.truth:truth:0.42'
 }
 
-
+// Формирование JavaDoc
 task javadoc(type: Javadoc) {
     options.encoding = 'UTF-8'
     options.memberLevel = JavadocMemberLevel.PACKAGE
@@ -113,18 +118,35 @@ afterEvaluate {
     })
 }
 
+// Формирование и показ JavaDoc
+gradle.taskGraph.afterTask { Task task, TaskState state ->
+    if (task.name == "javadoc") {
+        def file = project.file('../javadoc/index.html')
+        browse file
+    }
+}
+
+// Формирование и показ отчета по unit-тестам
+gradle.taskGraph.afterTask { Task task, TaskState state ->
+    if (task.name == "testDebugUnitTest") {
+        def file = project.file('build/reports/tests/testDebugUnitTest/index.html')
+        browse file
+    }
+}
+
+// Формирование и показ отчета по ui-тестам
+gradle.taskGraph.afterTask { Task task, TaskState state ->
+    if (task.name == "connectedDebugAndroidTest") {
+        def file = project.file('build/reports/androidTests/connected/index.html')
+        browse file
+    }
+}
+
 def browse(path) {
     def os = org.gradle.internal.os.OperatingSystem.current()
     if (os.isWindows()) {
         exec { commandLine 'cmd', '/c', "start $path" }
     } else if (os.isMacOsX()) {
         exec { commandLine 'open', "$path" }
-    }
-}
-
-gradle.taskGraph.afterTask { Task task, TaskState state ->
-    if (task.name == "connectedDebugAndroidTest") {
-        def file = project.file('build/reports/androidTests/connected/index.html')
-        browse file
     }
 }

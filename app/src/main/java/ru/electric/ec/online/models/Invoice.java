@@ -57,7 +57,7 @@ public class Invoice {
      * @param number номер счета
      * @param date дата счета
      * @param sum итоговая сумма счета
-     * @param status статус счета (См. {@see Invoice#status})
+     * @param status статус счета (См. {@link Invoice#status})
      */
     @Ignore
     public Invoice(int number, String date, double sum, String status) {
@@ -68,7 +68,7 @@ public class Invoice {
      * Создание нового счета (только для счетов со статусом "отгрузка")
      * @param number номер счета
      * @param date дата счета
-     * @param status статус счета (См. {@see Invoice#status})
+     * @param status статус счета (См. {@link Invoice#status})
      * @param waybill номер накладной
      */
     @Ignore

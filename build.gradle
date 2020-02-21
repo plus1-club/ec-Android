@@ -1,5 +1,6 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+import org.ajoberstar.grgit.Grgit
 
+// Основные настройки проекта
 buildscript {
     repositories {
         google()
@@ -14,19 +15,6 @@ buildscript {
     }
 }
 
-import org.ajoberstar.grgit.Grgit
-
-ext {
-    git = Grgit.open(currentDir: projectDir)
-    gitVersionName = git.describe(tags: true).split('-')[0]
-    gitVersionCode = git.tag.list().size() + 108 // Автогенерация верии подключена в 108 сборке
-}
-
-task printVersion() {
-    println("Version Name: $gitVersionName")
-    println("Version Code: $gitVersionCode")
-}
-
 allprojects {
     repositories {
         google()
@@ -34,6 +22,19 @@ allprojects {
     }
 }
 
+// Очистка папки сборки
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+// Формирование версии сборки на основе Git
+ext {
+    git = Grgit.open(currentDir: projectDir)
+    gitVersionName = git.describe(tags: true).split('-')[0]
+    gitVersionCode = git.log().size()
+}
+
+// Вывод текущей версии проекта
+task printVersion() {
+    println("Version: $gitVersionName.$gitVersionCode")
 }
