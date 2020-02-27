@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
@@ -14,7 +15,6 @@ import androidx.databinding.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.Service;
@@ -122,11 +122,11 @@ public class RequestViewModel {
             total.set(0);
             comment.set("");
 
-            Executors.newSingleThreadExecutor().execute(() ->  {
+            new Handler().postDelayed(() -> {
                 Intent intent = new Intent(context, BasketActivity.class);
                 intent.putExtra("title", context.getString(R.string.text_basket));
                 context.startActivity(intent);
-            });
+            }, 3000);
         } else {
             Intent intent = new Intent(context, InfoActivity.class);
             intent.putExtra("title", title.get());
@@ -153,13 +153,13 @@ public class RequestViewModel {
     public void onIssue(final Context context){
         ServerResponse.order(context, comment.get());
 
-        Executors.newSingleThreadExecutor().execute(() ->  {
+        new Handler().postDelayed(() -> {
             basket.clear();
             ServerResponse.deleteBasket(context);
             ServerResponse.getBasket(context);
             ((BasketActivity)context).refreshBasket();
             total.set(0);
             comment.set("");
-        });
+        }, 3000);
     }
 }

@@ -3,6 +3,7 @@ package ru.electric.ec.online.ui.search;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -11,7 +12,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.Objects;
-import java.util.concurrent.Executors;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.SearchBinding;
@@ -86,7 +86,7 @@ public class SearchActivity extends AppCompatActivity {
 
     public void refreshSearch(){
         binding.swiperefresh.setRefreshing(true);
-        Executors.newSingleThreadExecutor().execute(() ->  {
+        new Handler().postDelayed(() -> {
             adapter = new SearchViewAdapter();
             if (viewModel.search.size() > 0){
                 adapter.setItems(viewModel.search);
@@ -100,6 +100,6 @@ public class SearchActivity extends AppCompatActivity {
                 intent.putExtra("activityName", "RequestActivity");
                 this.startActivity(intent);
             }
-        });
+        }, 3000);
     }
 }

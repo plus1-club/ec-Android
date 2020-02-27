@@ -2,6 +2,7 @@ package ru.electric.ec.online.ui.details;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -10,7 +11,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.Objects;
-import java.util.concurrent.Executors;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.Service;
@@ -134,11 +134,11 @@ public class DetailsActivity extends AppCompatActivity {
         final Invoice thisInvoice = invoice;
 
         updateItem(viewModel.status.get());
-        Executors.newSingleThreadExecutor().execute(() ->  {
+        new Handler().postDelayed(() -> {
             adapter = new DetailsViewAdapter();
             adapter.setItems(thisInvoice.details);
             binding.list.setAdapter(adapter);
             binding.swiperefresh.setRefreshing(false);
-        });
+        }, 3000);
     }
 }

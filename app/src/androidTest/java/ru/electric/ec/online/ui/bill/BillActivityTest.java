@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import androidx.test.espresso.intent.Intents;
-import androidx.test.filters.SmallTest;
+import androidx.test.filters.MediumTest;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
@@ -60,7 +60,7 @@ public class BillActivityTest {
     public void tearDown() {
     }
 
-    @SmallTest
+    @MediumTest
     @Test
     public void openBillActivity() {
         onView(withId(R.id.buttonShare)).check(matches(isDisplayed()));

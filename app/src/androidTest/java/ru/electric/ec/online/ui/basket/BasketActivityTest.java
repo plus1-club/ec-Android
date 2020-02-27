@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import androidx.test.espresso.intent.Intents;
-import androidx.test.filters.SmallTest;
+import androidx.test.filters.MediumTest;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
@@ -61,7 +61,7 @@ public class BasketActivityTest {
     public void tearDown() {
     }
 
-    @SmallTest
+    @MediumTest
     @Test
     public void openBasketActivity() {
         onView(withId(R.id.text_total)).check(matches(isDisplayed()));
