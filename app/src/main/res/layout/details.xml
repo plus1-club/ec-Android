@@ -52,7 +52,7 @@
                             tools:ignore="UseCompoundDrawables">
 
                             <TextView
-                                android:id="@+id/textProduct"
+                                android:id="@+id/textNumberDate"
                                 style="@style/AppTheme.ECOnline.Text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

@@ -18,14 +18,14 @@ import java.io.File;
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.databinding.PdfBinding;
+import ru.electric.ec.online.databinding.BillBinding;
 import ru.electric.ec.online.ui.menu.MenuViewModel;
 
 public class BillActivity extends AppCompatActivity {
 
     BillViewModel viewModel;
     MenuViewModel navigationModel;
-    PdfBinding binding;
+    BillBinding binding;
     Bitmap bitmap;
     File localFile;
     private static final int REQUEST = 112;
@@ -43,7 +43,7 @@ public class BillActivity extends AppCompatActivity {
         viewModel.number.set(bundle.getInt("number"));
         this.setTitle(viewModel.title.get());
 
-        binding = DataBindingUtil.setContentView(this, R.layout.pdf);
+        binding = DataBindingUtil.setContentView(this, R.layout.bill);
         binding.setViewModel(viewModel);
 
         binding.progressBar.setVisibility(View.VISIBLE);

@@ -1,9 +1,8 @@
-package ru.electric.ec.online.ui;
+package ru.electric.ec.online.ui.enter;
 
 import android.app.Activity;
 import android.app.Instrumentation;
 
-import androidx.test.espresso.Espresso;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.filters.MediumTest;
 import androidx.test.filters.SmallTest;
@@ -15,12 +14,13 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.ui.enter.EnterActivity;
+import ru.electric.ec.online.ui.info.InfoActivity;
 import ru.electric.ec.online.ui.menu.MenuActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
@@ -51,9 +51,8 @@ public class EnterActivityTest {
 
     @Before
     public void setUp() {
-        intending(not(isInternal()))
-                .respondWith(new Instrumentation
-                        .ActivityResult(Activity.RESULT_OK, null));
+        intending(not(isInternal())).respondWith(new Instrumentation
+                .ActivityResult(Activity.RESULT_OK, null));
     }
 
     @After
@@ -62,21 +61,39 @@ public class EnterActivityTest {
 
     @SmallTest
     @Test
-    public void checkEditLoginIsDisplayed() {
+    public void openEnterActivity() {
         onView(withId(R.id.editLogin)).check(matches(isDisplayed()));
     }
 
     @MediumTest
     @Test
-    public void onLoginEnter() throws Exception {
-        onView(withId(R.id.editLogin)).perform(clearText());
-        onView(withId(R.id.editLogin)).perform(typeText("1770"));
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.editPassword)).perform(clearText());
-        onView(withId(R.id.editPassword)).perform(typeText("As12345"));
-        Espresso.closeSoftKeyboard();
+    public void fillEditsAndPushEnterButtonSuccess() throws Exception {
+        onView(withId(R.id.editLogin)).perform(
+                clearText(),
+                typeText("1770"),
+                closeSoftKeyboard());
+        onView(withId(R.id.editPassword)).perform(
+                clearText(),
+                typeText("As12345"),
+                closeSoftKeyboard());
         onView(withId(R.id.buttonEnter)).perform(click());
-        sleep(3000);
+        sleep(1000);
         intended(hasComponent(MenuActivity.class.getName()));
+    }
+
+    @MediumTest
+    @Test
+    public void fillEditsAndPushEnterButtonError() throws Exception {
+        onView(withId(R.id.editLogin)).perform(
+                clearText(),
+                typeText("1770"),
+                closeSoftKeyboard());
+        onView(withId(R.id.editPassword)).perform(
+                clearText(),
+                typeText(""),
+                closeSoftKeyboard());
+        onView(withId(R.id.buttonEnter)).perform(click());
+        sleep(1000);
+        intended(hasComponent(InfoActivity.class.getName()));
     }
 }

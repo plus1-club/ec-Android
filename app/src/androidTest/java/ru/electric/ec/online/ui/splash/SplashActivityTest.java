@@ -1,4 +1,4 @@
-package ru.electric.ec.online.ui;
+package ru.electric.ec.online.ui.splash;
 
 import androidx.test.filters.SmallTest;
 import androidx.test.rule.ActivityTestRule;
@@ -9,7 +9,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.ui.splash.SplashActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -31,7 +30,7 @@ public class SplashActivityTest {
 
     @SmallTest
     @Test
-    public void checkTextProductIsDisplayed() {
+    public void openSplashActivity() {
         onView(withId(R.id.textProduct)).check(matches(isDisplayed()));
     }
 }

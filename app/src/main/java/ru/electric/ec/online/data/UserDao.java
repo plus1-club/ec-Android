@@ -19,6 +19,9 @@ public interface UserDao {
     @Query("SELECT * FROM user")
     List<User> readAll();
 
+    @Query("SELECT * FROM user WHERE login = :login ORDER BY date LIMIT 1")
+    User readUser(String login);
+
     @Query("SELECT * FROM user WHERE login = :login AND password = :password ORDER BY date LIMIT 1")
     User readUser(String login, String password);
 
