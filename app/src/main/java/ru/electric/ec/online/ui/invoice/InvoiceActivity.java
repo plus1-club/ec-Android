@@ -2,7 +2,6 @@ package ru.electric.ec.online.ui.invoice;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.Executors;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.InvoiceBinding;
@@ -104,11 +104,11 @@ public class InvoiceActivity extends AppCompatActivity {
 
     public void refresh(){
         updateList();
-        new Handler().postDelayed(() -> {
+        Executors.newSingleThreadExecutor().execute(() -> {
             adapter = new InvoiceViewAdapter();
             adapter.setItems(viewModel.invoices);
             binding.list.setAdapter(adapter);
             binding.swiperefresh.setRefreshing(false);
-        }, 3000);
+        });
     }
 }

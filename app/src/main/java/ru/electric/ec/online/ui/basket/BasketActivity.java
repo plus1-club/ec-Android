@@ -2,7 +2,6 @@ package ru.electric.ec.online.ui.basket;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.Objects;
+import java.util.concurrent.Executors;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.BasketBinding;
@@ -94,7 +94,7 @@ public class BasketActivity extends AppCompatActivity {
     }
 
     public void refreshBasket(){
-        new Handler().postDelayed(() -> {
+        Executors.newSingleThreadExecutor().execute(() -> {
             adapter = new BasketViewAdapter();
             adapter.setItems(viewModel.basket);
             binding.list.setAdapter(adapter);
@@ -106,6 +106,6 @@ public class BasketActivity extends AppCompatActivity {
                 }
             }
             binding.swiperefresh.setRefreshing(false);
-        }, 3000);
+        });
     }
 }
