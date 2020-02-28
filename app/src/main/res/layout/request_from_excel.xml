@@ -27,16 +27,23 @@
             android:orientation="horizontal"
             android:padding="0dp">
 
-            <EditText
-                android:id="@+id/editFile"
+            <TextView
+                android:id="@+id/excelPath"
                 style="@style/AppTheme.ECOnline.Edit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|end"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
-                android:inputType="textPersonName"
+                android:ellipsize="start"
+                android:gravity="center_vertical|end"
                 android:labelFor="@id/buttonSelect"
-                tools:ignore="Autofill,LabelFor" />
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:singleLine="true"
+                android:text="@{viewModel.excel == null ? `Файл не выбран` : viewModel.excel}"
+                android:textAlignment="textEnd"
+                tools:ignore="RtlCompat" />
 
             <Button
                 android:id="@+id/buttonSelect"
