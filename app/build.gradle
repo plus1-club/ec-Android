@@ -71,8 +71,8 @@ dependencies {
 
     // Работа с локальной базой данных (SQLite, Room)
     implementation 'androidx.room:room-runtime:2.2.4'
-    annotationProcessor 'androidx.room:room-compiler:2.2.4'
     testImplementation 'androidx.room:room-testing:2.2.4'
+    annotationProcessor 'androidx.room:room-compiler:2.2.4'
 
     // Unit-тесты (JUnit5, Mockito2, OkHttp3.MockWebServer)
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'

@@ -21,7 +21,6 @@ import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.server.ServerResponse;
 import ru.electric.ec.online.ui.basket.BasketActivity;
-import ru.electric.ec.online.ui.files.FilesActivity;
 import ru.electric.ec.online.ui.info.InfoActivity;
 import ru.electric.ec.online.ui.info.InfoViewModel;
 import ru.electric.ec.online.ui.search.SearchActivity;
@@ -75,9 +74,15 @@ public class RequestViewModel {
     }
 
     public void onBrowse(Context context) {
-        Intent intent = new Intent(context, FilesActivity.class);
-        intent.putExtra("title", "Выбор файла");
-        context.startActivity(intent);
+        String[] mimeTypes =
+                {"application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xls & .xlsx
+                 "application/pdf"};
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        ((RequestActivity) context).startActivityForResult(Intent.createChooser(intent,"ChooseFile"), 0);
     }
 
     public void onNext(Context context){
