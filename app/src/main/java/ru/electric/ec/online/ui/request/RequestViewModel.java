@@ -35,6 +35,7 @@ public class RequestViewModel {
     public ObservableDouble total;
     public ObservableField<String> comment;
     public ObservableInt orderNumber;
+    public ObservableField<String> excel;
 
     private ObservableField<String> title;
     public ObservableList<Request> search;
@@ -56,6 +57,8 @@ public class RequestViewModel {
         total = new ObservableDouble();
         comment = new ObservableField<>();
         orderNumber = new ObservableInt();
+        excel = new ObservableField<>();
+
         isFullSearch.set(true);
 
         title = new ObservableField<>();
@@ -74,15 +77,16 @@ public class RequestViewModel {
     }
 
     public void onBrowse(Context context) {
-        String[] mimeTypes =
-                {"application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xls & .xlsx
-                 "application/pdf"};
+        String[] mimeTypes = {
+                "application/vnd.ms-excel",                                         // .xls
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",// .xlsx
+                "application/vnd.oasis.opendocument.spreadsheet"};                  // .ods
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");
         intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-        ((RequestActivity) context).startActivityForResult(Intent.createChooser(intent,"ChooseFile"), 0);
+        ((RequestActivity) context).startActivityForResult(Intent.createChooser(intent,"ChooseFile"), 1);
     }
 
     public void onNext(Context context){

@@ -25,17 +25,7 @@ public class EnterViewModel {
         login = new ObservableField<>();
         password = new ObservableField<>();
         save = new ObservableBoolean();
-        Executors.newSingleThreadExecutor().execute(() -> {
-            User user = App.getDb().userDao().readLast();
-            if (user != null ){
-                save.set(user.save);
-                if (user.save){
-                    login.set(user.login);
-                    password.set(user.password);
-                    App.getModel().token = user.token;
-                }
-            }
-        });
+        Executors.newSingleThreadExecutor().execute(this::saveAndRestore);
     }
 
     // Получение единственного экземпляра класса
@@ -44,6 +34,18 @@ public class EnterViewModel {
             mInstance = new EnterViewModel();
         }
         return mInstance;
+    }
+
+    private void saveAndRestore(){
+        User user = App.getDb().userDao().readLast();
+        if (user != null ){
+            save.set(user.save);
+            if (user.save){
+                login.set(user.login);
+                password.set(user.password);
+                App.getModel().token = user.token;
+            }
+        }
     }
 
     public void onEnter(Context context) {

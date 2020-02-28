@@ -3,7 +3,6 @@ package ru.electric.ec.online.ui.request;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -62,12 +61,10 @@ public class RequestActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 0) {
+        if (requestCode != 0) {
             if (resultCode == Activity.RESULT_OK) {
-                String result = data.getStringExtra("result");
-                Intent openIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(result));
-                openIntent.setDataAndType(Uri.parse("file:///" + result), "application/pdf");
-                this.startActivity(openIntent);
+                String path = Objects.requireNonNull(data.getData()).getPath();
+                viewModel.excel.set(path);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 return;
