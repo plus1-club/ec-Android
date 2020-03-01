@@ -34,13 +34,13 @@ public class InfoViewModel {
     public void onClose(Context context){
         try {
             String className = Objects.requireNonNull(activityName.get());
-            String classGroup = className.split("(?=[A-Z])")[0].toLowerCase();
+            String classGroup = className.split("(?=[A-Z])")[1].toLowerCase();
             Class nextClass = Class.forName("ru.electric.ec.online.ui." + classGroup + "." + className);
             Intent intent = new Intent(context, nextClass);
             intent.putExtra("title", title.get());
             context.startActivity(intent);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            log(context, true, true, "Не найден нужный экран");
         }
     }
 

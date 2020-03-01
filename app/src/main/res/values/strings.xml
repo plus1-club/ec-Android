@@ -6,6 +6,7 @@
     <!-- Экран "1.Вход" -->
     <string name="edit_login">Логин</string>
     <string name="edit_password">Пароль</string>
+    <string name="text_save_login">Сохранить логин и пароль</string>
     <string name="button_enter">Войти</string>
     <string name="text_ender">Логин и временный пароль вы можете получить,
         позвонив по телефону:%1$s</string>
@@ -28,6 +29,7 @@
     <string name="text_item_shipped">Отгрузка</string>
     <string name="text_item_invoice">Детали счета</string>
     <string name="text_exit">Выход</string>
+    <string name="image_logo">Логотип EC-Online</string>
     <string name="text_drawer_open">Открыть меню</string>
     <string name="text_drawer_close">Скрыть меню</string>
 
@@ -48,6 +50,7 @@
     <string name="link_file_example">Пример файла</string>
 
     <!-- Экран "5.Таблица заявок" -->
+    <string name="x">X</string>
     <string name="text_comment">Комментарий к заказу</string>
     <string name="button_to_busket">В корзину</string>
     <string name="button_recount">Пересчитать</string>
@@ -78,6 +81,7 @@
     <string name="text_waybill">Накладная № %1$d</string>
     <string name="button_detail">Подробнее</string>
     <string name="button_invoice">Счет</string>
+    <string name="text_share">Поделиться</string>
 
     <!-- Статусы счетов -->
     <string name="status_unconfirmed">Неподтвержденный резерв</string>
@@ -94,17 +98,12 @@
     <string name="text_server_data_error">Ошибка %1$s\nСообщение: %2$s</string>
     <string name="text_response_error">Ошибка %1$s:\n%2$s</string>
     <string name="text_response_failure">Ошибка:\n%1$s</string>
+    <string name="button_back">Вернуться назад</string>
 
     <!-- В разработке -->
     <string name="text_in_develop_choose_file">Выбор файла - в разработке</string>
     <string name="text_in_develop_download_remains">Скачивание остатков - в разработке</string>
     <string name="test_in_develop_download_invoice">Скачивание счета - в разработке</string>
-    <string name="pdf">pdf</string>
-    <string name="text_share">Поделиться</string>
-    <string name="x">X</string>
-    <string name="image_logo">Логотип EC-Online</string>
-    <string name="image_file_icon">Иконка файла</string>
-    <string name="text_save_login">Сохранить логин и пароль</string>
 
     <!-- Прочее -->
 

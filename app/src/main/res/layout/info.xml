@@ -49,6 +49,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{viewModel.info}" />
+
+                        <Button
+                            android:id="@+id/buttonBack"
+                            style="@style/AppTheme.ECOnline.Button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->viewModel.onClose(context)}"
+                            android:text="@string/button_back" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
