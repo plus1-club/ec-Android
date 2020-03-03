@@ -21,11 +21,12 @@ import java.util.List;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.Service;
+import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.router.RouterView;
 import ru.electric.ec.online.server.ServerResponse;
 import ru.electric.ec.online.ui.basket.BasketActivity;
 import ru.electric.ec.online.ui.info.InfoActivity;
-import ru.electric.ec.online.ui.info.InfoViewModel;
 import ru.electric.ec.online.ui.search.SearchActivity;
 
 public class RequestViewModel {
@@ -113,8 +114,8 @@ public class RequestViewModel {
 
     // TODO: Подключаться к серверу и скачивать остатки
     public void linkStock(Context context){
-        InfoViewModel.log(context, false, true,
-                Service.getStr(R.string.text_in_develop_download_remains));
+        RouterView.openInfo(context, new Info(false, true,
+                Service.getStr(R.string.text_in_develop_download_remains)));
         Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("https://www.ec-electric.ru/order/example.xls"));
         context.startActivity(intent);

@@ -30,8 +30,11 @@ public class RouterView {
         Intent intent = new Intent(context, InfoActivity.class);
         intent.putExtra("title", info.title);
         intent.putExtra("info", info.message);
-        intent.putExtra("activityName", info.activityName);
+        if (info.activityName.isEmpty()){
+            intent.putExtra("activityName", context.getClass().getSimpleName());
+        } else {
+            intent.putExtra("info", info.activityName);
+        }
         context.startActivity(intent);
     }
-
 }

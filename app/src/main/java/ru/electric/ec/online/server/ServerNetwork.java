@@ -28,7 +28,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.Service;
-import ru.electric.ec.online.ui.info.InfoViewModel;
+import ru.electric.ec.online.models.Info;
+import ru.electric.ec.online.router.RouterView;
 
 public class ServerNetwork {
 
@@ -131,14 +132,14 @@ public class ServerNetwork {
                 if (response.isSuccessful()) {
                     handler.post(() -> func.run(context, response, number));
                 } else {
-                    InfoViewModel.log(context, false, true,
-                            Service.getStr(R.string.text_response_error, response.code(), response.message()));
+                    RouterView.openInfo(context, new Info(false, true,
+                            Service.getStr(R.string.text_response_error, response.code(), response.message())));
                 }
             }
             @Override
             public void onFailure(@NonNull Call<ServerData> call, @NonNull Throwable t) {
-                InfoViewModel.log(context, true, true,
-                        Service.getStr(R.string.text_response_failure, t));
+                RouterView.openInfo(context, new Info(true, true,
+                        Service.getStr(R.string.text_response_failure, t)));
             }
         };
     }

@@ -62,6 +62,18 @@ public class Info {
     }
 
     /**
+     * Создание нового сообщения по переданным параметрам
+     * @param isError это сообщение об ошибке
+     * @param show показывать сообщение пользователю
+     * @param message текст сообщения
+     */
+    @Ignore
+    public Info(boolean isError, boolean show, String message) {
+        init(isError, show, message, activityName);
+    }
+
+
+    /**
      * Создание сообщения
      * @param isError это сообщение об ошибке
      * @param show показывать сообщение пользователю

@@ -6,8 +6,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 
+import ru.electric.ec.online.models.Info;
+import ru.electric.ec.online.router.RouterView;
 import ru.electric.ec.online.ui.enter.EnterActivity;
-import ru.electric.ec.online.ui.info.InfoViewModel;
 
 public class SplashViewModel {
 
@@ -20,7 +21,7 @@ public class SplashViewModel {
         try {
             pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
-            InfoViewModel.log(context, true, true, "Не удалось найти пакет приложения");
+            RouterView.openInfo(context, new Info(true, true, "Не удалось найти пакет приложения"));
         }
         if (pInfo == null) {
             pInfo = new PackageInfo();

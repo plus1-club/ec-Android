@@ -12,9 +12,10 @@ import androidx.databinding.ObservableInt;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Count;
+import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.router.RouterView;
 import ru.electric.ec.online.server.ServerResponse;
-import ru.electric.ec.online.ui.info.InfoViewModel;
 import ru.electric.ec.online.ui.request.RequestViewModel;
 
 public class SearchItemViewModel {
@@ -67,8 +68,8 @@ public class SearchItemViewModel {
             needUpdate.set(true);
             if (newCount % multiplicity.get() > 0){
                 count.set(newCount + (multiplicity.get() - (newCount % multiplicity.get())));
-                InfoViewModel.log(context, false, true,
-                        Service.getStr(R.string.text_multiplicity, multiplicity.get()));
+                RouterView.openInfo(context, new Info(false, true,
+                        Service.getStr(R.string.text_multiplicity, multiplicity.get())));
 
             } else {
                 count.set(newCount);

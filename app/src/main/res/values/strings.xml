@@ -104,6 +104,7 @@
     <string name="text_in_develop_choose_file">Выбор файла - в разработке</string>
     <string name="text_in_develop_download_remains">Скачивание остатков - в разработке</string>
     <string name="test_in_develop_download_invoice">Скачивание счета - в разработке</string>
+    <string name="text_acitivity_not_found">Не найден экран %s</string>
 
     <!-- Прочее -->
 
