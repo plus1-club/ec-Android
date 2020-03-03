@@ -3,19 +3,11 @@ package ru.electric.ec.online.server;
 import android.content.Context;
 
 import java.util.List;
-import java.util.concurrent.Executors;
 
 import ru.electric.ec.online.common.App;
-import ru.electric.ec.online.data.DataService;
 import ru.electric.ec.online.models.Request;
 
 public class ServerResponse {
-
-    public static void getEnter(final Context context, String login, String password, boolean save) {
-        Executors.newSingleThreadExecutor().execute(() -> DataService.createUser(login, password, save));
-        ServerNetwork.getApi().enter(login, password).enqueue(
-            ServerNetwork.callback(context, ServerRun.getInstance()::getEnter, 0));
-    }
 
     public static void getExit(final Context context) {
         ServerNetwork.getApi().exit(App.getModel().token).enqueue(

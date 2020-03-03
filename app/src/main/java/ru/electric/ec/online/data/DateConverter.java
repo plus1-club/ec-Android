@@ -4,7 +4,7 @@ import androidx.room.TypeConverter;
 
 import java.util.Date;
 
-class DateConverter {
+public class DateConverter {
 
     @TypeConverter
     static Date toDate(Long dateLong){
@@ -12,7 +12,7 @@ class DateConverter {
     }
 
     @TypeConverter
-    static Long fromDate(Date date){
+    public static Long fromDate(Date date){
         return date == null ? null : date.getTime();
     }
 }

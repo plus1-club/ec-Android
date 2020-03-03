@@ -8,12 +8,13 @@ import androidx.room.RoomDatabase;
 
 import ru.electric.ec.online.models.Basket;
 import ru.electric.ec.online.models.Detail;
+import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.models.User;
 
-@Database(version = 3, exportSchema = false,
-          entities = {User.class, Request.class, Basket.class, Invoice.class, Detail.class})
+@Database(version = 4, exportSchema = false,
+          entities = {User.class, Request.class, Basket.class, Invoice.class, Detail.class, Info.class})
 public abstract class LocalDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
@@ -21,6 +22,7 @@ public abstract class LocalDatabase extends RoomDatabase {
     public abstract BasketDao basketDao();
     public abstract InvoiceDao invoiceDao();
     public abstract DetailDao detailDao();
+    public abstract InfoDao infoDao();
 
     static LocalDatabase mInstance;
 

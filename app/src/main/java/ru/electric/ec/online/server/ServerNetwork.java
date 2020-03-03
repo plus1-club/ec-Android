@@ -124,7 +124,7 @@ public class ServerNetwork {
         };
     }
 
-    static Callback<ServerData> callback(final Context context, ServerRunInterface func, int number){
+    public static Callback<ServerData> callback(final Context context, ServerRunInterface func, int number){
         return new Callback<ServerData>() {
             @Override
             public void onResponse(@NonNull Call<ServerData> call, @NonNull final Response<ServerData> response) {

@@ -1,18 +1,12 @@
 package ru.electric.ec.online.ui.enter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 
-import java.util.concurrent.Executors;
-
-import ru.electric.ec.online.common.App;
-import ru.electric.ec.online.data.DataService;
-import ru.electric.ec.online.models.User;
-import ru.electric.ec.online.server.ServerResponse;
+import ru.electric.ec.online.router.RouterData;
+import ru.electric.ec.online.router.RouterView;
 
 public class EnterViewModel {
 
@@ -25,7 +19,7 @@ public class EnterViewModel {
         login = new ObservableField<>();
         password = new ObservableField<>();
         save = new ObservableBoolean();
-        Executors.newSingleThreadExecutor().execute(this::saveAndRestore);
+        RouterData.restoreUser(this);
     }
 
     // Получение единственного экземпляра класса
@@ -36,29 +30,16 @@ public class EnterViewModel {
         return mInstance;
     }
 
-    private void saveAndRestore(){
-        User user = App.getDb().userDao().readLast();
-        if (user != null ){
-            save.set(user.save);
-            if (user.save){
-                login.set(user.login);
-                password.set(user.password);
-                App.getModel().token = user.token;
-            }
-        }
-    }
-
     public void onEnter(Context context) {
-        ServerResponse.getEnter(context, login.get(), password.get(), save.get());
+        RouterData.saveUser(this);
+        RouterData.enterUser(context, this);
     }
 
     public void onPhone(Context context, String phone){
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
-        context.startActivity(intent);
+        RouterView.openPhoneCall(context, phone);
     }
 
     public void onSave(){
-        Executors.newSingleThreadExecutor().execute(() ->
-            DataService.createUser(login.get(), password.get(), save.get()));
+        RouterData.saveUser(this);
     }
 }

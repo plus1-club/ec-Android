@@ -14,15 +14,15 @@ import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Detail;
+import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.router.RouterData;
+import ru.electric.ec.online.router.RouterView;
 import ru.electric.ec.online.ui.bill.BillActivity;
 import ru.electric.ec.online.ui.details.DetailsViewAdapter;
-import ru.electric.ec.online.ui.enter.EnterActivity;
 import ru.electric.ec.online.ui.info.InfoActivity;
-import ru.electric.ec.online.ui.info.InfoViewModel;
 import ru.electric.ec.online.ui.invoice.InvoiceViewAdapter;
-import ru.electric.ec.online.ui.menu.MenuActivity;
 
 public class ServerRun {
 
@@ -39,22 +39,21 @@ public class ServerRun {
         return mInstance;
     }
 
-    void getEnter(Context context, Response<ServerData> response, final int number){
+    public void getEnter(Context context, Response<ServerData> response, final int number){
+        ServerData body = Objects.requireNonNull(response.body());
         if (isSuccess(response)) {
-            Object data = Objects.requireNonNull(response.body()).data;
-            App.getModel().token = (String) ((LinkedTreeMap) data).get("user_token");
-            Intent intent = new Intent(context, MenuActivity.class);
-            context.startActivity(intent);
+            RouterData.setToken(body);
+            RouterView.openMenu(context);
         } else {
-            InfoViewModel.log(context, false, true,
-                Service.getStr(R.string.text_response_error,
-                    Objects.requireNonNull(response.body()).error, response.body().message));
+            String message = Service.getStr(R.string.text_response_error, body.error, body.message);
+            Info info = new Info(false, true, message, "EnterActivity");
+            RouterData.saveInfo(info);
+            RouterView.openInfo(context, info);
         }
     }
 
     void getExit(Context context, Response<ServerData> response, final int number){
-        Intent intent = new Intent(context, EnterActivity.class);
-        context.startActivity(intent);
+        RouterView.openEnter(context);
     }
 
     void getByCode(Context context, Response<ServerData> response, final int number){
