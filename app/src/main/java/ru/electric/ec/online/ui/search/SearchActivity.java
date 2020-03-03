@@ -59,7 +59,11 @@ public class SearchActivity extends AppCompatActivity {
 
         // Обновление списка
         binding.swiperefresh.setRefreshing(true);
-        ServerResponse.byCode(this, viewModel.product.get(), viewModel.count.get(), viewModel.isFullSearch.get());
+        if (viewModel.isExcel.get()){
+            ServerResponse.fromExcel(this, viewModel.excel.get(), viewModel.productColumn.get(), viewModel.countColumn.get(), viewModel.isFullSearch.get());
+        } else {
+            ServerResponse.byCode(this, viewModel.product.get(), viewModel.count.get(), viewModel.isFullSearch.get());
+        }
         refreshSearch();
         binding.swiperefresh.setOnRefreshListener(this::refreshSearch);
     }
@@ -100,6 +104,6 @@ public class SearchActivity extends AppCompatActivity {
                 intent.putExtra("activityName", "RequestActivity");
                 this.startActivity(intent);
             }
-        }, 3000);
+        }, 5000);
     }
 }

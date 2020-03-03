@@ -57,9 +57,10 @@ public class ServerRun {
     }
 
     void getByCode(Context context, Response<ServerData> response, final int number){
+        ServerData body = Objects.requireNonNull(response.body());
         App.getModel().request.search.clear();
         if (isSuccess(response)) {
-            List<?> data = (List<?>) Objects.requireNonNull(response.body()).data;
+            List<?> data = (List<?>) body.data;
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
@@ -75,13 +76,47 @@ public class ServerRun {
                 }
                 App.getModel().request.search.add(request);
             }
+        } else {
+            String message = Service.getStr(R.string.text_response_error, body.error, body.message);
+            Info info = new Info(false, true, message, "RequestActivity");
+            RouterData.saveInfo(info);
+            RouterView.openInfo(context, info);
+        }
+    }
+
+    void getFromExcel(Context context, Response<ServerData> response, final int number){
+        ServerData body = Objects.requireNonNull(response.body());
+        App.getModel().request.search.clear();
+        if (isSuccess(response)) {
+            List<?> data = (List<?>) body.data;
+            for (Object element : data) {
+                @SuppressWarnings("unchecked")
+                Map<String, String> el = (LinkedTreeMap<String, String>) element;
+                Request request = new Request(
+                        el.get("product"),
+                        Service.getInt(el.get("requestCount")),
+                        Service.getInt(el.get("stockCount")),
+                        Service.getInt(el.get("multiplicity")),
+                        el.get("unit"),
+                        false);
+                if (request.requestCount % request.multiplicity > 0){
+                    request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
+                }
+                App.getModel().request.search.add(request);
+            }
+        } else {
+            String message = Service.getStr(R.string.text_response_error, body.error, body.message);
+            Info info = new Info(false, true, message, "RequestActivity");
+            RouterData.saveInfo(info);
+            RouterView.openInfo(context, info);
         }
     }
 
     void getBasket(Context context, Response<ServerData> response, final int number){
+        ServerData body = Objects.requireNonNull(response.body());
         App.getModel().request.basket.clear();
         if (isSuccess(response)) {
-            List<?> data = (List<?>) Objects.requireNonNull(response.body()).data;
+            List<?> data = (List<?>) body.data;
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
@@ -98,8 +133,13 @@ public class ServerRun {
                 }
                 App.getModel().request.basket.add(request);
             }
+        } else {
+            String message = Service.getStr(R.string.text_response_error, body.error, body.message);
+            Info info = new Info(false, true, message, "BasketActivity");
+            RouterData.saveInfo(info);
+            RouterView.openInfo(context, info);
         }
-     }
+    }
 
     void postBasket(Context context, Response<ServerData> response, final int number){
         ServerResponse.getBasket(context);
@@ -114,8 +154,9 @@ public class ServerRun {
     }
 
     void order(Context context, Response<ServerData> response, final int number){
+        ServerData body = Objects.requireNonNull(response.body());
         if (isSuccess(response)) {
-            LinkedTreeMap data = (LinkedTreeMap) Objects.requireNonNull(response.body()).data;
+            LinkedTreeMap data = (LinkedTreeMap) body.data;
             int orderNumber = Service.getInt((String)data.get("number"));
             App.getModel().request.orderNumber.set(orderNumber);
             Intent intent = new Intent(context, InfoActivity.class);
@@ -123,14 +164,20 @@ public class ServerRun {
             intent.putExtra("info", context.getString(R.string.text_order_processed, orderNumber));
             intent.putExtra("activityName", "BasketActivity");
             context.startActivity(intent);
+        } else {
+            String message = Service.getStr(R.string.text_response_error, body.error, body.message);
+            Info info = new Info(false, true, message, "BasketActivity");
+            RouterData.saveInfo(info);
+            RouterView.openInfo(context, info);
         }
         ServerResponse.getBasket(context);
     }
 
     void invoiceList(Context context, Response<ServerData> response, final int number){
+        ServerData body = Objects.requireNonNull(response.body());
         App.getModel().invoice.invoices.clear();
         if (isSuccess(response)) {
-            List<?> data = (List<?>) Objects.requireNonNull(response.body()).data;
+            List<?> data = (List<?>) body.data;
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
@@ -153,10 +200,16 @@ public class ServerRun {
             }
             InvoiceViewAdapter adapter = new InvoiceViewAdapter();
             adapter.updateAdapter(App.getModel().invoice, context);
+        } else {
+            String message = Service.getStr(R.string.text_response_error, body.error, body.message);
+            Info info = new Info(false, true, message, "InvoiceActivity");
+            RouterData.saveInfo(info);
+            RouterView.openInfo(context, info);
         }
     }
 
     void invoiceDetails(Context context, Response<ServerData> response, int number){
+        ServerData body = Objects.requireNonNull(response.body());
         if (isSuccess(response)) {
             Invoice invoice = null;
             for (Invoice item: App.getModel().invoice.invoices) {
@@ -166,7 +219,7 @@ public class ServerRun {
             }
             if (invoice == null) return;
 
-            List<?> data = (List<?>) Objects.requireNonNull(response.body()).data;
+            List<?> data = (List<?>) body.data;
             invoice.details.clear();
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
@@ -183,19 +236,30 @@ public class ServerRun {
             }
             DetailsViewAdapter adapter = new DetailsViewAdapter();
             adapter.updateAdapter(invoice, context);
+        } else {
+            String message = Service.getStr(R.string.text_response_error, body.error, body.message);
+            Info info = new Info(false, true, message, "DetailActivity");
+            RouterData.saveInfo(info);
+            RouterView.openInfo(context, info);
         }
     }
 
     // TODO: Подключаться к серверу и скачивать счет
     void getPrint(Context context, final Response<ServerData> response, final int number) {
+        ServerData body = Objects.requireNonNull(response.body());
         if (isSuccess(response)) {
-            LinkedTreeMap data = (LinkedTreeMap) Objects.requireNonNull(response.body()).data;
+            LinkedTreeMap data = (LinkedTreeMap) body.data;
             String link = (String) data.get("file");
             Intent intent = new Intent(context, BillActivity.class);
             intent.putExtra("title", Service.getStr(R.string.text_invoice_short, number));
             intent.putExtra("number", number);
             intent.putExtra("link", link);
             context.startActivity(intent);
+        } else {
+            String message = Service.getStr(R.string.text_response_error, body.error, body.message);
+            Info info = new Info(false, true, message, "DetailActivity");
+            RouterData.saveInfo(info);
+            RouterView.openInfo(context, info);
         }
     }
 

@@ -64,6 +64,7 @@ public class RequestActivity extends AppCompatActivity {
         if (requestCode != 0) {
             if (resultCode == Activity.RESULT_OK) {
                 String path = Objects.requireNonNull(data.getData()).getPath();
+                path = Objects.requireNonNull(path).replace("/document/raw:", "");
                 viewModel.excel.set(path);
             }
             if (resultCode == Activity.RESULT_CANCELED) {

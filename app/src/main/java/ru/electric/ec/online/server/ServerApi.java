@@ -1,16 +1,18 @@
 package ru.electric.ec.online.server;
 
-import java.io.File;
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
@@ -68,9 +70,10 @@ public interface ServerApi {
      * @param countColumn номер колонки, в котором находится количество товара
      * @return ответ сервера ({@link ServerData})
      * */
+    @Multipart
     @POST("request/fromExcel")
     Call<ServerData> fromExcel(@Header("user_token") String userToken,
-                            @Query("excel") File excel,
+                            @Part MultipartBody.Part excel,
                             @Query("productColumn") int productColumn,
                             @Query("countColumn") int countColumn,
                             @Query("fullsearch") boolean fullsearch);

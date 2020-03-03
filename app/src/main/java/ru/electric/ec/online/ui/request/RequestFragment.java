@@ -42,10 +42,12 @@ public class RequestFragment extends Fragment {
         if (page == 1) {
             RequestByCodeBinding binding = DataBindingUtil.inflate(inflater, R.layout.request_by_code, null, false);
             binding.setViewModel(viewModel);
+            viewModel.isExcel.set(false);
             return binding.getRoot();
         } else {
             RequestFromExcelBinding binding = DataBindingUtil.inflate(inflater, R.layout.request_from_excel, null, false);
             binding.setViewModel(viewModel);
+            viewModel.isExcel.set(true);
             return binding.getRoot();
         }
     }

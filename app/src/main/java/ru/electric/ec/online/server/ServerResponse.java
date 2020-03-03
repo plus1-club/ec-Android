@@ -2,8 +2,12 @@ package ru.electric.ec.online.server;
 
 import android.content.Context;
 
+import java.io.File;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.models.Request;
 
@@ -16,7 +20,16 @@ public class ServerResponse {
 
     public static void byCode(final Context context, String product, int count, boolean fullsearch) {
         ServerNetwork.getApi().byCode(App.getModel().token, product, count, fullsearch).enqueue(
-            ServerNetwork.callback(context, ServerRun.getInstance()::getByCode, 0));
+                ServerNetwork.callback(context, ServerRun.getInstance()::getByCode, 0));
+    }
+
+    public static void fromExcel(final Context context, String excelPath, int productColumn, int countColumn, boolean fullsearch) {
+        File file =  new File(excelPath);
+        RequestBody requestFile = RequestBody.create(file, MediaType.parse("multipart/form-data"));
+        MultipartBody.Part excel = MultipartBody.Part.createFormData("excel", file.getName(), requestFile);
+
+        ServerNetwork.getApi().fromExcel(App.getModel().token, excel, productColumn, countColumn, fullsearch).enqueue(
+                ServerNetwork.callback(context, ServerRun.getInstance()::getFromExcel, 0));
     }
 
     public static void getBasket(final Context context) {

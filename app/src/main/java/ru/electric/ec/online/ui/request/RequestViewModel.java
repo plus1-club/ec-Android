@@ -1,11 +1,14 @@
 package ru.electric.ec.online.ui.request;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Handler;
 
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
@@ -36,6 +39,7 @@ public class RequestViewModel {
     public ObservableField<String> comment;
     public ObservableInt orderNumber;
     public ObservableField<String> excel;
+    public ObservableBoolean isExcel;
 
     private ObservableField<String> title;
     public ObservableList<Request> search;
@@ -58,6 +62,7 @@ public class RequestViewModel {
         comment = new ObservableField<>();
         orderNumber = new ObservableInt();
         excel = new ObservableField<>();
+        isExcel = new ObservableBoolean();
 
         isFullSearch.set(true);
 
@@ -77,6 +82,16 @@ public class RequestViewModel {
     }
 
     public void onBrowse(Context context) {
+        final int REQUEST_EXTERNAL_STORAGE = 1;
+        String[] PERMISSIONS_STORAGE = {
+                Manifest.permission.READ_EXTERNAL_STORAGE
+        };
+        int permission = ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity)context, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+        }
+
         String[] mimeTypes = {
                 "application/vnd.ms-excel",                                         // .xls
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",// .xlsx

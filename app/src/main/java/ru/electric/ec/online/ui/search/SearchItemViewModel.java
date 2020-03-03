@@ -94,7 +94,11 @@ public class SearchItemViewModel {
     }
 
     public void onUpdateStatus(Context context){
-        ServerResponse.byCode(context, parent.product.get(), count.get(), parent.isFullSearch.get());
+        if (parent.isExcel.get()){
+            ServerResponse.fromExcel(context, parent.excel.get(), parent.productColumn.get(), parent.countColumn.get(), parent.isFullSearch.get());
+        } else {
+            ServerResponse.byCode(context, parent.product.get(), count.get(), parent.isFullSearch.get());
+        }
         ((SearchActivity)context).refreshSearch();
         needUpdate.set(false);
         updateStatus();
