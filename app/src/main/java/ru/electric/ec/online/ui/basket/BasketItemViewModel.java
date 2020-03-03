@@ -23,7 +23,6 @@ import ru.electric.ec.online.ui.request.RequestViewModel;
 
 public class BasketItemViewModel {
 
-    private static BasketItemViewModel mInstance;
     public RequestViewModel parent;
 
     public ObservableInt position;
@@ -39,7 +38,7 @@ public class BasketItemViewModel {
     public ObservableBoolean check;
     private ObservableBoolean needUpdate;
 
-    private BasketItemViewModel() {
+    BasketItemViewModel() {
         position = new ObservableInt();
         product = new ObservableField<>();
         count = new ObservableInt();
@@ -54,14 +53,6 @@ public class BasketItemViewModel {
         needUpdate = new ObservableBoolean();
         needUpdate.set(false);
         parent = RequestViewModel.getInstance();
-    }
-
-    // Получение единственного экземпляра класса
-    public static BasketItemViewModel getInstance() {
-        if (mInstance == null) {
-            mInstance = new BasketItemViewModel();
-        }
-        return mInstance;
     }
 
     public void onTextChanged(Context context, CharSequence s, int start, int before, int charCount) {

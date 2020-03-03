@@ -26,12 +26,10 @@ public class InvoiceActivity extends AppCompatActivity {
     private InvoiceViewAdapter adapter;
     public InvoiceBinding binding;
     private LinearLayoutManager layoutManager;
-    private AppCompatActivity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = this;
         viewModel = InvoiceViewModel.getInstance();
         viewModel.invoices.clear();
 

@@ -20,7 +20,6 @@ import ru.electric.ec.online.ui.request.RequestViewModel;
 
 public class SearchItemViewModel {
 
-    private static SearchItemViewModel mInstance;
     public RequestViewModel parent;
 
     public ObservableInt position;
@@ -36,7 +35,7 @@ public class SearchItemViewModel {
     public ObservableBoolean check;
     private ObservableBoolean needUpdate;
 
-    private SearchItemViewModel() {
+    SearchItemViewModel() {
         position = new ObservableInt();
         product = new ObservableField<>();
         count = new ObservableInt();
@@ -51,14 +50,6 @@ public class SearchItemViewModel {
         needUpdate = new ObservableBoolean();
         needUpdate.set(false);
         parent = RequestViewModel.getInstance();
-    }
-
-    // Получение единственного экземпляра класса
-    public static SearchItemViewModel getInstance() {
-        if (mInstance == null) {
-            mInstance = new SearchItemViewModel();
-        }
-        return mInstance;
     }
 
     public void onTextChanged(Context context, CharSequence s, int start, int before, int charCount) {

@@ -33,6 +33,8 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = RequestViewModel.getInstance();
+        viewModel.search.clear();
+
         Bundle bundle = getIntent().getExtras();
         this.setTitle(Objects.requireNonNull(bundle).getString("title"));
 
@@ -48,9 +50,8 @@ public class SearchActivity extends AppCompatActivity {
 
         // Подготовка и установка адаптера
         adapter = new SearchViewAdapter();
-        adapter.setItems(viewModel.search);
-        viewModel.searchAdapter.set(adapter);
         binding.list.setAdapter(adapter);
+        adapter.setItems(viewModel.search);
 
         // Подключение навигации
         navigationModel = new MenuViewModel(
@@ -95,7 +96,6 @@ public class SearchActivity extends AppCompatActivity {
             if (viewModel.search.size() > 0){
                 adapter.setItems(viewModel.search);
                 binding.list.setAdapter(adapter);
-                viewModel.searchAdapter.set(adapter);
                 binding.swiperefresh.setRefreshing(false);
             } else {
                 Intent intent = new Intent(this, InfoActivity.class);
