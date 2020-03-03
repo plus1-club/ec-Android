@@ -133,11 +133,6 @@ public class ServerRun {
                 }
                 App.getModel().request.basket.add(request);
             }
-        } else {
-            String message = Service.getStr(R.string.text_response_error, body.error, body.message);
-            Info info = new Info(false, true, message, "BasketActivity");
-            RouterData.saveInfo(info);
-            RouterView.openInfo(context, info);
         }
     }
 
