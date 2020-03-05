@@ -10,7 +10,7 @@ import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
 import ru.electric.ec.online.models.Detail;
-import ru.electric.ec.online.server.ServerResponse;
+import ru.electric.ec.online.router.RouterServer;
 
 public class DetailsViewModel {
 
@@ -47,6 +47,6 @@ public class DetailsViewModel {
     }
 
     public void onInvoice(Context context) {
-        ServerResponse.print(context, number.get());
+        RouterServer.print((DetailsActivity) context, number.get());
     }
 }

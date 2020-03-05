@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.EnterBinding;
-import ru.electric.ec.online.models.Info;
-import ru.electric.ec.online.router.RouterData;
 import ru.electric.ec.online.router.RouterServer;
 import ru.electric.ec.online.router.RouterView;
 import ru.electric.ec.online.server.ServerData;
@@ -31,17 +28,11 @@ public class EnterActivity extends AppCompatActivity {
             RouterServer.setToken(body);
             RouterView.openMenu(this);
         } else {
-            String message = Service.getStr(R.string.text_response_error, body.error, body.message);
-            Info info = new Info(false, true, message);
-            RouterData.saveInfo(info);
-            RouterView.openInfo(this, info);
+            RouterView.onUnsuccessful(this, body);
         }
     }
 
     public void enterError(Throwable throwable) {
-        Info info = new Info(false, true, throwable.getMessage());
-        RouterData.saveInfo(info);
-        RouterView.openInfo(this, info);
+        RouterView.onError(this, throwable);
     }
-
 }

@@ -10,12 +10,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.gson.internal.LinkedTreeMap;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
+import ru.electric.ec.online.common.App;
+import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.InvoiceBinding;
-import ru.electric.ec.online.server.ServerResponse;
+import ru.electric.ec.online.models.Invoice;
+import ru.electric.ec.online.router.RouterServer;
+import ru.electric.ec.online.router.RouterView;
+import ru.electric.ec.online.server.ServerData;
 import ru.electric.ec.online.ui.menu.MenuViewModel;
 
 public class InvoiceActivity extends AppCompatActivity {
@@ -86,15 +95,15 @@ public class InvoiceActivity extends AppCompatActivity {
 
     public void updateList(){
         if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_unconfirmed))) {
-            ServerResponse.unconfirmedList(this);
+            RouterServer.unconfirmedList(this);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_reserved))) {
-            ServerResponse.reservedList(this);
+            RouterServer.reservedList(this);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_ordered))) {
-            ServerResponse.orderedList(this);
+            RouterServer.orderedList(this);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_canceled))) {
-            ServerResponse.canceledList(this);
+            RouterServer.canceledList(this);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_shipped))) {
-            ServerResponse.shippedList(this);
+            RouterServer.shippedList(this);
         } else {
             adapter.setItems(new ArrayList<>());
         }
@@ -108,5 +117,40 @@ public class InvoiceActivity extends AppCompatActivity {
             binding.list.setAdapter(adapter);
             binding.swiperefresh.setRefreshing(false);
         }, 3000);
+    }
+
+    public void invoiceOk(ServerData body) {
+        App.getModel().invoice.invoices.clear();
+        if (RouterServer.isSuccess(body)) {
+            List<?> data = (List<?>) body.data;
+            for (Object element : data) {
+                @SuppressWarnings("unchecked")
+                Map<String, String> el = (LinkedTreeMap<String, String>) element;
+                Invoice invoice;
+                if (Service.isEqual(el.get("status"),this.getString(R.string.status_shipped))) {
+                    invoice = new Invoice(
+                            Service.getInt(el.get("number")),
+                            el.get("date"),
+                            el.get("status"),
+                            Service.getInt(el.get("waybill")));
+
+                } else {
+                    invoice = new Invoice(
+                            Service.getInt(el.get("number")),
+                            el.get("date"),
+                            Service.getDouble(el.get("sum")),
+                            el.get("status"));
+                }
+                App.getModel().invoice.invoices.add(invoice);
+            }
+            InvoiceViewAdapter adapter = new InvoiceViewAdapter();
+            adapter.updateAdapter(App.getModel().invoice, this);
+        } else {
+            RouterView.onUnsuccessful(this, body);
+        }
+    }
+
+    public void invoiceError(Throwable throwable) {
+        RouterView.onError(this, throwable);
     }
 }

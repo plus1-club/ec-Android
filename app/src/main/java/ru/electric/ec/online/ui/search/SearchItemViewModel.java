@@ -14,8 +14,8 @@ import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Count;
 import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.router.RouterServer;
 import ru.electric.ec.online.router.RouterView;
-import ru.electric.ec.online.server.ServerResponse;
 import ru.electric.ec.online.ui.request.RequestViewModel;
 
 public class SearchItemViewModel {
@@ -87,9 +87,9 @@ public class SearchItemViewModel {
 
     public void onUpdateStatus(Context context){
         if (parent.isExcel.get()){
-            ServerResponse.fromExcel(context, parent.excel.get(), parent.productColumn.get(), parent.countColumn.get(), parent.isFullSearch.get());
+            RouterServer.fromExcel((SearchActivity) context, parent);
         } else {
-            ServerResponse.byCode(context, parent.product.get(), count.get(), parent.isFullSearch.get());
+            RouterServer.byCode((SearchActivity)context, parent);
         }
         ((SearchActivity)context).refreshSearch();
         needUpdate.set(false);

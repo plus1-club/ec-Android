@@ -4,7 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import ru.electric.ec.online.R;
+import ru.electric.ec.online.common.App;
+import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Info;
+import ru.electric.ec.online.server.ServerData;
 import ru.electric.ec.online.ui.enter.EnterActivity;
 import ru.electric.ec.online.ui.info.InfoActivity;
 import ru.electric.ec.online.ui.menu.MenuActivity;
@@ -35,6 +39,39 @@ public class RouterView {
         } else {
             intent.putExtra("activityName", info.activityName);
         }
+        context.startActivity(intent);
+    }
+
+    public static void onError(Context context, Throwable throwable){
+        String message = Service.getStr(R.string.text_response_failure, throwable.getMessage());
+        Info info = new Info(false, true, message);
+        RouterData.saveInfo(info);
+        RouterView.openInfo(context, info);
+    }
+
+    public static void onError(Context context, Throwable throwable, String activityName){
+        String message = Service.getStr(R.string.text_response_failure, throwable.getMessage());
+        Info info = new Info(false, true, message, activityName);
+        RouterData.saveInfo(info);
+        RouterView.openInfo(context, info);
+    }
+
+    public static void onUnsuccessful(Context context, ServerData body){
+        String message = Service.getStr(R.string.text_response_error, body.error, body.message);
+        Info info = new Info(false, true, message);
+        RouterData.saveInfo(info);
+        RouterView.openInfo(context, info);
+    }
+    public static void onUnsuccessful(Context context, ServerData body, String activityName){
+        String message = Service.getStr(R.string.text_response_error, body.error, body.message);
+        Info info = new Info(false, true, message, activityName);
+        RouterData.saveInfo(info);
+        RouterView.openInfo(context, info);
+    }
+
+    public static void exit(Object object){
+        Context context = App.getAppContext();
+        Intent intent = new Intent(context, EnterActivity.class);
         context.startActivity(intent);
     }
 }

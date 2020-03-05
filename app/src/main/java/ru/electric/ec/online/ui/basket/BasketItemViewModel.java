@@ -17,8 +17,8 @@ import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Count;
 import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.router.RouterServer;
 import ru.electric.ec.online.router.RouterView;
-import ru.electric.ec.online.server.ServerResponse;
 import ru.electric.ec.online.ui.request.RequestViewModel;
 
 public class BasketItemViewModel {
@@ -99,15 +99,15 @@ public class BasketItemViewModel {
         for (Request item: deleted){
             parent.basket.remove(item);
         }
-        ServerResponse.putBasket(view.getContext(), parent.basket);
-        ServerResponse.getBasket(context);
+        RouterServer.putBasket((BasketActivity) context, parent.basket);
+        RouterServer.getBasket((BasketActivity) context);
         ((BasketActivity)context).refreshBasket();
         updateStatus();
     }
 
     public void onUpdateStatus(Context context){
-        ServerResponse.putBasket(context, parent.basket);
-        ServerResponse.getBasket(context);
+        RouterServer.putBasket((BasketActivity) context, parent.basket);
+        RouterServer.getBasket((BasketActivity) context);
         ((BasketActivity)context).refreshBasket();
         needUpdate.set(false);
         updateStatus();

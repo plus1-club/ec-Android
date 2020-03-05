@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
@@ -20,6 +22,7 @@ public class RequestActivity extends AppCompatActivity {
 
     RequestViewModel viewModel;
     MenuViewModel navigationModel;
+    RequestBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class RequestActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         this.setTitle(Objects.requireNonNull(bundle).getString("title"));
 
-        RequestBinding binding = DataBindingUtil.setContentView(this, R.layout.request);
+        binding = DataBindingUtil.setContentView(this, R.layout.request);
         binding.setViewModel(viewModel);
         binding.viewpager.setAdapter(new RequestFragmentAdapter(getSupportFragmentManager()));
         binding.tabs.setupWithViewPager(binding.viewpager);
@@ -37,6 +40,27 @@ public class RequestActivity extends AppCompatActivity {
                 this,  binding.drawer, binding.include.toolbar, binding.navigator);
         // Установить Toolbar для замены ActionBar'а.
         setSupportActionBar(navigationModel.toolbar);
+
+        binding.tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 0) {
+                    viewModel.isExcel.set(false);
+                } else {
+                    viewModel.isExcel.set(true);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
 
     @Override
@@ -73,4 +97,5 @@ public class RequestActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 }

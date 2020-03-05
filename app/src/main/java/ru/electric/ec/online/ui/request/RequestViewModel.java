@@ -23,8 +23,8 @@ import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.router.RouterServer;
 import ru.electric.ec.online.router.RouterView;
-import ru.electric.ec.online.server.ServerResponse;
 import ru.electric.ec.online.ui.basket.BasketActivity;
 import ru.electric.ec.online.ui.info.InfoActivity;
 import ru.electric.ec.online.ui.search.SearchActivity;
@@ -45,7 +45,7 @@ public class RequestViewModel {
     private ObservableField<String> title;
     public ObservableList<Request> search;
     public ObservableList<Request> basket;
-    public ObservableField<Object> searchAdapter;
+    private ObservableField<Object> searchAdapter;
     public ObservableField<Object> basketAdapter;
 
     private static RequestViewModel mInstance;    // Ссылка для биндинга с View
@@ -143,7 +143,7 @@ public class RequestViewModel {
                 }
             }
             basket.addAll(added);
-            ServerResponse.postBasket(context, added);
+            RouterServer.postBasket((BasketActivity) context, added);
             total.set(0);
             comment.set("");
 
@@ -163,8 +163,8 @@ public class RequestViewModel {
 
     public void onClear(final Context context){
         basket.clear();
-        ServerResponse.deleteBasket(context);
-        ServerResponse.getBasket(context);
+        RouterServer.deleteBasket((BasketActivity) context);
+        RouterServer.getBasket((BasketActivity) context);
         ((BasketActivity)context).refreshBasket();
         total.set(0);
     }
@@ -176,12 +176,12 @@ public class RequestViewModel {
     }
 
     public void onIssue(final Context context){
-        ServerResponse.order(context, comment.get());
+        RouterServer.order((BasketActivity) context, comment.get());
 
         new Handler().postDelayed(() -> {
             basket.clear();
-            ServerResponse.deleteBasket(context);
-            ServerResponse.getBasket(context);
+            RouterServer.deleteBasket((BasketActivity) context);
+            RouterServer.getBasket((BasketActivity) context);
             ((BasketActivity)context).refreshBasket();
             total.set(0);
             comment.set("");

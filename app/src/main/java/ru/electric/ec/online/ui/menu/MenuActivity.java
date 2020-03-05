@@ -9,13 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.MenuBinding;
-import ru.electric.ec.online.models.Info;
-import ru.electric.ec.online.router.RouterData;
-import ru.electric.ec.online.router.RouterServer;
-import ru.electric.ec.online.router.RouterView;
-import ru.electric.ec.online.server.ServerData;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -54,22 +48,5 @@ public class MenuActivity extends AppCompatActivity {
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         navigationModel.actionBar.onConfigurationChanged(newConfig);
-    }
-
-    public void exitOk(ServerData body) {
-        if (RouterServer.isSuccess(body)) {
-            RouterView.openEnter(this);
-        } else {
-            String message = Service.getStr(R.string.text_response_error, body.error, body.message);
-            Info info = new Info(false, true, message);
-            RouterData.saveInfo(info);
-            RouterView.openInfo(this, info);
-        }
-    }
-
-    public void exitError(Throwable throwable) {
-        Info info = new Info(false, true, throwable.getMessage());
-        RouterData.saveInfo(info);
-        RouterView.openInfo(this, info);
     }
 }

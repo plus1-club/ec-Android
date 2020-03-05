@@ -11,11 +11,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.gson.internal.LinkedTreeMap;
+
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
+import ru.electric.ec.online.common.App;
+import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.SearchBinding;
-import ru.electric.ec.online.server.ServerResponse;
+import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.router.RouterServer;
+import ru.electric.ec.online.router.RouterView;
+import ru.electric.ec.online.server.ServerData;
 import ru.electric.ec.online.ui.info.InfoActivity;
 import ru.electric.ec.online.ui.menu.MenuViewModel;
 import ru.electric.ec.online.ui.request.RequestViewModel;
@@ -61,9 +70,9 @@ public class SearchActivity extends AppCompatActivity {
         // Обновление списка
         binding.swiperefresh.setRefreshing(true);
         if (viewModel.isExcel.get()){
-            ServerResponse.fromExcel(this, viewModel.excel.get(), viewModel.productColumn.get(), viewModel.countColumn.get(), viewModel.isFullSearch.get());
+            RouterServer.fromExcel(this, viewModel);
         } else {
-            ServerResponse.byCode(this, viewModel.product.get(), viewModel.count.get(), viewModel.isFullSearch.get());
+            RouterServer.byCode(this, viewModel);
         }
         refreshSearch();
         binding.swiperefresh.setOnRefreshListener(this::refreshSearch);
@@ -105,5 +114,33 @@ public class SearchActivity extends AppCompatActivity {
                 this.startActivity(intent);
             }
         }, 5000);
+    }
+
+    public void searchOk(ServerData body) {
+        App.getModel().request.search.clear();
+        if (RouterServer.isSuccess(body)) {
+            List<?> data = (List<?>) body.data;
+            for (Object element : data) {
+                @SuppressWarnings("unchecked")
+                Map<String, String> el = (LinkedTreeMap<String, String>) element;
+                Request request = new Request(
+                        el.get("product"),
+                        Service.getInt(el.get("requestCount")),
+                        Service.getInt(el.get("stockCount")),
+                        Service.getInt(el.get("multiplicity")),
+                        el.get("unit"),
+                        false);
+                if (request.requestCount % request.multiplicity > 0) {
+                    request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
+                }
+                App.getModel().request.search.add(request);
+            }
+        } else {
+            RouterView.onUnsuccessful(this, body, "RequestActivity");
+        }
+    }
+
+    public void searchError(Throwable throwable) {
+        RouterView.onError(this, throwable, "RequestActivity");
     }
 }
