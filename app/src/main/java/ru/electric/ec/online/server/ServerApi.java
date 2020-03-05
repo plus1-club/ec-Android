@@ -2,9 +2,9 @@ package ru.electric.ec.online.server;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -26,6 +26,8 @@ import ru.electric.ec.online.models.Request;
  */
 public interface ServerApi {
 
+    String BASE_URL = "https://www.ec-electric.ru/api/v1/";
+
     // User - пользователи
 
     /**
@@ -35,8 +37,8 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("user/enter")
-    Call<ServerData> enter(@Query("login") String login,
-                           @Query("password") String password);
+    Observable<ServerData> enter(@Query("login") String login,
+                                 @Query("password") String password);
 
     /**
      * Выход пользователя из системы
@@ -44,7 +46,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("user/exit")
-    Call<ServerData> exit(@Header("user_token") String userToken);
+    Observable<ServerData> exit(@Header("user_token") String userToken);
 
 
     // Request - поиск и корзина
@@ -57,7 +59,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("request/byCode")
-    Call<ServerData> byCode(@Header("user_token") String userToken,
+    Observable<ServerData> byCode(@Header("user_token") String userToken,
                             @Query("product") String product,
                             @Query("count") int count,
                             @Query("fullsearch") boolean fullsearch);
@@ -72,7 +74,7 @@ public interface ServerApi {
      * */
     @Multipart
     @POST("request/fromExcel")
-    Call<ServerData> fromExcel(@Header("user_token") String userToken,
+    Observable<ServerData> fromExcel(@Header("user_token") String userToken,
                             @Part MultipartBody.Part excel,
                             @Query("productColumn") int productColumn,
                             @Query("countColumn") int countColumn,
@@ -84,7 +86,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("request/basket")
-    Call<ServerData> getBasket(@Header("user_token") String userToken);
+    Observable<ServerData> getBasket(@Header("user_token") String userToken);
 
     /**
      * Добавление товаров в корзину
@@ -93,7 +95,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @POST("request/basket")
-    Call<ServerData> postBasket(@Header("user_token") String userToken,
+    Observable<ServerData> postBasket(@Header("user_token") String userToken,
                                 @Body List<Request> requests);
 
     /**
@@ -103,7 +105,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @PUT("request/basket")
-    Call<ServerData> putBasket(@Header("user_token") String userToken,
+    Observable<ServerData> putBasket(@Header("user_token") String userToken,
                                @Body List<Request> requests);
 
     /**
@@ -112,7 +114,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @DELETE("request/basket")
-    Call<ServerData> deleteBasket(@Header("user_token") String userToken);
+    Observable<ServerData> deleteBasket(@Header("user_token") String userToken);
 
     /**
      * Создание заказа из корзины
@@ -121,7 +123,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @POST("request/order")
-    Call<ServerData> order(@Header("user_token") String userToken,
+    Observable<ServerData> order(@Header("user_token") String userToken,
                            @Query("comment") String comment);
 
 
@@ -133,7 +135,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("request/download/stockBalance")
-    Call<ServerData> stockBalance(@Header("user_token") String userToken);
+    Observable<ServerData> stockBalance(@Header("user_token") String userToken);
 
     /**
      * Скачивание Excel-файла с примером таблицы для поиска по Excel
@@ -141,7 +143,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("request/download/example")
-    Call<ServerData> example(@Header("user_token") String userToken);
+    Observable<ServerData> example(@Header("user_token") String userToken);
 
 
     // Invoices - счета
@@ -152,7 +154,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("invoices/unconfirmed")
-    Call<ServerData> unconfirmedList(@Header("user_token") String userToken);
+    Observable<ServerData> unconfirmedList(@Header("user_token") String userToken);
 
     /**
      * Получение списка резервов
@@ -160,7 +162,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("invoices/reserved")
-    Call<ServerData> reservedList(@Header("user_token") String userToken);
+    Observable<ServerData> reservedList(@Header("user_token") String userToken);
 
     /**
      * Получение списка неподтвержденных заказов
@@ -168,7 +170,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("invoices/ordered")
-    Call<ServerData> orderedList(@Header("user_token") String userToken);
+    Observable<ServerData> orderedList(@Header("user_token") String userToken);
 
     /**
      * Получение списка аннулированных и просроченных счетов
@@ -176,7 +178,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("invoices/canceled")
-    Call<ServerData> canceledList(@Header("user_token") String userToken);
+    Observable<ServerData> canceledList(@Header("user_token") String userToken);
 
     /**
      * Получение истории отгрузок
@@ -184,7 +186,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("invoices/shipped")
-    Call<ServerData> shippedList(@Header("user_token") String userToken);
+    Observable<ServerData> shippedList(@Header("user_token") String userToken);
 
 
     // Invoices/{number} - детали счета
@@ -196,7 +198,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("invoices/{number}/unconfirmed")
-    Call<ServerData> unconfirmedItem(@Header("user_token") String userToken, @Path("number") int number);
+    Observable<ServerData> unconfirmedItem(@Header("user_token") String userToken, @Path("number") int number);
 
     /**
      * Получение деталей резерва
@@ -205,7 +207,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("invoices/{number}/reserved")
-    Call<ServerData> reservedItem(@Header("user_token") String userToken, @Path("number") int number);
+    Observable<ServerData> reservedItem(@Header("user_token") String userToken, @Path("number") int number);
 
     /**
      * Получение деталей заказа
@@ -214,7 +216,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("invoices/{number}/ordered")
-    Call<ServerData> orderedItem(@Header("user_token") String userToken, @Path("number") int number);
+    Observable<ServerData> orderedItem(@Header("user_token") String userToken, @Path("number") int number);
 
     /**
      * Получение деталей аннулированного или просроченного счета
@@ -223,7 +225,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("invoices/{number}/canceled")
-    Call<ServerData> canceledItem(@Header("user_token") String userToken, @Path("number") int number);
+    Observable<ServerData> canceledItem(@Header("user_token") String userToken, @Path("number") int number);
 
     /**
      * Получение деталей отгрузки
@@ -232,7 +234,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("invoices/{number}/shipped")
-    Call<ServerData> shippedItem(@Header("user_token") String userToken, @Path("number") int number);
+    Observable<ServerData> shippedItem(@Header("user_token") String userToken, @Path("number") int number);
 
     /**
      * Получение pdf-файла для печати счета (резерва или заказа)
@@ -241,7 +243,7 @@ public interface ServerApi {
      * @return ответ сервера ({@link ServerData})
      * */
     @GET("invoices/{number}/print")
-    Call<ServerData> print(@Header("user_token") String userToken, @Path("number") int number);
+    Observable<ServerData> print(@Header("user_token") String userToken, @Path("number") int number);
 
 
     /**
@@ -251,5 +253,5 @@ public interface ServerApi {
      * */
     @Streaming
     @GET
-    Call<ResponseBody> downloadFile(@Url String fileUrl);
+    Observable<ResponseBody> downloadFile(@Url String fileUrl);
 }

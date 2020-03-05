@@ -18,6 +18,7 @@ public class ServerData {
     /** Запрос на сервер прошёл успешно */
     @SerializedName("success")
     @Expose
+    public
     boolean success;
 
     /** Данные, возвращённые сервером */
@@ -28,11 +29,13 @@ public class ServerData {
     /** Код ошибки */
     @SerializedName("error")
     @Expose
+    public
     String error;
 
     /** Текст сообщения ошибки */
     @SerializedName("message")
     @Expose
+    public
     String message;
 
     /**

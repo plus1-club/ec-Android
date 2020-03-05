@@ -39,23 +39,6 @@ public class ServerRun {
         return mInstance;
     }
 
-    public void getEnter(Context context, Response<ServerData> response, final int number){
-        ServerData body = Objects.requireNonNull(response.body());
-        if (isSuccess(response)) {
-            RouterData.setToken(body);
-            RouterView.openMenu(context);
-        } else {
-            String message = Service.getStr(R.string.text_response_error, body.error, body.message);
-            Info info = new Info(false, true, message, "EnterActivity");
-            RouterData.saveInfo(info);
-            RouterView.openInfo(context, info);
-        }
-    }
-
-    void getExit(Context context, Response<ServerData> response, final int number){
-        RouterView.openEnter(context);
-    }
-
     void getByCode(Context context, Response<ServerData> response, final int number){
         ServerData body = Objects.requireNonNull(response.body());
         App.getModel().request.search.clear();

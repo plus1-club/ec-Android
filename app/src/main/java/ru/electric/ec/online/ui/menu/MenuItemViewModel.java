@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.view.MenuItem;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.server.ServerResponse;
+import ru.electric.ec.online.router.RouterServer;
 import ru.electric.ec.online.ui.basket.BasketActivity;
 import ru.electric.ec.online.ui.invoice.InvoiceActivity;
 import ru.electric.ec.online.ui.request.RequestActivity;
@@ -73,7 +73,7 @@ public class MenuItemViewModel {
     }
 
     public void onExit(final Context context) {
-        ServerResponse.getExit(context);
+        RouterServer.getExit((MenuActivity) context);
     }
 
     public boolean onOptionsItemSelected(Context context, MenuItem item){

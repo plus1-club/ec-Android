@@ -6,6 +6,7 @@ import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 
 import ru.electric.ec.online.router.RouterData;
+import ru.electric.ec.online.router.RouterServer;
 import ru.electric.ec.online.router.RouterView;
 
 public class EnterViewModel {
@@ -32,7 +33,7 @@ public class EnterViewModel {
 
     public void onEnter(Context context) {
         RouterData.saveUser(this);
-        RouterData.enterUser(context, this);
+        RouterServer.enterUser((EnterActivity) context, this);
     }
 
     public void onPhone(Context context, String phone){
