@@ -103,7 +103,7 @@ public class RouterServer {
             .postBasket(App.getModel().token, requests)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::updateBasketOk, context::basketError);
+            .subscribe(context::postBasketOk, context::basketError);
     }
 
     public static void putBasket(BasketActivity context, List<Request> requests){

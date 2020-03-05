@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Handler;
 
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.ObservableArrayList;
@@ -146,12 +145,6 @@ public class RequestViewModel {
             RouterServer.postBasket((BasketActivity) context, added);
             total.set(0);
             comment.set("");
-
-            new Handler().postDelayed(() -> {
-                Intent intent = new Intent(context, BasketActivity.class);
-                intent.putExtra("title", context.getString(R.string.text_basket));
-                context.startActivity(intent);
-            }, 3000);
         } else {
             Intent intent = new Intent(context, InfoActivity.class);
             intent.putExtra("title", title.get());
@@ -165,7 +158,6 @@ public class RequestViewModel {
         basket.clear();
         RouterServer.deleteBasket((BasketActivity) context);
         RouterServer.getBasket((BasketActivity) context);
-        ((BasketActivity)context).refreshBasket();
         total.set(0);
     }
 
@@ -177,14 +169,5 @@ public class RequestViewModel {
 
     public void onIssue(final Context context){
         RouterServer.order((BasketActivity) context, comment.get());
-
-        new Handler().postDelayed(() -> {
-            basket.clear();
-            RouterServer.deleteBasket((BasketActivity) context);
-            RouterServer.getBasket((BasketActivity) context);
-            ((BasketActivity)context).refreshBasket();
-            total.set(0);
-            comment.set("");
-        }, 3000);
     }
 }

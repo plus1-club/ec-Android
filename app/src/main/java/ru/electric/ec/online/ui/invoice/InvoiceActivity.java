@@ -2,7 +2,6 @@ package ru.electric.ec.online.ui.invoice;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -111,12 +110,6 @@ public class InvoiceActivity extends AppCompatActivity {
 
     public void refresh(){
         updateList();
-        new Handler().postDelayed(() -> {
-            adapter = new InvoiceViewAdapter();
-            adapter.setItems(viewModel.invoices);
-            binding.list.setAdapter(adapter);
-            binding.swiperefresh.setRefreshing(false);
-        }, 3000);
     }
 
     public void invoiceOk(ServerData body) {
@@ -148,6 +141,10 @@ public class InvoiceActivity extends AppCompatActivity {
         } else {
             RouterView.onUnsuccessful(this, body);
         }
+        adapter = new InvoiceViewAdapter();
+        adapter.setItems(viewModel.invoices);
+        binding.list.setAdapter(adapter);
+        binding.swiperefresh.setRefreshing(false);
     }
 
     public void invoiceError(Throwable throwable) {

@@ -3,7 +3,6 @@ package ru.electric.ec.online.ui.search;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -74,7 +73,6 @@ public class SearchActivity extends AppCompatActivity {
         } else {
             RouterServer.byCode(this, viewModel);
         }
-        refreshSearch();
         binding.swiperefresh.setOnRefreshListener(this::refreshSearch);
     }
 
@@ -100,21 +98,19 @@ public class SearchActivity extends AppCompatActivity {
 
     public void refreshSearch(){
         binding.swiperefresh.setRefreshing(true);
-        new Handler().postDelayed(() -> {
-            adapter = new SearchViewAdapter();
-            if (viewModel.search.size() > 0){
-                adapter.setItems(viewModel.search);
-                binding.list.setAdapter(adapter);
-                binding.swiperefresh.setRefreshing(false);
-            } else {
-                Intent intent = new Intent(this, InfoActivity.class);
-                intent.putExtra("title", this.getTitle());
-                intent.putExtra("info", this.getString(R.string.text_product_not_found));
-                intent.putExtra("activityName", "RequestActivity");
-                this.startActivity(intent);
-            }
-        }, 5000);
-    }
+        adapter = new SearchViewAdapter();
+        if (viewModel.search.size() > 0){
+            adapter.setItems(viewModel.search);
+            binding.list.setAdapter(adapter);
+            binding.swiperefresh.setRefreshing(false);
+        } else {
+            Intent intent = new Intent(this, InfoActivity.class);
+            intent.putExtra("title", this.getTitle());
+            intent.putExtra("info", this.getString(R.string.text_product_not_found));
+            intent.putExtra("activityName", "RequestActivity");
+            this.startActivity(intent);
+        }
+     }
 
     public void searchOk(ServerData body) {
         App.getModel().request.search.clear();
@@ -137,6 +133,18 @@ public class SearchActivity extends AppCompatActivity {
             }
         } else {
             RouterView.onUnsuccessful(this, body, "RequestActivity");
+        }
+        adapter = new SearchViewAdapter();
+        if (viewModel.search.size() > 0){
+            adapter.setItems(viewModel.search);
+            binding.list.setAdapter(adapter);
+            binding.swiperefresh.setRefreshing(false);
+        } else {
+            Intent intent = new Intent(this, InfoActivity.class);
+            intent.putExtra("title", this.getTitle());
+            intent.putExtra("info", this.getString(R.string.text_product_not_found));
+            intent.putExtra("activityName", "RequestActivity");
+            this.startActivity(intent);
         }
     }
 

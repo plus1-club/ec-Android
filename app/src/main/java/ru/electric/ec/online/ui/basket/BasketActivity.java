@@ -1,8 +1,8 @@
 package ru.electric.ec.online.ui.basket;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -74,12 +74,8 @@ public class BasketActivity extends AppCompatActivity {
         // Обновление списка
         binding.swiperefresh.setRefreshing(true);
         RouterServer.getBasket(this);
-        refreshBasket();
         binding.swiperefresh.setOnRefreshListener(
-            () -> {
-                RouterServer.getBasket(this);
-                refreshBasket();
-            }
+            () -> RouterServer.getBasket(this)
         );
     }
 
@@ -103,22 +99,6 @@ public class BasketActivity extends AppCompatActivity {
         navigationModel.actionBar.onConfigurationChanged(newConfig);
     }
 
-    public void refreshBasket(){
-        new Handler().postDelayed(() -> {
-            adapter = new BasketViewAdapter();
-            adapter.setItems(viewModel.basket);
-            binding.list.setAdapter(adapter);
-            viewModel.total.set(0);
-            viewModel.basketAdapter.set(adapter);
-            for (Request item : viewModel.basket) {
-                if(item.check) {
-                    viewModel.total.set(viewModel.total.get() + item.requestCount * item.price);
-                }
-            }
-            binding.swiperefresh.setRefreshing(false);
-        }, 3000);
-    }
-
     public void getBasketOk(ServerData body) {
         App.getModel().request.basket.clear();
         if (RouterServer.isSuccess(body)) {
@@ -140,6 +120,26 @@ public class BasketActivity extends AppCompatActivity {
                 App.getModel().request.basket.add(request);
             }
         }
+        adapter = new BasketViewAdapter();
+        adapter.setItems(viewModel.basket);
+        binding.list.setAdapter(adapter);
+        viewModel.total.set(0);
+        viewModel.basketAdapter.set(adapter);
+        for (Request item : viewModel.basket) {
+            if(item.check) {
+                viewModel.total.set(viewModel.total.get() + item.requestCount * item.price);
+            }
+        }
+        binding.swiperefresh.setRefreshing(false);
+    }
+
+    public void postBasketOk(ServerData body) {
+        if (RouterServer.isSuccess(body)) {
+            RouterServer.getBasket(this);
+        }
+        Intent intent = new Intent(this, BasketActivity.class);
+        intent.putExtra("title", this.getString(R.string.text_basket));
+        this.startActivity(intent);
     }
 
     public void updateBasketOk(ServerData body) {
@@ -162,7 +162,11 @@ public class BasketActivity extends AppCompatActivity {
         } else {
             RouterView.onUnsuccessful(this, body);
         }
+        viewModel.basket.clear();
+        RouterServer.deleteBasket(this);
         RouterServer.getBasket(this);
+        viewModel.total.set(0);
+        viewModel.comment.set("");
     }
 
     public void basketError(Throwable throwable) {

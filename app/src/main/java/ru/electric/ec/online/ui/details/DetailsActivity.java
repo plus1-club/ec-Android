@@ -3,7 +3,6 @@ package ru.electric.ec.online.ui.details;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -133,23 +132,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void refresh(){
-        int number = viewModel.number.get();
-        Invoice invoice = null;
-        for (Invoice item:parent.invoices) {
-            if(item.number == number){
-                invoice = item;
-            }
-        }
-        if (invoice == null) return;
-        final Invoice thisInvoice = invoice;
-
         updateItem(viewModel.status.get());
-        new Handler().postDelayed(() -> {
-            adapter = new DetailsViewAdapter();
-            adapter.setItems(thisInvoice.details);
-            binding.list.setAdapter(adapter);
-            binding.swiperefresh.setRefreshing(false);
-        }, 3000);
     }
 
     public void detailOk(ServerData body) {
@@ -182,6 +165,7 @@ public class DetailsActivity extends AppCompatActivity {
         } else {
             RouterView.onUnsuccessful(this, body);
         }
+        binding.swiperefresh.setRefreshing(false);
     }
 
     public void printOk(ServerData body) {

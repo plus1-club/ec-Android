@@ -72,9 +72,6 @@ public class BasketItemViewModel {
                     multiplicity.get(), unit.get(), price.get(), check.get());
             parent.basket.set(position.get(), request);
 
-            if (!needUpdate.get()){
-                ((BasketActivity)context).refreshBasket();
-            }
             updateStatus();
         }
      }
@@ -101,14 +98,12 @@ public class BasketItemViewModel {
         }
         RouterServer.putBasket((BasketActivity) context, parent.basket);
         RouterServer.getBasket((BasketActivity) context);
-        ((BasketActivity)context).refreshBasket();
         updateStatus();
     }
 
     public void onUpdateStatus(Context context){
         RouterServer.putBasket((BasketActivity) context, parent.basket);
         RouterServer.getBasket((BasketActivity) context);
-        ((BasketActivity)context).refreshBasket();
         needUpdate.set(false);
         updateStatus();
     }
