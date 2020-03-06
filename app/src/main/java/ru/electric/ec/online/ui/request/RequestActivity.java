@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -88,7 +89,8 @@ public class RequestActivity extends AppCompatActivity {
         if (requestCode != 0) {
             if (resultCode == Activity.RESULT_OK) {
                 String path = Objects.requireNonNull(data.getData()).getPath();
-                path = Objects.requireNonNull(path).replace("/document/raw:", "");
+                path = Objects.requireNonNull(path).split(":", 2)[1];
+                path = Environment.getExternalStorageDirectory()+"/"+path;
                 viewModel.excel.set(path);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
