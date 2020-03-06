@@ -15,18 +15,29 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
+import com.google.gson.internal.LinkedTreeMap;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import ru.electric.ec.online.R;
+import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.common.Service;
+import ru.electric.ec.online.databinding.BasketBinding;
+import ru.electric.ec.online.databinding.SearchBinding;
 import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.router.RouterData;
 import ru.electric.ec.online.router.RouterServer;
 import ru.electric.ec.online.router.RouterView;
+import ru.electric.ec.online.server.ServerData;
 import ru.electric.ec.online.ui.basket.BasketActivity;
+import ru.electric.ec.online.ui.basket.BasketViewAdapter;
 import ru.electric.ec.online.ui.info.InfoActivity;
 import ru.electric.ec.online.ui.search.SearchActivity;
+import ru.electric.ec.online.ui.search.SearchViewAdapter;
 
 public class RequestViewModel {
 
@@ -37,15 +48,17 @@ public class RequestViewModel {
     public ObservableBoolean isFullSearch;
     public ObservableDouble total;
     public ObservableField<String> comment;
-    public ObservableInt orderNumber;
+    private ObservableInt orderNumber;
     public ObservableField<String> excel;
     public ObservableBoolean isExcel;
 
     private ObservableField<String> title;
     public ObservableList<Request> search;
     public ObservableList<Request> basket;
-    private ObservableField<Object> searchAdapter;
-    public ObservableField<Object> basketAdapter;
+    public ObservableField<SearchViewAdapter> searchAdapter;
+    public ObservableField<BasketViewAdapter> basketAdapter;
+    public ObservableField<SearchBinding> searchBinding;
+    public ObservableField<BasketBinding> basketBinding;
 
     private static RequestViewModel mInstance;    // Ссылка для биндинга с View
 
@@ -71,6 +84,8 @@ public class RequestViewModel {
         basket = new ObservableArrayList<>();
         searchAdapter = new ObservableField<>();
         basketAdapter = new ObservableField<>();
+        searchBinding = new ObservableField<>();
+        basketBinding = new ObservableField<>();
     }
 
     // Получение единственного экземпляра класса
@@ -142,7 +157,7 @@ public class RequestViewModel {
                 }
             }
             basket.addAll(added);
-            RouterServer.postBasket((BasketActivity) context, added);
+            RouterServer.postBasket(context, this, added);
             total.set(0);
             comment.set("");
         } else {
@@ -156,8 +171,8 @@ public class RequestViewModel {
 
     public void onClear(final Context context){
         basket.clear();
-        RouterServer.deleteBasket((BasketActivity) context);
-        RouterServer.getBasket((BasketActivity) context);
+        RouterServer.deleteBasket(context, this);
+        RouterServer.getBasket(context, this);
         total.set(0);
     }
 
@@ -168,6 +183,118 @@ public class RequestViewModel {
     }
 
     public void onIssue(final Context context){
-        RouterServer.order((BasketActivity) context, comment.get());
+        RouterServer.order(context, this, comment.get());
+    }
+
+    public void searchOk(Context context, ServerData body) {
+        App.getModel().request.search.clear();
+        if (RouterServer.isSuccess(body)) {
+            List<?> data = (List<?>) body.data;
+            for (Object element : data) {
+                @SuppressWarnings("unchecked")
+                Map<String, String> el = (LinkedTreeMap<String, String>) element;
+                Request request = new Request(
+                        el.get("product"),
+                        Service.getInt(el.get("requestCount")),
+                        Service.getInt(el.get("stockCount")),
+                        Service.getInt(el.get("multiplicity")),
+                        el.get("unit"),
+                        false);
+                if (request.requestCount % request.multiplicity > 0) {
+                    request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
+                }
+                App.getModel().request.search.add(request);
+            }
+        } else {
+            RouterView.onUnsuccessful(context, body, "RequestActivity");
+        }
+        searchAdapter.set(new SearchViewAdapter());
+        if (search.size() > 0){
+            Objects.requireNonNull(searchAdapter.get()).setItems(search);
+            Objects.requireNonNull(searchBinding.get()).list.setAdapter(searchAdapter.get());
+            Objects.requireNonNull(searchBinding.get()).swiperefresh.setRefreshing(false);
+        } else {
+            String message = context.getString(R.string.text_product_not_found);
+            Info info = new Info(false, true, message, "RequestActivity");
+            RouterView.openInfo(context, info);
+        }
+    }
+
+    public void searchError(Context context, Throwable throwable) {
+        RouterView.onError(context, throwable, "RequestActivity");
+    }
+
+    public void basketOk(Context context, ServerData body) {
+        App.getModel().request.basket.clear();
+        if (RouterServer.isSuccess(body)) {
+            List<?> data = (List<?>) body.data;
+            for (Object element : data) {
+                @SuppressWarnings("unchecked")
+                Map<String, String> el = (LinkedTreeMap<String, String>) element;
+                Request request = new Request(
+                        el.get("product"),
+                        Service.getInt(el.get("requestCount")),
+                        Service.getInt(el.get("stockCount")),
+                        Service.getInt(el.get("multiplicity")),
+                        el.get("unit"),
+                        Service.getDouble(el.get("price")),
+                        true);
+                if (request.requestCount % request.multiplicity > 0) {
+                    request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
+                }
+                App.getModel().request.basket.add(request);
+            }
+        }
+        basketAdapter.set(new BasketViewAdapter());
+        Objects.requireNonNull(basketAdapter.get()).setItems(basket);
+        Objects.requireNonNull(basketBinding.get()).list.setAdapter(basketAdapter.get());
+        total.set(0);
+        basketAdapter.set(basketAdapter.get());
+        for (Request item : basket) {
+            if(item.check) {
+                total.set(total.get() + item.requestCount * item.price);
+            }
+        }
+        Objects.requireNonNull(basketBinding.get()).swiperefresh.setRefreshing(false);
+    }
+
+    public void postBasketOk(Context context, ServerData body) {
+        if (RouterServer.isSuccess(body)) {
+            RouterServer.getBasket(context, this);
+        }
+        Intent intent = new Intent(context, BasketActivity.class);
+        intent.putExtra("title", context.getString(R.string.text_basket));
+        context.startActivity(intent);
+    }
+
+    public void updateBasketOk(Context context, ServerData body) {
+        if (RouterServer.isSuccess(body)) {
+            RouterServer.getBasket(context, this);
+        }
+    }
+
+    public void orderOk(Context context, ServerData body) {
+        if (RouterServer.isSuccess(body)) {
+            LinkedTreeMap data = (LinkedTreeMap) body.data;
+            int orderNumber = Service.getInt((String)data.get("number"));
+            App.getModel().request.orderNumber.set(orderNumber);
+
+            String message = Service.getStr(R.string.text_order_processed, orderNumber);
+            Info info = new Info(false, true, message, "BasketActivity");
+            info.title = context.getString(R.string.text_basket);
+            RouterData.saveInfo(info);
+            RouterView.openInfo(context, info);
+        } else {
+            RouterView.onUnsuccessful(context, body);
+        }
+        basket.clear();
+        RouterServer.deleteBasket(context, this);
+        RouterServer.getBasket(context, this);
+        total.set(0);
+        comment.set("");
+    }
+
+    public void basketError(Context context, Throwable throwable) {
+        RouterView.onError(context, throwable);
     }
 }

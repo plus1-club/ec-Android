@@ -20,11 +20,11 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchItemViewHolder
     private List<Request> requests;
     private SearchItemViewModel viewModel;
 
-    SearchViewAdapter() {
+    public SearchViewAdapter() {
         requests = new ArrayList<>();
     }
 
-    void setItems(Collection<Request> collection) {
+    public void setItems(Collection<Request> collection) {
         requests.addAll(collection);
         notifyDataSetChanged();
     }

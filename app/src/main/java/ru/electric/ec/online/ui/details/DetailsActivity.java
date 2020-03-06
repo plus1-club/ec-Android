@@ -1,6 +1,5 @@
 package ru.electric.ec.online.ui.details;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,22 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.google.gson.internal.LinkedTreeMap;
-
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.DetailsBinding;
-import ru.electric.ec.online.models.Detail;
-import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.router.RouterServer;
-import ru.electric.ec.online.router.RouterView;
-import ru.electric.ec.online.server.ServerData;
-import ru.electric.ec.online.ui.bill.BillActivity;
 import ru.electric.ec.online.ui.invoice.InvoiceViewModel;
 import ru.electric.ec.online.ui.menu.MenuViewModel;
 
@@ -74,6 +63,10 @@ public class DetailsActivity extends AppCompatActivity {
                 Service.isEqual(status, Service.getStr(R.string.status_reserved)) ||
                         Service.isEqual(status, Service.getStr(R.string.status_ordered)));
 
+        // Сохранение адаптера и биндинга в модели
+        viewModel.adapter.set(adapter);
+        viewModel.binding.set(binding);
+
         // Подключение навигации
         navigationModel = new MenuViewModel(
                 this,  binding.drawer, binding.include.toolbar, binding.navigator);
@@ -109,23 +102,23 @@ public class DetailsActivity extends AppCompatActivity {
     public void updateItem(String status){
         if (Service.isEqual(status, getString(R.string.status_unconfirmed))) {
             setTitle(getString(R.string.text_item_unconfirmed));
-            RouterServer.unconfirmedItem(this, viewModel.number.get());
+            RouterServer.unconfirmedItem(this, viewModel, viewModel.number.get());
         } else if (Service.isEqual(status, getString(R.string.status_reserved))) {
             setTitle(getString(R.string.text_item_reserved));
-            RouterServer.reservedItem(this, viewModel.number.get());
+            RouterServer.reservedItem(this, viewModel, viewModel.number.get());
         } else if (Service.isEqual(status, getString(R.string.status_ordered))) {
             setTitle(getString(R.string.text_item_ordered));
-            RouterServer.orderedItem(this, viewModel.number.get());
+            RouterServer.orderedItem(this, viewModel, viewModel.number.get());
         } else if (Service.isEqual(status, getString(R.string.status_canceled))) {
             setTitle(getString(R.string.text_item_canceled));
-            RouterServer.canceledItem(this, viewModel.number.get());
+            RouterServer.canceledItem(this, viewModel, viewModel.number.get());
         } else if (Service.isEqual(status, getString(R.string.status_overdie))) {
             this.setTitle(getString(R.string.text_item_overdie));
-            RouterServer.canceledItem(this, viewModel.number.get());
+            RouterServer.canceledItem(this, viewModel, viewModel.number.get());
         } else if (Service.isEqual(status, getString(R.string.status_shipped)) ||
                 Service.isEqual(status, getString(R.string.text_item_shipped))) {
             this.setTitle(getString(R.string.text_item_shipped));
-            RouterServer.shippedItem(this, viewModel.number.get());
+            RouterServer.shippedItem(this, viewModel, viewModel.number.get());
         } else {
             this.setTitle(getString(R.string.text_item_invoice));
         }
@@ -133,56 +126,5 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void refresh(){
         updateItem(viewModel.status.get());
-    }
-
-    public void detailOk(ServerData body) {
-        if (RouterServer.isSuccess(body)) {
-            Invoice invoice = null;
-            for (Invoice item: App.getModel().invoice.invoices) {
-                if(item.number == viewModel.number.get()){
-                    invoice = item;
-                }
-            }
-            if (invoice == null) return;
-
-            List<?> data = (List<?>) body.data;
-            invoice.details.clear();
-            for (Object element : data) {
-                @SuppressWarnings("unchecked")
-                Map<String, String> el = (LinkedTreeMap<String, String>) element;
-                Detail detail = new Detail(
-                        el.get("product"),
-                        Service.getInt(el.get("count")),
-                        el.get("unit"),
-                        Service.getDouble(el.get("price")),
-                        Service.getDouble(el.get("sum")),
-                        el.get("available"),
-                        el.get("delivery"));
-                invoice.details.add(detail);
-            }
-            DetailsViewAdapter adapter = new DetailsViewAdapter();
-            adapter.updateAdapter(invoice, this);
-        } else {
-            RouterView.onUnsuccessful(this, body);
-        }
-        binding.swiperefresh.setRefreshing(false);
-    }
-
-    public void printOk(ServerData body) {
-        if (RouterServer.isSuccess(body)) {
-            LinkedTreeMap data = (LinkedTreeMap) body.data;
-            String link = (String) data.get("file");
-            Intent intent = new Intent(this, BillActivity.class);
-            intent.putExtra("title", Service.getStr(R.string.text_invoice_short, viewModel.number.get()));
-            intent.putExtra("number", viewModel.number.get());
-            intent.putExtra("link", link);
-            startActivity(intent);
-        } else {
-            RouterView.onUnsuccessful(this, body);
-        }
-    }
-
-    public void detailError(Throwable throwable) {
-        RouterView.onError(this, throwable);
     }
 }

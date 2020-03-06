@@ -20,11 +20,11 @@ public class BasketViewAdapter extends RecyclerView.Adapter<BasketItemViewHolder
     private List<Request> requests;
     private BasketItemViewModel viewModel;
 
-    BasketViewAdapter() {
+    public BasketViewAdapter() {
         requests = new ArrayList<>();
     }
 
-    void setItems(Collection<Request> collection) {
+    public void setItems(Collection<Request> collection) {
         requests.addAll(collection);
         notifyDataSetChanged();
     }

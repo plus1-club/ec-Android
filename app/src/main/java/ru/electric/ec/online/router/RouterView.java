@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.server.ServerData;
@@ -67,11 +66,5 @@ public class RouterView {
         Info info = new Info(false, true, message, activityName);
         RouterData.saveInfo(info);
         RouterView.openInfo(context, info);
-    }
-
-    public static void exit(Object object){
-        Context context = App.getAppContext();
-        Intent intent = new Intent(context, EnterActivity.class);
-        context.startActivity(intent);
     }
 }

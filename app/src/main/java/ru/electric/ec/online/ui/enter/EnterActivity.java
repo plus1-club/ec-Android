@@ -7,9 +7,6 @@ import androidx.databinding.DataBindingUtil;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.EnterBinding;
-import ru.electric.ec.online.router.RouterServer;
-import ru.electric.ec.online.router.RouterView;
-import ru.electric.ec.online.server.ServerData;
 
 public class EnterActivity extends AppCompatActivity {
 
@@ -21,18 +18,5 @@ public class EnterActivity extends AppCompatActivity {
         viewModel = EnterViewModel.getInstance();
         EnterBinding binding = DataBindingUtil.setContentView(this, R.layout.enter);
         binding.setViewModel(viewModel);
-    }
-
-    public void enterOk(ServerData body) {
-        if (RouterServer.isSuccess(body)) {
-            RouterServer.setToken(body);
-            RouterView.openMenu(this);
-        } else {
-            RouterView.onUnsuccessful(this, body);
-        }
-    }
-
-    public void enterError(Throwable throwable) {
-        RouterView.onError(this, throwable);
     }
 }

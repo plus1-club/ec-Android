@@ -96,14 +96,14 @@ public class BasketItemViewModel {
         for (Request item: deleted){
             parent.basket.remove(item);
         }
-        RouterServer.putBasket((BasketActivity) context, parent.basket);
-        RouterServer.getBasket((BasketActivity) context);
+        RouterServer.putBasket(context, parent);
+        RouterServer.getBasket(context, parent);
         updateStatus();
     }
 
     public void onUpdateStatus(Context context){
-        RouterServer.putBasket((BasketActivity) context, parent.basket);
-        RouterServer.getBasket((BasketActivity) context);
+        RouterServer.putBasket(context, parent);
+        RouterServer.getBasket(context, parent);
         needUpdate.set(false);
         updateStatus();
     }

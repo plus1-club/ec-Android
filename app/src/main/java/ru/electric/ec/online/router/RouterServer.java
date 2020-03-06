@@ -18,14 +18,10 @@ import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.server.ServerData;
 import ru.electric.ec.online.server.ServerNetwork;
-import ru.electric.ec.online.ui.basket.BasketActivity;
-import ru.electric.ec.online.ui.details.DetailsActivity;
 import ru.electric.ec.online.ui.details.DetailsViewModel;
-import ru.electric.ec.online.ui.enter.EnterActivity;
 import ru.electric.ec.online.ui.enter.EnterViewModel;
-import ru.electric.ec.online.ui.invoice.InvoiceActivity;
+import ru.electric.ec.online.ui.invoice.InvoiceViewModel;
 import ru.electric.ec.online.ui.request.RequestViewModel;
-import ru.electric.ec.online.ui.search.SearchActivity;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 @SuppressLint("CheckResult")
@@ -44,23 +40,27 @@ public class RouterServer {
         }
     }
 
-    public static void enterUser(EnterActivity context, EnterViewModel viewModel){
+    public static void enterUser(Context context, EnterViewModel viewModel){
         ServerNetwork.getApi()
             .enter(viewModel.login.get(), viewModel.password.get())
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::enterOk, context::enterError);
+            .subscribe(
+                body -> viewModel.enterOk(context, body),
+                error ->viewModel.enterError(context, error));
     }
 
-    public static void getExit(Context context) {
+    public static void getExit(Context context, EnterViewModel viewModel) {
         ServerNetwork.getApi()
             .exit(App.getModel().token)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(RouterView::exit, RouterView::exit);
+            .subscribe(
+                body -> viewModel.exitOk(context, body),
+                error ->viewModel.exitError(context, error));
     }
 
-    public static void byCode(SearchActivity context, RequestViewModel viewModel) {
+    public static void byCode(Context context, RequestViewModel viewModel) {
         ServerNetwork.getApi()
             .byCode(App.getModel().token,
                     viewModel.product.get(),
@@ -68,10 +68,12 @@ public class RouterServer {
                     viewModel.isFullSearch.get())
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::searchOk, context::searchError);
+            .subscribe(
+                body -> viewModel.searchOk(context, body),
+                error ->viewModel.searchError(context, error));
     }
 
-    public static void fromExcel(SearchActivity context, RequestViewModel viewModel) {
+    public static void fromExcel(Context context, RequestViewModel viewModel) {
         if (viewModel.excel.get() != null){
             File fileExcel =  new File(Objects.requireNonNull(viewModel.excel.get()));
             RequestBody requestFile = RequestBody.create(fileExcel, MediaType.parse("multipart/form-data"));
@@ -79,144 +81,179 @@ public class RouterServer {
                     fileExcel.getName(), requestFile);
 
             ServerNetwork.getApi()
-                    .fromExcel(App.getModel().token,
-                            excelPart,
-                            viewModel.productColumn.get(),
-                            viewModel.countColumn.get(),
-                            viewModel.isFullSearch.get())
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(context::searchOk, context::searchError);
+                .fromExcel(App.getModel().token,
+                        excelPart,
+                        viewModel.productColumn.get(),
+                        viewModel.countColumn.get(),
+                        viewModel.isFullSearch.get())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        body -> viewModel.searchOk(context, body),
+                        error ->viewModel.searchError(context, error));
         }
     }
 
-    public static void getBasket(BasketActivity context) {
+    public static void getBasket(Context context, RequestViewModel viewModel) {
         ServerNetwork.getApi()
             .getBasket(App.getModel().token)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::getBasketOk, context::basketError);
+            .subscribe(
+                body -> viewModel.basketOk(context, body),
+                error ->viewModel.basketError(context, error));
     }
 
-    public static void postBasket(BasketActivity context, List<Request> requests){
+    public static void postBasket(Context context, RequestViewModel viewModel, List<Request> requests){
         ServerNetwork.getApi()
             .postBasket(App.getModel().token, requests)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::postBasketOk, context::basketError);
+            .subscribe(
+                body -> viewModel.postBasketOk(context, body),
+                error ->viewModel.basketError(context, error));
     }
 
-    public static void putBasket(BasketActivity context, List<Request> requests){
+    public static void putBasket(Context context, RequestViewModel viewModel){
+        List<Request> requests = viewModel.basket;
         ServerNetwork.getApi()
             .putBasket(App.getModel().token, requests)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::updateBasketOk, context::basketError);
+            .subscribe(
+                body -> viewModel.updateBasketOk(context, body),
+                error ->viewModel.basketError(context, error));
     }
 
-    public static void deleteBasket(BasketActivity context){
+    public static void deleteBasket(Context context, RequestViewModel viewModel){
         ServerNetwork.getApi()
             .deleteBasket(App.getModel().token)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::updateBasketOk, context::basketError);
+            .subscribe(
+                body -> viewModel.updateBasketOk(context, body),
+                error ->viewModel.basketError(context, error));
     }
 
-    public static void order(BasketActivity context, String comment){
+    public static void order(Context context, RequestViewModel viewModel, String comment){
         ServerNetwork.getApi()
             .order(App.getModel().token, comment)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::orderOk, context::basketError);
+            .subscribe(
+                body -> viewModel.orderOk(context, body),
+                error ->viewModel.basketError(context, error));
     }
 
-    public static void unconfirmedList(InvoiceActivity context) {
+    public static void unconfirmedList(Context context, InvoiceViewModel viewModel) {
         ServerNetwork.getApi()
             .unconfirmedList(App.getModel().token)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::invoiceOk, context::invoiceError);
+            .subscribe(
+                body -> viewModel.invoiceOk(context, body),
+                error ->viewModel.invoiceError(context, error));
     }
 
-    public static void reservedList(InvoiceActivity context) {
+    public static void reservedList(Context context, InvoiceViewModel viewModel) {
         ServerNetwork.getApi()
             .reservedList(App.getModel().token)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::invoiceOk, context::invoiceError);
+            .subscribe(
+                body -> viewModel.invoiceOk(context, body),
+                error ->viewModel.invoiceError(context, error));
     }
 
-    public static void orderedList(InvoiceActivity context) {
+    public static void orderedList(Context context, InvoiceViewModel viewModel) {
         ServerNetwork.getApi()
             .orderedList(App.getModel().token)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::invoiceOk, context::invoiceError);
+            .subscribe(
+                body -> viewModel.invoiceOk(context, body),
+                error ->viewModel.invoiceError(context, error));
     }
 
-    public static void canceledList(InvoiceActivity context) {
+    public static void canceledList(Context context, InvoiceViewModel viewModel) {
         ServerNetwork.getApi()
             .canceledList(App.getModel().token)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::invoiceOk, context::invoiceError);
+            .subscribe(
+                body -> viewModel.invoiceOk(context, body),
+                error ->viewModel.invoiceError(context, error));
     }
 
-    public static void shippedList(InvoiceActivity context) {
+    public static void shippedList(Context context, InvoiceViewModel viewModel) {
         ServerNetwork.getApi()
             .shippedList(App.getModel().token)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::invoiceOk, context::invoiceError);
+            .subscribe(
+                body -> viewModel.invoiceOk(context, body),
+                error ->viewModel.invoiceError(context, error));
     }
 
-    public static void unconfirmedItem(DetailsActivity context, final int number) {
+    public static void unconfirmedItem(Context context, DetailsViewModel viewModel, final int number) {
         ServerNetwork.getApi()
             .unconfirmedItem(App.getModel().token, number)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::detailOk, context::detailError);
+            .subscribe(
+                body -> viewModel.detailOk(context, body, number),
+                error ->viewModel.detailError(context, error));
     }
 
-    public static void reservedItem(DetailsActivity context, final int number) {
+    public static void reservedItem(Context context, DetailsViewModel viewModel, final int number) {
         ServerNetwork.getApi()
             .reservedItem(App.getModel().token, number)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::detailOk, context::detailError);
+            .subscribe(
+                body -> viewModel.detailOk(context, body, number),
+                error ->viewModel.detailError(context, error));
     }
 
-    public static void orderedItem(DetailsActivity context, final int number) {
+    public static void orderedItem(Context context, DetailsViewModel viewModel, final int number) {
         DetailsViewModel.getInstance().number.set(number);
         ServerNetwork.getApi()
             .orderedItem(App.getModel().token, number)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::detailOk, context::detailError);
+            .subscribe(
+                body -> viewModel.detailOk(context, body, number),
+                error ->viewModel.detailError(context, error));
     }
 
-    public static void canceledItem(DetailsActivity context, final int number) {
+    public static void canceledItem(Context context, DetailsViewModel viewModel, final int number) {
         ServerNetwork.getApi()
             .canceledItem(App.getModel().token, number)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::detailOk, context::detailError);
+            .subscribe(
+                body -> viewModel.detailOk(context, body, number),
+                error ->viewModel.detailError(context, error));
     }
 
-    public static void shippedItem(DetailsActivity context, final int number) {
+    public static void shippedItem(Context context, DetailsViewModel viewModel, final int number) {
         ServerNetwork.getApi()
             .shippedItem(App.getModel().token, number)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::detailOk, context::detailError);
+            .subscribe(
+                body -> viewModel.detailOk(context, body, number),
+                error ->viewModel.detailError(context, error));
     }
 
-    public static void print(DetailsActivity context, final int number) {
+    public static void print(Context context, DetailsViewModel viewModel, final int number) {
         ServerNetwork.getApi()
             .print(App.getModel().token, number)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(context::printOk, context::detailError);
+            .subscribe(
+                body -> viewModel.printOk(context, body, number),
+                error ->viewModel.detailError(context, error));
    }
 
 }
