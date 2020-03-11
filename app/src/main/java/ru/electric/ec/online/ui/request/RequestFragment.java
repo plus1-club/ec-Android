@@ -39,7 +39,7 @@ public class RequestFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         viewModel = RequestViewModel.getInstance();
-        if (page == 1) {
+        if (page == 0) {
             RequestByCodeBinding binding = DataBindingUtil.inflate(inflater, R.layout.request_by_code, null, false);
             binding.setViewModel(viewModel);
             return binding.getRoot();

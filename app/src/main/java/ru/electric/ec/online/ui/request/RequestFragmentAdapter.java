@@ -22,7 +22,7 @@ public class RequestFragmentAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        return RequestFragment.newInstance(position + 1);
+        return RequestFragment.newInstance(position);
     }
 
     @Override

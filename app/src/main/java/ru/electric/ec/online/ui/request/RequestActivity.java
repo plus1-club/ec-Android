@@ -21,7 +21,6 @@ public class RequestActivity extends AppCompatActivity {
     RequestViewModel viewModel;
     MenuViewModel navigationModel;
     RequestBinding binding;
-    int page = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,7 @@ public class RequestActivity extends AppCompatActivity {
             viewModel.title.set(title);
             setTitle(title);
         }
-        page = bundle.getInt("page");
+        viewModel.page.set(bundle.getInt("page"));
 
         binding = DataBindingUtil.setContentView(this, R.layout.request);
         binding.setViewModel(viewModel);
@@ -47,7 +46,12 @@ public class RequestActivity extends AppCompatActivity {
         // Установить Toolbar для замены ActionBar'а.
         setSupportActionBar(navigationModel.toolbar);
 
-        binding.tabs.selectTab(binding.tabs.getTabAt(page));
+        if (viewModel.page.get() == 0) {
+            viewModel.isExcel.set(false);
+        } else {
+            viewModel.isExcel.set(true);
+        }
+        binding.tabs.selectTab(binding.tabs.getTabAt(viewModel.page.get()));
 
         binding.tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

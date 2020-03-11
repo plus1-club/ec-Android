@@ -52,6 +52,7 @@ public class RequestViewModel {
     private ObservableInt orderNumber;
     public ObservableField<String> excel;
     public ObservableBoolean isExcel;
+    ObservableInt page;
 
     public ObservableField<String> title;
     public ObservableList<Request> search;
@@ -77,8 +78,10 @@ public class RequestViewModel {
         orderNumber = new ObservableInt();
         excel = new ObservableField<>();
         isExcel = new ObservableBoolean();
+        page = new ObservableInt();
 
         isFullSearch.set(true);
+        page.set(1);
 
         title = new ObservableField<>();
         search = new ObservableArrayList<>();

@@ -66,6 +66,12 @@ public class FilesActivity extends AppCompatActivity {
         initFileManager();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        viewModel.files.clear();
+    }
+
     /**
      * Этот метод будет вызван, когда пользователь предоставит разрешения, или откажет в них
      *
