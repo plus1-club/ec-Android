@@ -1,10 +1,7 @@
 package ru.electric.ec.online.ui.request;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -24,13 +21,21 @@ public class RequestActivity extends AppCompatActivity {
     RequestViewModel viewModel;
     MenuViewModel navigationModel;
     RequestBinding binding;
+    int page = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = RequestViewModel.getInstance();
-        Bundle bundle = getIntent().getExtras();
-        this.setTitle(Objects.requireNonNull(bundle).getString("title"));
+        Bundle bundle = Objects.requireNonNull(getIntent().getExtras());
+        String title = bundle.getString("title");
+        if (title == null || title.isEmpty()){
+            setTitle(viewModel.title.get());
+        } else {
+            viewModel.title.set(title);
+            setTitle(title);
+        }
+        page = bundle.getInt("page");
 
         binding = DataBindingUtil.setContentView(this, R.layout.request);
         binding.setViewModel(viewModel);
@@ -41,6 +46,8 @@ public class RequestActivity extends AppCompatActivity {
                 this,  binding.drawer, binding.include.toolbar, binding.navigator);
         // Установить Toolbar для замены ActionBar'а.
         setSupportActionBar(navigationModel.toolbar);
+
+        binding.tabs.selectTab(binding.tabs.getTabAt(page));
 
         binding.tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -83,21 +90,4 @@ public class RequestActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         navigationModel.actionBar.onConfigurationChanged(newConfig);
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode != 0) {
-            if (resultCode == Activity.RESULT_OK) {
-                String path = Objects.requireNonNull(data.getData()).getPath();
-                path = Objects.requireNonNull(path).split(":", 2)[1];
-                path = Environment.getExternalStorageDirectory()+"/"+path;
-                viewModel.excel.set(path);
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                return;
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
 }

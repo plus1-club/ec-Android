@@ -35,6 +35,7 @@ import ru.electric.ec.online.router.RouterView;
 import ru.electric.ec.online.server.ServerData;
 import ru.electric.ec.online.ui.basket.BasketActivity;
 import ru.electric.ec.online.ui.basket.BasketViewAdapter;
+import ru.electric.ec.online.ui.files.FilesActivity;
 import ru.electric.ec.online.ui.info.InfoActivity;
 import ru.electric.ec.online.ui.search.SearchActivity;
 import ru.electric.ec.online.ui.search.SearchViewAdapter;
@@ -52,7 +53,7 @@ public class RequestViewModel {
     public ObservableField<String> excel;
     public ObservableBoolean isExcel;
 
-    private ObservableField<String> title;
+    public ObservableField<String> title;
     public ObservableList<Request> search;
     public ObservableList<Request> basket;
     public ObservableField<SearchViewAdapter> searchAdapter;
@@ -105,22 +106,14 @@ public class RequestViewModel {
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions((Activity)context, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+        } else {
+            Intent intent = new Intent(context, FilesActivity.class);
+            intent.putExtra("title", (title.get()));
+            context.startActivity(intent);
         }
-
-        String[] mimeTypes = {
-                "application/vnd.ms-excel",                                         // .xls
-                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",// .xlsx
-                "application/vnd.oasis.opendocument.spreadsheet"};                  // .ods
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-        ((RequestActivity) context).startActivityForResult(Intent.createChooser(intent,"ChooseFile"), 1);
     }
 
     public void onNext(Context context){
-        title.set(((Activity)context).getTitle().toString());
         Intent intent = new Intent(context, SearchActivity.class);
         intent.putExtra("title", (title.get()));
         context.startActivity(intent);

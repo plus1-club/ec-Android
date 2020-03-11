@@ -11,6 +11,7 @@ import ru.electric.ec.online.server.ServerData;
 import ru.electric.ec.online.ui.enter.EnterActivity;
 import ru.electric.ec.online.ui.info.InfoActivity;
 import ru.electric.ec.online.ui.menu.MenuActivity;
+import ru.electric.ec.online.ui.request.RequestActivity;
 
 public class RouterView {
 
@@ -26,6 +27,12 @@ public class RouterView {
 
     public static void openEnter(Context context){
         Intent intent = new Intent(context, EnterActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void openRequest(Context context, int page){
+        Intent intent = new Intent(context, RequestActivity.class);
+        intent.putExtra("page", page);
         context.startActivity(intent);
     }
 

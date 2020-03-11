@@ -75,10 +75,10 @@ public class RouterServer {
 
     public static void fromExcel(Context context, RequestViewModel viewModel) {
         if (viewModel.excel.get() != null){
-            File fileExcel =  new File(Objects.requireNonNull(viewModel.excel.get()));
-            RequestBody requestFile = RequestBody.create(fileExcel, MediaType.parse("multipart/form-data"));
+            File file = new File(Objects.requireNonNull(viewModel.excel.get()));
+            RequestBody requestFile = RequestBody.create(file, MediaType.parse("multipart/form-data"));
             MultipartBody.Part excelPart = MultipartBody.Part.createFormData("excel",
-                    fileExcel.getName(), requestFile);
+                    file.getName(), requestFile);
 
             ServerNetwork.getApi()
                 .fromExcel(App.getModel().token,
