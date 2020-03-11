@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
+
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Info;
@@ -49,14 +52,26 @@ public class RouterView {
     }
 
     public static void onError(Context context, Throwable throwable){
-        String message = Service.getStr(R.string.text_response_failure, throwable.getMessage());
+        String text = "";
+        if (throwable instanceof UnknownHostException){
+            text = Service.getStr(R.string.error_UnknownHostException);
+        } else if (throwable instanceof SocketTimeoutException){
+            text = Service.getStr(R.string.error_SocketTimeoutException);
+        }
+        String message = Service.getStr(R.string.text_response_failure, throwable.getMessage() + "\n" + text);
         Info info = new Info(false, true, message);
         RouterData.saveInfo(info);
         RouterView.openInfo(context, info);
     }
 
     public static void onError(Context context, Throwable throwable, String activityName){
-        String message = Service.getStr(R.string.text_response_failure, throwable.getMessage());
+        String text = "";
+        if (throwable instanceof UnknownHostException){
+            text = Service.getStr(R.string.error_UnknownHostException);
+        } else if (throwable instanceof SocketTimeoutException){
+            text = Service.getStr(R.string.error_SocketTimeoutException);
+        }
+        String message = Service.getStr(R.string.text_response_failure, throwable.getMessage() + "\n" + text);
         Info info = new Info(false, true, message, activityName);
         RouterData.saveInfo(info);
         RouterView.openInfo(context, info);
