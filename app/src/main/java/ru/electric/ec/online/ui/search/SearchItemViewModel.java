@@ -28,7 +28,7 @@ public class SearchItemViewModel {
     private ObservableDouble price;
     public ObservableDouble sum;
     public ObservableField<String> status;
-    public ObservableInt color;
+    public int color;
     public ObservableBoolean check;
     private ObservableBoolean needUpdate;
 
@@ -42,7 +42,6 @@ public class SearchItemViewModel {
         price = new ObservableDouble();
         sum = new ObservableDouble();
         status = new ObservableField<>();
-        color = new ObservableInt();
         check = new ObservableBoolean();
         needUpdate = new ObservableBoolean();
         needUpdate.set(false);
@@ -50,7 +49,12 @@ public class SearchItemViewModel {
     }
 
     public void onTextChanged(Context context, CharSequence s, int start, int before, int charCount) {
-        int newCount = s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString());
+        int newCount;
+        try {
+            newCount = s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString());
+        } catch (Exception e) {
+            newCount = 0;
+        }
         if (newCount != count.get() && newCount != 0)
         {
             needUpdate.set(true);
@@ -95,6 +99,6 @@ public class SearchItemViewModel {
     void updateStatus() {
         Count countStatus = Service.status(count.get(), stockCount.get(), needUpdate.get());
         status.set(countStatus.status);
-        color.set(countStatus.color);
+        color = countStatus.color;
     }
 }

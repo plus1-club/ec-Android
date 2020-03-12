@@ -39,15 +39,15 @@
             <EditText
                 android:id="@+id/editCount"
                 style="@style/AppTheme.ECOnline.Edit"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="@dimen/edit_count_width"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
                 android:layout_margin="0dp"
                 android:backgroundTint="@{viewModel.color}"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:inputType="number|text"
                 android:onTextChanged="@{(s, start, before, count) -> viewModel.onTextChanged(context, s, start, before, count)}"
                 android:text="@={`` + viewModel.count}"
-                android:textAlignment="center"
                 tools:ignore="Autofill,LabelFor" />
 
             <TextView
