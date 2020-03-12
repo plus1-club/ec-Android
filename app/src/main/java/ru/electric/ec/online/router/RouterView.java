@@ -52,26 +52,30 @@ public class RouterView {
     }
 
     public static void onError(Context context, Throwable throwable){
-        String text = "";
+        String text;
         if (throwable instanceof UnknownHostException){
             text = Service.getStr(R.string.error_UnknownHostException);
         } else if (throwable instanceof SocketTimeoutException){
             text = Service.getStr(R.string.error_SocketTimeoutException);
+        } else {
+            text = throwable.getMessage();
         }
-        String message = Service.getStr(R.string.text_response_failure, throwable.getMessage() + "\n" + text);
+        String message = Service.getStr(R.string.text_response_failure, text);
         Info info = new Info(false, true, message);
         RouterData.saveInfo(info);
         RouterView.openInfo(context, info);
     }
 
     public static void onError(Context context, Throwable throwable, String activityName){
-        String text = "";
+        String text;
         if (throwable instanceof UnknownHostException){
             text = Service.getStr(R.string.error_UnknownHostException);
         } else if (throwable instanceof SocketTimeoutException){
             text = Service.getStr(R.string.error_SocketTimeoutException);
+        } else {
+            text = throwable.getMessage();
         }
-        String message = Service.getStr(R.string.text_response_failure, throwable.getMessage() + "\n" + text);
+        String message = Service.getStr(R.string.text_response_failure,  text);
         Info info = new Info(false, true, message, activityName);
         RouterData.saveInfo(info);
         RouterView.openInfo(context, info);
