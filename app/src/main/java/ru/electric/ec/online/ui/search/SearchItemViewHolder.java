@@ -28,7 +28,7 @@ class SearchItemViewHolder extends RecyclerView.ViewHolder {
         viewModel.stockCount.set(request.stockCount);
         viewModel.multiplicity.set(request.multiplicity);
         viewModel.unit.set(request.unit);
-        viewModel.check.set(false);
+        viewModel.check.set(request.check);
         viewModel.updateStatus();
     }
 }

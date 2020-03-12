@@ -11,4 +11,5 @@
     <dimen name="label_height">28dp</dimen>
     <dimen name="label_width">110dp</dimen>
     <dimen name="big_label_width">140dp</dimen>
+    <dimen name="basket_footer">210dp</dimen>
 </resources>

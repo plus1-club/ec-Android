@@ -30,7 +30,7 @@ class BasketItemViewHolder extends RecyclerView.ViewHolder {
         viewModel.unit.set(request.unit);
         viewModel.price.set(request.price);
         viewModel.sum.set(request.sum);
-        viewModel.check.set(true);
+        viewModel.check.set(request.check);
         viewModel.updateStatus();
     }
 }

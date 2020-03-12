@@ -106,6 +106,8 @@
     <string name="text_acitivity_not_found">Не найден экран %s</string>
     <string name="error_UnknownHostException">Соединение с интернетом нестабильно. Подключитесь к стабильному интернету и попробуйте снова.</string>
     <string name="error_SocketTimeoutException">Соединение с интернетом нестабильно. Подключитесь к стабильному интернету и попробуйте снова.</string>
+    <string name="button_select_all">Выбрать все</string>
+    <string name="button_select_none">Очистить выделение</string>
 
     <!-- Прочее -->
 

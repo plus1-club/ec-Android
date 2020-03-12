@@ -138,6 +138,53 @@ public class RequestViewModel {
         context.startActivity(intent);
     }
 
+    public void selectAllSearch(Context context){
+        Objects.requireNonNull(searchBinding.get()).swiperefresh.setRefreshing(true);
+        for (Request item: search){
+            item.check = true;
+        }
+        searchAdapter.set(new SearchViewAdapter());
+        Objects.requireNonNull(searchAdapter.get()).setItems(search);
+        Objects.requireNonNull(searchBinding.get()).list.setAdapter(searchAdapter.get());
+        Objects.requireNonNull(searchBinding.get()).swiperefresh.setRefreshing(false);
+    }
+
+    public void selectNoneSearch(Context context){
+        Objects.requireNonNull(searchBinding.get()).swiperefresh.setRefreshing(true);
+        for (Request item: search){
+            item.check = false;
+        }
+        searchAdapter.set(new SearchViewAdapter());
+        Objects.requireNonNull(searchAdapter.get()).setItems(search);
+        Objects.requireNonNull(searchBinding.get()).list.setAdapter(searchAdapter.get());
+        Objects.requireNonNull(searchBinding.get()).swiperefresh.setRefreshing(false);
+    }
+
+    public void selectAllBasket(Context context){
+        Objects.requireNonNull(basketBinding.get()).swiperefresh.setRefreshing(true);
+        for (Request item: basket){
+            item.check = true;
+        }
+        total.set(0);
+        for (Request item : basket) {
+            if(item.check) {
+                total.set(total.get() + item.requestCount * item.price);
+            }
+        }
+        Objects.requireNonNull(basketBinding.get()).list.setAdapter(basketAdapter.get());
+        Objects.requireNonNull(basketBinding.get()).swiperefresh.setRefreshing(false);
+    }
+
+    public void selectNoneBasket(Context context){
+        Objects.requireNonNull(basketBinding.get()).swiperefresh.setRefreshing(true);
+        for (Request item: basket){
+            item.check = false;
+        }
+        total.set(0);
+        Objects.requireNonNull(basketBinding.get()).list.setAdapter(basketAdapter.get());
+        Objects.requireNonNull(basketBinding.get()).swiperefresh.setRefreshing(false);
+    }
+
     public void toBasket(final Context context){
         List<Request> added = new ArrayList<>();
         int count = 0;

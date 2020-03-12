@@ -59,7 +59,7 @@
                     <LinearLayout
                         android:id="@+id/footer"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
+                        android:layout_height="@dimen/basket_footer"
                         android:orientation="vertical">
 
                         <TextView
@@ -83,27 +83,60 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:baselineAligned="false"
                             android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/buttonSelectAll"
+                                style="@style/AppTheme.ECOnline.Button"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_weight="2"
+                                android:contentDescription="@string/button_select_all"
+                                android:onClick="@{() -> viewModel.selectAllBasket(context)}"
+                                android:src="@drawable/select_all" />
+
+                            <ImageView
+                                android:id="@+id/buttonSelectNone"
+                                style="@style/AppTheme.ECOnline.Button"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_weight="2"
+                                android:contentDescription="@string/button_select_none"
+                                android:onClick="@{() -> viewModel.selectNoneBasket(context)}"
+                                android:src="@drawable/select_none" />
 
                             <Button
                                 android:id="@+id/buttonClear"
                                 style="@style/AppTheme.ECOnline.Button"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="5dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="10dp"
                                 android:layout_weight="1"
                                 android:onClick="@{() -> viewModel.onClear(context)}"
                                 android:text="@string/button_clear" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal">
+
 
                             <Button
                                 android:id="@+id/checkMark"
                                 style="@style/AppTheme.ECOnline.Button"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_marginEnd="5dp"
                                 android:layout_weight="1"
                                 android:onClick="@{() -> viewModel.addToBasket(context)}"
