@@ -38,9 +38,8 @@ class ServerDataTest {
     @DisplayName("getStr(): Строка с ошибкой")
     void toString_error() {
         object.success = false;
-        object.error = "error";
         object.message = "message";
-        String expected = Service.getStr(R.string.text_server_data_error, "error", "message");
+        String expected = Service.getStr(R.string.text_invoice, "message");
         assertEquals(expected, object.toString());
     }
 }

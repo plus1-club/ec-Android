@@ -95,8 +95,8 @@
     <string name="text_info">Информация</string>
     <string name="text_error">Ошибка</string>
     <string name="text_server_data_success">Успешно.\nДанные: %1$s</string>
-    <string name="text_server_data_error">Ошибка %1$s\nСообщение: %2$s</string>
-    <string name="text_response_error">Ошибка %1$s:\n%2$s</string>
+    <string name="text_server_data_error">Ошибка\nСообщение: %1$s</string>
+    <string name="text_response_error">Ошибка\n%1$s</string>
     <string name="text_response_failure">Ошибка:\n%1$s</string>
     <string name="button_back">Вернуться назад</string>
 
@@ -104,8 +104,8 @@
     <string name="text_in_develop_download_remains">Скачивание остатков - в разработке</string>
     <string name="test_in_develop_download_invoice">Скачивание счета - в разработке</string>
     <string name="text_acitivity_not_found">Не найден экран %s</string>
-    <string name="error_UnknownHostException">У вас не стабильный интернет. Подключитесь к стабильному интернету и попробуйте снова.</string>
-    <string name="error_SocketTimeoutException">У вас не медленный интернет. Подключитесь к быстрому интернету и попробуйте снова.</string>
+    <string name="error_UnknownHostException">Соединение с интернетом нестабильно. Подключитесь к стабильному интернету и попробуйте снова.</string>
+    <string name="error_SocketTimeoutException">Соединение с интернетом нестабильно. Подключитесь к стабильному интернету и попробуйте снова.</string>
 
     <!-- Прочее -->
 

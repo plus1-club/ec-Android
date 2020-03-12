@@ -48,7 +48,7 @@ public class ServerData {
         if (this.success) {
             return Service.getStr(R.string.text_server_data_success, this.data);
         } else {
-            return Service.getStr(R.string.text_server_data_error, this.error, this.message);
+            return Service.getStr(R.string.text_server_data_error, this.message);
         }
     }
 

@@ -78,13 +78,13 @@ public class RouterView {
     }
 
     public static void onUnsuccessful(Context context, ServerData body){
-        String message = Service.getStr(R.string.text_response_error, body.error, body.message);
+        String message = Service.getStr(R.string.text_response_error, body.message);
         Info info = new Info(false, true, message);
         RouterData.saveInfo(info);
         RouterView.openInfo(context, info);
     }
     public static void onUnsuccessful(Context context, ServerData body, String activityName){
-        String message = Service.getStr(R.string.text_response_error, body.error, body.message);
+        String message = Service.getStr(R.string.text_response_error, body.message);
         Info info = new Info(false, true, message, activityName);
         RouterData.saveInfo(info);
         RouterView.openInfo(context, info);
