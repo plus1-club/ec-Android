@@ -246,7 +246,9 @@ public class RequestViewModel {
                 if (request.requestCount % request.multiplicity > 0) {
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
                 }
-                App.getModel().request.search.add(request);
+                if (request.requestCount != 0){
+                    App.getModel().request.search.add(request);
+                }
             }
         } else {
             RouterView.onUnsuccessful(context, body, "RequestActivity");
