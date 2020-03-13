@@ -4,9 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
 
+import androidx.core.content.FileProvider;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
@@ -48,18 +51,18 @@ public class BillViewModel {
     }
 
     public void onShare(Context context){
-        //InfoViewModel.log(context, false, true,
-        //    Service.getStr(R.string.test_in_develop_download_invoice));
-        try {
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.setType("text/plain");
-            String shareMessage= title.get() + "\n";
-            //shareMessage = shareMessage + link.get();
-            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
-            context.startActivity(Intent.createChooser(shareIntent, title.get()));
-        } catch(Exception e) {
-            //e.toString();
+       Uri uri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uri = FileProvider.getUriForFile(context, "ru.electric.ec.online.provider",
+                    Objects.requireNonNull(local.get()));
+        } else {
+            uri = Uri.fromFile(local.get());
         }
+        Intent share = new Intent();
+        share.setAction(Intent.ACTION_SEND);
+        share.setType("application/pdf");
+        share.putExtra(Intent.EXTRA_STREAM, uri);
+        context.startActivity(share);
     }
 
     public void printOk(Context context, ServerData body, int number) {
