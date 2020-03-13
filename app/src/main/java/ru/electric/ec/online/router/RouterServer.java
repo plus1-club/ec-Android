@@ -291,14 +291,14 @@ public class RouterServer {
                 error ->viewModel.detailError(context, error));
     }
 
-    public static void print(Context context, DetailsViewModel viewModel, final int number) {
+    public static void print(Context context, BillViewModel viewModel, final int number) {
         ServerNetwork.getApi()
             .print(App.getModel().token, number)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 body -> viewModel.printOk(context, body, number),
-                error ->viewModel.detailError(context, error));
+                error ->viewModel.downloadError(context, error));
    }
 
     public static void downloadFile(Context context, BillViewModel viewModel, String fileUrl, String fileName) {

@@ -1,8 +1,11 @@
 package ru.electric.ec.online.ui.details;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+import android.content.pm.PackageManager;
 
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
@@ -16,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.DetailsBinding;
@@ -25,7 +27,7 @@ import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.router.RouterServer;
 import ru.electric.ec.online.router.RouterView;
 import ru.electric.ec.online.server.ServerData;
-import ru.electric.ec.online.ui.bill.BillActivity;
+import ru.electric.ec.online.ui.bill.BillViewModel;
 
 public class DetailsViewModel {
 
@@ -66,7 +68,18 @@ public class DetailsViewModel {
     }
 
     public void onInvoice(Context context) {
-        RouterServer.print(context, this, number.get());
+        final int REQUEST_EXTERNAL_STORAGE = 1;
+        String[] PERMISSIONS_STORAGE = {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        };
+        int permission = ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) context, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+        } else {
+            Objects.requireNonNull(binding.get()).swiperefresh.setRefreshing(true);
+            RouterServer.print(context, BillViewModel.getInstance(), number.get());
+        }
     }
 
     public void detailOk(Context context, ServerData body, int number) {
@@ -100,20 +113,6 @@ public class DetailsViewModel {
             RouterView.onUnsuccessful(context, body);
         }
         Objects.requireNonNull(binding.get()).swiperefresh.setRefreshing(false);
-    }
-
-    public void printOk(Context context, ServerData body, int number) {
-        if (RouterServer.isSuccess(body)) {
-            LinkedTreeMap data = (LinkedTreeMap) body.data;
-            String link = (String) data.get("file");
-            Intent intent = new Intent(context, BillActivity.class);
-            intent.putExtra("title", Service.getStr(R.string.text_invoice_short, number));
-            intent.putExtra("number", number);
-            intent.putExtra("link", link);
-            context.startActivity(intent);
-        } else {
-            RouterView.onUnsuccessful(context, body);
-        }
     }
 
     public void detailError(Context context, Throwable throwable) {

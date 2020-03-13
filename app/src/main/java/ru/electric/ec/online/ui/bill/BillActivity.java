@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
+import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+
 import java.io.File;
 import java.util.Objects;
 
@@ -39,7 +41,6 @@ public class BillActivity extends AppCompatActivity {
         viewModel = BillViewModel.getInstance();
         Bundle bundle = getIntent().getExtras();
         viewModel.title.set(Objects.requireNonNull(bundle).getString("title"));
-        viewModel.link.set(bundle.getString("link"));
         viewModel.number.set(bundle.getInt("number"));
         this.setTitle(viewModel.title.get());
 
@@ -47,7 +48,14 @@ public class BillActivity extends AppCompatActivity {
         binding.setViewModel(viewModel);
 
         binding.progressBar.setVisibility(View.VISIBLE);
-        binding.webView.loadUrl("https://docs.google.com/gview?embedded=true&url=" + viewModel.link.get());
+
+        binding.pdfView.fromFile(viewModel.local.get())
+                .enableSwipe(true)
+                .swipeHorizontal(false)
+                .enableAnnotationRendering(true)
+                .scrollHandle(new DefaultScrollHandle(this))
+                .load();
+
         binding.progressBar.setVisibility(View.GONE);
 
         navigationModel = new MenuViewModel(
