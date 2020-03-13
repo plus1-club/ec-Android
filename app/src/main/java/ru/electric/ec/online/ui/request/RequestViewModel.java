@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.ObservableArrayList;
@@ -26,6 +25,7 @@ import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.BasketBinding;
+import ru.electric.ec.online.databinding.RequestBinding;
 import ru.electric.ec.online.databinding.SearchBinding;
 import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.models.Request;
@@ -35,6 +35,7 @@ import ru.electric.ec.online.router.RouterView;
 import ru.electric.ec.online.server.ServerData;
 import ru.electric.ec.online.ui.basket.BasketActivity;
 import ru.electric.ec.online.ui.basket.BasketViewAdapter;
+import ru.electric.ec.online.ui.bill.BillViewModel;
 import ru.electric.ec.online.ui.files.FilesActivity;
 import ru.electric.ec.online.ui.info.InfoActivity;
 import ru.electric.ec.online.ui.search.SearchActivity;
@@ -59,6 +60,7 @@ public class RequestViewModel {
     public ObservableList<Request> basket;
     public ObservableField<SearchViewAdapter> searchAdapter;
     public ObservableField<BasketViewAdapter> basketAdapter;
+    ObservableField<RequestBinding> requestBinding;
     public ObservableField<SearchBinding> searchBinding;
     public ObservableField<BasketBinding> basketBinding;
 
@@ -88,6 +90,7 @@ public class RequestViewModel {
         basket = new ObservableArrayList<>();
         searchAdapter = new ObservableField<>();
         basketAdapter = new ObservableField<>();
+        requestBinding = new ObservableField<>();
         searchBinding = new ObservableField<>();
         basketBinding = new ObservableField<>();
     }
@@ -122,20 +125,34 @@ public class RequestViewModel {
         context.startActivity(intent);
     }
 
-    // TODO: Подключаться к серверу и скачивать остатки
     public void linkStock(Context context){
-        RouterView.openInfo(context, new Info(false, true,
-                Service.getStr(R.string.text_in_develop_download_remains)));
-        Intent intent = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("https://www.ec-electric.ru/order/example.xls"));
-        context.startActivity(intent);
+        final int REQUEST_EXTERNAL_STORAGE = 1;
+        String[] PERMISSIONS_STORAGE = {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        };
+        int permission = ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) context, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+        } else {
+            Objects.requireNonNull(requestBinding.get()).swiperefresh.setRefreshing(true);
+            RouterServer.stockBalance(context, this);
+        }
     }
 
-    // TODO: Подключаться к серверу и cкачать пример файла
     public void linkSample(Context context){
-        Intent intent = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("https://www.ec-electric.ru/order/example.xls"));
-        context.startActivity(intent);
+        final int REQUEST_EXTERNAL_STORAGE = 1;
+        String[] PERMISSIONS_STORAGE = {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        };
+        int permission = ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) context, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+        } else {
+            Objects.requireNonNull(requestBinding.get()).swiperefresh.setRefreshing(true);
+            RouterServer.example(context, this);
+        }
     }
 
     public void selectAllSearch(Context context){
@@ -342,4 +359,19 @@ public class RequestViewModel {
     public void basketError(Context context, Throwable throwable) {
         RouterView.onError(context, throwable);
     }
+
+    public void downloadOk(Context context, ServerData body, String fileName) {
+        if (RouterServer.isSuccess(body)) {
+            LinkedTreeMap data = (LinkedTreeMap) body.data;
+            String link = (String)Objects.requireNonNull(data.get("product"));
+            RouterServer.downloadFile(context, BillViewModel.getInstance(), link, fileName);
+        } else {
+            RouterView.onUnsuccessful(context, body);
+        }
+    }
+
+    public void downloadError(Context context, Throwable throwable) {
+        RouterView.onError(context, throwable);
+    }
+
 }

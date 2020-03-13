@@ -134,7 +134,7 @@ public interface ServerApi {
      * @param userToken токен, выданный пользователю после входа
      * @return ответ сервера ({@link ServerData})
      * */
-    @GET("request/download/stockBalance")
+    @GET("request/download/stock")
     Observable<ServerData> stockBalance(@Header("user_token") String userToken);
 
     /**
@@ -253,5 +253,5 @@ public interface ServerApi {
      * */
     @Streaming
     @GET
-    Observable<ResponseBody> downloadFile(@Url String fileUrl);
+    Observable<ResponseBody> downloadFile(@Header("user_token") String userToken, @Url String fileUrl);
 }

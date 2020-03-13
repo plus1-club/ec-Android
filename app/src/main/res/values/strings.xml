@@ -53,8 +53,7 @@
     <string name="x">X</string>
     <string name="text_comment">Комментарий к заказу</string>
     <string name="button_to_busket">В корзину</string>
-    <string name="button_recount">Пересчитать</string>
-    <string name="button_clear">Очистить</string>
+    <string name="button_clear">Очистить корзину</string>
     <string name="button_add">Добавить</string>
     <string name="button_issue">Оформить</string>
     <string name="text_count">%1$d</string>

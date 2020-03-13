@@ -20,7 +20,7 @@ public class RequestActivity extends AppCompatActivity {
 
     RequestViewModel viewModel;
     MenuViewModel navigationModel;
-    RequestBinding binding;
+    public RequestBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,8 @@ public class RequestActivity extends AppCompatActivity {
         binding.setViewModel(viewModel);
         binding.viewpager.setAdapter(new RequestFragmentAdapter(getSupportFragmentManager()));
         binding.tabs.setupWithViewPager(binding.viewpager);
+
+        viewModel.requestBinding.set(binding);
 
         navigationModel = new MenuViewModel(
                 this,  binding.drawer, binding.include.toolbar, binding.navigator);

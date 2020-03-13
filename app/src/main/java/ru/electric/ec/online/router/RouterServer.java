@@ -18,6 +18,7 @@ import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.server.ServerData;
 import ru.electric.ec.online.server.ServerNetwork;
+import ru.electric.ec.online.ui.bill.BillViewModel;
 import ru.electric.ec.online.ui.details.DetailsViewModel;
 import ru.electric.ec.online.ui.enter.EnterViewModel;
 import ru.electric.ec.online.ui.invoice.InvoiceViewModel;
@@ -40,6 +41,10 @@ public class RouterServer {
         }
     }
 
+    /*
+     *** Авторизация
+     */
+
     public static void enterUser(Context context, EnterViewModel viewModel){
         ServerNetwork.getApi()
             .enter(viewModel.login.get(), viewModel.password.get())
@@ -59,6 +64,10 @@ public class RouterServer {
                 body -> viewModel.exitOk(context, body),
                 error ->viewModel.exitError(context, error));
     }
+
+    /*
+     *** Поиск
+     */
 
     public static void byCode(Context context, RequestViewModel viewModel) {
         ServerNetwork.getApi()
@@ -93,6 +102,10 @@ public class RouterServer {
                         error ->viewModel.searchError(context, error));
         }
     }
+
+    /*
+     *** Корзина
+     */
 
     public static void getBasket(Context context, RequestViewModel viewModel) {
         ServerNetwork.getApi()
@@ -145,6 +158,34 @@ public class RouterServer {
                 error ->viewModel.basketError(context, error));
     }
 
+    /*
+     *** Файлы
+     */
+
+    public static void stockBalance(Context context, RequestViewModel viewModel) {
+        ServerNetwork.getApi()
+                .stockBalance(App.getModel().token)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        body -> viewModel.downloadOk(context, body, "stock_free.csv"),
+                        error ->viewModel.downloadError(context, error));
+    }
+
+    public static void example(Context context, RequestViewModel viewModel) {
+        ServerNetwork.getApi()
+                .example(App.getModel().token)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        body -> viewModel.downloadOk(context, body, "example.xls"),
+                        error ->viewModel.downloadError(context, error));
+    }
+
+    /*
+     *** Счета
+     */
+
     public static void unconfirmedList(Context context, InvoiceViewModel viewModel) {
         ServerNetwork.getApi()
             .unconfirmedList(App.getModel().token)
@@ -194,6 +235,10 @@ public class RouterServer {
                 body -> viewModel.invoiceOk(context, body),
                 error ->viewModel.invoiceError(context, error));
     }
+
+    /*
+    *** Детали
+     */
 
     public static void unconfirmedItem(Context context, DetailsViewModel viewModel, final int number) {
         ServerNetwork.getApi()
@@ -255,5 +300,16 @@ public class RouterServer {
                 body -> viewModel.printOk(context, body, number),
                 error ->viewModel.detailError(context, error));
    }
+
+    public static void downloadFile(Context context, BillViewModel viewModel, String fileUrl, String fileName) {
+        ServerNetwork.getApi()
+                .downloadFile(App.getModel().token, fileUrl)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        body -> viewModel.downloadOk(context, body, fileName),
+                        error ->viewModel.downloadError(context, error));
+    }
+
 
 }
