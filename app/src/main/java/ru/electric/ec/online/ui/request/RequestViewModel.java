@@ -158,7 +158,8 @@ public class RequestViewModel {
     public void selectAllSearch(Context context){
         Objects.requireNonNull(searchBinding.get()).swiperefresh.setRefreshing(true);
         for (Request item: search){
-            item.check = true;
+            if (item.stockCount != -3)
+                item.check = true;
         }
         searchAdapter.set(new SearchViewAdapter());
         Objects.requireNonNull(searchAdapter.get()).setItems(search);
@@ -261,7 +262,7 @@ public class RequestViewModel {
                         Service.getInt(el.get("multiplicity")),
                         el.get("unit"),
                         false);
-                if (request.requestCount % request.multiplicity > 0) {
+                if ((request.multiplicity > 0) && (request.requestCount % request.multiplicity > 0)) {
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
                 }
                 if (request.requestCount != 0){
@@ -303,7 +304,7 @@ public class RequestViewModel {
                         el.get("unit"),
                         Service.getDouble(el.get("price")),
                         true);
-                if (request.requestCount % request.multiplicity > 0) {
+                if ((request.multiplicity > 0) && (request.requestCount % request.multiplicity > 0)) {
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
                 }
                 App.getModel().request.basket.add(request);

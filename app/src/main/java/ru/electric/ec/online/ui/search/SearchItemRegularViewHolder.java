@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
-import ru.electric.ec.online.databinding.SearchItemBinding;
+import ru.electric.ec.online.databinding.SearchItemRegularBinding;
 import ru.electric.ec.online.models.Request;
 
-class SearchItemViewHolder extends RecyclerView.ViewHolder {
+class SearchItemRegularViewHolder extends RecyclerView.ViewHolder {
 
-    private SearchItemBinding binding;
+    private SearchItemRegularBinding binding;
     private SearchItemViewModel viewModel;
 
-    SearchItemViewHolder(View view) {
+    SearchItemRegularViewHolder(View view) {
         super(view);
         binding = DataBindingUtil.bind(view);
         viewModel = Objects.requireNonNull(binding).getViewModel();
