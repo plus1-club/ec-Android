@@ -21,6 +21,7 @@ public class SearchItemViewModel {
 
     public ObservableInt position;
     public ObservableField<String> product;
+    public ObservableField<String> requestProduct;
     public ObservableInt count;
     public ObservableInt stockCount;
     ObservableInt multiplicity;
@@ -35,6 +36,7 @@ public class SearchItemViewModel {
     SearchItemViewModel() {
         position = new ObservableInt();
         product = new ObservableField<>();
+        requestProduct = new ObservableField<>();
         count = new ObservableInt();
         stockCount = new ObservableInt();
         multiplicity = new ObservableInt();
@@ -60,13 +62,13 @@ public class SearchItemViewModel {
             needUpdate.set(true);
             if (newCount % multiplicity.get() > 0){
                 count.set(newCount + (multiplicity.get() - (newCount % multiplicity.get())));
-                //RouterView.openInfo(context, new Info(false, true, Service.getStr(R.string.text_multiplicity, count.get())));
-
+                //RouterView.openInfo(context, new Info(false, true,
+                //  Service.getStr(R.string.text_multiplicity, count.get())));
             } else {
                 count.set(newCount);
             }
             sum.set(count.get() * price.get());
-            Request request = new Request(product.get(), count.get(), stockCount.get(),
+            Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
                     multiplicity.get(), unit.get(), price.get(), check.get());
             parent.search.set(position.get(), request);
 
@@ -79,7 +81,7 @@ public class SearchItemViewModel {
 
     public void onFlagClick(View view) {
         this.check.set(((CheckBox) view).isChecked());
-        Request request = new Request(product.get(), count.get(), stockCount.get(),
+        Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
                 multiplicity.get(), unit.get(), price.get(), check.get());
         parent.search.set(position.get(), request);
         updateStatus();
@@ -97,7 +99,7 @@ public class SearchItemViewModel {
     }
 
     void updateStatus() {
-        Count countStatus = Service.status(count.get(), stockCount.get(), needUpdate.get());
+        Count countStatus = Service.status(count.get(), stockCount.get(), requestProduct.get(), needUpdate.get());
         status.set(countStatus.status);
         color = countStatus.color;
     }

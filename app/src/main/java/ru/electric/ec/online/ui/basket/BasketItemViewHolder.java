@@ -24,6 +24,7 @@ class BasketItemViewHolder extends RecyclerView.ViewHolder {
     void bind(Request request, int position) {
         viewModel.position.set(position);
         viewModel.product.set(request.product);
+        viewModel.requestProduct.set(request.requestProduct);
         viewModel.count.set(request.requestCount);
         viewModel.stockCount.set(request.stockCount);
         viewModel.multiplicity.set(request.multiplicity);

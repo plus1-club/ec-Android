@@ -66,6 +66,7 @@
 
     <!-- Статусы количества -->
     <string name="status_black">Неизвестно</string>
+    <string name="status_brown">Товар %1$s не найден</string>
     <string name="status_violet">Превышено допустимое число проверок количества, попробуйте позднее</string>
     <string name="status_blue">Проверить наличие</string>
     <string name="status_red">Нет</string>

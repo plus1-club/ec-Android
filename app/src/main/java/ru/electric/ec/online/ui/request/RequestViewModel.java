@@ -255,6 +255,7 @@ public class RequestViewModel {
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
                 Request request = new Request(
                         el.get("product"),
+                        el.get("requestProduct"),
                         Service.getInt(el.get("requestCount")),
                         Service.getInt(el.get("stockCount")),
                         Service.getInt(el.get("multiplicity")),
@@ -295,6 +296,7 @@ public class RequestViewModel {
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
                 Request request = new Request(
                         el.get("product"),
+                        el.get("requestProduct"),
                         Service.getInt(el.get("requestCount")),
                         Service.getInt(el.get("stockCount")),
                         Service.getInt(el.get("multiplicity")),

@@ -24,6 +24,7 @@ public class BasketItemViewModel {
 
     public ObservableInt position;
     public ObservableField<String> product;
+    public ObservableField<String> requestProduct;
     public ObservableInt count;
     public ObservableInt stockCount;
     ObservableInt multiplicity;
@@ -38,6 +39,7 @@ public class BasketItemViewModel {
     BasketItemViewModel() {
         position = new ObservableInt();
         product = new ObservableField<>();
+        requestProduct = new ObservableField<>();
         count = new ObservableInt();
         stockCount = new ObservableInt();
         multiplicity = new ObservableInt();
@@ -69,7 +71,7 @@ public class BasketItemViewModel {
                 count.set(newCount);
             }
             sum.set(count.get() * price.get());
-            Request request = new Request(product.get(), count.get(), stockCount.get(),
+            Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
                     multiplicity.get(), unit.get(), price.get(), check.get());
             parent.basket.set(position.get(), request);
 
@@ -79,7 +81,7 @@ public class BasketItemViewModel {
 
     public void onFlagClick(View view) {
         this.check.set(((CheckBox) view).isChecked());
-        Request request = new Request(product.get(), count.get(), stockCount.get(),
+        Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
                 multiplicity.get(), unit.get(), price.get(), check.get());
         parent.basket.set(position.get(), request);
         updateStatus();
@@ -110,7 +112,7 @@ public class BasketItemViewModel {
     }
 
     void updateStatus() {
-        Count countStatus = Service.status(count.get(), stockCount.get(), needUpdate.get());
+        Count countStatus = Service.status(count.get(), stockCount.get(), requestProduct.get(), needUpdate.get());
         status.set(countStatus.status);
         color = countStatus.color;
 

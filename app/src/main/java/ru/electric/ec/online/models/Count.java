@@ -13,6 +13,9 @@ public class Count {
     /** Количество товаров на складе */
     public int stockCount;
 
+    /** Запрошенный товар */
+    public String requestProduct;
+
     /** Текст статуса товара */
     public String status;
 
@@ -30,13 +33,14 @@ public class Count {
      * @param color идентификатор цвета статуса количества из ресурсов
      * @param colorName название цвета (для удобства отладки)
      */
-    public Count(int count, int stockCount, String status, int color, String colorName){
-        init(count, stockCount, status, color, colorName);
+    public Count(int count, int stockCount, String requestProduct, String status, int color, String colorName){
+        init(count, stockCount, requestProduct, status, color, colorName);
     }
 
-    private void init(int count, int stockCount, String status, int color, String colorName){
+    private void init(int count, int stockCount, String requestProduct, String status, int color, String colorName){
         this.count = count;
         this.stockCount = stockCount;
+        this.requestProduct = requestProduct;
         this.status = status;
         this.color = color;
         this.colorName = colorName;

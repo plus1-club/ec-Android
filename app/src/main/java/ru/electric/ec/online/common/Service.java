@@ -81,15 +81,22 @@ public class Service {
      * Получение статуса количества товара на основе переданных данных
      * @param count запрашиваемое количество товара
      * @param stockCount количество товара на складе или статус количества
-     *                   (-1 - товара недостаточно, но более 500; -2 - превышено количество проверок)
+     *      -1 - товара недостаточно, но более 500;
+     *      -2 - превышено количество проверок;
+     *      -3 - товар не найден
+     * @param requestProduct искомый продукт (для статуса товар не найден)
      * @param needUpdate требуется ли проверить количество (оно в клиенте не известно)
      * @return статус количества товара
      */
-    public static Count status(int count, int stockCount, boolean needUpdate){
+    public static Count status(int count, int stockCount, String requestProduct, boolean needUpdate){
         String textStatus;
         String colorName;
         int color;
-        if (count == 0) {
+        if (stockCount == -3) {
+            textStatus = Service.getStr(R.string.status_brown, requestProduct);
+            color = R.color.brown;
+            colorName = "brown";
+        } else if (count == 0) {
             textStatus = Service.getStr(R.string.status_black);
             color = R.color.black;
             colorName = "black";
@@ -119,7 +126,7 @@ public class Service {
             colorName = "yellow";
         }
 
-        return new Count(count, stockCount, textStatus, color, colorName);
+        return new Count(count, stockCount, requestProduct, textStatus, color, colorName);
     }
 
 

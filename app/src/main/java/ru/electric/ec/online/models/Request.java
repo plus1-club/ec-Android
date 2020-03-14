@@ -21,6 +21,10 @@ public class Request {
     @ColumnInfo(name = "product")
     public String product;
 
+    /** Запрошеный товар */
+    @ColumnInfo(name = "requestProduct")
+    public String requestProduct;
+
     /** Запрошеное количетсов товара */
     @ColumnInfo(name = "requestCount")
     public int requestCount;
@@ -58,6 +62,7 @@ public class Request {
     /**
      * Создание новой строки с найденным товаром (с ценой)
      * @param product название товара
+     * @param requestProduct запрошенный товар
      * @param requestCount запрошенное количество товара
      * @param stockCount количество товара на складе
      * @param multiplicity кратность товара (размер минимальной неделимой партии)
@@ -66,14 +71,15 @@ public class Request {
      * @param check установлена ли галочка у товара
      */
     @Ignore
-    public Request(String product, int requestCount, int stockCount,
+    public Request(String product, String requestProduct, int requestCount, int stockCount,
                    int multiplicity, String unit, double price, boolean check) {
-        init(product, requestCount, stockCount, multiplicity, unit, price, check);
+        init(product, requestProduct, requestCount, stockCount, multiplicity, unit, price, check);
     }
 
     /**
      * Создание новой строки с найденным товаром (без цены)
      * @param product название товара
+     * @param requestProduct запрошенный товар
      * @param requestCount запрошенное количество товара
      * @param stockCount количество товара на складе
      * @param multiplicity кратность товара (размер минимальной неделимой партии)
@@ -81,15 +87,16 @@ public class Request {
      * @param check установлена ли галочка у товара
      */
     @Ignore
-    public Request(String product, int requestCount, int stockCount,
+    public Request(String product, String requestProduct, int requestCount, int stockCount,
                    int multiplicity, String unit, boolean check) {
-        init(product, requestCount, stockCount, multiplicity, unit, 0, check);
+        init(product, requestProduct, requestCount, stockCount, multiplicity, unit, 0, check);
     }
 
     @Ignore
-    private void init(String product, int requestCount, int stockCount,
+    private void init(String product, String requestProduct, int requestCount, int stockCount,
                       int multiplicity, String unit, double price, boolean check){
         this.product = product;
+        this.requestProduct = requestProduct;
         this.requestCount = requestCount;
         this.stockCount = stockCount;
         this.multiplicity = multiplicity;
