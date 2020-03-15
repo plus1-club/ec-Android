@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
-import ru.electric.ec.online.databinding.SearchItemRegularBinding;
+import ru.electric.ec.online.databinding.SearchItemCheckboxBinding;
 import ru.electric.ec.online.models.Request;
 
-class SearchItemRegularViewHolder extends RecyclerView.ViewHolder {
+class SearchItemCheckboxViewHolder extends RecyclerView.ViewHolder {
 
-    private SearchItemRegularBinding binding;
+    private SearchItemCheckboxBinding binding;
     private SearchItemViewModel viewModel;
 
-    SearchItemRegularViewHolder(View view) {
+    SearchItemCheckboxViewHolder(View view) {
         super(view);
         binding = DataBindingUtil.bind(view);
         viewModel = Objects.requireNonNull(binding).getViewModel();
@@ -30,6 +30,7 @@ class SearchItemRegularViewHolder extends RecyclerView.ViewHolder {
         viewModel.multiplicity.set(request.multiplicity);
         viewModel.unit.set(request.unit);
         viewModel.check.set(request.check);
+        viewModel.variantsCount.set(request.variantsCount);
         viewModel.updateStatus();
     }
 }

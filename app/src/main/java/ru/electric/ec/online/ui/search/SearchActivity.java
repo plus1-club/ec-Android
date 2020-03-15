@@ -97,6 +97,7 @@ public class SearchActivity extends AppCompatActivity {
         if (viewModel.search.size() > 0){
             adapter.setItems(viewModel.search);
             binding.list.setAdapter(adapter);
+            viewModel.searchAdapter.set(adapter);
             binding.swiperefresh.setRefreshing(false);
         } else {
             Intent intent = new Intent(this, InfoActivity.class);

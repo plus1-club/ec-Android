@@ -12,8 +12,9 @@ import java.util.Collection;
 import java.util.List;
 
 import ru.electric.ec.online.R;
+import ru.electric.ec.online.databinding.SearchItemCheckboxBinding;
 import ru.electric.ec.online.databinding.SearchItemNotFoundBinding;
-import ru.electric.ec.online.databinding.SearchItemRegularBinding;
+import ru.electric.ec.online.databinding.SearchItemRadioBinding;
 import ru.electric.ec.online.models.Request;
 
 public class SearchViewAdapter extends RecyclerView.Adapter {
@@ -28,9 +29,13 @@ public class SearchViewAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         if (requests.get(position).stockCount == -3){
-            return SearchItemInterface.NOT_FOUND_TYPE;
+            return SearchItemTypeInterface.NOT_FOUND_ITEM_TYPE;
         } else {
-            return SearchItemInterface.REGULAR_TYPE;
+            if (requests.get(position).variantsCount == 1){
+                return SearchItemTypeInterface.CHECKBOX_ITEM_TYPE;
+            } else {
+                return SearchItemTypeInterface.RADIO_ITEM_TYPE;
+            }
         }
     }
 
@@ -46,24 +51,29 @@ public class SearchViewAdapter extends RecyclerView.Adapter {
         viewModel.parent.search.clear();
         viewModel.parent.search.addAll(requests);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        if (viewType == SearchItemInterface.NOT_FOUND_TYPE)
-        {
+        if (viewType == SearchItemTypeInterface.NOT_FOUND_ITEM_TYPE){
             SearchItemNotFoundBinding binding = DataBindingUtil.inflate(inflater, R.layout.search_item_not_found, parent, false);
             binding.setViewModel(viewModel);
             return new SearchItemNotFoundViewHolder(binding.getRoot());
-        } else {
-            SearchItemRegularBinding binding = DataBindingUtil.inflate(inflater, R.layout.search_item_regular, parent, false);
+        } else if (viewType == SearchItemTypeInterface.RADIO_ITEM_TYPE){
+            SearchItemRadioBinding binding = DataBindingUtil.inflate(inflater, R.layout.search_item_radio, parent, false);
             binding.setViewModel(viewModel);
-            return new SearchItemRegularViewHolder(binding.getRoot());
+            return new SearchItemRadioViewHolder(binding.getRoot());
+        } else {
+            SearchItemCheckboxBinding binding = DataBindingUtil.inflate(inflater, R.layout.search_item_checkbox, parent, false);
+            binding.setViewModel(viewModel);
+            return new SearchItemCheckboxViewHolder(binding.getRoot());
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (this.getItemViewType(position) == SearchItemInterface.NOT_FOUND_TYPE){
+        if (this.getItemViewType(position) == SearchItemTypeInterface.NOT_FOUND_ITEM_TYPE){
             ((SearchItemNotFoundViewHolder) holder).bind(requests.get(position), position);
+        } else if (this.getItemViewType(position) == SearchItemTypeInterface.RADIO_ITEM_TYPE){
+            ((SearchItemRadioViewHolder) holder).bind(requests.get(position), position);
         } else {
-            ((SearchItemRegularViewHolder) holder).bind(requests.get(position), position);
+            ((SearchItemCheckboxViewHolder) holder).bind(requests.get(position), position);
         }
     }
 

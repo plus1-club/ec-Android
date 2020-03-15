@@ -72,7 +72,7 @@ public class BasketItemViewModel {
             }
             sum.set(count.get() * price.get());
             Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
-                    multiplicity.get(), unit.get(), price.get(), check.get());
+                    multiplicity.get(), unit.get(), price.get(), check.get(), 0);
             parent.basket.set(position.get(), request);
 
             updateStatus();
@@ -82,7 +82,7 @@ public class BasketItemViewModel {
     public void onFlagClick(View view) {
         this.check.set(((CheckBox) view).isChecked());
         Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
-                multiplicity.get(), unit.get(), price.get(), check.get());
+                multiplicity.get(), unit.get(), price.get(), check.get(), 0);
         parent.basket.set(position.get(), request);
         updateStatus();
     }

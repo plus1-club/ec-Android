@@ -3,11 +3,14 @@ package ru.electric.ec.online.ui.search;
 import android.content.Context;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
+
+import java.util.Objects;
 
 import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Count;
@@ -31,6 +34,7 @@ public class SearchItemViewModel {
     public ObservableField<String> status;
     public int color;
     public ObservableBoolean check;
+    ObservableInt variantsCount;
     private ObservableBoolean needUpdate;
 
     SearchItemViewModel() {
@@ -45,6 +49,7 @@ public class SearchItemViewModel {
         sum = new ObservableDouble();
         status = new ObservableField<>();
         check = new ObservableBoolean();
+        variantsCount = new ObservableInt();
         needUpdate = new ObservableBoolean();
         needUpdate.set(false);
         parent = RequestViewModel.getInstance();
@@ -69,7 +74,7 @@ public class SearchItemViewModel {
             }
             sum.set(count.get() * price.get());
             Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
-                    multiplicity.get(), unit.get(), price.get(), check.get());
+                    multiplicity.get(), unit.get(), price.get(), check.get(), variantsCount.get());
             parent.search.set(position.get(), request);
 
             if (!needUpdate.get()) {
@@ -82,9 +87,26 @@ public class SearchItemViewModel {
     public void onFlagClick(View view) {
         this.check.set(((CheckBox) view).isChecked());
         Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
-                multiplicity.get(), unit.get(), price.get(), check.get());
+                multiplicity.get(), unit.get(), price.get(), check.get(), variantsCount.get());
         parent.search.set(position.get(), request);
-        updateStatus();
+    }
+
+    public void onRadioClick(View view) {
+        check.set(((RadioButton) view).isChecked());
+        Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
+                multiplicity.get(), unit.get(), price.get(), check.get(), variantsCount.get());
+        parent.search.set(position.get(), request);
+        SearchViewAdapter adapter = parent.searchAdapter.get();
+        for (int pos = 0; pos < parent.search.size()-1; pos++) {
+            Request item = parent.search.get(pos);
+            if ((item.requestProduct.equals(request.requestProduct))
+                    && !item.product.equals(request.product)
+                    && item.check){
+                item.check = false;
+                Objects.requireNonNull(adapter).notifyItemChanged(pos);
+            }
+        }
+        parent.searchAdapter.set(adapter);
     }
 
     public void onUpdateStatus(Context context){

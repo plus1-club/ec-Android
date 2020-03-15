@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
-import ru.electric.ec.online.databinding.SearchItemNotFoundBinding;
+import ru.electric.ec.online.databinding.SearchItemRadioBinding;
 import ru.electric.ec.online.models.Request;
 
-class SearchItemNotFoundViewHolder extends RecyclerView.ViewHolder {
+class SearchItemRadioViewHolder extends RecyclerView.ViewHolder {
 
-    private SearchItemNotFoundBinding binding;
+    private SearchItemRadioBinding binding;
     private SearchItemViewModel viewModel;
 
-    SearchItemNotFoundViewHolder(View view) {
+    SearchItemRadioViewHolder(View view) {
         super(view);
         binding = DataBindingUtil.bind(view);
         viewModel = Objects.requireNonNull(binding).getViewModel();
@@ -29,6 +29,7 @@ class SearchItemNotFoundViewHolder extends RecyclerView.ViewHolder {
         viewModel.stockCount.set(request.stockCount);
         viewModel.multiplicity.set(request.multiplicity);
         viewModel.unit.set(request.unit);
+        viewModel.check.set(request.check);
         viewModel.variantsCount.set(request.variantsCount);
         viewModel.updateStatus();
     }

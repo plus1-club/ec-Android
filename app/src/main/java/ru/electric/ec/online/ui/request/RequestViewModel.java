@@ -17,6 +17,7 @@ import androidx.databinding.ObservableList;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -158,8 +159,9 @@ public class RequestViewModel {
     public void selectAllSearch(Context context){
         Objects.requireNonNull(searchBinding.get()).swiperefresh.setRefreshing(true);
         for (Request item: search){
-            if (item.stockCount != -3)
+            if (item.stockCount != -3 && item.variantsCount == 1){
                 item.check = true;
+            }
         }
         searchAdapter.set(new SearchViewAdapter());
         Objects.requireNonNull(searchAdapter.get()).setItems(search);
@@ -170,7 +172,9 @@ public class RequestViewModel {
     public void selectNoneSearch(Context context){
         Objects.requireNonNull(searchBinding.get()).swiperefresh.setRefreshing(true);
         for (Request item: search){
-            item.check = false;
+            if (item.variantsCount == 1){
+                item.check = false;
+            }
         }
         searchAdapter.set(new SearchViewAdapter());
         Objects.requireNonNull(searchAdapter.get()).setItems(search);
@@ -251,6 +255,7 @@ public class RequestViewModel {
         App.getModel().request.search.clear();
         if (RouterServer.isSuccess(body)) {
             List<?> data = (List<?>) body.data;
+            Map<String, Integer> variants = new HashMap<>();
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
@@ -261,14 +266,25 @@ public class RequestViewModel {
                         Service.getInt(el.get("stockCount")),
                         Service.getInt(el.get("multiplicity")),
                         el.get("unit"),
-                        false);
+                        false,
+                        0);
                 if ((request.multiplicity > 0) && (request.requestCount % request.multiplicity > 0)) {
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
                 }
                 if (request.requestCount != 0){
                     App.getModel().request.search.add(request);
                 }
+                if (variants.get(request.requestProduct) == null) {
+                    variants.put(request.requestProduct, 1);
+                } else {
+                    int variantCount = Objects.requireNonNull(variants.get(request.requestProduct));
+                    variants.put(request.requestProduct, variantCount + 1);
+                }
             }
+            for (Request request: App.getModel().request.search) {
+                request.variantsCount = Objects.requireNonNull(variants.get(request.requestProduct));
+            }
+
         } else {
             RouterView.onUnsuccessful(context, body, "RequestActivity");
         }
@@ -292,6 +308,7 @@ public class RequestViewModel {
         App.getModel().request.basket.clear();
         if (RouterServer.isSuccess(body)) {
             List<?> data = (List<?>) body.data;
+            Map<String, Integer> variants = new HashMap<>();
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
@@ -303,11 +320,21 @@ public class RequestViewModel {
                         Service.getInt(el.get("multiplicity")),
                         el.get("unit"),
                         Service.getDouble(el.get("price")),
-                        true);
+                        true,
+                        0);
                 if ((request.multiplicity > 0) && (request.requestCount % request.multiplicity > 0)) {
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
                 }
+                if (variants.get(request.requestProduct) == null) {
+                    variants.put(request.requestProduct, 1);
+                } else {
+                    int variantCount = Objects.requireNonNull(variants.get(request.requestProduct));
+                    variants.put(request.requestProduct, variantCount + 1);
+                }
                 App.getModel().request.basket.add(request);
+            }
+            for (Request request: App.getModel().request.basket) {
+                request.variantsCount = Objects.requireNonNull(variants.get(request.requestProduct));
             }
         }
         basketAdapter.set(new BasketViewAdapter());
