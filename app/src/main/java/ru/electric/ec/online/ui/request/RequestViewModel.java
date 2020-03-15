@@ -210,12 +210,38 @@ public class RequestViewModel {
     public void toBasket(final Context context){
         List<Request> added = new ArrayList<>();
         int count = 0;
+        Map<String, Boolean> variants = new HashMap<>();
         for (Request request: search) {
+            if (variants.get(request.requestProduct) == null && request.variantsCount > 1) {
+                variants.put(request.requestProduct, request.check);
+            } else if (request.check){
+                variants.put(request.requestProduct, request.check);
+            }
             if (request.check){
                 count ++;
             }
         }
-        if (count > 0) {
+        boolean allChecked = true;
+        for (Boolean checked: variants.values()) {
+            if (!checked) {
+                allChecked = false;
+                break;
+            }
+        }
+
+        if (count == 0) {
+            Intent intent = new Intent(context, InfoActivity.class);
+            intent.putExtra("title", title.get());
+            intent.putExtra("info", context.getString(R.string.text_product_not_select));
+            intent.putExtra("activityName", "SearchActivity");
+            context.startActivity(intent);
+        } else if (!allChecked) {
+            Intent intent = new Intent(context, InfoActivity.class);
+            intent.putExtra("title", title.get());
+            intent.putExtra("info", context.getString(R.string.text_variant_not_select));
+            intent.putExtra("activityName", "SearchActivity");
+            context.startActivity(intent);
+        } else {
             for (Request request: search) {
                 if (request.check){
                     added.add(request);
@@ -225,12 +251,6 @@ public class RequestViewModel {
             RouterServer.postBasket(context, this, added);
             total.set(0);
             comment.set("");
-        } else {
-            Intent intent = new Intent(context, InfoActivity.class);
-            intent.putExtra("title", title.get());
-            intent.putExtra("info", context.getString(R.string.text_product_not_select));
-            intent.putExtra("activityName", "SearchActivity");
-            context.startActivity(intent);
         }
     }
 

@@ -63,6 +63,9 @@
     <string name="text_order_processed">Заказ № %1$d оформлен</string>
     <string name="text_product_not_found">Товар не найден</string>
     <string name="text_product_not_select">Не выбран товар для добавления в корзину</string>
+    <string name="text_variant_not_select">В результатах несколько вариантов - сделайте свой выбор</string>
+    <string name="button_select_all">Выбрать все</string>
+    <string name="button_select_none">Очистить выделение</string>
 
     <!-- Статусы количества -->
     <string name="status_black">Неизвестно</string>
@@ -106,8 +109,6 @@
     <string name="text_acitivity_not_found">Не найден экран %s</string>
     <string name="error_UnknownHostException">Соединение с интернетом нестабильно.</string>
     <string name="error_SocketTimeoutException">Низкая скорость соединения с интернетом.</string>
-    <string name="button_select_all">Выбрать все</string>
-    <string name="button_select_none">Очистить выделение</string>
 
     <!-- Прочее -->
 
