@@ -57,6 +57,15 @@ public class Request {
     @ColumnInfo(name = "variantsCount")
     public int variantsCount;
 
+    /** Вид строки:
+     *  1 - флаг,
+     *  2 - переключатель,
+     *  3 - группа
+     *  4 - не найдено,
+    */
+    @ColumnInfo(name = "itemType")
+    public int itemType;
+
     /**
      * Создание пустой новой строки
      */
@@ -74,11 +83,14 @@ public class Request {
      * @param price цена товара
      * @param check установлена ли галочка у товара
      * @param variantsCount количество вариантов при расширенном поиске
+     * @param itemType вид строки
      */
     @Ignore
     public Request(String product, String requestProduct, int requestCount, int stockCount,
-                   int multiplicity, String unit, double price, boolean check, int variantsCount) {
-        init(product, requestProduct, requestCount, stockCount, multiplicity, unit, price, check, variantsCount);
+                   int multiplicity, String unit, double price,
+                   boolean check, int variantsCount, int itemType) {
+        init(product, requestProduct, requestCount, stockCount, multiplicity, unit, price,
+                check, variantsCount, itemType);
     }
 
     /**
@@ -91,16 +103,19 @@ public class Request {
      * @param unit единица измерения товара
      * @param check установлена ли галочка у товара
      * @param variantsCount количество вариантов при расширенном поиске
+     * @param itemType вид строки
      */
     @Ignore
     public Request(String product, String requestProduct, int requestCount, int stockCount,
-                   int multiplicity, String unit, boolean check, int variantsCount) {
-        init(product, requestProduct, requestCount, stockCount, multiplicity, unit, 0, check, variantsCount);
+                   int multiplicity, String unit, boolean check, int variantsCount, int itemType) {
+        init(product, requestProduct, requestCount, stockCount, multiplicity, unit, 0,
+                check, variantsCount, itemType);
     }
 
     @Ignore
     private void init(String product, String requestProduct, int requestCount, int stockCount,
-                      int multiplicity, String unit, double price, boolean check, int variantsCount){
+                      int multiplicity, String unit, double price,
+                      boolean check, int variantsCount, int itemType){
         this.product = product;
         this.requestProduct = requestProduct;
         this.requestCount = requestCount;
@@ -110,6 +125,7 @@ public class Request {
         this.price = price;
         this.check = check;
         this.variantsCount = variantsCount;
+        this.itemType = itemType;
         sum = requestCount * price;
     }
 }

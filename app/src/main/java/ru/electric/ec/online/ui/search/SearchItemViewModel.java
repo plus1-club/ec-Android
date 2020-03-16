@@ -3,7 +3,6 @@ package ru.electric.ec.online.ui.search;
 import android.content.Context;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableDouble;
@@ -35,6 +34,7 @@ public class SearchItemViewModel {
     public int color;
     public ObservableBoolean check;
     ObservableInt variantsCount;
+    private ObservableInt itemType;
     private ObservableBoolean needUpdate;
 
     SearchItemViewModel() {
@@ -50,6 +50,7 @@ public class SearchItemViewModel {
         status = new ObservableField<>();
         check = new ObservableBoolean();
         variantsCount = new ObservableInt();
+        itemType = new ObservableInt();
         needUpdate = new ObservableBoolean();
         needUpdate.set(false);
         parent = RequestViewModel.getInstance();
@@ -64,7 +65,7 @@ public class SearchItemViewModel {
         }
         if (newCount != count.get() && newCount != 0)
         {
-            needUpdate.set(true);
+            //needUpdate.set(true);
             if ((multiplicity.get() > 0) && (newCount % multiplicity.get() > 0)){
                 count.set(newCount + (multiplicity.get() - (newCount % multiplicity.get())));
                 //RouterView.openInfo(context, new Info(false, true,
@@ -73,30 +74,38 @@ public class SearchItemViewModel {
                 count.set(newCount);
             }
             sum.set(count.get() * price.get());
-            Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
-                    multiplicity.get(), unit.get(), price.get(), check.get(), variantsCount.get());
+            updateStatus();
+            Request request = new Request(product.get(), requestProduct.get(),
+                    count.get(), stockCount.get(),
+                    multiplicity.get(), unit.get(), price.get(),
+                    check.get(), variantsCount.get(), itemType.get());
             parent.search.set(position.get(), request);
 
-            if (!needUpdate.get()) {
-                ((SearchActivity) context).refreshSearch();
-            }
-            updateStatus();
+            //if (!needUpdate.get()) {
+            //    ((SearchActivity) context).refreshSearch();
+            //}
+            Objects.requireNonNull(parent.searchAdapter.get()).notifyItemChanged(position.get());
         }
      }
 
     public void onFlagClick(View view) {
         this.check.set(((CheckBox) view).isChecked());
-        Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
-                multiplicity.get(), unit.get(), price.get(), check.get(), variantsCount.get());
+        Request request = new Request(product.get(), requestProduct.get(),
+                count.get(), stockCount.get(),
+                multiplicity.get(), unit.get(), price.get(),
+                check.get(), variantsCount.get(), itemType.get());
         parent.search.set(position.get(), request);
     }
 
     public void onRadioClick(View view) {
-        check.set(((RadioButton) view).isChecked());
-        Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
-                multiplicity.get(), unit.get(), price.get(), check.get(), variantsCount.get());
+        check.set(true);
+        Request request = new Request(product.get(), requestProduct.get(),
+                count.get(), stockCount.get(),
+                multiplicity.get(), unit.get(), price.get(),
+                check.get(), variantsCount.get(), SearchItemTypeInterface.RADIO_ITEM_TYPE);
         parent.search.set(position.get(), request);
         SearchViewAdapter adapter = parent.searchAdapter.get();
+        Objects.requireNonNull(adapter).setItems(parent.search);
         for (int pos = 0; pos < parent.search.size()-1; pos++) {
             Request item = parent.search.get(pos);
             if ((item.requestProduct.equals(request.requestProduct))
@@ -106,6 +115,7 @@ public class SearchItemViewModel {
                 Objects.requireNonNull(adapter).notifyItemChanged(pos);
             }
         }
+        Objects.requireNonNull(adapter).notifyItemChanged(position.get());
         parent.searchAdapter.set(adapter);
     }
 

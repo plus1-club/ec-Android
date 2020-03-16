@@ -50,6 +50,7 @@ public class SearchActivity extends AppCompatActivity {
         // Подготовка и установка адаптера
         adapter = new SearchViewAdapter();
         binding.list.setAdapter(adapter);
+        binding.list.setItemViewCacheSize(viewModel.search.size());
         adapter.setItems(viewModel.search);
 
         // Заполнение модели

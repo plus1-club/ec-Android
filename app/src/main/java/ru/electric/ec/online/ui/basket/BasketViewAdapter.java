@@ -25,6 +25,7 @@ public class BasketViewAdapter extends RecyclerView.Adapter<BasketItemViewHolder
     }
 
     public void setItems(Collection<Request> collection) {
+        requests.clear();
         requests.addAll(collection);
         notifyDataSetChanged();
     }

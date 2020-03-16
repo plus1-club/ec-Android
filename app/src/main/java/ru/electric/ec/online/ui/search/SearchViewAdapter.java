@@ -13,6 +13,7 @@ import java.util.List;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.SearchItemCheckboxBinding;
+import ru.electric.ec.online.databinding.SearchItemGroupBinding;
 import ru.electric.ec.online.databinding.SearchItemNotFoundBinding;
 import ru.electric.ec.online.databinding.SearchItemRadioBinding;
 import ru.electric.ec.online.models.Request;
@@ -28,18 +29,16 @@ public class SearchViewAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (requests.get(position).stockCount == -3){
-            return SearchItemTypeInterface.NOT_FOUND_ITEM_TYPE;
-        } else {
-            if (requests.get(position).variantsCount == 1){
-                return SearchItemTypeInterface.CHECKBOX_ITEM_TYPE;
-            } else {
-                return SearchItemTypeInterface.RADIO_ITEM_TYPE;
-            }
-        }
+        return requests.get(position).itemType;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     public void setItems(Collection<Request> collection) {
+        requests.clear();
         requests.addAll(collection);
         notifyDataSetChanged();
     }
@@ -55,6 +54,10 @@ public class SearchViewAdapter extends RecyclerView.Adapter {
             SearchItemNotFoundBinding binding = DataBindingUtil.inflate(inflater, R.layout.search_item_not_found, parent, false);
             binding.setViewModel(viewModel);
             return new SearchItemNotFoundViewHolder(binding.getRoot());
+        } else if (viewType == SearchItemTypeInterface.GROUP_ITEM_TYPE){
+            SearchItemGroupBinding binding = DataBindingUtil.inflate(inflater, R.layout.search_item_group, parent, false);
+            binding.setViewModel(viewModel);
+            return new SearchItemGroupViewHolder(binding.getRoot());
         } else if (viewType == SearchItemTypeInterface.RADIO_ITEM_TYPE){
             SearchItemRadioBinding binding = DataBindingUtil.inflate(inflater, R.layout.search_item_radio, parent, false);
             binding.setViewModel(viewModel);
@@ -70,6 +73,8 @@ public class SearchViewAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (this.getItemViewType(position) == SearchItemTypeInterface.NOT_FOUND_ITEM_TYPE){
             ((SearchItemNotFoundViewHolder) holder).bind(requests.get(position), position);
+        } else if (this.getItemViewType(position) == SearchItemTypeInterface.GROUP_ITEM_TYPE){
+            ((SearchItemGroupViewHolder) holder).bind(requests.get(position), position);
         } else if (this.getItemViewType(position) == SearchItemTypeInterface.RADIO_ITEM_TYPE){
             ((SearchItemRadioViewHolder) holder).bind(requests.get(position), position);
         } else {

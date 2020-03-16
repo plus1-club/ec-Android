@@ -40,6 +40,7 @@ import ru.electric.ec.online.ui.bill.BillViewModel;
 import ru.electric.ec.online.ui.files.FilesActivity;
 import ru.electric.ec.online.ui.info.InfoActivity;
 import ru.electric.ec.online.ui.search.SearchActivity;
+import ru.electric.ec.online.ui.search.SearchItemTypeInterface;
 import ru.electric.ec.online.ui.search.SearchViewAdapter;
 
 public class RequestViewModel {
@@ -212,6 +213,9 @@ public class RequestViewModel {
         int count = 0;
         Map<String, Boolean> variants = new HashMap<>();
         for (Request request: search) {
+            if (request.itemType == SearchItemTypeInterface.GROUP_ITEM_TYPE){
+                continue;
+            }
             if (variants.get(request.requestProduct) == null && request.variantsCount > 1) {
                 variants.put(request.requestProduct, request.check);
             } else if (request.check){
@@ -287,37 +291,56 @@ public class RequestViewModel {
                         Service.getInt(el.get("multiplicity")),
                         el.get("unit"),
                         false,
+                        0,
                         0);
                 if ((request.multiplicity > 0) && (request.requestCount % request.multiplicity > 0)) {
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
                 }
-                if (request.requestCount != 0){
-                    App.getModel().request.search.add(request);
-                }
                 if (variants.get(request.requestProduct) == null) {
                     variants.put(request.requestProduct, 1);
+                    Request group = new Request("", request.requestProduct,
+                            request.requestCount, 0,
+                            0, "",
+                            false, 0, SearchItemTypeInterface.GROUP_ITEM_TYPE);
+                    App.getModel().request.search.add(group);
                 } else {
                     int variantCount = Objects.requireNonNull(variants.get(request.requestProduct));
                     variants.put(request.requestProduct, variantCount + 1);
                 }
+                if (request.requestCount != 0){
+                    App.getModel().request.search.add(request);
+                }
             }
+
             for (Request request: App.getModel().request.search) {
                 request.variantsCount = Objects.requireNonNull(variants.get(request.requestProduct));
+                if (request.itemType > 0) {
+                    continue;
+                }
+                if (request.stockCount == -3){
+                    request.itemType = SearchItemTypeInterface.NOT_FOUND_ITEM_TYPE;
+                } else if (request.variantsCount > 1){
+                    request.itemType = SearchItemTypeInterface.RADIO_ITEM_TYPE;
+                } else {
+                    request.itemType = SearchItemTypeInterface.CHECKBOX_ITEM_TYPE;
+                }
+            }
+
+            searchAdapter.set(new SearchViewAdapter());
+            if (search.size() > 0){
+                Objects.requireNonNull(searchAdapter.get()).setItems(search);
+                Objects.requireNonNull(searchBinding.get()).list.setAdapter(searchAdapter.get());
+                Objects.requireNonNull(searchBinding.get()).swiperefresh.setRefreshing(false);
+            } else {
+                String message = context.getString(R.string.text_product_not_found);
+                Info info = new Info(false, true, message, "RequestActivity");
+                RouterView.openInfo(context, info);
             }
 
         } else {
             RouterView.onUnsuccessful(context, body, "RequestActivity");
         }
-        searchAdapter.set(new SearchViewAdapter());
-        if (search.size() > 0){
-            Objects.requireNonNull(searchAdapter.get()).setItems(search);
-            Objects.requireNonNull(searchBinding.get()).list.setAdapter(searchAdapter.get());
-            Objects.requireNonNull(searchBinding.get()).swiperefresh.setRefreshing(false);
-        } else {
-            String message = context.getString(R.string.text_product_not_found);
-            Info info = new Info(false, true, message, "RequestActivity");
-            RouterView.openInfo(context, info);
-        }
+
     }
 
     public void searchError(Context context, Throwable throwable) {
@@ -328,7 +351,6 @@ public class RequestViewModel {
         App.getModel().request.basket.clear();
         if (RouterServer.isSuccess(body)) {
             List<?> data = (List<?>) body.data;
-            Map<String, Integer> variants = new HashMap<>();
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
                 Map<String, String> el = (LinkedTreeMap<String, String>) element;
@@ -341,20 +363,12 @@ public class RequestViewModel {
                         el.get("unit"),
                         Service.getDouble(el.get("price")),
                         true,
+                        0,
                         0);
                 if ((request.multiplicity > 0) && (request.requestCount % request.multiplicity > 0)) {
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
                 }
-                if (variants.get(request.requestProduct) == null) {
-                    variants.put(request.requestProduct, 1);
-                } else {
-                    int variantCount = Objects.requireNonNull(variants.get(request.requestProduct));
-                    variants.put(request.requestProduct, variantCount + 1);
-                }
                 App.getModel().request.basket.add(request);
-            }
-            for (Request request: App.getModel().request.basket) {
-                request.variantsCount = Objects.requireNonNull(variants.get(request.requestProduct));
             }
         }
         basketAdapter.set(new BasketViewAdapter());
