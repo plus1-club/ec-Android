@@ -56,38 +56,6 @@ public class SearchItemViewModel {
         parent = RequestViewModel.getInstance();
     }
 
-    public void onTextChanged(Context context, CharSequence s, int start, int before, int charCount) {
-        int newCount;
-        try {
-            newCount = s.toString().isEmpty() ? 0 : Integer.parseInt(s.toString());
-        } catch (Exception e) {
-            newCount = 0;
-        }
-        if (newCount != count.get() && newCount != 0)
-        {
-            //needUpdate.set(true);
-            if ((multiplicity.get() > 0) && (newCount % multiplicity.get() > 0)){
-                count.set(newCount + (multiplicity.get() - (newCount % multiplicity.get())));
-                //RouterView.openInfo(context, new Info(false, true,
-                //  Service.getStr(R.string.text_multiplicity, count.get())));
-            } else {
-                count.set(newCount);
-            }
-            sum.set(count.get() * price.get());
-            updateStatus();
-            Request request = new Request(product.get(), requestProduct.get(),
-                    count.get(), stockCount.get(),
-                    multiplicity.get(), unit.get(), price.get(),
-                    check.get(), variantsCount.get(), itemType.get());
-            parent.search.set(position.get(), request);
-
-            //if (!needUpdate.get()) {
-            //    ((SearchActivity) context).refreshSearch();
-            //}
-            Objects.requireNonNull(parent.searchAdapter.get()).notifyItemChanged(position.get());
-        }
-     }
-
     public void onFlagClick(View view) {
         this.check.set(((CheckBox) view).isChecked());
         Request request = new Request(product.get(), requestProduct.get(),
