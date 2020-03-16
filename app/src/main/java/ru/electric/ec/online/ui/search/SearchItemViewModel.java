@@ -34,7 +34,7 @@ public class SearchItemViewModel {
     public int color;
     public ObservableBoolean check;
     ObservableInt variantsCount;
-    private ObservableInt itemType;
+    public ObservableInt itemType;
     private ObservableBoolean needUpdate;
 
     SearchItemViewModel() {

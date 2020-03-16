@@ -30,6 +30,7 @@ class SearchItemGroupViewHolder extends RecyclerView.ViewHolder {
         viewModel.multiplicity.set(request.multiplicity);
         viewModel.unit.set(request.unit);
         viewModel.variantsCount.set(request.variantsCount);
+        viewModel.itemType.set(request.itemType);
         viewModel.updateStatus();
     }
 }

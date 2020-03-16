@@ -31,6 +31,7 @@ class SearchItemCheckboxViewHolder extends RecyclerView.ViewHolder {
         viewModel.unit.set(request.unit);
         viewModel.check.set(request.check);
         viewModel.variantsCount.set(request.variantsCount);
+        viewModel.itemType.set(request.itemType);
         viewModel.updateStatus();
     }
 }
