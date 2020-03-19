@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.router.RouterServer;
 import ru.electric.ec.online.ui.request.RequestViewModel;
@@ -73,11 +74,11 @@ public class BasketItemViewModel {
                 count.set(newCount);
             }
             sum.set(count.get() * price.get());
-            updateStatus();
             Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
                     multiplicity.get(), unit.get(), price.get(),
                     check.get(), needUpdate.get(),0, 0,
                     status.get(), colorName.get(), color);
+            updateStatus();
             parent.basket.set(position.get(), request);
 
             Objects.requireNonNull(parent.basketAdapter.get()).notifyItemChanged(position.get());
@@ -119,7 +120,25 @@ public class BasketItemViewModel {
     }
 
     void updateStatus() {
-        //Count countStatus = Service.status(count.get(), stockCount.get(), requestProduct.get(), needUpdate.get());
+
+         Request request = new Request(product.get(), requestProduct.get(),
+                count.get(), stockCount.get(),
+                multiplicity.get(), unit.get(), price.get(),
+                check.get(), needUpdate.get(), 0, 0,
+                status.get(), colorName.get(), color);
+        Service.status(request);
+        product.set(request.product);
+        requestProduct.set(request.requestProduct);
+        count.set(request.requestCount);
+        stockCount.set(request.stockCount);
+        multiplicity.set(request.multiplicity);
+        unit.set(request.unit);
+        price.set(request.price);
+        check.set(request.check);
+        needUpdate.set(request.needUpdate);
+        status.set(request.status);
+        colorName.set(request.colorName);
+        color = request.color;
 
         double total = 0;
         for (Request item : parent.basket) {
