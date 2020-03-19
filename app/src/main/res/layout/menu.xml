@@ -35,7 +35,7 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:id="@+id/splash_screen"
+                        android:id="@+id/logo"
                         style="@style/AppTheme.ECOnline.Logo"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"

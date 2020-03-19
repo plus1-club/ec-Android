@@ -1,6 +1,9 @@
 package ru.electric.ec.online.ui.menu;
 
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -12,6 +15,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 import ru.electric.ec.online.R;
+import ru.electric.ec.online.common.App;
+import ru.electric.ec.online.common.Service;
 
 public class MenuViewModel {
 
@@ -20,6 +25,7 @@ public class MenuViewModel {
     private AppCompatActivity activity;
     private DrawerLayout drawer;
     private NavigationView navigation;
+    private boolean showLogo;
 
     public MenuViewModel(
             AppCompatActivity activity,
@@ -30,6 +36,7 @@ public class MenuViewModel {
         this.toolbar = toolbar;
         this.navigation = navigation;
         this.activity = activity;
+        showLogo = false;
 
         // Привязать события DrawerLayout'а к ActionBarToggle
         this.actionBar = setupDrawerToggle();
@@ -46,6 +53,14 @@ public class MenuViewModel {
                 selectDrawerItem(menuItem);
                 return true;
             });
+        View header = navigationView.getHeaderView(0);
+        TextView version = header.findViewById(R.id.textView);
+        version.setText(Service.getStr(R.string.version, App.versionName, App.versionCode));
+        ImageView logo = header.findViewById(R.id.logo);
+        logo.setOnClickListener(v -> {
+            showLogo = !showLogo;
+            version.setVisibility(showLogo?View.VISIBLE:View.GONE);
+        });
     }
 
     private void selectDrawerItem(MenuItem menuItem) {

@@ -2,8 +2,12 @@ package ru.electric.ec.online.common;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 import ru.electric.ec.online.data.LocalDatabase;
+import ru.electric.ec.online.models.Info;
+import ru.electric.ec.online.router.RouterView;
 import ru.electric.ec.online.server.ServerNetwork;
 
 public class App extends Application {
@@ -11,6 +15,8 @@ public class App extends Application {
     private static Context appContext;
     private static Model model;
     private static LocalDatabase db;
+    public static int versionCode;
+    public static String versionName;
 
     public static Context getAppContext() {
         return appContext;
@@ -39,7 +45,6 @@ public class App extends Application {
         App.db = db;
     }
 
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -57,6 +62,22 @@ public class App extends Application {
         setModel(new Model());
         setDb(LocalDatabase.getLocalDatabase(this));
         ServerNetwork.getInstance();
+        PackageInfo pInfo = null;
+        try {
+            PackageManager pm = getPackageManager();
+            if (pm != null){
+                pInfo = pm.getPackageInfo(getPackageName(), 0);
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            RouterView.openInfo(getAppContext(), new Info(true, true, "Не удалось найти пакет приложения"));
+        }
+        if (pInfo == null) {
+            pInfo = new PackageInfo();
+            pInfo.versionName = "0.0";
+            pInfo.versionCode = 0;
+        }
+        versionName = pInfo.versionName;
+        versionCode = pInfo.versionCode;
     }
 
     private void terminate(){

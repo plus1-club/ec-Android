@@ -13,7 +13,7 @@
         android:layout_height="fill_parent">
 
         <ImageView
-            android:id="@+id/splash_screen"
+            android:id="@+id/logo"
             style="@style/AppTheme.ECOnline.Logo"
             android:layout_weight="1"
             android:src="@drawable/splash"
