@@ -321,7 +321,7 @@ public class RequestViewModel {
                     int variantCount = Objects.requireNonNull(variants.get(request.requestProduct));
                     variants.put(request.requestProduct, variantCount + 1);
                 }
-                if (request.requestCount != 0){
+                if (request.stockCount == -3 || request.requestCount != 0){
                     App.getModel().request.search.add(request);
                 }
             }
