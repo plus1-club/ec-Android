@@ -47,4 +47,16 @@ public class Basket {
     /** Установлена ли галочка у товара */
     @ColumnInfo(name = "check")
     public boolean check;
+
+    /** Статус количества */
+    @ColumnInfo(name = "textStatus")
+    public String textStatus;
+
+    /** Название цвета статуса количества */
+    @ColumnInfo(name = "colorName")
+    public String colorName;
+
+    /** Цвет статуса количества */
+    @ColumnInfo(name = "color")
+    public int color;
 }

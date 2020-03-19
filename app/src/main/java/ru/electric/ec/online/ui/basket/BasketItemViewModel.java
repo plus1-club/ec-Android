@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import ru.electric.ec.online.common.Service;
-import ru.electric.ec.online.models.Count;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.router.RouterServer;
 import ru.electric.ec.online.ui.request.RequestViewModel;
@@ -32,10 +30,11 @@ public class BasketItemViewModel {
     public ObservableField<String> unit;
     public ObservableDouble price;
     public ObservableDouble sum;
-    public ObservableField<String> status;
-    public int color;
     public ObservableBoolean check;
     private ObservableBoolean needUpdate;
+    public ObservableField<String> status;
+    public ObservableField<String> colorName;
+    public int color;
 
     BasketItemViewModel() {
         position = new ObservableInt();
@@ -47,8 +46,10 @@ public class BasketItemViewModel {
         unit = new ObservableField<>();
         price = new ObservableDouble();
         sum = new ObservableDouble();
-        status = new ObservableField<>();
         check = new ObservableBoolean();
+        status = new ObservableField<>();
+        color = 0;
+        colorName = new ObservableField<>();
         needUpdate = new ObservableBoolean();
         needUpdate.set(false);
         parent = RequestViewModel.getInstance();
@@ -74,7 +75,9 @@ public class BasketItemViewModel {
             sum.set(count.get() * price.get());
             updateStatus();
             Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
-                    multiplicity.get(), unit.get(), price.get(), check.get(), 0, 0);
+                    multiplicity.get(), unit.get(), price.get(),
+                    check.get(), needUpdate.get(),0, 0,
+                    status.get(), colorName.get(), color);
             parent.basket.set(position.get(), request);
 
             Objects.requireNonNull(parent.basketAdapter.get()).notifyItemChanged(position.get());
@@ -84,7 +87,9 @@ public class BasketItemViewModel {
     public void onFlagClick(View view) {
         this.check.set(((CheckBox) view).isChecked());
         Request request = new Request(product.get(), requestProduct.get(), count.get(), stockCount.get(),
-                multiplicity.get(), unit.get(), price.get(), check.get(), 0, 0);
+                multiplicity.get(), unit.get(), price.get(),
+                check.get(), needUpdate.get(),0, 0,
+                status.get(), colorName.get(), color);
         parent.basket.set(position.get(), request);
         updateStatus();
     }
@@ -114,9 +119,7 @@ public class BasketItemViewModel {
     }
 
     void updateStatus() {
-        Count countStatus = Service.status(count.get(), stockCount.get(), requestProduct.get(), needUpdate.get());
-        status.set(countStatus.status);
-        color = countStatus.color;
+        //Count countStatus = Service.status(count.get(), stockCount.get(), requestProduct.get(), needUpdate.get());
 
         double total = 0;
         for (Request item : parent.basket) {

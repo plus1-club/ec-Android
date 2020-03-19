@@ -53,6 +53,10 @@ public class Request {
     @ColumnInfo(name = "check")
     public boolean check;
 
+    /** Необходимо обновить статус с сервера, т.к. изменились параметры на клиенте */
+    @ColumnInfo(name = "needUpdate")
+    public boolean needUpdate;
+
     /** Количество вариантов при расширенном поиске */
     @ColumnInfo(name = "variantsCount")
     public int variantsCount;
@@ -65,6 +69,18 @@ public class Request {
     */
     @ColumnInfo(name = "itemType")
     public int itemType;
+
+    /** Статус количества */
+    @ColumnInfo(name = "status")
+    public String status;
+
+    /** Название цвета статуса количества */
+    @ColumnInfo(name = "colorName")
+    public String colorName;
+
+    /** Цвет статуса количества */
+    @ColumnInfo(name = "color")
+    public int color;
 
     /**
      * Создание пустой новой строки
@@ -82,15 +98,20 @@ public class Request {
      * @param unit единица измерения товара
      * @param price цена товара
      * @param check установлена ли галочка у товара
+     * @param needUpdate необходимо обновить информацию с сервера
      * @param variantsCount количество вариантов при расширенном поиске
      * @param itemType вид строки
+     * @param status название цвета статуса количества
+     * @param colorName вид строки
+     * @param color цвет статуса количества
      */
     @Ignore
     public Request(String product, String requestProduct, int requestCount, int stockCount,
                    int multiplicity, String unit, double price,
-                   boolean check, int variantsCount, int itemType) {
+                   boolean check, boolean needUpdate, int variantsCount, int itemType,
+                   String status, String colorName, int color) {
         init(product, requestProduct, requestCount, stockCount, multiplicity, unit, price,
-                check, variantsCount, itemType);
+                check, needUpdate, variantsCount, itemType, status, colorName, color);
     }
 
     /**
@@ -104,18 +125,24 @@ public class Request {
      * @param check установлена ли галочка у товара
      * @param variantsCount количество вариантов при расширенном поиске
      * @param itemType вид строки
+     * @param status название цвета статуса количества
+     * @param colorName вид строки
+     * @param color цвет статуса количества
      */
     @Ignore
     public Request(String product, String requestProduct, int requestCount, int stockCount,
-                   int multiplicity, String unit, boolean check, int variantsCount, int itemType) {
+                   int multiplicity, String unit,
+                   boolean check, boolean needUpdate, int variantsCount, int itemType,
+                   String status, String colorName, int color) {
         init(product, requestProduct, requestCount, stockCount, multiplicity, unit, 0,
-                check, variantsCount, itemType);
+                check, needUpdate, variantsCount, itemType, status, colorName, color);
     }
 
     @Ignore
     private void init(String product, String requestProduct, int requestCount, int stockCount,
                       int multiplicity, String unit, double price,
-                      boolean check, int variantsCount, int itemType){
+                      boolean check, boolean needUpdate, int variantsCount, int itemType,
+                      String status, String colorName, int color){
         this.product = product;
         this.requestProduct = requestProduct;
         this.requestCount = requestCount;
@@ -126,6 +153,10 @@ public class Request {
         this.check = check;
         this.variantsCount = variantsCount;
         this.itemType = itemType;
+        this.needUpdate = needUpdate;
+        this.status = status;
+        this.colorName = colorName;
+        this.color = color;
         sum = requestCount * price;
     }
 }

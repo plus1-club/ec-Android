@@ -32,6 +32,9 @@ class SearchItemRadioViewHolder extends RecyclerView.ViewHolder {
         viewModel.check.set(request.check);
         viewModel.variantsCount.set(request.variantsCount);
         viewModel.itemType.set(request.itemType);
+        viewModel.colorName.set(request.colorName);
+        viewModel.status.set(request.status);
+        viewModel.color = request.color;
         viewModel.updateStatus();
     }
 }

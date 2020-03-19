@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.models.Count;
+import ru.electric.ec.online.models.Request;
 
 /**
  * Класс общих сервисных функций
@@ -78,55 +78,43 @@ public class Service {
     }
 
     /**
-     * Получение статуса количества товара на основе переданных данных
-     * @param count запрашиваемое количество товара
-     * @param stockCount количество товара на складе или статус количества
-     *      -1 - товара недостаточно, но более 500;
-     *      -2 - превышено количество проверок;
-     *      -3 - товар не найден
-     * @param requestProduct искомый продукт (для статуса товар не найден)
-     * @param needUpdate требуется ли проверить количество (оно в клиенте не известно)
-     * @return статус количества товара
+     * Обновление статуса количества товара в переданной строке
+     * @param request строка в которой проводится обновление статуса
      */
-    public static Count status(int count, int stockCount, String requestProduct, boolean needUpdate){
-        String textStatus;
-        String colorName;
-        int color;
-        if (stockCount == -3) {
-            textStatus = Service.getStr(R.string.status_brown, requestProduct);
-            color = R.color.brown;
-            colorName = "brown";
-        } else if (count == 0) {
-            textStatus = Service.getStr(R.string.status_black);
-            color = R.color.black;
-            colorName = "black";
-        } else if (stockCount == -2) {
-            textStatus = Service.getStr(R.string.status_violet);
-            color = R.color.violet;
-            colorName = "violet";
-        } else if (needUpdate) {
-            textStatus = Service.getStr(R.string.status_blue);
-            color = R.color.blue;
-            colorName = "blue";
-        } else if (stockCount == 0) {
-            textStatus = Service.getStr(R.string.status_red);
-            color = R.color.red;
-            colorName = "red";
-        } else if (stockCount >= count) {
-            textStatus = Service.getStr(R.string.status_green);
-            color = R.color.green;
-            colorName = "green";
-        } else if (stockCount > 500 || stockCount == -1) {
-            textStatus = Service.getStr(R.string.status_orange);
-            color = R.color.orange;
-            colorName = "orange";
+    public static void status(Request request){
+        if (request.stockCount == -3) {
+            request.status = Service.getStr(R.string.status_brown, request.requestProduct);
+            request.color = R.color.brown;
+            request.colorName = "brown";
+        } else if (request.requestCount == 0) {
+            request.status = Service.getStr(R.string.status_black);
+            request.color = R.color.black;
+            request.colorName = "black";
+        } else if (request.stockCount == -2) {
+            request.status = Service.getStr(R.string.status_violet);
+            request.color = R.color.violet;
+            request.colorName = "violet";
+        } else if (request.needUpdate) {
+            request.status = Service.getStr(R.string.status_blue);
+            request.color = R.color.blue;
+            request.colorName = "blue";
+        } else if (request.stockCount == 0) {
+            request.status = Service.getStr(R.string.status_red);
+            request.color = R.color.red;
+            request.colorName = "red";
+        } else if (request.stockCount >= request.requestCount) {
+            request.status = Service.getStr(R.string.status_green);
+            request.color = R.color.green;
+            request.colorName = "green";
+        } else if (request.stockCount > 500 || request.stockCount == -1) {
+            request.status = Service.getStr(R.string.status_orange);
+            request.color = R.color.orange;
+            request.colorName = "orange";
         } else {
-            textStatus = Service.getStr(R.string.status_yellow, stockCount);
-            color = R.color.yellow;
-            colorName = "yellow";
+            request.status = Service.getStr(R.string.status_yellow, request.stockCount);
+            request.color = R.color.yellow;
+            request.colorName = "yellow";
         }
-
-        return new Count(count, stockCount, requestProduct, textStatus, color, colorName);
     }
 
 

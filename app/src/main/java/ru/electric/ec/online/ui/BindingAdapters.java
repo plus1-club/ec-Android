@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 
-public class BindgingAdapters {
+public class BindingAdapters {
 
     @BindingAdapter({"app:buttonTint"})
     public static void setButtonTintList(RadioButton view, int colorId) {

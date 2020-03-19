@@ -17,8 +17,9 @@ class RequestTest {
 
     @BeforeEach
     void setUp() {
-        object = new Request("old", 3, 2, 1,
-                                "шт", false);
+        object = new Request("old", "old", 3, 2, 1,
+                                "шт", false, false,
+                            0, 0, "", "", 0);
     }
 
     @AfterEach
@@ -62,8 +63,9 @@ class RequestTest {
         assertEquals("шт", object.unit);
         assertFalse(object.check);
 
-        object = new Request("new", 4, 3, 2,
-                        "м", 3.0, true);
+        object = new Request("new", "new", 4, 3, 2,
+                        "м", 3.0, true, false,
+                0, 0, "", "", 0);
 
         assertEquals("new", object.product);
         assertEquals(4, object.requestCount);

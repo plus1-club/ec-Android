@@ -31,6 +31,6 @@ public class SplashActivityTest {
     @SmallTest
     @Test
     public void openSplashActivity() {
-        onView(withId(R.id.textProduct)).check(matches(isDisplayed()));
+        onView(withId(R.id.splash_screen)).check(matches(isDisplayed()));
     }
 }

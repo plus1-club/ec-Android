@@ -291,17 +291,31 @@ public class RequestViewModel {
                         Service.getInt(el.get("multiplicity")),
                         el.get("unit"),
                         false,
+                        false,
                         0,
+                        0,
+                        "",
+                        "",
                         0);
                 if ((request.multiplicity > 0) && (request.requestCount % request.multiplicity > 0)) {
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);
                 }
                 if (variants.get(request.requestProduct) == null) {
                     variants.put(request.requestProduct, 1);
-                    Request group = new Request("", request.requestProduct,
-                            request.requestCount, 0,
-                            0, "",
-                            false, 0, SearchItemTypeInterface.GROUP_ITEM_TYPE);
+                    Request group = new Request(
+                            "",
+                            request.requestProduct,
+                            request.requestCount,
+                            0,
+                            0,
+                            "",
+                            false,
+                            false,
+                            0,
+                            SearchItemTypeInterface.GROUP_ITEM_TYPE,
+                            "",
+                            "",
+                            0);
                     App.getModel().request.search.add(group);
                 } else {
                     int variantCount = Objects.requireNonNull(variants.get(request.requestProduct));
@@ -363,7 +377,11 @@ public class RequestViewModel {
                         el.get("unit"),
                         Service.getDouble(el.get("price")),
                         true,
+                        false,
                         0,
+                        0,
+                        "",
+                        "",
                         0);
                 if ((request.multiplicity > 0) && (request.requestCount % request.multiplicity > 0)) {
                     request.requestCount += request.multiplicity - (request.requestCount % request.multiplicity);

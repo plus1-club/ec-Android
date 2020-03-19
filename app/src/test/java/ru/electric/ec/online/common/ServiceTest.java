@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.models.Count;
+import ru.electric.ec.online.models.Request;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -124,9 +124,14 @@ class ServiceTest {
     @DisplayName("status(): Просят 0 - статус черный(Не известно)")
     void status_black() {
         String status = Service.getStr(R.string.status_black);
-        Count expected = new Count(0, 100, status, R.color.black, "black");
-        Count actual = Service.status(0, 100, false);
-        assertEquals(expected.count, actual.count);
+        Request expected = new Request("", "", 0, 100,
+                1, "", false, false, 0,
+                0,  status, "black", R.color.black);
+        Request actual = new Request("", "", 0, 100,
+                1, "", false, false, 0,
+                0,  "", "", 0);
+        Service.status(actual);
+        assertEquals(expected.requestCount, actual.requestCount);
         assertEquals(expected.stockCount, actual.stockCount);
         assertEquals(expected.status, actual.status);
         assertEquals(expected.colorName, actual.colorName);
@@ -137,9 +142,14 @@ class ServiceTest {
     @DisplayName("status(): Слишком часто просят (на складе = -2) - статус фиолетовый(Превышено...)")
     void status_violet() {
         String status = Service.getStr(R.string.status_violet);
-        Count expected = new Count(1, -2, status, R.color.violet, "violet");
-        Count actual = Service.status(1, -2, false);
-        assertEquals(expected.count, actual.count);
+        Request expected = new Request("", "", 1, -2,
+                1, "", false, false, 0,
+                0,  status, "violet", R.color.violet);
+        Request actual = new Request("", "", 1, -2,
+                1, "", false, false, 0,
+                0,  "", "", 0);
+        Service.status(actual);
+        assertEquals(expected.requestCount, actual.requestCount);
         assertEquals(expected.stockCount, actual.stockCount);
         assertEquals(expected.status, actual.status);
         assertEquals(expected.colorName, actual.colorName);
@@ -150,9 +160,14 @@ class ServiceTest {
     @DisplayName("status(): Требуется обновление количества - статус синий(Проверить наличие)")
     void status_blue() {
         String status = Service.getStr(R.string.status_blue);
-        Count expected = new Count(1, 100, status, R.color.blue, "blue");
-        Count actual = Service.status(1, 100, true);
-        assertEquals(expected.count, actual.count);
+        Request expected = new Request("", "", 1, 100,
+                1, "", false, true, 0,
+                0,  status, "blue", R.color.blue);
+        Request actual = new Request("", "", 1, 100,
+                1, "", false, true, 0,
+                0,  "", "", 0);
+        Service.status(actual);
+        assertEquals(expected.requestCount, actual.requestCount);
         assertEquals(expected.stockCount, actual.stockCount);
         assertEquals(expected.status, actual.status);
         assertEquals(expected.colorName, actual.colorName);
@@ -163,9 +178,14 @@ class ServiceTest {
     @DisplayName("status(): На складе 0 - статус красный(Нет)")
     void status_red() {
         String status = Service.getStr(R.string.status_red);
-        Count expected = new Count(1, 0, status, R.color.red, "red");
-        Count actual = Service.status(1, 0, false);
-        assertEquals(expected.count, actual.count);
+        Request expected = new Request("", "", 1, 0,
+                1, "", false, false, 0,
+                0,  status, "red", R.color.red);
+        Request actual = new Request("", "", 1, 0,
+                1, "", false, false, 0,
+                0,  "", "", 0);
+        Service.status(actual);
+        assertEquals(expected.requestCount, actual.requestCount);
         assertEquals(expected.stockCount, actual.stockCount);
         assertEquals(expected.status, actual.status);
         assertEquals(expected.colorName, actual.colorName);
@@ -176,9 +196,14 @@ class ServiceTest {
     @DisplayName("status(): На складе больше, чем заказали(<500) - статус зеленый(В наличии)")
     void status_green_less_500() {
         String status = Service.getStr(R.string.status_green);
-        Count expected = new Count(1, 10, status, R.color.green, "green");
-        Count actual = Service.status(1, 10, false);
-        assertEquals(expected.count, actual.count);
+        Request expected = new Request("", "", 1, 10,
+                1, "", false, false, 0,
+                0,  status, "green", R.color.green);
+        Request actual = new Request("", "", 1, 10,
+                1, "", false, false, 0,
+                0,  "", "", 0);
+        Service.status(actual);
+        assertEquals(expected.requestCount, actual.requestCount);
         assertEquals(expected.stockCount, actual.stockCount);
         assertEquals(expected.status, actual.status);
         assertEquals(expected.colorName, actual.colorName);
@@ -189,9 +214,14 @@ class ServiceTest {
     @DisplayName("status(): На складе больше, чем заказали(>500) - статус зеленый(В наличии)")
     void status_green_more_500() {
         String status = Service.getStr(R.string.status_green);
-        Count expected = new Count(600, 999, status, R.color.green, "green");
-        Count actual = Service.status(600, 999, false);
-        assertEquals(expected.count, actual.count);
+        Request expected = new Request("", "", 600, 999,
+                1, "", false, false, 0,
+                0,  status, "green", R.color.green);
+        Request actual = new Request("", "", 600, 999,
+                1, "", false, false, 0,
+                0,  "", "", 0);
+        Service.status(actual);
+        assertEquals(expected.requestCount, actual.requestCount);
         assertEquals(expected.stockCount, actual.stockCount);
         assertEquals(expected.status, actual.status);
         assertEquals(expected.colorName, actual.colorName);
@@ -202,9 +232,14 @@ class ServiceTest {
     @DisplayName("status(): Просят, но не все есть(на складе = -1) - статус оранжевый(Частично доступно)")
     void status_orange_less_500() {
         String status = Service.getStr(R.string.status_orange);
-        Count expected = new Count(1, -1, status, R.color.orange, "orange");
-        Count actual = Service.status(1, -1, false);
-        assertEquals(expected.count, actual.count);
+        Request expected = new Request("", "", 1, -1,
+                1, "", false, false, 0,
+                0,  status, "orange", R.color.orange);
+        Request actual = new Request("", "", 1, -1,
+                1, "", false, false, 0,
+                0,  "", "", 0);
+        Service.status(actual);
+        assertEquals(expected.requestCount, actual.requestCount);
         assertEquals(expected.stockCount, actual.stockCount);
         assertEquals(expected.status, actual.status);
         assertEquals(expected.colorName, actual.colorName);
@@ -215,9 +250,14 @@ class ServiceTest {
     @DisplayName("status(): На складе больше, чем заказали(>500) - статус оранжевый(Частично доступно)")
     void status_orange_more_500() {
         String status = Service.getStr(R.string.status_orange);
-        Count expected = new Count(600, 555, status, R.color.orange, "orange");
-        Count actual = Service.status(600, 555, false);
-        assertEquals(expected.count, actual.count);
+        Request expected = new Request("", "", 600, 555,
+                1, "", false, false, 0,
+                0,  status, "orange", R.color.orange);
+        Request actual = new Request("", "", 600, 555,
+                1, "", false, false, 0,
+                0,  "", "", 0);
+        Service.status(actual);
+        assertEquals(expected.requestCount, actual.requestCount);
         assertEquals(expected.stockCount, actual.stockCount);
         assertEquals(expected.status, actual.status);
         assertEquals(expected.colorName, actual.colorName);
@@ -228,9 +268,14 @@ class ServiceTest {
     @DisplayName("status(): Просят немного, но не все есть - статус желтый(Доступно ...)")
     void status_yellow() {
         String status = Service.getStr(R.string.status_yellow, 10);
-        Count expected = new Count(20, 10, status, R.color.yellow, "yellow");
-        Count actual = Service.status(20, 10, false);
-        assertEquals(expected.count, actual.count);
+        Request expected = new Request("", "", 20, 10,
+                1, "", false, false, 0,
+                0,  status, "yellow", R.color.yellow);
+        Request actual = new Request("", "", 20, 10,
+                1, "", false, false, 0,
+                0,  "", "", 0);
+        Service.status(actual);
+        assertEquals(expected.requestCount, actual.requestCount);
         assertEquals(expected.stockCount, actual.stockCount);
         assertEquals(expected.status, actual.status);
         assertEquals(expected.colorName, actual.colorName);

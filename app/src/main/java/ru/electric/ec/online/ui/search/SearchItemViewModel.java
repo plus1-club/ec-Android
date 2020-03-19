@@ -12,7 +12,6 @@ import androidx.databinding.ObservableInt;
 import java.util.Objects;
 
 import ru.electric.ec.online.common.Service;
-import ru.electric.ec.online.models.Count;
 import ru.electric.ec.online.models.Request;
 import ru.electric.ec.online.router.RouterServer;
 import ru.electric.ec.online.ui.request.RequestViewModel;
@@ -30,11 +29,13 @@ public class SearchItemViewModel {
     public ObservableField<String> unit;
     private ObservableDouble price;
     public ObservableDouble sum;
-    public ObservableField<String> status;
-    public int color;
     public ObservableBoolean check;
     ObservableInt variantsCount;
     public ObservableInt itemType;
+    public ObservableField<String> status;
+    public ObservableField<String> colorName;
+    public int color;
+
     private ObservableBoolean needUpdate;
 
     SearchItemViewModel() {
@@ -47,10 +48,12 @@ public class SearchItemViewModel {
         unit = new ObservableField<>();
         price = new ObservableDouble();
         sum = new ObservableDouble();
-        status = new ObservableField<>();
         check = new ObservableBoolean();
         variantsCount = new ObservableInt();
         itemType = new ObservableInt();
+        status = new ObservableField<>();
+        color = 0;
+        colorName = new ObservableField<>();
         needUpdate = new ObservableBoolean();
         needUpdate.set(false);
         parent = RequestViewModel.getInstance();
@@ -61,7 +64,9 @@ public class SearchItemViewModel {
         Request request = new Request(product.get(), requestProduct.get(),
                 count.get(), stockCount.get(),
                 multiplicity.get(), unit.get(), price.get(),
-                check.get(), variantsCount.get(), itemType.get());
+                check.get(), needUpdate.get(), variantsCount.get(), itemType.get(),
+                status.get(), colorName.get(), color);
+        Service.status(request);
         parent.search.set(position.get(), request);
     }
 
@@ -70,17 +75,20 @@ public class SearchItemViewModel {
         Request request = new Request(product.get(), requestProduct.get(),
                 count.get(), stockCount.get(),
                 multiplicity.get(), unit.get(), price.get(),
-                check.get(), variantsCount.get(), SearchItemTypeInterface.RADIO_ITEM_TYPE);
+                check.get(), needUpdate.get(), variantsCount.get(), SearchItemTypeInterface.RADIO_ITEM_TYPE,
+                status.get(), colorName.get(), color);
+        Service.status(request);
         parent.search.set(position.get(), request);
         SearchViewAdapter adapter = parent.searchAdapter.get();
         Objects.requireNonNull(adapter).setItems(parent.search);
         for (int pos = 0; pos < parent.search.size()-1; pos++) {
             Request item = parent.search.get(pos);
+            Service.status(item);
             if ((item.requestProduct.equals(request.requestProduct))
                     && !item.product.equals(request.product)
                     && item.check){
                 item.check = false;
-                Objects.requireNonNull(adapter).notifyItemChanged(pos);
+                Objects.requireNonNull(adapter).notifyItemChanged(pos+1);
             }
         }
         Objects.requireNonNull(adapter).notifyItemChanged(position.get());
@@ -99,8 +107,25 @@ public class SearchItemViewModel {
     }
 
     void updateStatus() {
-        Count countStatus = Service.status(count.get(), stockCount.get(), requestProduct.get(), needUpdate.get());
-        status.set(countStatus.status);
-        color = countStatus.color;
+        Request request = new Request(product.get(), requestProduct.get(),
+                count.get(), stockCount.get(),
+                multiplicity.get(), unit.get(), price.get(),
+                check.get(), needUpdate.get(), variantsCount.get(), itemType.get(),
+                status.get(), colorName.get(), color);
+        Service.status(request);
+        product.set(request.product);
+        requestProduct.set(request.requestProduct);
+        count.set(request.requestCount);
+        stockCount.set(request.stockCount);
+        multiplicity.set(request.multiplicity);
+        unit.set(request.unit);
+        price.set(request.price);
+        check.set(request.check);
+        needUpdate.set(request.needUpdate);
+        variantsCount.set(request.variantsCount);
+        itemType.set(request.itemType);
+        status.set(request.status);
+        colorName.set(request.colorName);
+        color = request.color;
     }
 }

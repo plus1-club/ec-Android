@@ -63,6 +63,9 @@ public class RequestActivityTest {
     @SmallTest
     @Test
     public void openRequestActivity() {
+        RequestViewModel.getInstance().product.set("411");
+        RequestViewModel.getInstance().count.set(1);
+        RequestViewModel.getInstance().isFullSearch.set(true);
         onView(withId(R.id.tabs)).check(matches(isDisplayed()));
     }
 
