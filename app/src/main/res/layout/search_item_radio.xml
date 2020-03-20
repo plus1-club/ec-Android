@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> viewModel.onUpdateStatus(context)}"
-                android:text="@{(viewModel.multiplicity > 1)?(viewModel.status + '\n' + @string/text_multiplicity(viewModel.multiplicity)):viewModel.status}"
+                android:text="@{(viewModel.multiplicity > 1)?(viewModel.status + '\n' + @string/text_multiplicity(viewModel.count, viewModel.multiplicity)):viewModel.status}"
                 android:textAlignment="viewStart"
                 tools:ignore="RtlCompat" />
 

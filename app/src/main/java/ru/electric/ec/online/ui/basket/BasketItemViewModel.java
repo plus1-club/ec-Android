@@ -85,8 +85,6 @@ public class BasketItemViewModel {
                 needUpdate.set(true);
                 if ((multiplicity.get() > 0) && (newCount % multiplicity.get() > 0)){
                     count.set(newCount + (multiplicity.get() - (newCount % multiplicity.get())));
-                    //RouterView.openInfo(context, new Info(false, true,
-                    // Service.getStr(R.string.text_multiplicity, multiplicity.get())));
                 } else {
                     count.set(newCount);
                 }

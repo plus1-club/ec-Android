@@ -76,7 +76,7 @@
     <string name="status_orange">Частично доступно</string>
     <string name="status_yellow">Доступно %1$d</string>
     <string name="status_green">В наличии</string>
-    <string name="text_multiplicity">Увеличено до кратности минимальной упаковки: %1$d (по %1$d в упаковке)</string>
+    <string name="text_multiplicity">Увеличено до кратности минимальной упаковки: %1$d (по %2$d в упаковке)</string>
 
     <!-- Экран "6.Счета" -->
     <string name="text_invoice">Счет № %1$d от %2$s</string>

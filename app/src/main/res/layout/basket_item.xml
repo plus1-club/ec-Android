@@ -134,7 +134,7 @@
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
                 android:onClick="@{() -> viewModel.onUpdateStatus(context)}"
-                android:text="@{(viewModel.multiplicity > 1) ? @string/text_multiplicity(viewModel.multiplicity) : @string/text_empty}"
+                android:text="@{(viewModel.multiplicity > 1) ? @string/text_multiplicity(viewModel.count, viewModel.multiplicity) : @string/text_empty}"
                 android:textAlignment="viewStart"
                 tools:ignore="RtlCompat" />
         </LinearLayout>
