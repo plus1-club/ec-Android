@@ -73,13 +73,11 @@ public class BasketItemViewModel {
                 count.set(newCount);
             }
             sum.set(count.get() * price.get());
-            Basket request = new Basket(product.get(), count.get(), stockCount.get(),
-                    multiplicity.get(), unit.get(), price.get(),
-                    check.get(), needUpdate.get(),
-                    status.get(), colorName.get(), color);
+            Basket request = parent.basket.get(position.get());
+            request.needUpdate = needUpdate.get();
+            request.requestCount = count.get();
             updateStatus();
             parent.basket.set(position.get(), request);
-
             Objects.requireNonNull(parent.adapter.get()).notifyItemChanged(position.get());
         }
      }
@@ -111,10 +109,12 @@ public class BasketItemViewModel {
     }
 
     public void onUpdateStatus(Context context){
-        ServerRouter.putBasket(context, parent);
-        ServerRouter.getBasket(context, parent);
-        needUpdate.set(false);
-        updateStatus();
+        if(needUpdate.get()){
+            ServerRouter.putBasket(context, parent);
+            ServerRouter.getBasket(context, parent);
+            needUpdate.set(false);
+            updateStatus();
+        }
     }
 
     void updateStatus() {
