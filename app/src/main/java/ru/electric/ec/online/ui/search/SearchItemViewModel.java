@@ -66,11 +66,8 @@ public class SearchItemViewModel {
 
     public void onRadioClick(View view) {
         check.set(true);
-        Search request = new Search(product.get(), requestProduct.get(),
-                count.get(), stockCount.get(),
-                multiplicity.get(), unit.get(),
-                check.get(), needUpdate.get(), variantsCount.get(), SearchItemTypeInterface.RADIO_ITEM_TYPE,
-                status.get(), colorName.get(), color);
+        Search request = parent.search.get(position.get());
+        request.check = true;
         Service.status(request);
         parent.search.set(position.get(), request);
         SearchViewAdapter adapter = parent.adapter.get();
@@ -82,22 +79,23 @@ public class SearchItemViewModel {
                     && !item.product.equals(request.product)
                     && item.check){
                 item.check = false;
-                Objects.requireNonNull(adapter).notifyItemChanged(pos+1);
             }
+            Objects.requireNonNull(adapter).notifyItemChanged(pos);
         }
-        Objects.requireNonNull(adapter).notifyItemChanged(position.get());
         parent.adapter.set(adapter);
     }
 
     public void onUpdateStatus(Context context){
-        if (parent.isExcel.get()){
-            ServerRouter.fromExcel(context, parent);
-        } else {
-            ServerRouter.byCode(context, parent);
+        if (needUpdate.get()){
+            if (parent.isExcel.get()){
+                ServerRouter.fromExcel(context, parent);
+            } else {
+                ServerRouter.byCode(context, parent);
+            }
+            ((SearchActivity)context).refreshSearch();
+            needUpdate.set(false);
+            updateStatus();
         }
-        ((SearchActivity)context).refreshSearch();
-        needUpdate.set(false);
-        updateStatus();
     }
 
     void updateStatus() {

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
+import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.SearchItemRadioBinding;
 import ru.electric.ec.online.models.Request;
 
@@ -36,6 +37,10 @@ class SearchItemRadioViewHolder extends RecyclerView.ViewHolder {
         viewModel.status.set(request.status);
         viewModel.color = request.color;
         viewModel.updateStatus();
+        binding.radioMark.setButtonTintList(Service.getColorStateList(viewModel.color));
+        binding.editCount.setBackgroundTintList(Service.getColorStateList(viewModel.color));
+        binding.textUnit.setTextColor(Service.getColor(viewModel.color));
+        binding.textStatus.setTextColor(Service.getColor(viewModel.color));
     }
 }
 

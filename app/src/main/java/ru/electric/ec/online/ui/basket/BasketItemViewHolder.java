@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
+import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.BasketItemBinding;
 import ru.electric.ec.online.models.Basket;
 
@@ -36,5 +37,9 @@ class BasketItemViewHolder extends RecyclerView.ViewHolder {
         viewModel.status.set(request.status);
         viewModel.color = request.color;
         viewModel.updateStatus();
+        binding.checkMark.setButtonTintList(Service.getColorStateList(viewModel.color));
+        binding.editCount.setBackgroundTintList(Service.getColorStateList(viewModel.color));
+        binding.textUnit.setTextColor(Service.getColor(viewModel.color));
+        binding.textStatus.setTextColor(Service.getColor(viewModel.color));
     }
 }

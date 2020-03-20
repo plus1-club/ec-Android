@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
+import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.SearchItemNotFoundBinding;
 import ru.electric.ec.online.models.Request;
 
@@ -32,6 +33,7 @@ class SearchItemNotFoundViewHolder extends RecyclerView.ViewHolder {
         viewModel.variantsCount.set(request.variantsCount);
         viewModel.itemType.set(request.itemType);
         viewModel.updateStatus();
+        binding.textProduct.setTextColor(Service.getColor(viewModel.color));
     }
 }
 

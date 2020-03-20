@@ -55,6 +55,7 @@ class FilesItemViewHolder extends RecyclerView.ViewHolder {
                 viewModel.icon.set(App.getAppContext().getDrawable(R.drawable.file));
             }
         }
+        binding.icon.setImageDrawable(viewModel.icon.get());
     }
 }
 

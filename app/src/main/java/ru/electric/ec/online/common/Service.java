@@ -1,5 +1,6 @@
 package ru.electric.ec.online.common;
 
+import android.content.res.ColorStateList;
 import android.util.Log;
 
 import androidx.databinding.ObservableDouble;
@@ -212,5 +213,23 @@ public class Service {
         } catch (Exception e) {
             return param1.toString() + param2.toString();
         }
+    }
+
+    /**
+     * Получение цвета из ресурсов
+     * @param res идентификатор цвета
+     * @return цвет из ресурсов
+     */
+    public static int getColor(int res){
+        return App.getAppContext().getResources().getColor(res);
+    }
+
+    /**
+     * Получение списка цветовых состояний из ресурсов
+     * @param res идентификатор цвета
+     * @return список цветовых состояний из ресурсов
+     */
+    public static ColorStateList getColorStateList(int res){
+        return ColorStateList.valueOf(getColor(res));
     }
 }

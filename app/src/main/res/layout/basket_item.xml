@@ -30,7 +30,6 @@
                 android:id="@+id/checkMark"
                 android:layout_width="32dp"
                 android:layout_height="40dp"
-                android:buttonTint="@{viewModel.color}"
                 android:checked="@={viewModel.check}"
                 android:gravity="center_vertical"
                 android:onClick="@{(view) -> viewModel.onFlagClick(view)}" />
@@ -43,7 +42,6 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_margin="0dp"
-                android:backgroundTint="@{viewModel.color}"
                 android:gravity="center"
                 android:inputType="number|text"
                 android:onTextChanged="@{(s, start, before, count) -> viewModel.onTextChanged(context, s, start, before, count)}"
@@ -59,7 +57,6 @@
                 android:gravity="center_vertical"
                 android:text="@={viewModel.unit}"
                 android:textAlignment="viewStart"
-                android:textColor="@{viewModel.color}"
                 tools:ignore="RtlCompat" />
 
             <TextView
@@ -106,7 +103,6 @@
                 android:onClick="@{() -> viewModel.onUpdateStatus(context)}"
                 android:text="@={viewModel.status}"
                 android:textAlignment="viewStart"
-                android:textColor="@{viewModel.color}"
                 tools:ignore="RtlCompat" />
 
             <TextView

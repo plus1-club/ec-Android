@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="android.view.View" />
         <variable
@@ -31,8 +30,7 @@
                 android:layout_height="40dp"
                 android:checked="@={viewModel.check}"
                 android:gravity="center_vertical"
-                android:onClick="@{(view) -> viewModel.onRadioClick(view)}"
-                app:buttonTint="@{viewModel.color}" />
+                android:onClick="@{(view) -> viewModel.onRadioClick(view)}" />
 
             <!--suppress AndroidUnknownAttribute -->
 
@@ -43,7 +41,6 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_margin="0dp"
-                android:backgroundTint="@{viewModel.color}"
                 android:enabled="false"
                 android:gravity="center"
                 android:inputType="number|text"
@@ -90,9 +87,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> viewModel.onUpdateStatus(context)}"
-                android:text="@={viewModel.status}"
+                android:text="@{viewModel.status}"
                 android:textAlignment="viewStart"
-                android:textColor="@{viewModel.color}"
                 tools:ignore="RtlCompat" />
 
         </LinearLayout>
