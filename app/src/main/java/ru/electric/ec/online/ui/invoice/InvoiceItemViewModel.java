@@ -32,6 +32,8 @@ public class InvoiceItemViewModel {
     public ObservableDouble sum;
     public ObservableField<String> status;
     public ObservableInt waybill;
+    public ObservableField<String> message;
+    public ObservableInt itemType;
 
     public ObservableBoolean showWaybill;
     public ObservableBoolean showInvoiceButton;
@@ -43,6 +45,9 @@ public class InvoiceItemViewModel {
         sum = new ObservableDouble();
         status = new ObservableField<>();
         waybill = new ObservableInt();
+        message = new ObservableField<>();
+        itemType = new ObservableInt();
+
         parent = InvoiceViewModel.getInstance();
         details = new ObservableArrayList<>();
         showWaybill = new ObservableBoolean();

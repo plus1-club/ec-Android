@@ -58,21 +58,38 @@ public class InvoiceViewModel {
                             Service.getInt(el.get("number")),
                             el.get("date"),
                             el.get("status"),
-                            Service.getInt(el.get("waybill")));
+                            Service.getInt(el.get("waybill")),
+                            body.message,
+                            InvoiceItemTypeInterface.USUAL_ITEM_TYPE);
 
                 } else {
                     invoice = new Invoice(
                             Service.getInt(el.get("number")),
                             el.get("date"),
                             Service.getDouble(el.get("sum")),
-                            el.get("status"));
+                            el.get("status"),
+                            body.message,
+                            InvoiceItemTypeInterface.USUAL_ITEM_TYPE);
                 }
                 App.getModel().invoice.invoices.add(invoice);
             }
             InvoiceViewAdapter adapter = new InvoiceViewAdapter();
             adapter.updateAdapter(App.getModel().invoice, context);
         } else {
-            ViewRouter.onUnsuccessful(context, body);
+            if (body.error.endsWith("_is_not_found")) {
+                Invoice invoice = new Invoice(
+                        0,
+                        "",
+                        "",
+                        0,
+                        body.message,
+                        InvoiceItemTypeInterface.MESSAGE_ITEM_TYPE);
+                App.getModel().invoice.invoices.add(invoice);
+                InvoiceViewAdapter adapter = new InvoiceViewAdapter();
+                adapter.updateAdapter(App.getModel().invoice, context);
+            } else {
+                ViewRouter.onUnsuccessful(context, body);
+            }
         }
         adapter.set(new InvoiceViewAdapter());
         Objects.requireNonNull(adapter.get()).setItems(invoices);

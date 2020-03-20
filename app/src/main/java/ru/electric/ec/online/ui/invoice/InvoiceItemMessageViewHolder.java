@@ -9,15 +9,15 @@ import java.util.Objects;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.Service;
-import ru.electric.ec.online.databinding.InvoiceItemBinding;
+import ru.electric.ec.online.databinding.InvoiceItemMessageBinding;
 import ru.electric.ec.online.models.Invoice;
 
-class InvoiceItemViewHolder extends RecyclerView.ViewHolder {
+class InvoiceItemMessageViewHolder extends RecyclerView.ViewHolder {
 
-    private InvoiceItemBinding binding;
+    private InvoiceItemMessageBinding binding;
     private InvoiceItemViewModel viewModel;
 
-    InvoiceItemViewHolder(View view) {
+    InvoiceItemMessageViewHolder(View view) {
         super(view);
         binding = DataBindingUtil.bind(view);
         viewModel = Objects.requireNonNull(binding).getViewModel();

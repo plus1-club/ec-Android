@@ -15,17 +15,23 @@ import java.util.List;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.databinding.InvoiceItemBinding;
+import ru.electric.ec.online.databinding.InvoiceItemMessageBinding;
 import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.ui.ViewRouter;
 
-public class InvoiceViewAdapter extends RecyclerView.Adapter<InvoiceItemViewHolder> {
+public class InvoiceViewAdapter extends RecyclerView.Adapter {
 
     private List<Invoice> invoices;
     private InvoiceItemViewModel viewModel;
 
     InvoiceViewAdapter() {
         invoices = new ArrayList<>();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return invoices.get(position).itemType;
     }
 
     void updateAdapter(InvoiceViewModel invoice, Context context){
@@ -48,19 +54,30 @@ public class InvoiceViewAdapter extends RecyclerView.Adapter<InvoiceItemViewHold
 
     @NonNull
     @Override
-    public InvoiceItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         viewModel = new InvoiceItemViewModel();
         viewModel.parent.invoices.clear();
         viewModel.parent.invoices.addAll(invoices);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        InvoiceItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.invoice_item, parent, false);
-        binding.setViewModel(viewModel);
-        return new InvoiceItemViewHolder(binding.getRoot());
+        if (viewType == InvoiceItemTypeInterface.MESSAGE_ITEM_TYPE) {
+            InvoiceItemMessageBinding binding = DataBindingUtil.inflate(inflater, R.layout.invoice_item_message, parent, false);
+            binding.setViewModel(viewModel);
+            return new InvoiceItemMessageViewHolder(binding.getRoot());
+
+        } else {
+            InvoiceItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.invoice_item, parent, false);
+            binding.setViewModel(viewModel);
+            return new InvoiceItemViewHolder(binding.getRoot());
+        }
     }
 
     @Override
-    public void onBindViewHolder(InvoiceItemViewHolder holder, int position) {
-        holder.bind(invoices.get(position), position);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (this.getItemViewType(position) == InvoiceItemTypeInterface.MESSAGE_ITEM_TYPE){
+            ((InvoiceItemMessageViewHolder) holder).bind(invoices.get(position), position);
+        } else {
+            ((InvoiceItemViewHolder) holder).bind(invoices.get(position), position);
+        }
     }
 
     @Override

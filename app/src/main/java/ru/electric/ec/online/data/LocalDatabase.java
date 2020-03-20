@@ -13,7 +13,7 @@ import ru.electric.ec.online.models.Invoice;
 import ru.electric.ec.online.models.Search;
 import ru.electric.ec.online.models.User;
 
-@Database(version = 161, exportSchema = false,
+@Database(version = 168, exportSchema = false,
           entities = {User.class, Search.class, Basket.class, Invoice.class, Detail.class, Info.class})
 public abstract class LocalDatabase extends RoomDatabase {
 

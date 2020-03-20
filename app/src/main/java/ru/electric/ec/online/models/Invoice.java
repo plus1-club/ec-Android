@@ -42,6 +42,17 @@ public class Invoice {
     @ColumnInfo(name = "waybill")
     public int waybill;
 
+    /** Сообщение от сервера */
+    @ColumnInfo(name = "message")
+    public String message;
+
+    /** Вид строки:
+     *  1 - обычный,
+     *  2 - сообщение от сервера
+     */
+    @ColumnInfo(name = "itemType")
+    public int itemType;
+
     /** Список детальной информации по товарам в счете */
     @Ignore
     public List<Detail> details;
@@ -60,8 +71,8 @@ public class Invoice {
      * @param status статус счета (См. {@link Invoice#status})
      */
     @Ignore
-    public Invoice(int number, String date, double sum, String status) {
-        init(number, date, sum, status, 0);
+    public Invoice(int number, String date, double sum, String status, String message, int itemType) {
+        init(number, date, sum, status, 0, message, itemType);
     }
 
     /**
@@ -72,17 +83,19 @@ public class Invoice {
      * @param waybill номер накладной
      */
     @Ignore
-    public Invoice(int number, String date, String status, int waybill) {
-        init(number, date, 0.0, status, waybill);
+    public Invoice(int number, String date, String status, int waybill, String message, int itemType) {
+        init(number, date, 0.0, status, waybill, message, itemType);
     }
 
     @Ignore
-    private void init(int number, String date, double sum, String status, int waybill){
+    private void init(int number, String date, double sum, String status, int waybill, String message, int itemType){
         this.number = number;
         this.date = date;
         this.status = status;
         this.sum = sum;
         this.waybill = waybill;
+        this.message = message;
+        this.itemType = itemType;
         this.details = new ArrayList<>();
     }
 }
