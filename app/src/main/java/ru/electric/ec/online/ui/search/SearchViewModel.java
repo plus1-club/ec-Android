@@ -1,7 +1,7 @@
 package ru.electric.ec.online.ui.search;
 
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
@@ -27,7 +27,6 @@ import ru.electric.ec.online.server.ServerData;
 import ru.electric.ec.online.server.ServerRouter;
 import ru.electric.ec.online.ui.ViewRouter;
 import ru.electric.ec.online.ui.basket.BasketViewModel;
-import ru.electric.ec.online.ui.info.InfoActivity;
 
 public class SearchViewModel {
 
@@ -245,17 +244,20 @@ public class SearchViewModel {
         }
 
         if (count == 0) {
-            Intent intent = new Intent(context, InfoActivity.class);
-            intent.putExtra("title", title.get());
-            intent.putExtra("info", context.getString(R.string.text_product_not_select));
-            intent.putExtra("activityName", "SearchActivity");
-            context.startActivity(intent);
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle(title.get());
+            alertDialog.setMessage(context.getString(R.string.text_product_not_select));
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    (dialog, which) -> dialog.dismiss());
+            alertDialog.show();
         } else if (!allChecked) {
-            Intent intent = new Intent(context, InfoActivity.class);
-            intent.putExtra("title", title.get());
-            intent.putExtra("info", context.getString(R.string.text_variant_not_select));
-            intent.putExtra("activityName", "SearchActivity");
-            context.startActivity(intent);
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+            alertDialog.setTitle(title.get());
+            alertDialog.setMessage(context.getString(R.string.text_variant_not_select));
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    (dialog, which) -> dialog.dismiss());
+            alertDialog.show();
+
         } else {
             for (Search request: App.getModel().search.search) {
                 if (request.check){
