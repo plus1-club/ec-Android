@@ -43,7 +43,7 @@
     <string name="link_specifications_file">Посмотреть ранее загруженные спецификации</string>
 
     <!-- Экран "4.Заявки из Excel" -->
-    <string name="text_select_file">Выберите Excel-файл (формат XLS, XLSX, ODS) В файле должен быть столбец с товарами и столбец с количеством товаров.</string>
+    <string name="text_select_file">Выберите Excel-файл (формат XLS, XLSX, ODS) В файле должен быть столбец с товарами и столбец с количеством товаров</string>
     <string name="button_select">Обзор…</string>
     <string name="label_product_column_number">№ столбца с кодом товара</string>
     <string name="label_count_column_number">№ столбца с количеством</string>
@@ -76,7 +76,7 @@
     <string name="status_orange">Частично доступно</string>
     <string name="status_yellow">Доступно %1$d</string>
     <string name="status_green">В наличии</string>
-    <string name="text_multiplicity">Количество увеличено до кратности минимальной упаковки: %1$d (по %1$d в упаковке).</string>
+    <string name="text_multiplicity">Увеличено до кратности минимальной упаковки: %1$d (по %1$d в упаковке)</string>
 
     <!-- Экран "6.Счета" -->
     <string name="text_invoice">Счет № %1$d от %2$s</string>
@@ -102,13 +102,14 @@
     <string name="text_response_error">Ошибка\n%1$s</string>
     <string name="text_response_failure">Ошибка:\n%1$s</string>
     <string name="button_back">Вернуться назад</string>
+    <string name="text_empty" />
 
     <!-- В разработке -->
     <string name="text_in_develop_download_remains">Скачивание остатков - в разработке</string>
     <string name="test_in_develop_download_invoice">Скачивание счета - в разработке</string>
     <string name="text_acitivity_not_found">Не найден экран %s</string>
-    <string name="error_UnknownHostException">Соединение с интернетом нестабильно.</string>
-    <string name="error_SocketTimeoutException">Низкая скорость соединения с интернетом.</string>
+    <string name="error_UnknownHostException">Соединение с интернетом нестабильно</string>
+    <string name="error_SocketTimeoutException">Низкая скорость соединения с интернетом</string>
 
     <!-- Прочее -->
 

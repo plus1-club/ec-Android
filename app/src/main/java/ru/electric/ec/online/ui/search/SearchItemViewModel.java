@@ -23,7 +23,7 @@ public class SearchItemViewModel {
     public ObservableField<String> requestProduct;
     public ObservableInt count;
     public ObservableInt stockCount;
-    ObservableInt multiplicity;
+    public ObservableInt multiplicity;
     public ObservableField<String> unit;
     public ObservableBoolean check;
     ObservableInt variantsCount;

@@ -31,7 +31,7 @@ public class BasketItemViewModel {
     public ObservableField<String> requestProduct;
     public ObservableInt count;
     public ObservableInt stockCount;
-    ObservableInt multiplicity;
+    public ObservableInt multiplicity;
     public ObservableField<String> unit;
     public ObservableDouble price;
     public ObservableDouble sum;

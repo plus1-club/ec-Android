@@ -41,6 +41,7 @@ class BasketItemViewHolder extends RecyclerView.ViewHolder {
         binding.editCount.setBackgroundTintList(Service.getColorStateList(viewModel.color));
         binding.textUnit.setTextColor(Service.getColor(viewModel.color));
         binding.textStatus.setTextColor(Service.getColor(viewModel.color));
+        binding.textMultiplicity.setTextColor(Service.getColor(viewModel.color));
         binding.editCount.setOnKeyListener(null);
         binding.editCount.setFocusable(false);
         binding.editCount.setFocusableInTouchMode(false);

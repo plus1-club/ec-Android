@@ -101,7 +101,7 @@
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
                 android:onClick="@{() -> viewModel.onUpdateStatus(context)}"
-                android:text="@={viewModel.status}"
+                android:text="@{viewModel.status}"
                 android:textAlignment="viewStart"
                 tools:ignore="RtlCompat" />
 
@@ -118,5 +118,26 @@
                 tools:ignore="RtlCompat" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textMultiplicity"
+                style="@style/AppTheme.ECOnline.Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="0dp"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewModel.onUpdateStatus(context)}"
+                android:text="@{(viewModel.multiplicity > 1) ? @string/text_multiplicity(viewModel.multiplicity) : @string/text_empty}"
+                android:textAlignment="viewStart"
+                tools:ignore="RtlCompat" />
+        </LinearLayout>
+
     </LinearLayout>
 </layout>
