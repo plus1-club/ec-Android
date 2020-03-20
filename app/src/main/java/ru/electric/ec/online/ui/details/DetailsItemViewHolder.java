@@ -42,6 +42,8 @@ class DetailsItemViewHolder extends RecyclerView.ViewHolder {
         viewModel.showDelivery.set(
                 Service.isEqual(status, Service.getStr(R.string.status_reserved)) ||
                         Service.isEqual(status, Service.getStr(R.string.status_ordered)));
+        binding.textCount.setTextColor(Service.getColor(viewModel.color.get()));
+        binding.textAvailable.setTextColor(Service.getColor(viewModel.color.get()));
     }
 }
 
