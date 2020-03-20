@@ -165,40 +165,49 @@ public class SearchViewModel {
                 }
             }
         } else {
-            if (body.error.equals("data_is_not_found")){
-                Search group = new Search(
-                        "",
-                        product.get(),
-                        count.get(),
-                        0,
-                        0,
-                        "",
-                        false,
-                        false,
-                        0,
-                        SearchItemTypeInterface.GROUP_ITEM_TYPE,
-                        "",
-                        "",
-                        0);
-                App.getModel().search.search.add(group);
+            if (!body.error.isEmpty()){
+                if (!isExcel.get()) {
+                    Search group = new Search(
+                            "",
+                            product.get(),
+                            count.get(),
+                            0,
+                            0,
+                            "",
+                            false,
+                            false,
+                            0,
+                            SearchItemTypeInterface.GROUP_ITEM_TYPE,
+                            "",
+                            "",
+                            0);
+                    App.getModel().search.search.add(group);
+                }
+                String productText = "";
+                int stock;
+                if (body.error.equals("data_is_not_found")){
+                    productText = product.get();
+                    stock = -3;
+                } else {
+                    stock = -4;
+                }
                 Search item = new Search(
                         "",
-                        product.get(),
+                        productText,
                         count.get(),
-                        -3,
+                        stock,
                         0,
                         "",
                         false,
                         false,
                         0,
                         SearchItemTypeInterface.NOT_FOUND_ITEM_TYPE,
-                        "",
+                        body.message,
                         "",
                         0);
                 App.getModel().search.search.add(item);
             }
             Objects.requireNonNull(binding.get()).swiperefresh.setRefreshing(false);
-        //    ViewRouter.onUnsuccessful(context, body, "RequestActivity");
         }
         adapter.set(new SearchViewAdapter());
         Objects.requireNonNull(adapter.get()).setItems(search);

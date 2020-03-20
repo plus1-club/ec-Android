@@ -6,6 +6,7 @@ import android.content.Context;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Objects;
 
@@ -100,6 +101,8 @@ public class ServerRouter {
                 .subscribe(
                         body -> viewModel.searchOk(context, body),
                         error ->viewModel.searchError(context, error));
+        } else {
+            viewModel.searchError(context, new FileNotFoundException("Не выбран файл"));
         }
     }
 

@@ -84,10 +84,13 @@ public class Service {
      * @param request строка в которой проводится обновление статуса
      */
     public static void status(Search request){
-        if (request.stockCount == -3) {
-            request.status = Service.getStr(R.string.status_brown, request.requestProduct);
+        if (request.stockCount == -4) {
             request.color = R.color.brown;
             request.colorName = "brown";
+        } else if (request.stockCount == -3) {
+            request.status = Service.getStr(R.string.status_brown, request.requestProduct);
+            request.color = R.color.brown;
+            request.colorName = "black";
         } else if (request.requestCount == 0) {
             request.status = Service.getStr(R.string.status_black);
             request.color = R.color.black;
@@ -124,10 +127,13 @@ public class Service {
      * @param request строка в которой проводится обновление статуса
      */
     public static void status(Basket request){
-        if (request.stockCount == -3) {
-            request.status = Service.getStr(R.string.status_brown, request.requestProduct);
+        if (request.stockCount == -4) {
             request.color = R.color.brown;
             request.colorName = "brown";
+        } else if (request.stockCount == -3) {
+                request.status = Service.getStr(R.string.status_brown, request.requestProduct);
+                request.color = R.color.brown;
+                request.colorName = "brown";
         } else if (request.requestCount == 0) {
             request.status = Service.getStr(R.string.status_black);
             request.color = R.color.black;
