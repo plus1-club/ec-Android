@@ -1,13 +1,12 @@
-package ru.electric.ec.online.router;
+package ru.electric.ec.online.data;
 
 import java.util.concurrent.Executors;
 
 import ru.electric.ec.online.common.Service;
-import ru.electric.ec.online.data.DataService;
 import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.ui.enter.EnterViewModel;
 
-public class RouterData {
+public class DataRouter {
 
     public static void restoreUser(EnterViewModel viewModel){
         Executors.newSingleThreadExecutor().execute(() ->

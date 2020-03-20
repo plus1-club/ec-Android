@@ -6,7 +6,7 @@
         <import type="ru.electric.ec.online.common.Service" />
         <variable
             name="viewModel"
-            type="ru.electric.ec.online.ui.request.RequestViewModel" />
+            type="ru.electric.ec.online.ui.basket.BasketViewModel" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"

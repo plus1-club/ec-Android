@@ -22,9 +22,9 @@ import java.util.Locale;
 import java.util.Objects;
 
 import okhttp3.ResponseBody;
-import ru.electric.ec.online.router.RouterServer;
-import ru.electric.ec.online.router.RouterView;
 import ru.electric.ec.online.server.ServerData;
+import ru.electric.ec.online.server.ServerRouter;
+import ru.electric.ec.online.ui.ViewRouter;
 import ru.electric.ec.online.ui.details.DetailsActivity;
 import ru.electric.ec.online.ui.invoice.InvoiceActivity;
 import ru.electric.ec.online.ui.request.RequestActivity;
@@ -66,13 +66,13 @@ public class BillViewModel {
     }
 
     public void printOk(Context context, ServerData body, int number) {
-        if (RouterServer.isSuccess(body)) {
+        if (ServerRouter.isSuccess(body)) {
             LinkedTreeMap data = (LinkedTreeMap) body.data;
             String link = (String) Objects.requireNonNull(data.get("file"));
-            RouterServer.downloadFile(context, BillViewModel.getInstance(), link,
+            ServerRouter.downloadFile(context, BillViewModel.getInstance(), link,
                     String.format(Locale.getDefault(),"%1$d.pdf", number));
         } else {
-            RouterView.onUnsuccessful(context, body);
+            ViewRouter.onUnsuccessful(context, body);
         }
     }
 
@@ -82,12 +82,12 @@ public class BillViewModel {
             DownloadTask load = new DownloadTask(context);
             load.execute(body, fileName);
         } catch (Exception e){
-            RouterView.onError(context, e);
+            ViewRouter.onError(context, e);
         }
     }
 
     public void downloadError(Context context, Throwable throwable) {
-        RouterView.onError(context, throwable);
+        ViewRouter.onError(context, throwable);
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -110,7 +110,7 @@ public class BillViewModel {
                 local.set(localFile);
                 return localFile;
             } catch (IOException e) {
-                RouterView.onError(context, e);
+                ViewRouter.onError(context, e);
                 return null;
             }
         }

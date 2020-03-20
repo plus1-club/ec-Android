@@ -17,9 +17,9 @@ import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.InvoiceBinding;
 import ru.electric.ec.online.models.Invoice;
-import ru.electric.ec.online.router.RouterServer;
-import ru.electric.ec.online.router.RouterView;
 import ru.electric.ec.online.server.ServerData;
+import ru.electric.ec.online.server.ServerRouter;
+import ru.electric.ec.online.ui.ViewRouter;
 
 public class InvoiceViewModel {
 
@@ -47,7 +47,7 @@ public class InvoiceViewModel {
 
     public void invoiceOk(Context context, ServerData body) {
         App.getModel().invoice.invoices.clear();
-        if (RouterServer.isSuccess(body)) {
+        if (ServerRouter.isSuccess(body)) {
             List<?> data = (List<?>) body.data;
             for (Object element : data) {
                 @SuppressWarnings("unchecked")
@@ -72,7 +72,7 @@ public class InvoiceViewModel {
             InvoiceViewAdapter adapter = new InvoiceViewAdapter();
             adapter.updateAdapter(App.getModel().invoice, context);
         } else {
-            RouterView.onUnsuccessful(context, body);
+            ViewRouter.onUnsuccessful(context, body);
         }
         adapter.set(new InvoiceViewAdapter());
         Objects.requireNonNull(adapter.get()).setItems(invoices);
@@ -81,7 +81,7 @@ public class InvoiceViewModel {
     }
 
     public void invoiceError(Context context, Throwable throwable) {
-        RouterView.onError(context, throwable);
+        ViewRouter.onError(context, throwable);
     }
 
 }

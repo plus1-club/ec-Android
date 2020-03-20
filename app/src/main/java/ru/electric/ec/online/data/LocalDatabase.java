@@ -10,15 +10,15 @@ import ru.electric.ec.online.models.Basket;
 import ru.electric.ec.online.models.Detail;
 import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.models.Invoice;
-import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.models.Search;
 import ru.electric.ec.online.models.User;
 
-@Database(version = 157, exportSchema = false,
-          entities = {User.class, Request.class, Basket.class, Invoice.class, Detail.class, Info.class})
+@Database(version = 161, exportSchema = false,
+          entities = {User.class, Search.class, Basket.class, Invoice.class, Detail.class, Info.class})
 public abstract class LocalDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
-    public abstract RequestDao requestDao();
+    public abstract SearchDao requestDao();
     public abstract BasketDao basketDao();
     public abstract InvoiceDao invoiceDao();
     public abstract DetailDao detailDao();

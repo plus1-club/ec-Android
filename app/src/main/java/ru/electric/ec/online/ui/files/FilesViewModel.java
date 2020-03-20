@@ -15,7 +15,7 @@ import java.util.Objects;
 
 import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.models.Info;
-import ru.electric.ec.online.router.RouterView;
+import ru.electric.ec.online.ui.ViewRouter;
 
 /**
  * Менеджер файлов
@@ -67,7 +67,7 @@ public class FilesViewModel {
 
         // Проверим, является ли файл директорией
         if (!Objects.requireNonNull(directory).isDirectory()) {
-            RouterView.openInfo(App.getAppContext(),
+            ViewRouter.openInfo(App.getAppContext(),
                     new Info(true, false, String.format("%1$s не директория", directory.getAbsolutePath())));
             return false;
         }

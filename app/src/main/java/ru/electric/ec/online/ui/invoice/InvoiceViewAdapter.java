@@ -17,23 +17,23 @@ import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.databinding.InvoiceItemBinding;
 import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.models.Invoice;
-import ru.electric.ec.online.router.RouterView;
+import ru.electric.ec.online.ui.ViewRouter;
 
 public class InvoiceViewAdapter extends RecyclerView.Adapter<InvoiceItemViewHolder> {
 
     private List<Invoice> invoices;
     private InvoiceItemViewModel viewModel;
 
-    public InvoiceViewAdapter() {
+    InvoiceViewAdapter() {
         invoices = new ArrayList<>();
     }
 
-    public void updateAdapter(InvoiceViewModel invoice, Context context){
+    void updateAdapter(InvoiceViewModel invoice, Context context){
         this.setItems(invoice.invoices);
         try{
             ((InvoiceActivity)context).binding.list.setAdapter(this);
         } catch (Exception e){
-            RouterView.openInfo(context, new Info(true, false, "Ошибка вывода списка"));
+            ViewRouter.openInfo(context, new Info(true, false, "Ошибка вывода списка"));
         }
     }
 
@@ -42,7 +42,7 @@ public class InvoiceViewAdapter extends RecyclerView.Adapter<InvoiceItemViewHold
             invoices.addAll(collection);
             notifyDataSetChanged();
         } catch (Exception e){
-            RouterView.openInfo(App.getAppContext(),  new Info(true, false, "Ошибка добавления значений"));
+            ViewRouter.openInfo(App.getAppContext(),  new Info(true, false, "Ошибка добавления значений"));
         }
     }
 

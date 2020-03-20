@@ -1,4 +1,4 @@
-package ru.electric.ec.online.router;
+package ru.electric.ec.online.server;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,18 +15,18 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import ru.electric.ec.online.common.App;
-import ru.electric.ec.online.models.Request;
-import ru.electric.ec.online.server.ServerData;
-import ru.electric.ec.online.server.ServerNetwork;
+import ru.electric.ec.online.models.Basket;
+import ru.electric.ec.online.ui.basket.BasketViewModel;
 import ru.electric.ec.online.ui.bill.BillViewModel;
 import ru.electric.ec.online.ui.details.DetailsViewModel;
 import ru.electric.ec.online.ui.enter.EnterViewModel;
 import ru.electric.ec.online.ui.invoice.InvoiceViewModel;
 import ru.electric.ec.online.ui.request.RequestViewModel;
+import ru.electric.ec.online.ui.search.SearchViewModel;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 @SuppressLint("CheckResult")
-public class RouterServer {
+public class ServerRouter {
 
     public static void setToken(ServerData body){
         App.getModel().token = (String) ((LinkedTreeMap) body.data).get("user_token");
@@ -69,7 +69,7 @@ public class RouterServer {
      *** Поиск
      */
 
-    public static void byCode(Context context, RequestViewModel viewModel) {
+    public static void byCode(Context context, SearchViewModel viewModel) {
         ServerNetwork.getApi()
             .byCode(App.getModel().token,
                     viewModel.product.get(),
@@ -82,7 +82,7 @@ public class RouterServer {
                 error ->viewModel.searchError(context, error));
     }
 
-    public static void fromExcel(Context context, RequestViewModel viewModel) {
+    public static void fromExcel(Context context, SearchViewModel viewModel) {
         if (viewModel.excel.get() != null){
             File file = new File(Objects.requireNonNull(viewModel.excel.get()));
             RequestBody requestFile = RequestBody.create(file, MediaType.parse("multipart/form-data"));
@@ -107,7 +107,7 @@ public class RouterServer {
      *** Корзина
      */
 
-    public static void getBasket(Context context, RequestViewModel viewModel) {
+    public static void getBasket(Context context, BasketViewModel viewModel) {
         ServerNetwork.getApi()
             .getBasket(App.getModel().token)
             .subscribeOn(Schedulers.newThread())
@@ -117,7 +117,7 @@ public class RouterServer {
                 error ->viewModel.basketError(context, error));
     }
 
-    public static void postBasket(Context context, RequestViewModel viewModel, List<Request> requests){
+    public static void postBasket(Context context, BasketViewModel viewModel, List<Basket> requests){
         ServerNetwork.getApi()
             .postBasket(App.getModel().token, requests)
             .subscribeOn(Schedulers.newThread())
@@ -127,8 +127,8 @@ public class RouterServer {
                 error ->viewModel.basketError(context, error));
     }
 
-    public static void putBasket(Context context, RequestViewModel viewModel){
-        List<Request> requests = viewModel.basket;
+    public static void putBasket(Context context, BasketViewModel viewModel){
+        List<Basket> requests = viewModel.basket;
         ServerNetwork.getApi()
             .putBasket(App.getModel().token, requests)
             .subscribeOn(Schedulers.newThread())
@@ -138,7 +138,7 @@ public class RouterServer {
                 error ->viewModel.basketError(context, error));
     }
 
-    public static void deleteBasket(Context context, RequestViewModel viewModel){
+    public static void deleteBasket(Context context, BasketViewModel viewModel){
         ServerNetwork.getApi()
             .deleteBasket(App.getModel().token)
             .subscribeOn(Schedulers.newThread())
@@ -148,7 +148,7 @@ public class RouterServer {
                 error ->viewModel.basketError(context, error));
     }
 
-    public static void order(Context context, RequestViewModel viewModel, String comment){
+    public static void order(Context context, BasketViewModel viewModel, String comment){
         ServerNetwork.getApi()
             .order(App.getModel().token, comment)
             .subscribeOn(Schedulers.newThread())

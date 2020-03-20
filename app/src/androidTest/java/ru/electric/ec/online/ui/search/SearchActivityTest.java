@@ -67,5 +67,4 @@ public class SearchActivityTest {
         onView(withId(R.id.buttonIssue)).check(matches(isDisplayed()));
     }
 
-
 }

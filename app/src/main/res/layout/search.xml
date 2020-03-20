@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="ru.electric.ec.online.ui.request.RequestViewModel" />
+            type="ru.electric.ec.online.ui.search.SearchViewModel" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"

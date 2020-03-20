@@ -14,7 +14,7 @@ import java.util.Objects;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.InvoiceBinding;
-import ru.electric.ec.online.router.RouterServer;
+import ru.electric.ec.online.server.ServerRouter;
 import ru.electric.ec.online.ui.menu.MenuViewModel;
 
 public class InvoiceActivity extends AppCompatActivity {
@@ -89,15 +89,15 @@ public class InvoiceActivity extends AppCompatActivity {
 
     public void updateList(){
         if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_unconfirmed))) {
-            RouterServer.unconfirmedList(this, viewModel);
+            ServerRouter.unconfirmedList(this, viewModel);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_reserved))) {
-            RouterServer.reservedList(this, viewModel);
+            ServerRouter.reservedList(this, viewModel);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_ordered))) {
-            RouterServer.orderedList(this, viewModel);
+            ServerRouter.orderedList(this, viewModel);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_canceled))) {
-            RouterServer.canceledList(this, viewModel);
+            ServerRouter.canceledList(this, viewModel);
         } else if (Objects.equals(viewModel.title.get(), getString(R.string.text_list_shipped))) {
-            RouterServer.shippedList(this, viewModel);
+            ServerRouter.shippedList(this, viewModel);
         } else {
             adapter.setItems(new ArrayList<>());
         }

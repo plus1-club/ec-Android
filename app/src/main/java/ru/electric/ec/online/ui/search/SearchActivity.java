@@ -8,20 +8,21 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.Objects;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.SearchBinding;
-import ru.electric.ec.online.router.RouterServer;
+import ru.electric.ec.online.server.ServerRouter;
 import ru.electric.ec.online.ui.info.InfoActivity;
 import ru.electric.ec.online.ui.menu.MenuViewModel;
 import ru.electric.ec.online.ui.request.RequestViewModel;
 
 public class SearchActivity extends AppCompatActivity {
 
-    RequestViewModel viewModel;
+    SearchViewModel viewModel;
     MenuViewModel navigationModel;
 
     private SearchViewAdapter adapter;
@@ -31,16 +32,17 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = RequestViewModel.getInstance();
-        viewModel.search.clear();
+        viewModel = SearchViewModel.getInstance();
 
         Bundle bundle = getIntent().getExtras();
         this.setTitle(Objects.requireNonNull(bundle).getString("title"));
+        copyFromRequest();
 
         // Подготовка биндинга
         binding = DataBindingUtil.setContentView(this, R.layout.search);
         binding.setViewModel(viewModel);
         binding.list.setHasFixedSize(true);
+        binding.list.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         // Подготовка и установка лайаут-менеджера
         layoutManager = new LinearLayoutManager(this);
@@ -49,13 +51,12 @@ public class SearchActivity extends AppCompatActivity {
 
         // Подготовка и установка адаптера
         adapter = new SearchViewAdapter();
-        binding.list.setAdapter(adapter);
-        binding.list.setItemViewCacheSize(viewModel.search.size());
         adapter.setItems(viewModel.search);
+        binding.list.setAdapter(adapter);
 
         // Заполнение модели
-        viewModel.searchAdapter.set(adapter);
-        viewModel.searchBinding.set(binding);
+        viewModel.adapter.set(adapter);
+        viewModel.binding.set(binding);
 
         // Подключение навигации
         navigationModel = new MenuViewModel(
@@ -65,9 +66,9 @@ public class SearchActivity extends AppCompatActivity {
         // Обновление списка
         binding.swiperefresh.setRefreshing(true);
         if (viewModel.isExcel.get()){
-            RouterServer.fromExcel(this, viewModel);
+            ServerRouter.fromExcel(this, viewModel);
         } else {
-            RouterServer.byCode(this, viewModel);
+            ServerRouter.byCode(this, viewModel);
         }
         binding.swiperefresh.setOnRefreshListener(this::refreshSearch);
     }
@@ -98,7 +99,7 @@ public class SearchActivity extends AppCompatActivity {
         if (viewModel.search.size() > 0){
             adapter.setItems(viewModel.search);
             binding.list.setAdapter(adapter);
-            viewModel.searchAdapter.set(adapter);
+            viewModel.adapter.set(adapter);
             binding.swiperefresh.setRefreshing(false);
         } else {
             Intent intent = new Intent(this, InfoActivity.class);
@@ -107,5 +108,17 @@ public class SearchActivity extends AppCompatActivity {
             intent.putExtra("activityName", "RequestActivity");
             this.startActivity(intent);
         }
+    }
+
+    private void copyFromRequest(){
+        RequestViewModel from = RequestViewModel.getInstance();
+        viewModel.product.set(from.product.get());
+        viewModel.count.set(from.count.get());
+        viewModel.productColumn.set(from.productColumn.get());
+        viewModel.countColumn.set(from.countColumn.get());
+        viewModel.isFullSearch.set(from.isFullSearch.get());
+        viewModel.excel.set(from.excel.get());
+        viewModel.isExcel.set(from.isExcel.get());
+
     }
 }

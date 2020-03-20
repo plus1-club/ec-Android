@@ -14,25 +14,23 @@ import java.util.Objects;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.BasketBinding;
-import ru.electric.ec.online.router.RouterServer;
+import ru.electric.ec.online.server.ServerRouter;
 import ru.electric.ec.online.ui.menu.MenuViewModel;
-import ru.electric.ec.online.ui.request.RequestViewModel;
 
 public class BasketActivity extends AppCompatActivity {
 
-    RequestViewModel viewModel;
+    BasketViewModel viewModel;
     MenuViewModel navigationModel;
 
     private BasketViewAdapter adapter;
     private BasketBinding binding;
     private LinearLayoutManager layoutManager;
-    private AppCompatActivity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = this;
-        viewModel = RequestViewModel.getInstance();
+        viewModel = BasketViewModel.getInstance();
+
         Bundle bundle = getIntent().getExtras();
         this.setTitle(Objects.requireNonNull(bundle).getString("title"));
         viewModel.total.set(0);
@@ -52,11 +50,10 @@ public class BasketActivity extends AppCompatActivity {
         adapter = new BasketViewAdapter();
         adapter.setItems(viewModel.basket);
         binding.list.setAdapter(adapter);
-        viewModel.basketAdapter.set(adapter);
 
         // Заполнение модели
-        viewModel.basketAdapter.set(adapter);
-        viewModel.basketBinding.set(binding);
+        viewModel.adapter.set(adapter);
+        viewModel.binding.set(binding);
 
         // Подключение навигации
         navigationModel = new MenuViewModel(
@@ -65,9 +62,9 @@ public class BasketActivity extends AppCompatActivity {
 
         // Обновление списка
         binding.swiperefresh.setRefreshing(true);
-        RouterServer.getBasket(this, viewModel);
+        ServerRouter.getBasket(this, viewModel);
         binding.swiperefresh.setOnRefreshListener(
-            () -> RouterServer.getBasket(this, viewModel)
+            () -> ServerRouter.getBasket(this, viewModel)
         );
     }
 

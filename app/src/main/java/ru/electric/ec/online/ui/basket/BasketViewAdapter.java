@@ -13,18 +13,18 @@ import java.util.List;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.databinding.BasketItemBinding;
-import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.models.Basket;
 
 public class BasketViewAdapter extends RecyclerView.Adapter<BasketItemViewHolder> {
 
-    private List<Request> requests;
+    private List<Basket> requests;
     private BasketItemViewModel viewModel;
 
-    public BasketViewAdapter() {
+    BasketViewAdapter() {
         requests = new ArrayList<>();
     }
 
-    public void setItems(Collection<Request> collection) {
+    public void setItems(Collection<Basket> collection) {
         requests.clear();
         requests.addAll(collection);
         notifyDataSetChanged();

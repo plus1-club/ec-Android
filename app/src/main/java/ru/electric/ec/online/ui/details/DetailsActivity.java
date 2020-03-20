@@ -14,7 +14,7 @@ import java.util.Objects;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.DetailsBinding;
-import ru.electric.ec.online.router.RouterServer;
+import ru.electric.ec.online.server.ServerRouter;
 import ru.electric.ec.online.ui.invoice.InvoiceViewModel;
 import ru.electric.ec.online.ui.menu.MenuViewModel;
 
@@ -102,23 +102,23 @@ public class DetailsActivity extends AppCompatActivity {
     public void updateItem(String status){
         if (Service.isEqual(status, getString(R.string.status_unconfirmed))) {
             setTitle(getString(R.string.text_item_unconfirmed));
-            RouterServer.unconfirmedItem(this, viewModel, viewModel.number.get());
+            ServerRouter.unconfirmedItem(this, viewModel, viewModel.number.get());
         } else if (Service.isEqual(status, getString(R.string.status_reserved))) {
             setTitle(getString(R.string.text_item_reserved));
-            RouterServer.reservedItem(this, viewModel, viewModel.number.get());
+            ServerRouter.reservedItem(this, viewModel, viewModel.number.get());
         } else if (Service.isEqual(status, getString(R.string.status_ordered))) {
             setTitle(getString(R.string.text_item_ordered));
-            RouterServer.orderedItem(this, viewModel, viewModel.number.get());
+            ServerRouter.orderedItem(this, viewModel, viewModel.number.get());
         } else if (Service.isEqual(status, getString(R.string.status_canceled))) {
             setTitle(getString(R.string.text_item_canceled));
-            RouterServer.canceledItem(this, viewModel, viewModel.number.get());
+            ServerRouter.canceledItem(this, viewModel, viewModel.number.get());
         } else if (Service.isEqual(status, getString(R.string.status_overdie))) {
             this.setTitle(getString(R.string.text_item_overdie));
-            RouterServer.canceledItem(this, viewModel, viewModel.number.get());
+            ServerRouter.canceledItem(this, viewModel, viewModel.number.get());
         } else if (Service.isEqual(status, getString(R.string.status_shipped)) ||
                 Service.isEqual(status, getString(R.string.text_item_shipped))) {
             this.setTitle(getString(R.string.text_item_shipped));
-            RouterServer.shippedItem(this, viewModel, viewModel.number.get());
+            ServerRouter.shippedItem(this, viewModel, viewModel.number.get());
         } else {
             this.setTitle(getString(R.string.text_item_invoice));
         }

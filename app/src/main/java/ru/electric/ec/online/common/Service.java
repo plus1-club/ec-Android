@@ -8,7 +8,8 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 import ru.electric.ec.online.R;
-import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.models.Basket;
+import ru.electric.ec.online.models.Search;
 
 /**
  * Класс общих сервисных функций
@@ -81,7 +82,47 @@ public class Service {
      * Обновление статуса количества товара в переданной строке
      * @param request строка в которой проводится обновление статуса
      */
-    public static void status(Request request){
+    public static void status(Search request){
+        if (request.stockCount == -3) {
+            request.status = Service.getStr(R.string.status_brown, request.requestProduct);
+            request.color = R.color.brown;
+            request.colorName = "brown";
+        } else if (request.requestCount == 0) {
+            request.status = Service.getStr(R.string.status_black);
+            request.color = R.color.black;
+            request.colorName = "black";
+        } else if (request.stockCount == -2) {
+            request.status = Service.getStr(R.string.status_violet);
+            request.color = R.color.violet;
+            request.colorName = "violet";
+        } else if (request.needUpdate) {
+            request.status = Service.getStr(R.string.status_blue);
+            request.color = R.color.blue;
+            request.colorName = "blue";
+        } else if (request.stockCount == 0) {
+            request.status = Service.getStr(R.string.status_red);
+            request.color = R.color.red;
+            request.colorName = "red";
+        } else if (request.stockCount >= request.requestCount) {
+            request.status = Service.getStr(R.string.status_green);
+            request.color = R.color.green;
+            request.colorName = "green";
+        } else if (request.stockCount > 500 || request.stockCount == -1) {
+            request.status = Service.getStr(R.string.status_orange);
+            request.color = R.color.orange;
+            request.colorName = "orange";
+        } else {
+            request.status = Service.getStr(R.string.status_yellow, request.stockCount);
+            request.color = R.color.yellow;
+            request.colorName = "yellow";
+        }
+    }
+
+    /**
+     * Обновление статуса количества товара в переданной строке
+     * @param request строка в которой проводится обновление статуса
+     */
+    public static void status(Basket request){
         if (request.stockCount == -3) {
             request.status = Service.getStr(R.string.status_brown, request.requestProduct);
             request.color = R.color.brown;

@@ -17,7 +17,7 @@ import androidx.databinding.ObservableList;
 import java.util.Objects;
 
 import ru.electric.ec.online.models.Detail;
-import ru.electric.ec.online.router.RouterServer;
+import ru.electric.ec.online.server.ServerRouter;
 import ru.electric.ec.online.ui.bill.BillViewModel;
 import ru.electric.ec.online.ui.details.DetailsActivity;
 
@@ -71,7 +71,7 @@ public class InvoiceItemViewModel {
             ActivityCompat.requestPermissions((Activity) context, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
         } else {
             Objects.requireNonNull(parent.binding.get()).swiperefresh.setRefreshing(true);
-            RouterServer.print(context, BillViewModel.getInstance(), number.get());
+            ServerRouter.print(context, BillViewModel.getInstance(), number.get());
         }
     }
 }

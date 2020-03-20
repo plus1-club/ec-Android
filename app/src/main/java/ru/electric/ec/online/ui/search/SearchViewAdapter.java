@@ -16,14 +16,14 @@ import ru.electric.ec.online.databinding.SearchItemCheckboxBinding;
 import ru.electric.ec.online.databinding.SearchItemGroupBinding;
 import ru.electric.ec.online.databinding.SearchItemNotFoundBinding;
 import ru.electric.ec.online.databinding.SearchItemRadioBinding;
-import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.models.Search;
 
 public class SearchViewAdapter extends RecyclerView.Adapter {
 
-    private List<Request> requests;
+    private List<Search> requests;
     private SearchItemViewModel viewModel;
 
-    public SearchViewAdapter() {
+    SearchViewAdapter() {
         requests = new ArrayList<>();
     }
 
@@ -37,7 +37,7 @@ public class SearchViewAdapter extends RecyclerView.Adapter {
         return position;
     }
 
-    public void setItems(Collection<Request> collection) {
+    public void setItems(Collection<Search> collection) {
         requests.clear();
         requests.addAll(collection);
         notifyDataSetChanged();

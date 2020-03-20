@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Objects;
 
 import ru.electric.ec.online.databinding.BasketItemBinding;
-import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.models.Basket;
 
 class BasketItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -21,7 +21,7 @@ class BasketItemViewHolder extends RecyclerView.ViewHolder {
         viewModel = Objects.requireNonNull(binding).getViewModel();
     }
 
-    void bind(Request request, int position) {
+    void bind(Basket request, int position) {
         viewModel.position.set(position);
         viewModel.product.set(request.product);
         viewModel.requestProduct.set(request.requestProduct);

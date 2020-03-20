@@ -26,6 +26,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.not;
 
 public class RequestActivityTest {
+
     @Rule
     public ActivityTestRule<RequestActivity> activityRule
             = new ActivityTestRule<RequestActivity>(RequestActivity.class){
@@ -63,10 +64,6 @@ public class RequestActivityTest {
     @SmallTest
     @Test
     public void openRequestActivity() {
-        RequestViewModel.getInstance().product.set("411");
-        RequestViewModel.getInstance().count.set(1);
-        RequestViewModel.getInstance().isFullSearch.set(true);
         onView(withId(R.id.tabs)).check(matches(isDisplayed()));
     }
-
 }

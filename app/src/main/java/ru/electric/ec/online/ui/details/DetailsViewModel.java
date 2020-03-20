@@ -24,9 +24,9 @@ import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.databinding.DetailsBinding;
 import ru.electric.ec.online.models.Detail;
 import ru.electric.ec.online.models.Invoice;
-import ru.electric.ec.online.router.RouterServer;
-import ru.electric.ec.online.router.RouterView;
 import ru.electric.ec.online.server.ServerData;
+import ru.electric.ec.online.server.ServerRouter;
+import ru.electric.ec.online.ui.ViewRouter;
 import ru.electric.ec.online.ui.bill.BillViewModel;
 
 public class DetailsViewModel {
@@ -78,12 +78,12 @@ public class DetailsViewModel {
             ActivityCompat.requestPermissions((Activity) context, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
         } else {
             Objects.requireNonNull(binding.get()).swiperefresh.setRefreshing(true);
-            RouterServer.print(context, BillViewModel.getInstance(), number.get());
+            ServerRouter.print(context, BillViewModel.getInstance(), number.get());
         }
     }
 
     public void detailOk(Context context, ServerData body, int number) {
-        if (RouterServer.isSuccess(body)) {
+        if (ServerRouter.isSuccess(body)) {
             Invoice invoice = null;
             for (Invoice item: App.getModel().invoice.invoices) {
                 if(item.number == number){
@@ -110,12 +110,12 @@ public class DetailsViewModel {
             adapter.set(new DetailsViewAdapter());
             Objects.requireNonNull(adapter.get()).updateAdapter(invoice, context);
         } else {
-            RouterView.onUnsuccessful(context, body);
+            ViewRouter.onUnsuccessful(context, body);
         }
         Objects.requireNonNull(binding.get()).swiperefresh.setRefreshing(false);
     }
 
     public void detailError(Context context, Throwable throwable) {
-        RouterView.onError(context, throwable);
+        ViewRouter.onError(context, throwable);
     }
 }

@@ -18,23 +18,23 @@ import ru.electric.ec.online.databinding.DetailsItemBinding;
 import ru.electric.ec.online.models.Detail;
 import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.models.Invoice;
-import ru.electric.ec.online.router.RouterView;
+import ru.electric.ec.online.ui.ViewRouter;
 
 public class DetailsViewAdapter extends RecyclerView.Adapter<DetailsItemViewHolder> {
 
     private List<Detail> details;
     private DetailsItemViewModel viewModel;
 
-    public DetailsViewAdapter() {
+    DetailsViewAdapter() {
         details = new ArrayList<>();
     }
 
-    public void updateAdapter(Invoice invoice, Context context){
+    void updateAdapter(Invoice invoice, Context context){
         this.setItems(invoice.details);
         try{
             ((DetailsActivity)context).binding.list.setAdapter(this);
         } catch (Exception e){
-            RouterView.openInfo(context, new Info(true, false, "Ошибка вывода списка"));
+            ViewRouter.openInfo(context, new Info(true, false, "Ошибка вывода списка"));
         }
     }
 
@@ -43,7 +43,7 @@ public class DetailsViewAdapter extends RecyclerView.Adapter<DetailsItemViewHold
             details.addAll(collection);
             notifyDataSetChanged();
         } catch (Exception e){
-            RouterView.openInfo(App.getAppContext(), new Info(true, false, "Ошибка добавления значений"));
+            ViewRouter.openInfo(App.getAppContext(), new Info(true, false, "Ошибка добавления значений"));
         }
     }
 

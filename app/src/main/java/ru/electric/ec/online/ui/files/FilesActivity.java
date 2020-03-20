@@ -20,7 +20,7 @@ import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.App;
 import ru.electric.ec.online.databinding.FilesBinding;
 import ru.electric.ec.online.models.Info;
-import ru.electric.ec.online.router.RouterView;
+import ru.electric.ec.online.ui.ViewRouter;
 import ru.electric.ec.online.ui.menu.MenuViewModel;
 
 public class FilesActivity extends AppCompatActivity {
@@ -84,11 +84,11 @@ public class FilesActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                RouterView.openInfo(App.getAppContext(),
+                ViewRouter.openInfo(App.getAppContext(),
                         new Info(true, false, "Достур предоставлен"));
                 initFileManager();
             } else {
-                RouterView.openInfo(App.getAppContext(),
+                ViewRouter.openInfo(App.getAppContext(),
                         new Info(true, false, "Доступ запрещен"));
                 requestPermissions(); // Запрашиваем ещё раз
             }

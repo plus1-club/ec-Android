@@ -7,8 +7,8 @@ import android.content.pm.PackageManager;
 
 import ru.electric.ec.online.data.LocalDatabase;
 import ru.electric.ec.online.models.Info;
-import ru.electric.ec.online.router.RouterView;
 import ru.electric.ec.online.server.ServerNetwork;
+import ru.electric.ec.online.ui.ViewRouter;
 
 public class App extends Application {
 
@@ -69,7 +69,7 @@ public class App extends Application {
                 pInfo = pm.getPackageInfo(getPackageName(), 0);
             }
         } catch (PackageManager.NameNotFoundException e) {
-            RouterView.openInfo(getAppContext(), new Info(true, true, "Не удалось найти пакет приложения"));
+            ViewRouter.openInfo(getAppContext(), new Info(true, true, "Не удалось найти пакет приложения"));
         }
         if (pInfo == null) {
             pInfo = new PackageInfo();

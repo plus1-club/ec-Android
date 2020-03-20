@@ -1,4 +1,4 @@
-package ru.electric.ec.online.router;
+package ru.electric.ec.online.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.Service;
+import ru.electric.ec.online.data.DataRouter;
 import ru.electric.ec.online.models.Info;
 import ru.electric.ec.online.server.ServerData;
 import ru.electric.ec.online.ui.enter.EnterActivity;
@@ -16,7 +17,7 @@ import ru.electric.ec.online.ui.info.InfoActivity;
 import ru.electric.ec.online.ui.menu.MenuActivity;
 import ru.electric.ec.online.ui.request.RequestActivity;
 
-public class RouterView {
+public class ViewRouter {
 
     public static void openPhoneCall(Context context, String phone){
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
@@ -62,8 +63,8 @@ public class RouterView {
         }
         String message = Service.getStr(R.string.text_response_failure, text);
         Info info = new Info(false, true, message);
-        RouterData.saveInfo(info);
-        RouterView.openInfo(context, info);
+        DataRouter.saveInfo(info);
+        ViewRouter.openInfo(context, info);
     }
 
     public static void onError(Context context, Throwable throwable, String activityName){
@@ -77,20 +78,20 @@ public class RouterView {
         }
         String message = Service.getStr(R.string.text_response_failure,  text);
         Info info = new Info(false, true, message, activityName);
-        RouterData.saveInfo(info);
-        RouterView.openInfo(context, info);
+        DataRouter.saveInfo(info);
+        ViewRouter.openInfo(context, info);
     }
 
     public static void onUnsuccessful(Context context, ServerData body){
         String message = Service.getStr(R.string.text_response_error, body.message);
         Info info = new Info(false, true, message);
-        RouterData.saveInfo(info);
-        RouterView.openInfo(context, info);
+        DataRouter.saveInfo(info);
+        ViewRouter.openInfo(context, info);
     }
     public static void onUnsuccessful(Context context, ServerData body, String activityName){
         String message = Service.getStr(R.string.text_response_error, body.message);
         Info info = new Info(false, true, message, activityName);
-        RouterData.saveInfo(info);
-        RouterView.openInfo(context, info);
+        DataRouter.saveInfo(info);
+        ViewRouter.openInfo(context, info);
     }
 }

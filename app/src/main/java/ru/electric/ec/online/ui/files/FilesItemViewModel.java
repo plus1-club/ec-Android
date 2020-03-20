@@ -10,7 +10,7 @@ import androidx.databinding.ObservableInt;
 import java.io.File;
 import java.util.Objects;
 
-import ru.electric.ec.online.router.RouterView;
+import ru.electric.ec.online.ui.ViewRouter;
 import ru.electric.ec.online.ui.request.RequestViewModel;
 
 public class FilesItemViewModel {
@@ -52,7 +52,7 @@ public class FilesItemViewModel {
             }
             if (ext.equals(".xls") || ext.equals(".xlsx") || ext.equals(".ods")) {
                 RequestViewModel.getInstance().excel.set(file.getAbsolutePath());
-                RouterView.openRequest(context, 1);
+                ViewRouter.openRequest(context, 1);
             }
         }
     }

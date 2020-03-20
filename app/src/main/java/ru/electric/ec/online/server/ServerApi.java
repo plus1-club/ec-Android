@@ -17,7 +17,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
-import ru.electric.ec.online.models.Request;
+import ru.electric.ec.online.models.Basket;
 
 /**
  * Интерфейс для вызова методов API с сервера
@@ -96,7 +96,7 @@ public interface ServerApi {
      * */
     @POST("request/basket")
     Observable<ServerData> postBasket(@Header("user_token") String userToken,
-                                @Body List<Request> requests);
+                                @Body List<Basket> requests);
 
     /**
      * Обновление содержимого корзины (искользуется для изменения количества или удаления позиций)
@@ -106,7 +106,7 @@ public interface ServerApi {
      * */
     @PUT("request/basket")
     Observable<ServerData> putBasket(@Header("user_token") String userToken,
-                               @Body List<Request> requests);
+                               @Body List<Basket> requests);
 
     /**
      * Очистка корзины

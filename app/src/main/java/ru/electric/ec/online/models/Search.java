@@ -6,36 +6,32 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
- * Класс для хранения содержимого корзины
+ * Класс для хранения поиска
  * @author Сергей Лавров
- * @version 0.6
+ * @version 0.8
  */
 @Entity
-public class Basket implements Request{
+public class Search implements Request{
 
     /** Идентификатор для строк таблицы */
     @PrimaryKey
     public int id = 0;
 
-    /** Товар или код товара */
+    /** Искомый товар или код товара */
     @ColumnInfo(name = "product")
     public String product;
 
-    /** Запрошеное количество товара */
+    /** Запрошеный товар */
+    @ColumnInfo(name = "requestProduct")
+    public String requestProduct;
+
+    /** Запрошеное количетсов товара */
     @ColumnInfo(name = "requestCount")
     public int requestCount;
 
     /** Количество товара на складе */
     @ColumnInfo(name = "stockCount")
     public int stockCount;
-
-    /** Цена товара */
-    @ColumnInfo(name = "price")
-    public double price;
-
-    /** Сумма по товару (цена * запрошенное количество) */
-    @ColumnInfo(name = "sum")
-    public double sum;
 
     /** Кратность товара (размер минимальной неделимой партии) */
     @ColumnInfo(name = "multiplicity")
@@ -49,6 +45,23 @@ public class Basket implements Request{
     @ColumnInfo(name = "check")
     public boolean check;
 
+    /** Необходимо обновить статус с сервера, т.к. изменились параметры на клиенте */
+    @ColumnInfo(name = "needUpdate")
+    public boolean needUpdate;
+
+    /** Количество вариантов при расширенном поиске */
+    @ColumnInfo(name = "variantsCount")
+    public int variantsCount;
+
+    /** Вид строки:
+     *  1 - флаг,
+     *  2 - переключатель,
+     *  3 - группа
+     *  4 - не найдено,
+     */
+    @ColumnInfo(name = "itemType")
+    public int itemType;
+
     /** Статус количества */
     @ColumnInfo(name = "status")
     public String status;
@@ -61,66 +74,55 @@ public class Basket implements Request{
     @ColumnInfo(name = "color")
     public int color;
 
-    /** Необходимо обновить статус с сервера, т.к. изменились параметры на клиенте */
-    @ColumnInfo(name = "needUpdate")
-    public boolean needUpdate;
-
     /**
      * Создание пустой новой строки
      */
-    public Basket() {
+    public Search() {
     }
 
     /**
-     * Создание новой строки с найденным товаром (с ценой)
+     * Создание новой строки с найденным товаром
      * @param product название товара
+     * @param requestProduct запрошенный товар
      * @param requestCount запрошенное количество товара
      * @param stockCount количество товара на складе
      * @param multiplicity кратность товара (размер минимальной неделимой партии)
      * @param unit единица измерения товара
-     * @param price цена товара
      * @param check установлена ли галочка у товара
-     * @param needUpdate необходимо обновить информацию с сервера
+     * @param variantsCount количество вариантов при расширенном поиске
+     * @param itemType вид строки
      * @param status название цвета статуса количества
      * @param colorName вид строки
      * @param color цвет статуса количества
      */
     @Ignore
-    public Basket(String product, int requestCount, int stockCount,
-                  int multiplicity, String unit, double price,
-                  boolean check, boolean needUpdate,
-                  String status, String colorName, int color) {
-        init(product, requestCount, stockCount,
-                multiplicity, unit, price,
-                check, needUpdate,
+    public Search(String product, String requestProduct, int requestCount, int stockCount,
+                   int multiplicity, String unit,
+                   boolean check, boolean needUpdate, int variantsCount, int itemType,
+                   String status, String colorName, int color) {
+        init(product, requestProduct, requestCount, stockCount,
+                multiplicity, unit,
+                check, needUpdate, variantsCount, itemType,
                 status, colorName, color);
     }
 
     @Ignore
-    private void init(String product, int requestCount, int stockCount,
-                      int multiplicity, String unit, double price,
-                      boolean check, boolean needUpdate,
+    private void init(String product, String requestProduct, int requestCount, int stockCount,
+                      int multiplicity, String unit,
+                      boolean check, boolean needUpdate, int variantsCount, int itemType,
                       String status, String colorName, int color){
         this.product = product;
+        this.requestProduct = requestProduct;
         this.requestCount = requestCount;
         this.stockCount = stockCount;
         this.multiplicity = multiplicity;
         this.unit = unit;
-        this.price = price;
         this.check = check;
+        this.variantsCount = variantsCount;
+        this.itemType = itemType;
         this.needUpdate = needUpdate;
         this.status = status;
         this.colorName = colorName;
         this.color = color;
-        sum = requestCount * price;
     }
-
-    @Ignore
-    public static Basket searchToBasket(Search s){
-        return new Basket(s.product, s.requestCount, s.stockCount,
-                s.multiplicity, s.unit, 0,
-                true, false,
-                s.status, s.colorName, s.color);
-    }
-
 }

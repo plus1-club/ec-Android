@@ -10,7 +10,7 @@ import java.util.Objects;
 import ru.electric.ec.online.R;
 import ru.electric.ec.online.common.Service;
 import ru.electric.ec.online.models.Info;
-import ru.electric.ec.online.router.RouterView;
+import ru.electric.ec.online.ui.ViewRouter;
 
 public class InfoViewModel {
 
@@ -43,7 +43,7 @@ public class InfoViewModel {
             context.startActivity(intent);
         } catch (ClassNotFoundException e) {
             String message = Service.getStr(R.string.text_acitivity_not_found, activityName);
-            RouterView.openInfo(context, new Info(true, true, message));
+            ViewRouter.openInfo(context, new Info(true, true, message));
         }
     }
 }

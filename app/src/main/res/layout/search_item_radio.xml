@@ -8,10 +8,11 @@
             name="viewModel"
             type="ru.electric.ec.online.ui.search.SearchItemViewModel" />
     </data>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:baselineAligned="false"
         android:orientation="vertical"
         android:paddingTop="1dp"
@@ -28,10 +29,10 @@
                 android:id="@+id/radioMark"
                 android:layout_width="32dp"
                 android:layout_height="40dp"
-                app:buttonTint="@{viewModel.color}"
                 android:checked="@={viewModel.check}"
                 android:gravity="center_vertical"
-                android:onClick="@{(view) -> viewModel.onRadioClick(view)}"/>
+                android:onClick="@{(view) -> viewModel.onRadioClick(view)}"
+                app:buttonTint="@{viewModel.color}" />
 
             <!--suppress AndroidUnknownAttribute -->
 
