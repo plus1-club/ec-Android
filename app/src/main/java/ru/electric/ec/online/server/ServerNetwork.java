@@ -6,6 +6,7 @@ import android.os.Looper;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.itkacher.okhttpprofiler.OkHttpProfilerInterceptor;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -21,6 +22,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.electric.ec.online.BuildConfig;
 
 import static ru.electric.ec.online.server.ServerApi.BASE_URL;
 
@@ -88,6 +90,9 @@ public class ServerNetwork {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
         builder.hostnameVerifier((hostname, session) -> true);
+        if (BuildConfig.DEBUG) {
+            builder.addInterceptor(new OkHttpProfilerInterceptor());
+        }
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
 
